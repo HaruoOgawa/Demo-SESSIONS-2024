@@ -1,0 +1,633 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="CompGL|Win32">
+      <Configuration>CompGL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="CompGL|x64">
+      <Configuration>CompGL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugGLFW|Win32">
+      <Configuration>DebugGLFW</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugGLFW|x64">
+      <Configuration>DebugGLFW</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugGL|Win32">
+      <Configuration>DebugGL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugGL|x64">
+      <Configuration>DebugGL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugWG|Win32">
+      <Configuration>DebugWG</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="DebugWG|x64">
+      <Configuration>DebugWG</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseGL|Win32">
+      <Configuration>ReleaseGL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseGL|x64">
+      <Configuration>ReleaseGL</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseWG|Win32">
+      <Configuration>ReleaseWG</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="ReleaseWG|x64">
+      <Configuration>ReleaseWG</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{f591028c-9d82-408c-998f-a52973597c46}</ProjectGuid>
+    <RootNamespace>Demo-SESSIONS-2024</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWG|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGLFW|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGL|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWG|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGL|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CompGL|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugWG|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGLFW|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugGL|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWG|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGL|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='CompGL|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugWG|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGLFW|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWG|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CompGL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugWG|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGLFW|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='DebugGL|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWG|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGL|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='CompGL|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugWG|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugGLFW|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugGL|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWG|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGL|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CompGL|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_GLFW;USE_VULKAN;NOMINMAX;VK_USE_PLATFORM_WIN32_KHR;GLFW_INCLUDE_VULKAN;GLFW_EXPOSE_NATIVE_WIN32;USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU;USE_FBX;USE_ANIMATION;USE_MMD;USE_PHYSICS;B3_USE_CLEW;USE_GUIENGINE;USE_GUI_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;E:\CppDev\Garnet\Garnet/Src\Library\json;E:\CppDev\Garnet\Garnet/Src\Library\GLFW\include;E:\CppDev\Garnet\Garnet/src\Library\Vulkan\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugWG|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_GLFW;USE_WEBGPU;NOMINMAX;USE_WebGPUNative;USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU;USE_FBX;USE_ANIMATION;USE_SMALL_FBX;mrDebug;USE_MMD;USE_PHYSICS;B3_USE_CLEW;USE_GUIENGINE;USE_GUI_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;E:\CppDev\Garnet\Garnet/Src\Library\json;E:\CppDev\Garnet\Garnet/src\Library\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\CppDev\Garnet\Garnet/Src\Library\SmallFBX\lib\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugGLFW|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_GLFW;USE_OPENGL;NOMINMAX;USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU;USE_FBX;USE_ANIMATION;USE_MMD;USE_PHYSICS;B3_USE_CLEW;USE_GUIENGINE;USE_GUI_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;E:\CppDev\Garnet\Garnet/Src\Library\json;E:\CppDev\Garnet\Garnet/src\Library\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugGL|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;RUNTIME_SHADER_EDITING;USE_OPENGL;NOMINMAX;USE_WIN32_WindowAPI;USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU;USE_FBX;USE_ANIMATION;USE_MMD;USE_PHYSICS;B3_USE_CLEW;USE_GUIENGINE;USE_GUI_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;E:\CppDev\Garnet\Garnet/Src\Library\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;USE_OPENGL;NOMINMAX</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWG|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;USE_WEBGPU;NOMINMAX;%(PreprocessorDefinitions);USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseGL|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;USE_OPENGL;NOMINMAX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='CompGL|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;USE_OPENGL;NOMINMAX</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="E:\CppDev\Garnet\Garnet/Garnet.vcxproj">
+      <Project>{9bb5f0a3-4cd3-470f-8d71-8c187fa3332b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\GUIApp\GUI\CGUILogTab.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUIMeshTab.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.cpp" />
+    <ClCompile Include="Src\App\ScriptApp\CDevApp.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CTimeLineView.cpp" />
+    <ClCompile Include="Src\ImageEffect\CBlurEffect.cpp" />
+    <ClCompile Include="Src\App\ScriptApp\CScriptApp.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGraphicsEditingWindow.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUICameraTab.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUIMaterialTab.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUIObjectTab.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUIRenderingTab.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUIResourcesTab.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUITransformTab.cpp" />
+    <ClCompile Include="Src\GUIApp\Model\CFileModifier.cpp" />
+    <ClCompile Include="Src\App\ScriptApp\Scene\CScriptScene.cpp" />
+    <ClCompile Include="Src\Main\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\GUIApp\GUI\CGUILogTab.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUIMeshTab.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.h" />
+    <ClInclude Include="Src\App\ScriptApp\CDevApp.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CTimeLineView.h" />
+    <ClInclude Include="Src\GUIApp\GUI\SGUIParams.h" />
+    <ClInclude Include="Src\ImageEffect\CBlurEffect.h" />
+    <ClInclude Include="Src\App\ScriptApp\CScriptApp.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGraphicsEditingWindow.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUICameraTab.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUIMaterialTab.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUIObjectTab.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUIRenderingTab.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUIResourcesTab.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUITransformTab.h" />
+    <ClInclude Include="Src\GUIApp\Model\CFileModifier.h" />
+    <ClInclude Include="Src\App\ScriptApp\Scene\CScriptScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Commands\CompileGLSLToSpirV.bat" />
+    <None Include="Commands\CompileSpirVToWGSL.bat" />
+    <None Include="Commands\compVK.bat" />
+    <None Include="Commands\compWG.bat" />
+    <None Include="Commands\CopyDawnLib.bat" />
+    <None Include="Commands\GetLibAndPath.py" />
+    <None Include="Commands\glslc_ALL.bat" />
+    <None Include="Commands\MakeEmccBuild.bat" />
+    <None Include="Commands\MakeEmccBuild.py" />
+    <None Include="Commands\RemakeCmakeLists.bat" />
+    <None Include="Commands\RemakeCmakeLists.py" />
+    <None Include="Commands\RemakeCmakeLists_DescApp.bat" />
+    <None Include="Commands\RemakeCmakeLists_DescApp.py" />
+    <None Include="Commands\RunLocalHost.bat" />
+    <None Include="Commands\TestCmd.bat" />
+    <None Include="Commands\update.bat" />
+    <None Include="Commands\UTF8Encorder.py" />
+    <None Include="Commands\wgslc_ALL.bat" />
+    <None Include="Resources\MaterialFrame\basic_toon_mf.json" />
+    <None Include="Resources\MaterialFrame\Blur_MF.json" />
+    <None Include="Resources\MaterialFrame\Depth_MF.json" />
+    <None Include="Resources\MaterialFrame\FrameTexture_MF.json" />
+    <None Include="Resources\MaterialFrame\MRTSample_MF.json" />
+    <None Include="Resources\MaterialFrame\Objectspace_Ray_MF.json" />
+    <None Include="Resources\MaterialFrame\PBRMorph_MF.json" />
+    <None Include="Resources\MaterialFrame\PBR_MF.json" />
+    <None Include="Resources\MaterialFrame\PBR_MRT_MF.json" />
+    <None Include="Resources\MaterialFrame\raymarching_mf.json" />
+    <None Include="Resources\MaterialFrame\Sample_MF.json" />
+    <None Include="Resources\MaterialFrame\sdftext_mf.json" />
+    <None Include="Resources\MaterialFrame\SimpleTexture_MF.json" />
+    <None Include="Resources\Scene\MRTTest.json" />
+    <None Include="Resources\Shaders\basic_toon.frag" />
+    <None Include="Resources\Shaders\basic_toon.vert" />
+    <None Include="Resources\Shaders\basic_toon_frag.spv" />
+    <None Include="Resources\Shaders\basic_toon_frag.wgsl" />
+    <None Include="Resources\Shaders\basic_toon_vert.spv" />
+    <None Include="Resources\Shaders\basic_toon_vert.wgsl" />
+    <None Include="Resources\Shaders\blur.frag" />
+    <None Include="Resources\Shaders\blur.vert" />
+    <None Include="Resources\Shaders\blur_frag.spv" />
+    <None Include="Resources\Shaders\blur_frag.wgsl" />
+    <None Include="Resources\Shaders\blur_vert.spv" />
+    <None Include="Resources\Shaders\blur_vert.wgsl" />
+    <None Include="Resources\Shaders\depth.frag" />
+    <None Include="Resources\Shaders\depth.vert" />
+    <None Include="Resources\Shaders\depth_frag.spv" />
+    <None Include="Resources\Shaders\depth_frag.wgsl" />
+    <None Include="Resources\Shaders\depth_vert.spv" />
+    <None Include="Resources\Shaders\depth_vert.wgsl" />
+    <None Include="Resources\Shaders\gpgpu_sample.comp" />
+    <None Include="Resources\Shaders\gpgpu_sample.frag" />
+    <None Include="Resources\Shaders\gpgpu_sample.vert" />
+    <None Include="Resources\Shaders\gpgpu_sample_comp.spv" />
+    <None Include="Resources\Shaders\gpgpu_sample_comp.wgsl" />
+    <None Include="Resources\Shaders\gpgpu_sample_frag.spv" />
+    <None Include="Resources\Shaders\gpgpu_sample_frag.wgsl" />
+    <None Include="Resources\Shaders\gpgpu_sample_vert.spv" />
+    <None Include="Resources\Shaders\gpgpu_sample_vert.wgsl" />
+    <None Include="Resources\Shaders\loadingbar.frag" />
+    <None Include="Resources\Shaders\loadingbar.vert" />
+    <None Include="Resources\Shaders\loadingbar_frag.spv" />
+    <None Include="Resources\Shaders\loadingbar_frag.wgsl" />
+    <None Include="Resources\Shaders\loadingbar_vert.spv" />
+    <None Include="Resources\Shaders\loadingbar_vert.wgsl" />
+    <None Include="Resources\Shaders\minimum.vert" />
+    <None Include="Resources\Shaders\minimum_vert.spv" />
+    <None Include="Resources\Shaders\minimum_vert.wgsl" />
+    <None Include="Resources\Shaders\mrt_sample.frag" />
+    <None Include="Resources\Shaders\objectspace_raymarching.frag" />
+    <None Include="Resources\Shaders\objectspace_raymarching.vert" />
+    <None Include="Resources\Shaders\pbr.frag" />
+    <None Include="Resources\Shaders\pbr.vert" />
+    <None Include="Resources\Shaders\pbrmorph.vert" />
+    <None Include="Resources\Shaders\pbrmorph_vert.spv" />
+    <None Include="Resources\Shaders\pbrmorph_vert.wgsl" />
+    <None Include="Resources\Shaders\pbr_frag.spv" />
+    <None Include="Resources\Shaders\pbr_frag.wgsl" />
+    <None Include="Resources\Shaders\pbr_mrt.frag" />
+    <None Include="Resources\Shaders\pbr_NativeSafe_frag.wgsl" />
+    <None Include="Resources\Shaders\pbr_vert.spv" />
+    <None Include="Resources\Shaders\pbr_vert.wgsl" />
+    <None Include="Resources\Shaders\raymarching.frag" />
+    <None Include="Resources\Shaders\raymarching_frag.spv" />
+    <None Include="Resources\Shaders\raymarching_frag.wgsl" />
+    <None Include="Resources\Shaders\renderboard.vert" />
+    <None Include="Resources\Shaders\renderboard_vert.spv" />
+    <None Include="Resources\Shaders\renderboard_vert.wgsl" />
+    <None Include="Resources\Shaders\sample.frag" />
+    <None Include="Resources\Shaders\sample.vert" />
+    <None Include="Resources\Shaders\sample_frag.spv" />
+    <None Include="Resources\Shaders\sample_frag.wgsl" />
+    <None Include="Resources\Shaders\sample_vert.spv" />
+    <None Include="Resources\Shaders\sample_vert.wgsl" />
+    <None Include="Resources\Shaders\sdftext.frag" />
+    <None Include="Resources\Shaders\shadow_debug.frag" />
+    <None Include="Resources\Shaders\shadow_debug.vert" />
+    <None Include="Resources\Shaders\shadow_debug_frag.spv" />
+    <None Include="Resources\Shaders\shadow_debug_frag.wgsl" />
+    <None Include="Resources\Shaders\shadow_debug_vert.spv" />
+    <None Include="Resources\Shaders\shadow_debug_vert.wgsl" />
+    <None Include="Resources\Shaders\texture.frag" />
+    <None Include="Resources\Shaders\unlit.frag" />
+    <None Include="Resources\Shaders\unlit_frag.spv" />
+    <None Include="Resources\Shaders\unlit_frag.wgsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Commands\LibList.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,348 @@
+{
+  "name": "basic_toon_mat",
+  "shaderList": [
+    {
+      "name": "basic_toon_vert",
+      "shaderFile": "Resources\\Shaders\\basic_toon",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "vertex",
+      "uniformBlockList": [
+        {
+          "name": "UniformBufferObject",
+          "binding": 0,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "model",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "view",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "proj",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "lightVPMat",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "edgeSize",
+              "type": "float",
+              "initValue": [ 0.0 ]
+            },
+            {
+              "name": "fPad0",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "fPad1",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "fPad2",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "useSkinMeshAnimation",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "pad0",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "drawPathIndex",
+              "type": "int",
+              "initValue": [ -1 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "pad1",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            }
+          ]
+        },
+        {
+          "name": "SkinMatrixBuffer",
+          "binding": 1,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "r_SkinMatrixBuffer",
+              "type": "mat4_array",
+              "useInitValue": false,
+              "arraySize": 512,
+              "input": {
+                "hide": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "basic_toon_frag",
+      "shaderFile": "Resources\\Shaders\\basic_toon",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "fragment",
+      "uniformBlockList": [
+        {
+          "name": "FragUniformBufferObject",
+          "binding": 2,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "lightDir",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "lightColor",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "cameraPos",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "diffuseFactor",
+              "type": "vec4",
+              "initValue": [ 1.0, 1.0, 1.0, 1.0 ]
+            },
+            {
+              "name": "ambientFactor",
+              "type": "vec4",
+              "initValue": [ 1.0, 1.0, 1.0, 1.0 ]
+            },
+            {
+              "name": "specularFactor",
+              "type": "vec4",
+              "initValue": [ 1.0, 1.0, 1.0, 1.0 ]
+            },
+            {
+              "name": "edgeColor",
+              "type": "vec4",
+              "initValue": [ 1.0, 1.0, 1.0, 1.0 ],
+              "input": {
+                "type": "color"
+              }
+            },
+            {
+              "name": "specularIntensity",
+              "type": "float",
+              "initValue": [ 1.0 ]
+            },
+            {
+              "name": "f_pad0",
+              "type": "float",
+              "initValue": [ 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "f_pad1",
+              "type": "float",
+              "initValue": [ 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "f_pad2",
+              "type": "float",
+              "initValue": [ 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "UseMainTexture",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "UseToonTexture",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "UseSphereTexture",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "SphereMode",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "drawPathIndex",
+              "type": "int",
+              "initValue": [ -1 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "iPad0",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "iPad1",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "iPad2",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad0",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad1",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad2",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad3",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            }
+          ]
+        },
+        {
+          "name": "MainTexture",
+          "viewBinding": 3,
+          "samplerBinding": 4,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "ToonTexture",
+          "viewBinding": 5,
+          "samplerBinding": 6,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "SphereTexture",
+          "viewBinding": 7,
+          "samplerBinding": 8,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        }
+      ]
+    }
+  ]
+}

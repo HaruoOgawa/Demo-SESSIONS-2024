@@ -1,0 +1,54 @@
+{
+  "name": "blur_mat",
+  "shaderList": [
+    {
+      "name": "blur_vert",
+      "shaderFile": "Resources\\Shaders\\blur",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "vertex",
+      "uniformBlockList": []
+    },
+    {
+      "name": "blur_frag",
+      "shaderFile": "Resources\\Shaders\\blur",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "fragment",
+      "uniformBlockList": [
+        {
+          "name": "UniformBufferObject",
+          "binding": 0,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "UseBlur",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "KernelSize",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "Direction",
+              "type": "vec2",
+              "initValue": [ 0.0, 0.0 ]
+            }
+          ]
+        },
+        {
+          "name": "SrcTex",
+          "viewBinding": 2,
+          "samplerBinding": 3,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        }
+      ]
+    }
+  ]
+}

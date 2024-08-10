@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Main\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGraphicsEditingWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGUICameraTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGUIMaterialTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGUIObjectTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGUIRenderingTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGUIResourcesTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGUITransformTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\Model\CFileModifier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\App\ScriptApp\Scene\CScriptScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\App\ScriptApp\CScriptApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImageEffect\CBlurEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CTimeLineView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\App\ScriptApp\CDevApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGUIMeshTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\CGUILogTab.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\GUIApp\GUI\CGraphicsEditingWindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CGUICameraTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CGUIMaterialTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CGUIObjectTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CGUIRenderingTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CGUIResourcesTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CGUITransformTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\Model\CFileModifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\App\ScriptApp\Scene\CScriptScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\App\ScriptApp\CScriptApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImageEffect\CBlurEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CTimeLineView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\App\ScriptApp\CDevApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\SGUIParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CGUIMeshTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\CGUILogTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MaterialFrame\basic_toon_mf.json" />
+    <None Include="Resources\MaterialFrame\Blur_MF.json" />
+    <None Include="Resources\MaterialFrame\Depth_MF.json" />
+    <None Include="Resources\MaterialFrame\PBR_MF.json" />
+    <None Include="Resources\MaterialFrame\PBRMorph_MF.json" />
+    <None Include="Resources\MaterialFrame\raymarching_mf.json" />
+    <None Include="Resources\MaterialFrame\Sample_MF.json" />
+    <None Include="Resources\MaterialFrame\SimpleTexture_MF.json" />
+    <None Include="Resources\Shaders\basic_toon.frag" />
+    <None Include="Resources\Shaders\basic_toon.vert" />
+    <None Include="Resources\Shaders\basic_toon_frag.spv" />
+    <None Include="Resources\Shaders\basic_toon_frag.wgsl" />
+    <None Include="Resources\Shaders\basic_toon_vert.spv" />
+    <None Include="Resources\Shaders\basic_toon_vert.wgsl" />
+    <None Include="Resources\Shaders\blur.frag" />
+    <None Include="Resources\Shaders\blur.vert" />
+    <None Include="Resources\Shaders\blur_frag.spv" />
+    <None Include="Resources\Shaders\blur_frag.wgsl" />
+    <None Include="Resources\Shaders\blur_vert.spv" />
+    <None Include="Resources\Shaders\blur_vert.wgsl" />
+    <None Include="Resources\Shaders\depth.frag" />
+    <None Include="Resources\Shaders\depth.vert" />
+    <None Include="Resources\Shaders\depth_frag.spv" />
+    <None Include="Resources\Shaders\depth_frag.wgsl" />
+    <None Include="Resources\Shaders\depth_vert.spv" />
+    <None Include="Resources\Shaders\depth_vert.wgsl" />
+    <None Include="Resources\Shaders\gpgpu_sample.comp" />
+    <None Include="Resources\Shaders\gpgpu_sample.frag" />
+    <None Include="Resources\Shaders\gpgpu_sample.vert" />
+    <None Include="Resources\Shaders\gpgpu_sample_comp.spv" />
+    <None Include="Resources\Shaders\gpgpu_sample_comp.wgsl" />
+    <None Include="Resources\Shaders\gpgpu_sample_frag.spv" />
+    <None Include="Resources\Shaders\gpgpu_sample_frag.wgsl" />
+    <None Include="Resources\Shaders\gpgpu_sample_vert.spv" />
+    <None Include="Resources\Shaders\gpgpu_sample_vert.wgsl" />
+    <None Include="Resources\Shaders\loadingbar.frag" />
+    <None Include="Resources\Shaders\loadingbar.vert" />
+    <None Include="Resources\Shaders\loadingbar_frag.spv" />
+    <None Include="Resources\Shaders\loadingbar_frag.wgsl" />
+    <None Include="Resources\Shaders\loadingbar_vert.spv" />
+    <None Include="Resources\Shaders\loadingbar_vert.wgsl" />
+    <None Include="Resources\Shaders\minimum.vert" />
+    <None Include="Resources\Shaders\minimum_vert.spv" />
+    <None Include="Resources\Shaders\minimum_vert.wgsl" />
+    <None Include="Resources\Shaders\pbr.frag" />
+    <None Include="Resources\Shaders\pbr.vert" />
+    <None Include="Resources\Shaders\pbr_frag.spv" />
+    <None Include="Resources\Shaders\pbr_frag.wgsl" />
+    <None Include="Resources\Shaders\pbr_NativeSafe_frag.wgsl" />
+    <None Include="Resources\Shaders\pbr_vert.spv" />
+    <None Include="Resources\Shaders\pbr_vert.wgsl" />
+    <None Include="Resources\Shaders\pbrmorph.vert" />
+    <None Include="Resources\Shaders\pbrmorph_vert.spv" />
+    <None Include="Resources\Shaders\pbrmorph_vert.wgsl" />
+    <None Include="Resources\Shaders\raymarching.frag" />
+    <None Include="Resources\Shaders\raymarching_frag.spv" />
+    <None Include="Resources\Shaders\raymarching_frag.wgsl" />
+    <None Include="Resources\Shaders\renderboard.vert" />
+    <None Include="Resources\Shaders\renderboard_vert.spv" />
+    <None Include="Resources\Shaders\renderboard_vert.wgsl" />
+    <None Include="Resources\Shaders\sample.frag" />
+    <None Include="Resources\Shaders\sample.vert" />
+    <None Include="Resources\Shaders\sample_frag.spv" />
+    <None Include="Resources\Shaders\sample_frag.wgsl" />
+    <None Include="Resources\Shaders\sample_vert.spv" />
+    <None Include="Resources\Shaders\sample_vert.wgsl" />
+    <None Include="Resources\Shaders\shadow_debug.frag" />
+    <None Include="Resources\Shaders\shadow_debug.vert" />
+    <None Include="Resources\Shaders\shadow_debug_frag.spv" />
+    <None Include="Resources\Shaders\shadow_debug_frag.wgsl" />
+    <None Include="Resources\Shaders\shadow_debug_vert.spv" />
+    <None Include="Resources\Shaders\shadow_debug_vert.wgsl" />
+    <None Include="Resources\Shaders\unlit.frag" />
+    <None Include="Resources\Shaders\unlit_frag.spv" />
+    <None Include="Resources\Shaders\unlit_frag.wgsl" />
+    <None Include="Commands\wgslc_ALL.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\CompileGLSLToSpirV.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\CompileSpirVToWGSL.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\compVK.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\compWG.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\CopyDawnLib.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\GetLibAndPath.py" />
+    <None Include="Commands\glslc_ALL.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\MakeEmccBuild.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\MakeEmccBuild.py" />
+    <None Include="Commands\RemakeCmakeLists.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\RemakeCmakeLists.py" />
+    <None Include="Commands\RemakeCmakeLists_DescApp.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\RemakeCmakeLists_DescApp.py" />
+    <None Include="Commands\RunLocalHost.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\TestCmd.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\update.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="Commands\UTF8Encorder.py" />
+    <None Include="Resources\Scene\MRTTest.json" />
+    <None Include="Resources\MaterialFrame\PBR_MRT_MF.json" />
+    <None Include="Resources\Shaders\pbr_mrt.frag" />
+    <None Include="Resources\Shaders\mrt_sample.frag" />
+    <None Include="Resources\MaterialFrame\MRTSample_MF.json" />
+    <None Include="Resources\Shaders\objectspace_raymarching.frag" />
+    <None Include="Resources\Shaders\objectspace_raymarching.vert" />
+    <None Include="Resources\MaterialFrame\Objectspace_Ray_MF.json" />
+    <None Include="Resources\Shaders\texture.frag" />
+    <None Include="Resources\MaterialFrame\FrameTexture_MF.json" />
+    <None Include="Resources\Shaders\sdftext.frag" />
+    <None Include="Resources\MaterialFrame\sdftext_mf.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Commands\LibList.txt" />
+  </ItemGroup>
+</Project>
