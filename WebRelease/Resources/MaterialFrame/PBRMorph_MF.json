@@ -1,0 +1,300 @@
+{
+  "name": "pbrmorph_mat",
+  "shaderList": [
+    {
+      "name": "pbrmorph_vert",
+      "shaderFile": "Resources\\Shaders\\pbrmorph",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "vertex",
+      "uniformBlockList": [
+        {
+          "name": "MorphUniformBufferObject",
+          "binding": 0,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "model",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "view",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "proj",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "lightVPMat",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "lightDir",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ]
+            },
+            {
+              "name": "lightColor",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ]
+            },
+            {
+              "name": "cameraPos",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ]
+            },
+            {
+              "name": "baseColorFactor",
+              "type": "vec4",
+              "initValue": [ 1.0, 1.0, 1.0, 1.0 ]
+            },
+            {
+              "name": "emissiveFactor",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ]
+            },
+            {
+              "name": "time",
+              "type": "float",
+              "initValue": [ 0.0 ]
+            },
+            {
+              "name": "metallicFactor",
+              "type": "float",
+              "initValue": [ 0.0 ]
+            },
+            {
+              "name": "roughnessFactor",
+              "type": "float",
+              "initValue": [ 0.0 ]
+            },
+            {
+              "name": "normalMapScale",
+              "type": "float",
+              "initValue": [ 1.0 ]
+            },
+            {
+              "name": "occlusionStrength",
+              "type": "float",
+              "initValue": [ 1.0 ]
+            },
+            {
+              "name": "mipCount",
+              "type": "float",
+              "initValue": [ 1.0 ]
+            },
+            {
+              "name": "ShadowMapX",
+              "type": "float",
+              "initValue": [ 1.0 ]
+            },
+            {
+              "name": "ShadowMapY",
+              "type": "float",
+              "initValue": [ 1.0 ]
+            },
+            {
+              "name": "MorphWeight_0",
+              "type": "float",
+              "initValue": [ 0.0 ]
+            },
+            {
+              "name": "MorphWeight_1",
+              "type": "float",
+              "initValue": [ 0.0 ]
+            },
+            {
+              "name": "fPad0",
+              "type": "float",
+              "initValue": [ 0.0 ]
+            },
+            {
+              "name": "fPad1",
+              "type": "float",
+              "initValue": [ 0.0 ]
+            },
+            {
+              "name": "useBaseColorTexture",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useMetallicRoughnessTexture",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useEmissiveTexture",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useNormalTexture",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useOcclusionTexture",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useCubeMap",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useShadowMap",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useIBL",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useSkinMeshAnimation",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useDirCubemap",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "useMorph",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "pad2",
+              "type": "int",
+              "initValue": [ 0 ]
+            }
+          ]
+        },
+        {
+          "name": "SkinMatrixBuffer",
+          "binding": 1,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "r_SkinMatrixBuffer",
+              "type": "mat4_array",
+              "useInitValue": false,
+              "arraySize": 512
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pbr_frag",
+      "shaderFile": "Resources\\Shaders\\pbr",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "fragment",
+      "uniformBlockList": [
+        {
+          "name": "baseColorTexture",
+          "viewBinding": 2,
+          "samplerBinding": 3,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "metallicRoughnessTexture",
+          "viewBinding": 4,
+          "samplerBinding": 5,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "emissiveTexture",
+          "viewBinding": 6,
+          "samplerBinding": 7,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "normalTexture",
+          "viewBinding": 8,
+          "samplerBinding": 9,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "occlusionTexture",
+          "viewBinding": 10,
+          "samplerBinding": 11,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "cubemapTexture",
+          "viewBinding": 12,
+          "samplerBinding": 13,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "cube"
+        },
+        {
+          "name": "shadowmapTexture",
+          "viewBinding": 14,
+          "samplerBinding": 15,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "frame"
+        },
+        {
+          "name": "IBL_Diffuse_Texture",
+          "viewBinding": 16,
+          "samplerBinding": 17,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "diffuse"
+        },
+        {
+          "name": "IBL_Specular_Texture",
+          "viewBinding": 18,
+          "samplerBinding": 19,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "specular"
+        },
+        {
+          "name": "IBL_GGXLUT_Texture",
+          "viewBinding": 20,
+          "samplerBinding": 21,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "ggx"
+        },
+        {
+          "name": "cubeMap2DTexture",
+          "viewBinding": 22,
+          "samplerBinding": 23,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        }
+      ]
+    }
+  ]
+}

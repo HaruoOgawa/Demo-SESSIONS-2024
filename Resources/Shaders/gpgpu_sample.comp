@@ -1,0 +1,51 @@
+#version 450
+
+layout(binding = 0) uniform ParamUBO
+{
+	float time;
+	float deltaTime;
+    float pad0;
+    float pad1;
+} ubo;
+
+struct TestData
+{
+    vec4 offset;
+    vec4 color;
+    float AccumulateDeltaTime;
+    float pad0;
+    float pad1;
+    float pad2;
+};
+
+readonly layout(std430, binding = 1) buffer ReadOnlyTestBufferObject
+{
+    TestData data[];
+} r_TBO;
+
+layout(std430, binding = 2) buffer WriteOnlyTestBufferObject
+{
+    TestData data[];
+} w_TBO;
+
+layout(local_size_x = 256, local_size_y = 1, local_size_z =1) in;
+
+float rand(vec2 st)
+{
+    return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+}
+
+void main()
+{
+    uint id = gl_GlobalInvocationID.x;
+    float id_f = float(id);
+
+    w_TBO.data[id].AccumulateDeltaTime += ubo.deltaTime;
+
+    if(w_TBO.data[id].AccumulateDeltaTime >= (1.0 / 120.0))
+    {
+        w_TBO.data[id].AccumulateDeltaTime = 0.0;
+
+        w_TBO.data[id].offset.y += sin(ubo.time + rand(vec2(id_f, id_f + 12.394)) * 10.0) * 0.1; 
+    }
+}

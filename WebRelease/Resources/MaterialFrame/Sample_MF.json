@@ -1,0 +1,99 @@
+{
+  "name": "sample_mat",
+  "shaderList": [
+    {
+      "name": "sample_vert",
+      "shaderFile": "Resources\\Shaders\\sample",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "vertex",
+      "uniformBlockList": [
+        {
+          "name": "UniformBufferObject",
+          "binding": 0,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "model",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "view",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "proj",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "lightVPMat",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "color",
+              "type": "vec4",
+              "initValue": [1.0, 1.0, 1.0, 1.0]
+            },
+            {
+              "name": "useTexture",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "pad0",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "pad1",
+              "type": "int",
+              "initValue": [ 0 ]
+            },
+            {
+              "name": "pad2",
+              "type": "int",
+              "initValue": [ 0 ]
+            }
+          ]
+        },
+        {
+          "name": "SkinMatrixBuffer",
+          "binding": 3,
+          "isWritable": false,
+          "type": "ssbo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "r_SkinMatrixBuffer",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sample_frag",
+      "shaderFile": "Resources\\Shaders\\sample",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "fragment",
+      "uniformBlockList": [
+        {
+          "name": "baseColorTexture",
+          "viewBinding": 1,
+          "samplerBinding": 2,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        }
+      ]
+    }
+  ]
+}
