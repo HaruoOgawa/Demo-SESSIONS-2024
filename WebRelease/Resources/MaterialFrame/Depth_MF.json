@@ -1,0 +1,51 @@
+{
+  "name": "depth_mat",
+  "shaderList": [
+    {
+      "name": "depth_vert",
+      "shaderFile": "Resources\\Shaders\\depth",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "vertex",
+      "uniformBlockList": [
+        {
+          "name": "UniformBufferObject",
+          "binding": 0,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "model",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "view",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "proj",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            },
+            {
+              "name": "lightVPMat",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "depth_frag",
+      "shaderFile": "Resources\\Shaders\\depth",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "fragment",
+      "uniformBlockList": []
+    }
+  ]
+}

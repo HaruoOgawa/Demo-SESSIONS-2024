@@ -1,0 +1,57 @@
+{
+  "name": "sample_scene",
+
+  "materialframes": [
+    {
+      "name": "pbr_mat",
+      "filename": "Resources/MaterialFrame/PBR_MF.json"
+    }
+  ],
+
+  "objects": [
+    {
+      "name": "SampleObj",
+      "transform": {
+        "pos": [ 0.0, 0.0, 0.0 ],
+        "rotate": [ 0.0, 0.0, 0.0 ],
+        "scale": [ 1.0, 1.0, 1.0 ]
+      },
+      "enable": true,
+      "rootnodes": [
+        0
+      ],
+      "nodes": [
+        {
+          "name": "testnode",
+          "transform": {
+            "pos": [ 0.0, 0.0, 0.0 ],
+            "rotate": [ 0.0, 0.0, 0.0 ],
+            "scale": [ 1.0, 1.0, 1.0 ]
+          },
+          "meshindex": 0
+        }
+      ],
+      "meshs": [
+        {
+          "primitives": [
+            {
+              "materialindex": 0,
+              "type": "cube"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "materialframe": "pbr_mat",
+          "uniformvalues": [
+          ],
+          "textures": [
+          ]
+        }
+      ],
+      "textureset": [
+      ]
+    }
+  ]
+}
