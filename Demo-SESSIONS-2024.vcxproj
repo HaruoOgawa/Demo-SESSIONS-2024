@@ -549,6 +549,7 @@
     <None Include="Resources\MaterialFrame\Sample_MF.json" />
     <None Include="Resources\MaterialFrame\sdftext_mf.json" />
     <None Include="Resources\MaterialFrame\SimpleTexture_MF.json" />
+    <None Include="Resources\Scene\Demo-SESSIONS-2024.json" />
     <None Include="Resources\Scene\MRTTest.json" />
     <None Include="Resources\Shaders\basic_toon.frag" />
     <None Include="Resources\Shaders\basic_toon.vert" />
