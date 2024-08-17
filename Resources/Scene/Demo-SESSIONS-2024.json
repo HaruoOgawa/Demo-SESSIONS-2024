@@ -1,64 +1,511 @@
 {
-  "name": "sample_scene",
-
-  "materialframes": [
-    {
-      "name": "pbr_mat",
-      "filename": "Resources/MaterialFrame/PBR_MF.json"
-    }
-  ],
-  "sound": {
-    "bgm": {
-      "filename": "Resources\\Sound\\DemoSound_01.wav",
-      "autoplay": true,
-      "loop": false
-    }
-  },
-
-  "objects": [
-    {
-      "name": "SampleObj",
-      "transform": {
-        "pos": [ 0.0, 0.0, 0.0 ],
-        "rotate": [ 0.0, 0.0, 0.0 ],
-        "scale": [ 1.0, 1.0, 1.0 ]
-      },
-      "enable": true,
-      "rootnodes": [
-        0
-      ],
-      "nodes": [
+    "materialframes": [
         {
-          "name": "testnode",
-          "transform": {
-            "pos": [ 0.0, 0.0, 0.0 ],
-            "rotate": [ 0.0, 0.0, 0.0 ],
-            "scale": [ 1.0, 1.0, 1.0 ]
-          },
-          "meshindex": 0
-        }
-      ],
-      "meshs": [
+            "name": "pbr_mat",
+            "filename": "Resources/MaterialFrame/PBR_MF.json"
+        },
         {
-          "primitives": [
-            {
-              "materialindex": 0,
-              "type": "cube"
-            }
-          ]
+            "name": "ray_01",
+            "filename": "Resources/MaterialFrame/ray_01_mf.json"
         }
-      ],
-      "materials": [
+    ],
+    "sound": {
+        "bgm": {
+            "filename": "Resources\\Sound\\DemoSound_01.wav",
+            "autoplay": true,
+            "loop": false
+        }
+    },
+    "timeline": {
+        "filename": "Resources\\Scene\\Demo-SESSIONS-2024.tl"
+    },
+    "objects": [
         {
-          "materialframe": "pbr_mat",
-          "uniformvalues": [
-          ],
-          "textures": [
-          ]
+            "name": "SampleObj",
+            "filename": "",
+            "renderpass": "MainResultPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "testnode",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "cube"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "pbr_mat",
+                    "cull": "back",
+                    "uniformvalues": [
+                        {
+                            "name": "baseColorFactor",
+                            "type": "vec4",
+                            "value": [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "emissiveFactor",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "metallicFactor",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "normalMapScale",
+                            "type": "float",
+                            "value": [
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "occlusionStrength",
+                            "type": "float",
+                            "value": [
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "roughnessFactor",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useBaseColorTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useCubeMap",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useDirCubemap",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useEmissiveTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useIBL",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useMetallicRoughnessTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useNormalTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useOcclusionTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useShadowMap",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        }
+                    ],
+                    "textures": [
+                        {
+                            "texturebuffername": "cubemapTexture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        },
+                        {
+                            "texturebuffername": "shadowmapTexture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        },
+                        {
+                            "texturebuffername": "IBL_Diffuse_Texture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        },
+                        {
+                            "texturebuffername": "IBL_Specular_Texture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        },
+                        {
+                            "texturebuffername": "IBL_GGXLUT_Texture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ray_01",
+            "filename": "",
+            "renderpass": "MainResultPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": false,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "root_node",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "board"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "pbr_mat",
+                    "cull": "none",
+                    "uniformvalues": [
+                        {
+                            "name": "baseColorFactor",
+                            "type": "vec4",
+                            "value": [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "emissiveFactor",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "metallicFactor",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "normalMapScale",
+                            "type": "float",
+                            "value": [
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "occlusionStrength",
+                            "type": "float",
+                            "value": [
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "roughnessFactor",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useBaseColorTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useCubeMap",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useDirCubemap",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useEmissiveTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useIBL",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useMetallicRoughnessTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useNormalTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useOcclusionTexture",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "useShadowMap",
+                            "type": "int",
+                            "value": [
+                                0.0
+                            ]
+                        }
+                    ],
+                    "textures": [
+                        {
+                            "texturebuffername": "cubemapTexture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        },
+                        {
+                            "texturebuffername": "shadowmapTexture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        },
+                        {
+                            "texturebuffername": "IBL_Diffuse_Texture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        },
+                        {
+                            "texturebuffername": "IBL_Specular_Texture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        },
+                        {
+                            "texturebuffername": "IBL_GGXLUT_Texture",
+                            "textureindex": -1,
+                            "texturename": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ray_obj_01",
+            "filename": "",
+            "renderpass": "MainResultPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "ray_node_1",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            100.0,
+                            100.0,
+                            100.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "ray_01",
+                    "cull": "front",
+                    "uniformvalues": [
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
-      ],
-      "textureset": [
-      ]
-    }
-  ]
+    ]
 }

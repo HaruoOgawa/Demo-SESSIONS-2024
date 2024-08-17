@@ -546,6 +546,7 @@
     <None Include="Resources\MaterialFrame\PBR_MF.json" />
     <None Include="Resources\MaterialFrame\PBR_MRT_MF.json" />
     <None Include="Resources\MaterialFrame\raymarching_mf.json" />
+    <None Include="Resources\MaterialFrame\ray_01_mf.json" />
     <None Include="Resources\MaterialFrame\Sample_MF.json" />
     <None Include="Resources\MaterialFrame\sdftext_mf.json" />
     <None Include="Resources\MaterialFrame\SimpleTexture_MF.json" />
@@ -604,6 +605,7 @@
     <None Include="Resources\Shaders\raymarching.frag" />
     <None Include="Resources\Shaders\raymarching_frag.spv" />
     <None Include="Resources\Shaders\raymarching_frag.wgsl" />
+    <None Include="Resources\Shaders\ray_01.frag" />
     <None Include="Resources\Shaders\renderboard.vert" />
     <None Include="Resources\Shaders\renderboard_vert.spv" />
     <None Include="Resources\Shaders\renderboard_vert.wgsl" />

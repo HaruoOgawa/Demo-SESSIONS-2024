@@ -253,6 +253,8 @@
     <None Include="Resources\Shaders\sdftext.frag" />
     <None Include="Resources\MaterialFrame\sdftext_mf.json" />
     <None Include="Resources\Scene\Demo-SESSIONS-2024.json" />
+    <None Include="Resources\MaterialFrame\ray_01_mf.json" />
+    <None Include="Resources\Shaders\ray_01.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Commands\LibList.txt" />

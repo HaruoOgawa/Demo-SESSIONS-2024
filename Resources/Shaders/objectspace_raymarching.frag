@@ -61,8 +61,8 @@ void main()
         
         //vec4 projPos = f_ubo.proj * f_ubo.view * f_ubo.model * vec4(p, 1.0);
         //float depth = projPos.z / projPos.w;
-        // ƒfƒvƒX‚ª‚¸‚ê‚é‚Ì‚Å‚Ð‚Æ‚Ü‚¸Œ³‚ÌƒLƒ…[ƒu‚ÌƒfƒvƒX‚ðÌ—p
-        // ƒŒƒCƒ}[ƒ`ƒ“ƒO“I‚É‰½‚©‚ ‚ê‚Î”²‚¯‚é‚Ì‚Å‚Ð‚Æ‚Ü‚¸[“x‚Í•Û‚Ä‚é‚Í‚¸(‰½‚à‚È‚¢‚Æ‚±‚Ídiscard‚ÅŽÌ‚Ä‚ç‚ê‚é‚Ì‚Å)
+        // ï¿½fï¿½vï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Å‚Ð‚Æ‚Ü‚ï¿½ï¿½ï¿½ï¿½ÌƒLï¿½ï¿½ï¿½[ï¿½uï¿½Ìƒfï¿½vï¿½Xï¿½ï¿½ï¿½Ì—p
+        // ï¿½ï¿½ï¿½Cï¿½}ï¿½[ï¿½`ï¿½ï¿½ï¿½Oï¿½Iï¿½É‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î”ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Å‚Ð‚Æ‚Ü‚ï¿½ï¿½[ï¿½xï¿½Í•Û‚Ä‚ï¿½Í‚ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½discardï¿½ÅŽÌ‚Ä‚ï¿½ï¿½ï¿½Ì‚ï¿½)
         float depth = gl_FragCoord.z;
 
         gPosition = vec4(p, 1.0);

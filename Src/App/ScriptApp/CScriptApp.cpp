@@ -94,6 +94,9 @@ namespace app
 
 	bool CScriptApp::Update(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<input::CInputState>& InputState)
 	{
+		// í‚Éƒ^ƒCƒ€ƒ‰ƒCƒ“‚©‚ç‚ÌÄ¶ŽžŠÔ‚ð“n‚·
+		m_DrawInfo->SetSecondsTime(m_TimelineController->GetPlayBackTime());
+
 		if (!m_FileModifier->Update(pLoadWorker)) return false;
 
 		if (pLoadWorker->IsLoaded())
