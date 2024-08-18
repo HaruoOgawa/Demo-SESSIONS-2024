@@ -29,12 +29,10 @@ layout(binding = 1) uniform FragUniformBufferObject{
 
 #define repeat(p, a) mod(p, a) - a * 0.5
 #define gmin(dst, src) dst = min(dst, src)
+#define rot(a) mat2(cos(a), sin(a), -sin(a), cos(a))
 
 //
 const float MIN_VALUE = 1E-3;
-
-// グリッドの間隔
-const float GRID_INTERVAL = 0.25;
 
 //
 float rand(vec2 st)
@@ -47,37 +45,29 @@ float sdBox(vec3 p, vec3 s)
 	return length(max(vec3(0.0), abs(p) - s));
 }
 
-float map(vec3 p, vec3 gridCenter)
+float map(vec3 p)
 {
 	float d = 1e5;
 
 	vec3 pos0 = p;
-	float hegiht = rand(gridCenter.xz) * 0.5 + 0.5;
-	hegiht *= 2.0;
 
-	float width = GRID_INTERVAL * 0.5;
+	pos0.xy *= rot(fragUbo.time);
+	pos0.yz *= rot(fragUbo.time);
+	pos0.xz *= rot(fragUbo.time);
 
-	if(length(gridCenter.xz) < 5.0)
-	{
-		hegiht = 0.0;
-	}
-
-	float d0 = sdBox(pos0 + vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );
-	gmin(d, d0);
-
-	d0 = sdBox(pos0 - vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );
+	float d0 = sdBox(pos0 , vec3(0.5) );
 	gmin(d, d0);
 
 	return d;
 }
 
-vec3 gn(vec3 p, vec3 gridCenter)
+vec3 gn(vec3 p)
 {
 	vec2 e = vec2(MIN_VALUE, 0.0);
 	return normalize(vec3(
-		map(p + e.xyy, gridCenter) - map(p - e.xyy, gridCenter),
-		map(p + e.yxy, gridCenter) - map(p - e.yxy, gridCenter),
-		map(p + e.yyx, gridCenter) - map(p - e.yyx, gridCenter)
+		map(p + e.xyy) - map(p - e.xyy),
+		map(p + e.yxy) - map(p - e.yxy),
+		map(p + e.yyx) - map(p - e.yyx)
 	));
 }
 
@@ -98,26 +88,6 @@ float CalcDepth(vec3 p)
 	return moment2;
 }
 
-// grid traversal
-// https://www.shadertoy.com/view/stdXWH
-/**
- * do grid traversal
- * returns vec3( center of the grid, distance to the next grid )
- */
- vec3 traverseGrid2D(vec2 ro, vec2 rd)
- {
-	// グリッドの中心位置を求める
-	vec2 grid = floor( (ro + rd * 1E-2 * GRID_INTERVAL) / GRID_INTERVAL ) * GRID_INTERVAL + 0.5 * GRID_INTERVAL;
-
-	// 次のグリッドまでの距離を求める(b)
-	vec2 src = ( ro - grid ) / rd;
-	vec2 dst = abs( 0.5 * GRID_INTERVAL / rd );
-	vec2 bv = -src + dst;
-	float b = min(bv.x, bv. y);
-
-	return vec3( grid, b );
- }
-
 void main()
 {
 	vec3 col = vec3(0.0, 0.0, 0.0);
@@ -133,26 +103,10 @@ void main()
 
 	float dist = 0.0, depth = 0.0, lenToNextGrid = 0.0;
 	vec3 p = ro + rd * depth;
-	vec3 gridCenter;
-	vec2 normalizeRdXZ = normalize(rd.xz);
-	float gridLenMultiplier = 1.0 / length(rd.xz);
 
-	for(int i = 0; i < 256; i++)
+	for(int i = 0; i < 64; i++)
 	{
-		if(depth >= lenToNextGrid)
-		{
-			// grid traversal
-			// https://www.shadertoy.com/view/stdXWH
-			// 次のグリッドまで届いていたら現在のグリッドに収まるように丸め込む
-			depth = lenToNextGrid;
-			p = ro + rd * depth;
-
-			vec3 grid = traverseGrid2D( p.xz, normalizeRdXZ);
-			gridCenter = vec3(grid.x, 0.0, grid.y);
-			lenToNextGrid += grid.z * gridLenMultiplier;
-		}
-
-		dist = map(p - gridCenter, gridCenter);
+		dist = map(p);
 		depth += dist;
 		p = ro + rd * depth;
 
@@ -163,7 +117,7 @@ void main()
 
 	if(dist < MIN_VALUE)
 	{
-		vec3 n = gn(p - gridCenter, gridCenter);
+		vec3 n = gn(p);
 		float outDepth = CalcDepth(p);
 
 		col = vec3(1.0);
@@ -178,7 +132,6 @@ void main()
 	}
 	else
 	{
-		// gDepth = vec4(1.0);
 		discard;
 	}
 }

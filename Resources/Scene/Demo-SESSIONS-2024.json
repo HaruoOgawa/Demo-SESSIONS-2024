@@ -1,12 +1,16 @@
 {
     "materialframes": [
         {
-            "name": "pbr_mat",
-            "filename": "Resources/MaterialFrame/PBR_MF.json"
+            "name": "centercube_01_mf",
+            "filename": "Resources/MaterialFrame/centercube_01_mf.json"
         },
         {
             "name": "cubegrid",
             "filename": "Resources/MaterialFrame/cubegrid_mf.json"
+        },
+        {
+            "name": "pbr_mat",
+            "filename": "Resources/MaterialFrame/PBR_MF.json"
         }
     ],
     "sound": {
@@ -21,215 +25,9 @@
     },
     "objects": [
         {
-            "name": "SampleObj",
-            "filename": "",
-            "renderpass": "MainResultPass",
-            "depthpass": "",
-            "transform": {
-                "pos": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    2.0,
-                    2.0,
-                    2.0
-                ]
-            },
-            "enable": true,
-            "rootnodes": [
-                0
-            ],
-            "nodes": [
-                {
-                    "name": "testnode",
-                    "transform": {
-                        "pos": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotate": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            2.0,
-                            2.0,
-                            2.0
-                        ]
-                    },
-                    "meshindex": 0
-                }
-            ],
-            "meshs": [
-                {
-                    "primitives": [
-                        {
-                            "materialindex": 0,
-                            "type": "cube"
-                        }
-                    ]
-                }
-            ],
-            "materials": [
-                {
-                    "materialframe": "pbr_mat",
-                    "cull": "back",
-                    "uniformvalues": [
-                        {
-                            "name": "baseColorFactor",
-                            "type": "vec4",
-                            "value": [
-                                1.0,
-                                1.0,
-                                1.0,
-                                1.0
-                            ]
-                        },
-                        {
-                            "name": "emissiveFactor",
-                            "type": "vec4",
-                            "value": [
-                                0.0,
-                                0.0,
-                                0.0,
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "metallicFactor",
-                            "type": "float",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "normalMapScale",
-                            "type": "float",
-                            "value": [
-                                1.0
-                            ]
-                        },
-                        {
-                            "name": "occlusionStrength",
-                            "type": "float",
-                            "value": [
-                                1.0
-                            ]
-                        },
-                        {
-                            "name": "roughnessFactor",
-                            "type": "float",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "useBaseColorTexture",
-                            "type": "int",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "useCubeMap",
-                            "type": "int",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "useDirCubemap",
-                            "type": "int",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "useEmissiveTexture",
-                            "type": "int",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "useIBL",
-                            "type": "int",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "useMetallicRoughnessTexture",
-                            "type": "int",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "useNormalTexture",
-                            "type": "int",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "useOcclusionTexture",
-                            "type": "int",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "useShadowMap",
-                            "type": "int",
-                            "value": [
-                                0.0
-                            ]
-                        }
-                    ],
-                    "textures": [
-                        {
-                            "texturebuffername": "cubemapTexture",
-                            "textureindex": -1,
-                            "texturename": ""
-                        },
-                        {
-                            "texturebuffername": "shadowmapTexture",
-                            "textureindex": -1,
-                            "texturename": ""
-                        },
-                        {
-                            "texturebuffername": "IBL_Diffuse_Texture",
-                            "textureindex": -1,
-                            "texturename": ""
-                        },
-                        {
-                            "texturebuffername": "IBL_Specular_Texture",
-                            "textureindex": -1,
-                            "texturename": ""
-                        },
-                        {
-                            "texturebuffername": "IBL_GGXLUT_Texture",
-                            "textureindex": -1,
-                            "texturename": ""
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "name": "ray_obj_01",
             "filename": "",
-            "renderpass": "MainResultPass",
+            "renderpass": "MRTPass",
             "depthpass": "",
             "transform": {
                 "pos": [
@@ -288,6 +86,81 @@
             "materials": [
                 {
                     "materialframe": "cubegrid",
+                    "cull": "front",
+                    "uniformvalues": [
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "centercube_obj",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    4.0,
+                    4.0,
+                    4.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "centercube_node",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "cube"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "centercube_01",
                     "cull": "front",
                     "uniformvalues": [
                         {
