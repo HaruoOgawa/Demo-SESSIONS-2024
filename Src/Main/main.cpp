@@ -4,7 +4,7 @@
 int main()
 {
 	app::SAppSettings Settings = {};
-	Settings.FullScreen = false;
+	Settings.FullScreen = true;
 
 	if (!app::CAppRunner::Run(std::make_shared<app::CScriptApp>(), Settings)) return 1;
 
