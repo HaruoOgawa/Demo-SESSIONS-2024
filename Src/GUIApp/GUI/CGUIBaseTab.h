@@ -15,7 +15,7 @@ namespace object {
 
 namespace gui
 {
-	class CGUITransformTab
+	class CGUIBaseTab
 	{
 	private:
 		static bool DrawTransformGUI(const std::shared_ptr<math::CTransform>& Transform);

@@ -36,7 +36,7 @@
     <ClCompile Include="Src\GUIApp\GUI\CGUIResourcesTab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\GUIApp\GUI\CGUITransformTab.cpp">
+    <ClCompile Include="Src\GUIApp\GUI\CGUIBaseTab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\GUIApp\Model\CFileModifier.cpp">
@@ -86,7 +86,7 @@
     <ClInclude Include="Src\GUIApp\GUI\CGUIResourcesTab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\GUIApp\GUI\CGUITransformTab.h">
+    <ClInclude Include="Src\GUIApp\GUI\CGUIBaseTab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\GUIApp\Model\CFileModifier.h">

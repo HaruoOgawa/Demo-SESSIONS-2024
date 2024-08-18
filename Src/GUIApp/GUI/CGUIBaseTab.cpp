@@ -1,16 +1,46 @@
 #ifdef USE_GUIENGINE
-#include "CGUITransformTab.h"
+#include "CGUIBaseTab.h"
 #include "../../Object/C3DObject.h"
 
 namespace gui
 {
-	bool CGUITransformTab::Draw(const std::vector<std::shared_ptr<object::C3DObject>>& ObjectList, int SelectedObjectIndex, int SelectedNodeIndex)
+	bool CGUIBaseTab::Draw(const std::vector<std::shared_ptr<object::C3DObject>>& ObjectList, int SelectedObjectIndex, int SelectedNodeIndex)
 	{
 		if (ImGui::BeginTabItem("Base"))
 		{
 			if (SelectedObjectIndex >= 0 && SelectedObjectIndex < static_cast<int>(ObjectList.size()))
 			{
 				const auto& Object = ObjectList[SelectedObjectIndex];
+
+				// PassName
+				{
+					std::string PassName = Object->GetPassName();
+
+					char buf[256] = "";
+					std::memcpy(&buf[0], &PassName[0], PassName.size());
+					
+					if (ImGui::InputText("PassName##CGUIBaseTab::Draw", buf, IM_ARRAYSIZE(buf)))
+					{
+						PassName = std::string(buf);
+
+						Object->SetPassName(PassName);
+					}
+				}
+
+				// DepthPass
+				{
+					std::string DepthPass = Object->GetDepthPassName();
+
+					char buf[256] = "";
+					std::memcpy(&buf[0], &DepthPass[0], DepthPass.size());
+					
+					if (ImGui::InputText("DepthPass##CGUIBaseTab::Draw", buf, IM_ARRAYSIZE(buf)))
+					{
+						DepthPass = std::string(buf);
+
+						Object->SetDepthPassName(DepthPass);
+					}
+				}
 
 				const auto& NodeList = Object->GetNodeList();
 				const auto& MeshList = Object->GetMeshList();
@@ -23,7 +53,7 @@ namespace gui
 
 					// ƒƒbƒVƒ…
 					int MeshIndex = Node->GetMeshIndex();
-					if (ImGui::InputInt("MeshIndex##CGUITransformTab", &MeshIndex))
+					if (ImGui::InputInt("MeshIndex##CGUIBaseTab", &MeshIndex))
 					{
 						if (MeshIndex >= 0 && MeshIndex < static_cast<int>(MeshList.size()))
 						{
@@ -53,7 +83,7 @@ namespace gui
 		return true;
 	}
 
-	bool CGUITransformTab::DrawTransformGUI(const std::shared_ptr<math::CTransform>& Transform)
+	bool CGUIBaseTab::DrawTransformGUI(const std::shared_ptr<math::CTransform>& Transform)
 	{
 		// Pos
 		glm::vec3 Pos = Transform->GetPos();

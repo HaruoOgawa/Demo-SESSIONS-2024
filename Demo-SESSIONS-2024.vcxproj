@@ -493,7 +493,7 @@
     <ClCompile Include="Src\GUIApp\GUI\CGUIObjectTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIRenderingTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIResourcesTab.cpp" />
-    <ClCompile Include="Src\GUIApp\GUI\CGUITransformTab.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUIBaseTab.cpp" />
     <ClCompile Include="Src\GUIApp\Model\CFileModifier.cpp" />
     <ClCompile Include="Src\App\ScriptApp\Scene\CScriptScene.cpp" />
     <ClCompile Include="Src\Main\main.cpp" />
@@ -513,7 +513,7 @@
     <ClInclude Include="Src\GUIApp\GUI\CGUIObjectTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIRenderingTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIResourcesTab.h" />
-    <ClInclude Include="Src\GUIApp\GUI\CGUITransformTab.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUIBaseTab.h" />
     <ClInclude Include="Src\GUIApp\Model\CFileModifier.h" />
     <ClInclude Include="Src\App\ScriptApp\Scene\CScriptScene.h" />
   </ItemGroup>
