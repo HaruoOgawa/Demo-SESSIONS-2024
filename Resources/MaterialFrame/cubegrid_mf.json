@@ -1,5 +1,6 @@
 {
-  "name": "ray_01",
+  "name": "cubegrid",
+  "outputcolorcount": 5,
   "shaderList": [
     {
       "name": "objectspace_raymarching",
@@ -52,8 +53,8 @@
       ]
     },
     {
-      "name": "ray_01",
-      "shaderFile": "Resources\\Shaders\\ray_01",
+      "name": "cubegrid",
+      "shaderFile": "Resources\\Shaders\\cubegrid",
       "autoShaderExtension": true,
       "shadercode": "",
       "shaderType": "fragment",

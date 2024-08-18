@@ -5,8 +5,8 @@
             "filename": "Resources/MaterialFrame/PBR_MF.json"
         },
         {
-            "name": "ray_01",
-            "filename": "Resources/MaterialFrame/ray_01_mf.json"
+            "name": "cubegrid",
+            "filename": "Resources/MaterialFrame/cubegrid_mf.json"
         }
     ],
     "sound": {
@@ -287,7 +287,7 @@
             ],
             "materials": [
                 {
-                    "materialframe": "ray_01",
+                    "materialframe": "cubegrid",
                     "cull": "front",
                     "uniformvalues": [
                         {

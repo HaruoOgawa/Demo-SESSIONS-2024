@@ -3,7 +3,11 @@
 layout(location = 0) in vec4 v2f_ObjectPos;
 layout(location = 1) in vec2 v2f_UV;
 
-layout(location = 0) out vec4 outColor;
+layout(location = 0) out vec4 gPosition;
+layout(location = 1) out vec4 gNormal;
+layout(location = 2) out vec4 gAlbedo;
+layout(location = 3) out vec4 gDepth;
+layout(location = 4) out vec4 gParam_1; // (Material_ID, None, None, None)
 
 layout(binding = 1) uniform FragUniformBufferObject{
 	mat4 invModel;
@@ -155,18 +159,25 @@ void main()
 		if(abs(dist) < MIN_VALUE) break;
 	}
 
+	float MatID = 1.0;
+
 	if(dist < MIN_VALUE)
 	{
 		vec3 n = gn(p - gridCenter, gridCenter);
+		float outDepth = CalcDepth(p);
 
-		col = vec3(n * 0.5 + 0.5);
+		col = vec3(1.0);
 
-		gl_FragDepth = CalcDepth(p);
+		gPosition = vec4(p, 1.0);
+		gNormal = vec4(n, 1.0);
+		gAlbedo = vec4(col, 1.0);
+		gDepth = vec4(vec3(outDepth), 1.0);
+		gParam_1 = vec4(MatID, 0.0, 0.0, 1.0);
+
+		gl_FragDepth = outDepth;
 	}
 	else
 	{
-		gl_FragDepth = 1.0;
+		gDepth = vec4(1.0);
 	}
-
-	outColor = vec4(col, 1.0);
 }

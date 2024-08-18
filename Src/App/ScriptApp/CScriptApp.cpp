@@ -74,14 +74,14 @@ namespace app
 		pLoadWorker->AddScene(std::make_shared<resource::CSceneLoader>("Resources\\Scene\\Demo-SESSIONS-2024.json", m_SceneController));
 
 		// オフスクリーンレンダリング
-		if (!pGraphicsAPI->CreateRenderPass("MainResultPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 1)) return false;
 		if (!pGraphicsAPI->CreateRenderPass("MRTPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 5)) return false;
+		if (!pGraphicsAPI->CreateRenderPass("MainResultPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 1)) return false;
+
+		m_MRTFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MRTPass", "MainResultPass");
+		if (!m_MRTFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\mrt_renderer_mf.json")) return false;
 
 		m_MainFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", "");
 		if (!m_MainFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\FrameTexture_MF.json")) return false;
-		
-		m_MRTFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MRTPass", "");
-		if (!m_MRTFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\FrameTexture_MF.json")) return false;
 
 		// Viewの初期化
 		m_ScriptScene = std::make_shared<app::CScriptScene>(pGraphicsAPI, pLoadWorker, pPhysicsEngine);
@@ -134,6 +134,7 @@ namespace app
 			}
 		}
 
+		if (!m_MRTFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 		if (!m_MainFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 
 		// GUIEngine
@@ -177,6 +178,7 @@ namespace app
 		// MainResultPass
 		{
 			if (!pGraphicsAPI->BeginRender("MainResultPass")) return false;
+			if (!m_MRTFrameRenderer->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 			if (!m_SceneController->Draw(pGraphicsAPI, false, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
 		}
@@ -184,7 +186,7 @@ namespace app
 		// Main FrameBuffer
 		{
 			if (!pGraphicsAPI->BeginRender()) return false;
-
+			
 			if (!m_MainFrameRenderer->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 
 			// GUIEngine
