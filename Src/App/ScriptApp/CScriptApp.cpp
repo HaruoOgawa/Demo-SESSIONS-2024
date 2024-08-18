@@ -36,8 +36,11 @@ namespace app
 		m_Projection(std::make_shared<projection::CProjection>()),
 		m_DrawInfo(std::make_shared<graphics::CDrawInfo>()),
 #ifdef USE_GUIENGINE
+		m_EnabledGUIDraw(true),
 		m_GraphicsEditingWindow(std::make_shared<gui::CGraphicsEditingWindow>()),
 #endif // USE_GUIENGINE
+		m_MainFrameRenderer(nullptr),
+		m_MRTFrameRenderer(nullptr),
 		m_FileModifier(std::make_shared<CFileModifier>()),
 		m_TimelineController(std::make_shared<timeline::CTimelineController>())
 	{
@@ -49,6 +52,10 @@ namespace app
 		m_DrawInfo->GetLightProjection()->SetFar(100.0f);
 
 		m_SceneController->SetDefaultPass("MainResultPass", "");
+
+#ifdef USE_GUIENGINE
+		m_GraphicsEditingWindow->SetDefaultPass("MainResultPass", "");
+#endif
 	}
 
 	bool CScriptApp::Release(api::IGraphicsAPI* pGraphicsAPI)
@@ -68,9 +75,13 @@ namespace app
 
 		// オフスクリーンレンダリング
 		if (!pGraphicsAPI->CreateRenderPass("MainResultPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 1)) return false;
+		if (!pGraphicsAPI->CreateRenderPass("MRTPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 5)) return false;
 
 		m_MainFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", "");
 		if (!m_MainFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\FrameTexture_MF.json")) return false;
+		
+		m_MRTFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MRTPass", "");
+		if (!m_MRTFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\FrameTexture_MF.json")) return false;
 
 		// Viewの初期化
 		m_ScriptScene = std::make_shared<app::CScriptScene>(pGraphicsAPI, pLoadWorker, pPhysicsEngine);
@@ -125,6 +136,14 @@ namespace app
 
 		if (!m_MainFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 
+		// GUIEngine
+#ifdef USE_GUIENGINE
+		if (InputState->IsKeyUp(input::EKeyType::KEY_TYPE_F1))
+		{
+			m_EnabledGUIDraw = !m_EnabledGUIDraw;
+		}
+#endif // USE_GUIENGINE
+
 		return true;
 	}
 
@@ -148,6 +167,13 @@ namespace app
 
 	bool CScriptApp::Draw(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<gui::IGUIEngine>& GUIEngine)
 	{
+		// MRTPass
+		{
+			if (!pGraphicsAPI->BeginRender("MRTPass")) return false;
+			if (!m_SceneController->Draw(pGraphicsAPI, false, m_MainCamera, m_Projection, m_DrawInfo)) return false;
+			if (!pGraphicsAPI->EndRender()) return false;
+		}
+
 		// MainResultPass
 		{
 			if (!pGraphicsAPI->BeginRender("MainResultPass")) return false;
@@ -163,7 +189,7 @@ namespace app
 
 			// GUIEngine
 #ifdef USE_GUIENGINE
-			if (pLoadWorker->IsLoaded())
+			if (pLoadWorker->IsLoaded() && m_EnabledGUIDraw)
 			{
 				gui::SGUIParams GUIParams = gui::SGUIParams(GetObjectList(), m_SceneController, m_FileModifier, m_TimelineController, pLoadWorker);
 

@@ -480,6 +480,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\GUIApp\GUI\C3DView.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUILogTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIMeshTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.cpp" />
@@ -499,6 +500,7 @@
     <ClCompile Include="Src\Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\GUIApp\GUI\C3DView.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUILogTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIMeshTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.h" />

@@ -25,9 +25,11 @@ namespace app
 		std::shared_ptr<graphics::CDrawInfo> m_DrawInfo;
 
 		std::shared_ptr<graphics::CFrameRenderer> m_MainFrameRenderer;
+		std::shared_ptr<graphics::CFrameRenderer> m_MRTFrameRenderer;
 
 		std::shared_ptr<CFileModifier> m_FileModifier;
 #ifdef USE_GUIENGINE
+		bool m_EnabledGUIDraw;
 		std::shared_ptr<gui::CGraphicsEditingWindow> m_GraphicsEditingWindow;
 #endif // USE_GUIENGINE
 
