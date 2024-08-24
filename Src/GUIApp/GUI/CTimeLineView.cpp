@@ -77,7 +77,16 @@ namespace gui
 			std::string Name = (TimelineController->IsPlay()) ? "Stop##Timeline" : "Play##Timeline";
 			if (ImGui::Button(Name.c_str()))
 			{
-				TimelineController->SetPlay(!TimelineController->IsPlay());
+				bool IsPlay = !TimelineController->IsPlay();
+
+				if (IsPlay)
+				{
+					TimelineController->Play();
+				}
+				else
+				{
+					TimelineController->Stop();
+				}
 			}
 		}
 

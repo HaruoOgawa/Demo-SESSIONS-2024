@@ -69,5 +69,8 @@ namespace app
 		// Getter
 		virtual std::vector<std::shared_ptr<object::C3DObject>> GetObjectList() const override;
 		virtual std::shared_ptr<scene::CSceneController> GetSceneController() const override;
+
+		// タイムライン再生停止イベント
+		virtual void OnPlayedTimeline(bool IsPlay) override;
 	};
 }

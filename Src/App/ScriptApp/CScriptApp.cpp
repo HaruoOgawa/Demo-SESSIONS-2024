@@ -258,6 +258,9 @@ namespace app
 			}
 		}
 
+		// タイムラインの再生開始
+		m_TimelineController->Play();
+
 		return true;
 	}
 
@@ -302,5 +305,24 @@ namespace app
 	std::shared_ptr<scene::CSceneController> CScriptApp::GetSceneController() const
 	{
 		return m_SceneController;
+	}
+
+	// タイムライン再生停止イベント
+	void CScriptApp::OnPlayedTimeline(bool IsPlay)
+	{
+		const auto& Sound = m_SceneController->GetSound();
+		const auto& SoundClip = std::get<0>(Sound);
+		if (SoundClip)
+		{
+			if (IsPlay)
+			{
+				SoundClip->SetPlayPos(m_TimelineController->GetPlayBackTime());
+				SoundClip->PlayOneShot();
+			}
+			else
+			{
+				SoundClip->Stop();
+			}
+		}
 	}
 }

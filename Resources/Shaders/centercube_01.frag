@@ -17,8 +17,8 @@ layout(binding = 1) uniform FragUniformBufferObject{
 
 	vec4 cameraPos;
     vec4 mainColor;
-    vec4 v4Pad1;
-    vec4 v4Pad2;
+    vec4 param0;
+    vec4 param1;
 
 	vec2 resolution;
 	float time;
@@ -30,6 +30,7 @@ layout(binding = 1) uniform FragUniformBufferObject{
 #define repeat(p, a) mod(p, a) - a * 0.5
 #define gmin(dst, src) dst = min(dst, src)
 #define rot(a) mat2(cos(a), sin(a), -sin(a), cos(a))
+#define pi acos(-1.0)
 
 //
 const float MIN_VALUE = 1E-3;
@@ -45,20 +46,74 @@ float sdBox(vec3 p, vec3 s)
 	return length(max(vec3(0.0), abs(p) - s));
 }
 
+float sdTorus(vec3 p, vec2 t)
+{
+	vec2 q = vec2(length(p.xz) - t.x, p.y);
+	return length(q) - t.y;
+}
+
 float map(vec3 p)
 {
-	float d = 1e5;
+	float Dst = 1e5;
 
-	vec3 pos0 = p;
+	p.xy *= rot(fragUbo.time);
+	p.yz *= rot(fragUbo.time);
+	p.xz *= rot(fragUbo.time);
 
-	pos0.xy *= rot(fragUbo.time);
-	pos0.yz *= rot(fragUbo.time);
-	pos0.xz *= rot(fragUbo.time);
+	{
+		vec3 pos = p;
 
-	float d0 = sdBox(pos0 , vec3(0.5) );
-	gmin(d, d0);
+		pos.xy *= rot(pi * 0.25);
+		float d = sdTorus(pos , vec2(2.5, 0.025) );
+		gmin(Dst, d);
+	}
 
-	return d;
+	{
+		vec3 pos = p;
+
+		pos.xy *= rot(pi * -0.25);
+		float d = sdTorus(pos , vec2(2.0, 0.025) );
+		gmin(Dst, d);
+	}
+
+	{
+		vec3 pos = p;
+
+		float scale = fragUbo.param0.w;
+		float sum = scale;
+
+		for(int i = 0; i < 3; i++)
+		{
+			// pos = abs(pos) - 0.5;
+			pos = abs(pos) - fragUbo.param0.z;
+
+			pos.xy *= rot(fragUbo.param0.x);
+			pos.yz *= rot(fragUbo.param0.y);
+
+			pos *= scale;
+			sum *= scale;
+
+			// 直角Fold
+			if(pos.x < pos.y) pos.xy = pos.yx;
+			if(pos.x < pos.z) pos.xz = pos.zx;
+			if(pos.y < pos.y) pos.yz = pos.zy;
+		}
+
+		pos /= sum;
+
+		// float d = length(pos) - 0.1;
+		float d = sdTorus(pos , vec2(0.25, 0.025) );
+		// float d = sdBox(pos, vec3(0.5));
+		gmin(Dst, d);
+	}
+
+	{
+		vec3 pos = p;
+		float d = length(pos) - 0.5;
+		gmin(Dst, d);
+	}
+
+	return Dst;
 }
 
 vec3 gn(vec3 p)

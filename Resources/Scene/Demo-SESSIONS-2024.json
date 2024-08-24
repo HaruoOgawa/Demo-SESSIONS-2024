@@ -1,7 +1,7 @@
 {
     "materialframes": [
         {
-            "name": "centercube_01_mf",
+            "name": "centercube_01",
             "filename": "Resources/MaterialFrame/centercube_01_mf.json"
         },
         {
@@ -163,6 +163,16 @@
                     "materialframe": "centercube_01",
                     "cull": "front",
                     "uniformvalues": [
+                        {
+                            "name": "param0",
+                            "type": "vec4",
+                            "value": [
+                                0.25,
+                                0.5,
+                                0.75,
+                                2.0
+                            ]
+                        },
                         {
                             "name": "zLength",
                             "type": "float",

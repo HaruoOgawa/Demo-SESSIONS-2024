@@ -327,6 +327,11 @@ namespace app
 	{
 		return m_SceneController;
 	}
+
+	// タイムライン再生停止イベント
+	void CDevApp::OnPlayedTimeline(bool IsPlay)
+	{
+	}
 }
 
 #endif // _DEBUG
