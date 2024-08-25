@@ -31,6 +31,7 @@ layout(binding = 1) uniform FragUniformBufferObject{
 #define gmin(dst, src) dst = min(dst, src)
 #define rot(a) mat2(cos(a), sin(a), -sin(a), cos(a))
 #define pi acos(-1.0)
+#define pi2 pi * 2.0
 
 //
 const float MIN_VALUE = 1E-3;
@@ -52,15 +53,21 @@ float sdTorus(vec3 p, vec2 t)
 	return length(q) - t.y;
 }
 
+vec2 pmod(vec2 p, float seg)
+{
+	float n = pi2 / seg;
+	float a = atan(p.x, p.y) + n * 0.5;
+	a = floor(a / n) * n;
+	return p * rot(-a);
+}
+
 float map(vec3 p)
 {
 	float Dst = 1e5;
 
-	p.xy *= rot(fragUbo.time);
-	p.yz *= rot(fragUbo.time);
-	p.xz *= rot(fragUbo.time);
+	
 
-	{
+	/*{
 		vec3 pos = p;
 
 		pos.xy *= rot(pi * 0.25);
@@ -74,36 +81,107 @@ float map(vec3 p)
 		pos.xy *= rot(pi * -0.25);
 		float d = sdTorus(pos , vec2(2.0, 0.025) );
 		gmin(Dst, d);
+	}*/
+
+	{
+
+		
+		
+		float offset = 1.0;
+		float angle = 0.0;
+		// float expand = 1.0 + sin(fragUbo.time * 0.1) * 0.25;
+		float rateE = (sin(fragUbo.time * 0.5) * 0.5 + 0.5);
+		float rateA = (sin(fragUbo.time * 2.0) * 0.5 + 0.5);
+		float expand = 1.0 - rateE * 0.5;
+
+
+		for(int i = 0; i < 15; i++)
+		{
+			vec3 pos = p;
+			pos *= expand;
+			pos.xy *= rot(fragUbo.time);
+			pos.yz *= rot(fragUbo.time);
+			pos.xz *= rot(fragUbo.time);
+			
+			pos.xy *= rot(angle);
+			pos.yz *= rot(angle);
+			pos.xz *= rot(angle);
+
+			pos = abs(pos);
+			pos -= offset;
+			if(pos.x < pos.y) pos.xy = pos.yx;
+			if(pos.x < pos.z) pos.xz = pos.zx;
+			if(pos.y < pos.z) pos.yz = pos.zy;
+
+			float d = length(pos.xy) - 0.01;
+			gmin(Dst, d);
+
+			offset *= 0.99;
+			// angle += 0.05;
+			angle += 0.01 + rateA * 0.04;
+		}
+
+
+		// float scale = 1.0;
+
+		// for(int i = 0; i < 6; i++)
+		// {
+		// 	pos.xy *= rot(pi * -0.25);
+
+		// 	float d = sdTorus(pos/ scale , vec2(2.0, 0.02) );
+		// 	gmin(Dst, d);
+
+		// 	scale *= 0.8;
+		// 	pos *= 0.8;
+		// }
 	}
 
 	{
 		vec3 pos = p;
+			pos.xy *= rot(-fragUbo.time);
+			pos.yz *= rot(-fragUbo.time);
+			pos.xz *= rot(-fragUbo.time);
 
-		float scale = fragUbo.param0.w;
-		float sum = scale;
+		// 直角Fold
+		pos = abs(pos);
+		
+		float sum = 1.0;
 
 		for(int i = 0; i < 3; i++)
 		{
-			// pos = abs(pos) - 0.5;
-			pos = abs(pos) - fragUbo.param0.z;
+			pos = abs(pos) - vec3(fragUbo.param0.w);
+			// pos.xy = pmod(pos.xy, 3.0);
+			if(pos.x < pos.y) pos.xy = pos.yx;
+			if(pos.x < pos.z) pos.xz = pos.zx;
+			if(pos.y < pos.z) pos.yz = pos.zy;
+
+			// pos = abs(pos) - vec3(0.2, 0.2, 0.2);
+
+			float sc = clamp(max(0.0, 2.0 / dot(p, p)), 0.0, 4.0);
+			// float sc = 2.0;
+			pos *= sc;
+			sum *= sc;
+			
+			pos.xy -= 0.2;
 
 			pos.xy *= rot(fragUbo.param0.x);
 			pos.yz *= rot(fragUbo.param0.y);
+			pos.xz *= rot(fragUbo.param0.z);
 
-			pos *= scale;
-			sum *= scale;
-
-			// 直角Fold
-			if(pos.x < pos.y) pos.xy = pos.yx;
-			if(pos.x < pos.z) pos.xz = pos.zx;
-			if(pos.y < pos.y) pos.yz = pos.zy;
+			// pos = abs(pos);
+			// pos.xy -= 0.05;
 		}
+
+		float h = fragUbo.param1.x;
+		pos.x -= clamp(pos.x, -h, h);
+
+		// sum = abs(sum);
 
 		pos /= sum;
 
-		// float d = length(pos) - 0.1;
-		float d = sdTorus(pos , vec2(0.25, 0.025) );
-		// float d = sdBox(pos, vec3(0.5));
+		// float d = length(pos) / sum - 0.02;
+		float d = sdTorus(pos , vec2(0.5, 0.05) );
+		// float d = sdBox(pos, vec3(0.25));
 		gmin(Dst, d);
 	}
 

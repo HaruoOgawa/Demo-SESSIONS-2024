@@ -44,8 +44,10 @@ namespace app
 		m_FileModifier(std::make_shared<CFileModifier>()),
 		m_TimelineController(std::make_shared<timeline::CTimelineController>())
 	{
-		m_ViewCamera->SetPos(glm::vec3(-3.1f, 1.6f, 2.4f));
-		m_ViewCamera->SetCenter(glm::vec3(8.5f, -0.76f, -8.4f));
+		//m_ViewCamera->SetPos(glm::vec3(0.0f, 1.65, 2.5f));
+		//m_ViewCamera->SetCenter(glm::vec3(0.0f, 1.65f, 0.0f));
+
+		m_ViewCamera->SetPos(glm::vec3(0.0f, 0.0f, 3.0));
 
 		m_MainCamera = m_ViewCamera;
 
