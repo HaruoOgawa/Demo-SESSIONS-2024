@@ -253,6 +253,26 @@
                     "cull": "front",
                     "uniformvalues": [
                         {
+                            "name": "param0",
+                            "type": "vec4",
+                            "value": [
+                                0.25,
+                                0.25,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "param1",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
                             "name": "zLength",
                             "type": "float",
                             "value": [

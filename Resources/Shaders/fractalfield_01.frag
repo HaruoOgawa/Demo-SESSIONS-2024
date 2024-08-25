@@ -78,7 +78,7 @@ float map(vec3 pos)
 
 
 		float scale = 1.0;
-		for(int i = 0; i < 20; i++)
+		for(int i = 0; i < 12; i++)
 		{
 			// Fold
 			// p = 1.0 - abs(p - 1.0);
@@ -86,17 +86,23 @@ float map(vec3 pos)
 			// p = abs(p) - vec3(0.2, 0.5, 0.2);
 			// p.xy = pmod(p.xy, 6);
 			// p = abs(p) - vec3(0.2, 2.0, 0.2);
-			p = abs(p) - vec3(0.1, 0.1, 1.0);
+			p = abs(p) - vec3(0.1, 0.1, 2.0);
 
 			// scale
 			// float sc = clamp(max(0.0, 2.0/dot(p, p)), 0.0, 2.0);
-			float sc = 1.5 *clamp(max(0.0, (2.0 / dot(p, p))), 0.0, 2.0);
+			float sc = 1.25 *clamp(max(0.0, (2.0 / dot(p, p))), 0.0, 2.0);
 			scale *= sc;
-			p *= sc; 
+			p *= sc;
+			
+			p.x += fragUbo.param1.x;
+			p.y += fragUbo.param1.y;
+			p.z += fragUbo.param1.z;
 
-			p.xy *= rot(0.25 * pi);
+			p.xy *= rot(fragUbo.param0.x);
+			p.yz *= rot(fragUbo.param0.y);
+			p.xz *= rot(fragUbo.param0.z);
 			// p.yz *= rot(0.25 * pi);
-			// p.z += 0.25;
+			
 		}
 
 		// scale = abs(scale);
@@ -155,7 +161,7 @@ void main()
 	float dist = 0.0, depth = 0.0, lenToNextGrid = 0.0;
 	vec3 p = ro + rd * depth;
 
-	for(int i = 0; i < 64; i++)
+	for(int i = 0; i < 99; i++)
 	{
 		dist = map(p);
 		depth += dist;
