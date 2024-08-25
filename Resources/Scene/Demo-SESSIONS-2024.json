@@ -9,6 +9,10 @@
             "filename": "Resources/MaterialFrame/cubegrid_mf.json"
         },
         {
+            "name": "fractalfield_01",
+            "filename": "Resources/MaterialFrame/fractalfield_01_mf.json"
+        },
+        {
             "name": "pbr_mat",
             "filename": "Resources/MaterialFrame/PBR_MF.json"
         }
@@ -46,7 +50,7 @@
                     1.0
                 ]
             },
-            "enable": true,
+            "enable": false,
             "rootnodes": [
                 0
             ],
@@ -121,7 +125,7 @@
                     4.0
                 ]
             },
-            "enable": true,
+            "enable": false,
             "rootnodes": [
                 0
             ],
@@ -173,6 +177,81 @@
                                 2.0
                             ]
                         },
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "fractal_field",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "fractal_node",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            100.0,
+                            100.0,
+                            100.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "fractalfield_01",
+                    "cull": "front",
+                    "uniformvalues": [
                         {
                             "name": "zLength",
                             "type": "float",
