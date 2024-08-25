@@ -72,28 +72,37 @@ float map(vec3 pos)
 
 	{
 		vec3 p = pos;
+		p.xz = pmod(p.xz, 36.0);
+
+		p.y = abs(p.y);
+
 
 		float scale = 1.0;
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < 20; i++)
 		{
+			// Fold
 			// p = 1.0 - abs(p - 1.0);
 			// p = 1.0 - abs(p);
 			// p = abs(p) - vec3(0.2, 0.5, 0.2);
-			p.xy = pmod(p.xy, 6);
-			p = abs(p) - vec3(0.2, 2.0, 0.2);
+			// p.xy = pmod(p.xy, 6);
+			// p = abs(p) - vec3(0.2, 2.0, 0.2);
+			p = abs(p) - vec3(0.1, 0.1, 1.0);
 
-			// float sc = clamp(max(0.0,  2.0/dot(p, p)), 0.0, 2.0);
-			float sc = clamp(max(0.0, 2.0 / dot(p, p)), 0.0, 2.0);
+			// scale
+			// float sc = clamp(max(0.0, 2.0/dot(p, p)), 0.0, 2.0);
+			float sc = 1.5 *clamp(max(0.0, (2.0 / dot(p, p))), 0.0, 2.0);
 			scale *= sc;
 			p *= sc; 
 
-			p.xy *= rot(pi * 0.25);
-			// p.xz *= rot(pi * 0.8)
-			p -= 0.1;
+			p.xy *= rot(0.25 * pi);
+			// p.yz *= rot(0.25 * pi);
+			// p.z += 0.25;
 		}
 
+		// scale = abs(scale);
+
 		float d = length(p) / scale - 0.02;
-		// float d = sdTorus(p / scale, vec2(0.5, 0.25));
+		// float d = length(p) / scale;
 
 		// p.xy = pmod(p.xy, 3);
 		// float d = sdBox(p, vec3(0.5));
