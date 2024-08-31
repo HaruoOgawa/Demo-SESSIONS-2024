@@ -18,6 +18,111 @@
         "shaderType": "fragment",
         "uniformBlockList": [
           {
+            "name": "UniformBufferObject",
+            "binding": 0,
+            "isWritable": false,
+            "type": "ubo",
+            "bufferUpdateType": "cpu",
+            "values": [
+              {
+                "name": "model",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "view",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "proj",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "lightVPMat",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "lightDir",
+                "type": "vec4",
+                "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "lightPos",
+                "type": "vec4",
+                "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "lightColor",
+                "type": "vec4",
+                "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "cameraPos",
+                "type": "vec4",
+                "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "Attenuation",
+                "type": "float",
+                "initValue": [ 1.0 ],
+                "input": {
+                  
+                }
+              },
+              {
+                "name": "fPad0",
+                "type": "float",
+                "initValue": [ 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "fPad1",
+                "type": "float",
+                "initValue": [ 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "fPad2",
+                "type": "float",
+                "initValue": [ 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              }
+            ]
+          },
+          {
             "name": "texGPosition",
             "viewBinding": 1,
             "samplerBinding": 2,

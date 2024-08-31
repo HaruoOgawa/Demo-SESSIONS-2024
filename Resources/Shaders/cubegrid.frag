@@ -159,7 +159,8 @@ void main()
 		if(abs(dist) < MIN_VALUE) break;
 	}
 
-	float MatID = 1.0;
+	float MatID = 2.0;
+	float UseLightPos = 1.0;
 
 	if(dist < MIN_VALUE)
 	{
@@ -172,7 +173,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(col, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(MatID, 0.0, 0.0, 1.0);
+		gParam_1 = vec4(MatID, UseLightPos, 0.0, 1.0);
 
 		gl_FragDepth = outDepth;
 	}

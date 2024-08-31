@@ -51,7 +51,9 @@ namespace app
 
 		m_MainCamera = m_ViewCamera;
 
-		m_DrawInfo->GetLightCamera()->SetPos(glm::vec3(-2.358f, 15.6f, -0.59f));
+		// ライトはあとでトレースカメラにする
+		//m_DrawInfo->GetLightCamera()->SetPos(glm::vec3(-2.358f, 15.6f, -0.59f));
+		//m_DrawInfo->GetLightCamera()->SetPos(glm::vec3(0.0f, 0.0f, 0.0f));
 		m_DrawInfo->GetLightProjection()->SetNear(2.0f);
 		m_DrawInfo->GetLightProjection()->SetFar(100.0f);
 
@@ -123,6 +125,7 @@ namespace app
 		if (!m_ScriptScene->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 
 		m_MainCamera->Update(m_DrawInfo->GetDeltaSecondsTime(), InputState);
+		m_DrawInfo->GetLightCamera()->Update(m_DrawInfo->GetDeltaSecondsTime(), InputState);
 
 		if (InputState->IsKeyUp(input::EKeyType::KEY_TYPE_SPACE))
 		{
@@ -260,6 +263,25 @@ namespace app
 					m_TraceCamera->SetTargetNode(Node);
 				}
 			}
+		}
+
+		// ライト
+		{
+			// ライトの方もトレースカメラにする
+			std::shared_ptr<camera::CTraceCamera> LightTraceCamera = std::make_shared<camera::CTraceCamera>();
+
+			const auto& Object = m_SceneController->FindObjectByName("LightObject");
+			if (Object)
+			{
+				const auto& Node = Object->FindNodeByName("LightNode");
+
+				if (Node)
+				{
+					LightTraceCamera->SetTargetNode(Node);
+				}
+			}
+
+			m_DrawInfo->SetLightCamera(LightTraceCamera);
 		}
 
 		// タイムラインの再生開始
