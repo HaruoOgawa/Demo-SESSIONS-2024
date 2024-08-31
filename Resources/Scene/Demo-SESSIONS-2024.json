@@ -1,0 +1,397 @@
+{
+    "materialframes": [
+        {
+            "name": "centercube_01",
+            "filename": "Resources/MaterialFrame/centercube_01_mf.json"
+        },
+        {
+            "name": "cubegrid",
+            "filename": "Resources/MaterialFrame/cubegrid_mf.json"
+        },
+        {
+            "name": "fractalfield_01",
+            "filename": "Resources/MaterialFrame/fractalfield_01_mf.json"
+        },
+        {
+            "name": "pbr_mat",
+            "filename": "Resources/MaterialFrame/PBR_MF.json"
+        }
+    ],
+    "sound": {
+        "bgm": {
+            "filename": "Resources\\Sound\\DemoSound_01.wav",
+            "autoplay": false,
+            "loop": false
+        }
+    },
+    "timeline": {
+        "filename": "Resources\\Scene\\Demo-SESSIONS-2024.tl"
+    },
+    "objects": [
+        {
+            "name": "ray_obj_01",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "ray_node_1",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            100.0,
+                            100.0,
+                            100.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "cubegrid",
+                    "cull": "front",
+                    "uniformvalues": [
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "centercube_obj",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    50.0,
+                    50.0,
+                    50.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "centercube_node",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "cube"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "centercube_01",
+                    "cull": "front",
+                    "uniformvalues": [
+                        {
+                            "name": "param0",
+                            "type": "vec4",
+                            "value": [
+                                0.5,
+                                0.25,
+                                0.5,
+                                0.10000000149011612
+                            ]
+                        },
+                        {
+                            "name": "param1",
+                            "type": "vec4",
+                            "value": [
+                                0.5,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "fractal_field",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": false,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "fractal_node",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            100.0,
+                            100.0,
+                            100.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "fractalfield_01",
+                    "cull": "front",
+                    "uniformvalues": [
+                        {
+                            "name": "param0",
+                            "type": "vec4",
+                            "value": [
+                                0.25,
+                                0.25,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "param1",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "CameraObject",
+            "filename": "",
+            "renderpass": "MainResultPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "CameraNode",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "meshindex": -1
+                }
+            ]
+        },
+        {
+            "name": "LightObject",
+            "filename": "",
+            "renderpass": "MainResultPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "LightNode",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "meshindex": -1
+                }
+            ]
+        }
+    ]
+}

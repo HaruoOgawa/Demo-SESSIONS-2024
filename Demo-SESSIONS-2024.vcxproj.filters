@@ -36,7 +36,7 @@
     <ClCompile Include="Src\GUIApp\GUI\CGUIResourcesTab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\GUIApp\GUI\CGUITransformTab.cpp">
+    <ClCompile Include="Src\GUIApp\GUI\CGUIBaseTab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\GUIApp\Model\CFileModifier.cpp">
@@ -66,6 +66,9 @@
     <ClCompile Include="Src\GUIApp\GUI\CGUILogTab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\GUIApp\GUI\C3DView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\GUIApp\GUI\CGraphicsEditingWindow.h">
@@ -86,7 +89,7 @@
     <ClInclude Include="Src\GUIApp\GUI\CGUIResourcesTab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\GUIApp\GUI\CGUITransformTab.h">
+    <ClInclude Include="Src\GUIApp\GUI\CGUIBaseTab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\GUIApp\Model\CFileModifier.h">
@@ -117,6 +120,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\GUIApp\GUI\CGUILogTab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\GUIApp\GUI\C3DView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -252,6 +258,9 @@
     <None Include="Resources\MaterialFrame\FrameTexture_MF.json" />
     <None Include="Resources\Shaders\sdftext.frag" />
     <None Include="Resources\MaterialFrame\sdftext_mf.json" />
+    <None Include="Resources\Scene\Demo-SESSIONS-2024.json" />
+    <None Include="Resources\MaterialFrame\ray_01_mf.json" />
+    <None Include="Resources\Shaders\ray_01.frag" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Commands\LibList.txt" />

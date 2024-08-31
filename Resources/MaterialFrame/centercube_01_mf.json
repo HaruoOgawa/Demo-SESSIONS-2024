@@ -1,0 +1,175 @@
+{
+    "name": "centercube_01",
+    "outputcolorcount": 5,
+    "shaderList": [
+      {
+        "name": "objectspace_raymarching",
+        "shaderFile": "Resources\\Shaders\\objectspace_raymarching",
+        "autoShaderExtension": true,
+        "shadercode": "",
+        "shaderType": "vertex",
+        "uniformBlockList": [
+          {
+            "name": "VertexUniformBuffer",
+            "binding": 0,
+            "isWritable": false,
+            "type": "ubo",
+            "bufferUpdateType": "cpu",
+            "values": [
+              {
+                "name": "model",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "view",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "proj",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "lightVPMat",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "centercube_01",
+        "shaderFile": "Resources\\Shaders\\centercube_01",
+        "autoShaderExtension": true,
+        "shadercode": "",
+        "shaderType": "fragment",
+        "uniformBlockList": [
+          {
+            "name": "FragUniformBufferObject",
+            "binding": 1,
+            "isWritable": false,
+            "type": "ubo",
+            "bufferUpdateType": "cpu",
+            "values": [
+              {
+                "name": "invModel",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "model",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "view",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "proj",
+                "type": "mat4",
+                "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "cameraPos",
+                "type": "vec4",
+                "initValue": [ 1.0, 1.0, 1.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "mainColor",
+                "type": "vec4",
+                "initValue": [ 1.0, 1.0, 1.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "param0",
+                "type": "vec4",
+                "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+                "input": {
+                }
+              },
+              {
+                "name": "param1",
+                "type": "vec4",
+                "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+                "input": {
+                }
+              },
+              {
+                "name": "resolution",
+                "type": "vec2",
+                "initValue": [ 1.0, 1.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "time",
+                "type": "float",
+                "initValue": [ 0.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "deltaTime",
+                "type": "float",
+                "initValue": [ 0.0 ],
+                "input": {
+                  "hide": true
+                }
+              },
+              {
+                "name": "zLength",
+                "type": "float",
+                "initValue": [ 2.0 ],
+                "input": {
+                }
+              },
+              {
+                "name": "fpad0",
+                "type": "float",
+                "initValue": [ 0.0 ],
+                "input": {
+                  "hide": true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }

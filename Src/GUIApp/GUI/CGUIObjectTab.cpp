@@ -1,7 +1,7 @@
 #ifdef USE_GUIENGINE
 #include "CGUIObjectTab.h"
 #include "CGUIMaterialTab.h"
-#include "CGUITransformTab.h"
+#include "CGUIBaseTab.h"
 #include "CGUIMeshTab.h"
 
 #include <Scene/CSceneController.h>
@@ -205,7 +205,7 @@ namespace gui
 
 			if (ImGui::BeginTabBar("ObjectDetail"))
 			{
-				if (!CGUITransformTab::Draw(GUIParams.ObjectList, m_SelectedObjectIndex, m_SelectedNodeIndex)) return false;
+				if (!CGUIBaseTab::Draw(GUIParams.ObjectList, m_SelectedObjectIndex, m_SelectedNodeIndex)) return false;
 				if (!CGUIMaterialTab::Draw(pGraphicsAPI, GUIParams.ObjectList, GUIParams.SceneController, m_SelectedObjectIndex, m_SelectedNodeIndex)) return false;
 				if (!CGUIMeshTab::Draw(pGraphicsAPI, GUIParams.ObjectList, GUIParams.SceneController, m_SelectedObjectIndex, m_SelectedNodeIndex)) return false;
 

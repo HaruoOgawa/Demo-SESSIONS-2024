@@ -28,7 +28,7 @@ layout(binding = 0) uniform UniformBufferObject{
     float normalMapScale;
 
 	float occlusionStrength;
-    // MipCount‚É‚Í”½ŽËƒLƒ…[ƒuƒ}ƒbƒv‚©IBL‚ÌSpecularMap‚Ì’l‚ª“ü‚Á‚Ä‚¢‚é(‚±‚ê‚ç‚Í•K‚¸‚Ç‚¿‚ç‚©ˆê•û‚µ‚©Žg—p‚³‚ê‚È‚¢‚½‚ß)
+    // MipCountï¿½É‚Í”ï¿½ï¿½ËƒLï¿½ï¿½ï¿½[ï¿½uï¿½}ï¿½bï¿½vï¿½ï¿½IBLï¿½ï¿½SpecularMapï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½Í•Kï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ç‚©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½)
 	float mipCount;
     float ShadowMapX;
     float ShadowMapY;
@@ -96,7 +96,7 @@ layout(binding = 22) uniform texture2D cubeMap2DTexture;
 layout(binding = 23) uniform sampler cubeMap2DTextureSampler;
 #endif
 
-// ‚È‚ñ‚©UnityPBR‚Å‚à‚Ý‚½’l‚¾‚È‚Ÿ
+// ï¿½È‚ï¿½UnityPBRï¿½Å‚ï¿½ï¿½Ý‚ï¿½ï¿½lï¿½ï¿½ï¿½È‚ï¿½
 const float MIN_ROUGHNESS = 0.04;
 const float PI = 3.14159265;
 
@@ -116,90 +116,90 @@ struct PBRParam
 	vec3 specularColor;
 };
 
-// ƒ}ƒCƒNƒƒtƒ@ƒZƒbƒg(”÷¬–Ê–@ü•ª•zŠÖ”)(Microfacet Distribution). Distribution‚Í•ª•z‚ÉˆÓ–¡
-// •ª•zŠÖ”‚È‚Ì‚Å“ŒvŠw“I‚É‹‚ß‚ç‚ê‚½”Ž®
-// ƒ}ƒCƒNƒƒtƒ@ƒZƒbƒg‚Ì–ÊÏ‚ð•Ô‚·
-// –ÊÏ‚ª¬‚³‚¢‚Ù‚Çƒ}ƒCƒNƒƒtƒ@ƒZƒbƒg‚ªŽU‚ç‚Î‚Á‚Ä‚¢‚Är‚¢‚Æ‚¢‚¤‚±‚Æ‚©‚ÈH ¨ ‘å‚«‚¢‚Ù‚Ç“Ê‰š‚Ì‚È‚¢ˆê‚Â‚Ì•½–Ê‚É‹ß‚Ã‚­
+// ï¿½}ï¿½Cï¿½Nï¿½ï¿½ï¿½tï¿½@ï¿½Zï¿½bï¿½g(ï¿½ï¿½ï¿½ï¿½ï¿½Ê–@ï¿½ï¿½ï¿½ï¿½ï¿½zï¿½Öï¿½)(Microfacet Distribution). Distributionï¿½Í•ï¿½ï¿½zï¿½ÉˆÓ–ï¿½
+// ï¿½ï¿½ï¿½zï¿½Öï¿½ï¿½È‚Ì‚Å“ï¿½ï¿½vï¿½wï¿½Iï¿½É‹ï¿½ï¿½ß‚ï¿½ê‚½ï¿½ï¿½ï¿½ï¿½
+// ï¿½}ï¿½Cï¿½Nï¿½ï¿½ï¿½tï¿½@ï¿½Zï¿½bï¿½gï¿½Ì–ÊÏ‚ï¿½Ô‚ï¿½
+// ï¿½ÊÏ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù‚Çƒ}ï¿½Cï¿½Nï¿½ï¿½ï¿½tï¿½@ï¿½Zï¿½bï¿½gï¿½ï¿½ï¿½Uï¿½ï¿½Î‚ï¿½ï¿½Ä‚ï¿½ï¿½Ärï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ÈH ï¿½ï¿½ ï¿½å‚«ï¿½ï¿½ï¿½Ù‚Ç“Ê‰ï¿½ï¿½Ì‚È‚ï¿½ï¿½ï¿½Â‚Ì•ï¿½ï¿½Ê‚É‹ß‚Ã‚ï¿½
 // https://learnopengl.com/PBR/Theory#:~:text=GGX%20for%20G.-,Normal%20distribution%20function,-The%20normal%20distribution
 float CalcMicrofacet(PBRParam param)
 {
-	float roughness2 = param.alphaRoughness * param.alphaRoughness; // ƒOƒ‰ƒt‚ÌŒù”z‚ð‚‚­‚·‚é
+	float roughness2 = param.alphaRoughness * param.alphaRoughness; // ï¿½Oï¿½ï¿½ï¿½tï¿½ÌŒï¿½ï¿½zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	//
 	float f = (param.NdotH * roughness2 - param.NdotH) * param.NdotH + 1.0;
 	// = ( param.NdotH * (roughness2 - 1.0) ) * param.NdotH + 1.0
 	// = pow(param.NdotH, 2.0) * (roughness2 - 1.0) + 1.0
-	// ”Ž®‚Æ“¯‚¶Œ`‚É‚È‚é. (nEh)^2 * (a^2 - 1) + 1
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Æ“ï¿½ï¿½ï¿½ï¿½`ï¿½É‚È‚ï¿½. (nï¿½Eh)^2 * (a^2 - 1) + 1
 	
 	//
 	return roughness2 / (PI * f * f);
 }
 
-// Šô‰½Œ¸Š€(Geometric Occlusion)
-// ƒ}ƒCƒNƒƒtƒ@ƒZƒbƒg‚Ì”÷¬•½–Ê‚ªŒõ‚ÌŒo˜H‚ðŽÕ’f‚·‚é‚±‚Æ‚É‚æ‚èŽ¸‚í‚ê‚Ä‚µ‚Ü‚¤Œõ‚ÌŒ¸Š—Ê‚ðŒvŽZ‚·‚éŠÖ”
+// ï¿½ô‰½Œï¿½ï¿½ï¿½ï¿½ï¿½(Geometric Occlusion)
+// ï¿½}ï¿½Cï¿½Nï¿½ï¿½ï¿½tï¿½@ï¿½Zï¿½bï¿½gï¿½Ì”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ÌŒoï¿½Hï¿½ï¿½ï¿½Õ’fï¿½ï¿½ï¿½é‚±ï¿½Æ‚É‚ï¿½èŽ¸ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ï¿½Ê‚ï¿½ï¿½vï¿½Zï¿½ï¿½ï¿½ï¿½Öï¿½
 float CalcGeometricOcculusion(PBRParam param)
 {
 	float NdotL = param.NdotL;
 	float NdotV = param.NdotV;
-	// •\–Ê‚ªr‚¢‚Ù‚ÇA”÷¬•½–Ê‚ª‘‚¦‚ÄŒõ‚ª‰B•Á‚³‚ê‚â‚·‚­‚È‚é
+	// ï¿½\ï¿½Ê‚ï¿½ï¿½rï¿½ï¿½ï¿½Ù‚ÇAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄŒï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â‚·ï¿½ï¿½ï¿½È‚ï¿½
 	float r = param.alphaRoughness;
 
-	// Ú‚µ‚¢”Ž®(https://google.github.io/filament/Filament.md.html#materialsystem/specularbrdf/geometricshadowing(specularg))
-	// ƒVƒƒƒhƒEƒCƒ“ƒO‚Ì€‚ðŒvŽZ(“üŽËŒõ‚ª‘¼‚Ì”÷¬•½–Ê‚ÉŽÕ‚ç‚ê‚Ä‰e‚É‚È‚èŒõ‚ªŒ¸Š‚·‚é•ª)
+	// ï¿½Ú‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(https://google.github.io/filament/Filament.md.html#materialsystem/specularbrdf/geometricshadowing(specularg))
+	// ï¿½Vï¿½ï¿½ï¿½hï¿½Eï¿½Cï¿½ï¿½ï¿½Oï¿½Ìï¿½ï¿½ï¿½ï¿½vï¿½Z(ï¿½ï¿½ï¿½ËŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê‚ÉŽÕ‚ï¿½ï¿½Ä‰eï¿½É‚È‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é•ª)
 	float attenuationL = 2.0 * NdotL / ( NdotL + sqrt(r * r + (1.0 - r * r) * (NdotL * NdotL)) );
 	// = 2.0 * NdotL / ( NdotL * () )
-	// ƒ}ƒXƒLƒ“ƒO‚Ì€‚ðŒvŽZ(”½ŽËŒõ‚ª‘¼‚Ì”÷¬•½–Ê‚ÉŽÕ‚ç‚ê‚Ä‚»‚ÌŒõ‚ª–Ú‚É“Í‚©‚È‚¢‚±‚Æ‚ÅŒ¸Š‚·‚é•ª)
+	// ï¿½}ï¿½Xï¿½Lï¿½ï¿½ï¿½Oï¿½Ìï¿½ï¿½ï¿½ï¿½vï¿½Z(ï¿½ï¿½ï¿½ËŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê‚ÉŽÕ‚ï¿½ï¿½Ä‚ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ï¿½Ú‚É“Í‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½Æ‚ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é•ª)
 	float attenuationV = 2.0 * NdotV / ( NdotV + sqrt(r * r + (1.0 - r * r) * (NdotV * NdotV)) );
 
-	// Šô‰½Œ¸Š€‚Íã‹L‚ÌæŽZŒ‹‰Ê
+	// ï¿½ô‰½Œï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íï¿½Lï¿½Ìï¿½Zï¿½ï¿½ï¿½ï¿½
 	return attenuationL * attenuationV;
 }
 
-// ƒtƒŒƒlƒ‹”½ŽË(ƒtƒŒƒlƒ‹€). 
-// ƒtƒŒƒlƒ‹”½ŽË‚Æ‚ÍView•ûŒü‚É‰ž‚¶‚Ä”½ŽË—¦‚ª•Ï‰»‚·‚é•¨—Œ»Û‚Ì‚±‚Æ‚Å‚ ‚é 
-// ‚±‚±‚Å‚ÌGGX€‚Å‚ÌƒtƒŒƒlƒ‹”½ŽË‚ÍƒIƒuƒWƒFƒNƒg‚Ì’[‚Å‚ ‚é‚Ù‚Ç”½ŽË—¦‚ª‚‚¢(”½ŽËF‚ª–¾‚é‚¢)‚±‚Æ‚ðŽ¦‚µ‚Ä‚¢‚é
+// ï¿½tï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½tï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½). 
+// ï¿½tï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½Ë‚Æ‚ï¿½Viewï¿½ï¿½ï¿½ï¿½ï¿½É‰ï¿½ï¿½ï¿½ï¿½Ä”ï¿½ï¿½Ë—ï¿½ï¿½ï¿½ï¿½Ï‰ï¿½ï¿½ï¿½ï¿½é•¨ï¿½ï¿½ï¿½ï¿½ï¿½Û‚Ì‚ï¿½ï¿½Æ‚Å‚ï¿½ï¿½ï¿½ 
+// ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½GGXï¿½ï¿½ï¿½Å‚Ìƒtï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½Ë‚ÍƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì’[ï¿½Å‚ï¿½ï¿½ï¿½Ù‚Ç”ï¿½ï¿½Ë—ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ËFï¿½ï¿½ï¿½ï¿½ï¿½é‚¢)ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 // https://marmoset.co/posts/basic-theory-of-physically-based-rendering/
-// ‚±‚Ì‰æ‘œ‚ª‚í‚©‚è‚â‚·‚¢ --> https://marmoset.co/wp-content/uploads/2016/11/pbr_theory_fresnel.png
-// GGX‚ÌƒtƒŒƒlƒ‹€‚ÌŽ®‚ÍA‚æ‚­ŒõŠw‚Ì•ª–ì‚ÅŒ©•·‚«‚·‚é‚æ‚¤‚ÈƒtƒŒƒlƒ‹‚ÌŽ®‚Ì‹ßŽ—Ž®‚Å‚ ‚é(https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%AC%E3%83%8D%E3%83%AB%E3%81%AE%E5%BC%8F)
+// ï¿½ï¿½ï¿½Ì‰æ‘œï¿½ï¿½ï¿½í‚©ï¿½ï¿½â‚·ï¿½ï¿½ --> https://marmoset.co/wp-content/uploads/2016/11/pbr_theory_fresnel.png
+// GGXï¿½Ìƒtï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½ÌŽï¿½ï¿½ÍAï¿½æ‚­ï¿½ï¿½ï¿½wï¿½Ì•ï¿½ï¿½ï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½Èƒtï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ÌŽï¿½ï¿½Ì‹ßŽï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½(https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%AC%E3%83%8D%E3%83%AB%E3%81%AE%E5%BC%8F)
 // https://learnopengl.com/PBR/Theory#:~:text=return%20ggx1%20*%20ggx2%3B%0A%7D-,Fresnel%20equation,-The%20Fresnel%20equation
 vec3 CalcFrenelReflection(PBRParam param)
 {
-	// Šî–{‚Ì”½ŽË—¦: reflectance0
-	// ‚»‚ê‚É‘Î‚µ‚ÄŽ‹–ì•ûŒü‚É‚æ‚é”½ŽË—¦‚Ì•Ï‰»•ª‚ð‰ÁŽZ‚µ‚Ä‚¢‚é
-	// Š„‚Æ”Ž®‚¾‚Æreflectance90‚Í1.0‚È‚Ì‚Å¡‚Í‚ ‚ñ‚Ü‚è[‚­l‚¦‚È‚­‚Ä‚à‚¢‚¢‚©‚àH
-	// ‚à‚µ‚©‚µ‚Äreflectance90‚Í”}Ž¿‚Ì‹üÜ—¦‚ÉŠÖŒW‚µ‚Ä‚¢‚éH^‹ó‚¾‚Æ1.0‚È‚Ì‚ÅA‘¼‚Ì”Ž®‚Æ‚©‚¾‚Æ‚Ð‚Æ‚Ü‚·^‹ó‚Æ‰¼’è‚µ‚Ä‚¢‚éH
+	// ï¿½ï¿½{ï¿½Ì”ï¿½ï¿½Ë—ï¿½: reflectance0
+	// ï¿½ï¿½ï¿½ï¿½É‘Î‚ï¿½ï¿½ÄŽï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚ï¿½é”½ï¿½Ë—ï¿½ï¿½Ì•Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+	// ï¿½ï¿½ï¿½Æï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½reflectance90ï¿½ï¿½1.0ï¿½È‚Ì‚Åï¿½ï¿½Í‚ï¿½ï¿½ï¿½Ü‚ï¿½[ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½È‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½H
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½reflectance90ï¿½Í”}ï¿½ï¿½ï¿½Ì‹ï¿½ï¿½Ü—ï¿½ï¿½ÉŠÖŒWï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Hï¿½^ï¿½ó‚¾‚ï¿½1.0ï¿½È‚Ì‚ÅAï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½Æ‚Ð‚Æ‚Ü‚ï¿½ï¿½^ï¿½ï¿½Æ‰ï¿½ï¿½è‚µï¿½Ä‚ï¿½ï¿½ï¿½H
 	return param.reflectance0 + (param.reflectance90 - param.reflectance0) * pow(clamp(1.0 - param.VdotH, 0.0, 1.0), 5.0);
 }
 
-// ƒfƒBƒtƒ…[ƒY‚ÌBRDF‚ðŒvŽZ
+// ï¿½fï¿½Bï¿½tï¿½ï¿½ï¿½[ï¿½Yï¿½ï¿½BRDFï¿½ï¿½ï¿½vï¿½Z
 // https://google.github.io/filament/Filament.md.html#materialsystem/diffusebrdf
-// ‚±‚Ì‹LŽ–‚É‚æ‚é‚ÆŠgŽUF‚ÌBRDF‚Í‹ßŽ—“I‚Éw1.0 / PIx‚Æ’è‚Ü‚é‚Æ‚Ì‚±‚Æ
+// ï¿½ï¿½ï¿½Ì‹Lï¿½ï¿½ï¿½É‚ï¿½ï¿½ÆŠgï¿½Uï¿½Fï¿½ï¿½BRDFï¿½Í‹ßŽï¿½ï¿½Iï¿½Éw1.0 / PIï¿½xï¿½Æ’ï¿½Ü‚ï¿½Æ‚Ì‚ï¿½ï¿½ï¿½
 vec3 CalcDiffuseBRDF(PBRParam param)
 {
 	return param.diffuseColor / PI;
 }
 
-// –@ü‚ÌŽæ“¾(ƒm[ƒ}ƒ‹ƒ}ƒbƒv‚ðŽg‚¤‚±‚Æ‚ª‚ ‚é. ¨ ‚Â‚¢‚Å‚É•×‹­‚·‚é)
+// ï¿½@ï¿½ï¿½ï¿½ÌŽæ“¾(ï¿½mï¿½[ï¿½}ï¿½ï¿½ï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ ï¿½Â‚ï¿½ï¿½Å‚É•×‹ï¿½ï¿½ï¿½ï¿½ï¿½)
 vec3 getNormal()
 {
 	vec3 nomral = vec3(0.0);
 
 	if(ubo.useNormalTexture != 0)
 	{
-		// Tangent, SubTangent, Normal‚Å\¬‚³‚ê‚éÀ•W•ÏŠ·ƒxƒNƒgƒ‹‚ðì¬‚·‚é
-		// ‚±‚Ì‚æ‚¤‚È•ÏŠ·s—ñ‚Ì‚±‚Æ‚ð“ª•¶Žš‚ð‚Æ‚Á‚Ä TBN Matrix ‚ÆŒÄ‚Ô
-		// –@üƒ}ƒbƒv‚ÌŽ¦‚·–@ü•ûŒü‚Íí‚É’è”‚Å‚ ‚èAƒIƒuƒWƒFƒNƒg‚ð‰ñ“]‚³‚¹‚é‚Æƒ[ƒ‹ƒhÀ•Wã‚ÌŒü‚«‚ª‡‚í‚È‚­‚È‚é‚Ì‚ÅAÀ•W•ÏŠ·‚µ‚Ä³‚µ‚¢‚à‚Ì‚É‚·‚é•K—v‚ª‚ ‚é
-		// —á‚¦‚ÎZŽ²³‚ðŽ¦‚·–@üƒ}ƒbƒv‚ðŽ‚ÂPlaneƒIƒuƒWƒFƒNƒg‚ðXŽ²‚ðŠî€‚É90“x‰ñ“]‚³‚¹‚é‚ÆA–@ü•ûŒü‚ÍYŽ²³‚É‚È‚é‚Ì‚ª³‚µ‚¢‚Í‚¸‚È‚Ì‚ÉA–@üƒ}ƒbƒv‚Ì’l‚ª’è”‚Å‚ ‚é‚½‚ßA
-		// ‚»‚Ì‚Ü‚ÜZŽ²³‚ðŽ¦‚µƒ‰ƒCƒeƒBƒ“ƒO‚ª‚¨‚©‚µ‚È‚±‚Æ‚É‚È‚é
+		// Tangent, SubTangent, Normalï¿½Å\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ÏŠï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½ï¿½
+		// ï¿½ï¿½ï¿½Ì‚æ‚¤ï¿½È•ÏŠï¿½ï¿½sï¿½ï¿½Ì‚ï¿½ï¿½Æ‚ð“ª•ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ TBN Matrix ï¿½ÆŒÄ‚ï¿½
+		// ï¿½@ï¿½ï¿½ï¿½}ï¿½bï¿½vï¿½ÌŽï¿½ï¿½ï¿½ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íï¿½É’è”ï¿½Å‚ï¿½ï¿½ï¿½Aï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æƒï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½È‚ï¿½Ì‚ÅAï¿½ï¿½ï¿½Wï¿½ÏŠï¿½ï¿½ï¿½ï¿½Äï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚É‚ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// ï¿½á‚¦ï¿½ï¿½Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½ï¿½ï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Planeï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½î€ï¿½ï¿½90ï¿½xï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆAï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½É‚È‚ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½È‚Ì‚ÉAï¿½@ï¿½ï¿½ï¿½}ï¿½bï¿½vï¿½Ì’lï¿½ï¿½ï¿½è”ï¿½Å‚ï¿½ï¿½é‚½ï¿½ßA
+		// ï¿½ï¿½ï¿½Ì‚Ü‚ï¿½Zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½eï¿½Bï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Æ‚É‚È‚ï¿½
 		// https://learnopengl.com/Advanced-Lighting/Normal-Mapping#:~:text=tangent%20space.-,Tangent%20space,-Normal%20vectors%20in
-		// TBN Matrix‚ÌŒvŽZŽè–@
-		// –@ü‚Í—Ç‚µ‚È‚É.
-		// Ú“_‚Æ•¡Úü‚ÌƒxƒNƒgƒ‹•ûŒü‚ªƒT[ƒtƒFƒCƒX‚ÌƒeƒNƒXƒ`ƒƒÀ•W‚Ì•ûŒü‚Æˆê’v‚µ‚Ä‚¢‚é‚Æ‚¢‚¤‚±‚Æ‚ð—˜—p‚µ‚ÄŒvŽZ‚·‚é(ã‹L‚ÌÚü‹óŠÔ‚Ì€–Ú‚æ‚è)
-		// ŽOŠpŒ`‚Ì’¸“_‚Æ‚»‚ÌƒeƒNƒXƒ`ƒƒÀ•W‚©‚çÚü‚Æ•¡Úü‚ðŒvŽZ‚·‚é‚±‚Æ‚ª‚Å‚«‚é
-		// ¦ ‚±‚ê‚Íƒƒ‚‚¾‚ªÚü‹óŠÔ‹LŽ–‚ÌE1EE2‚ª•\‚·‚Ì‚Í–ÊÏ‚Å‚Í‚È‚­AP1EP2EP3‚ðŽg‚Á‚½wƒxƒNƒgƒ‹x
-		// ¦ ‚È‚Ì‚ÅƒxƒNƒgƒ‹‚ÅŽOŠpŒ`‚ªì‚ê‚ê‚ÎŒvŽZ‚Í‚Å‚«‚é‚Ì‚ÅAŽÀŽ¿Plane‚Å‚Í‚È‚­ƒ|ƒŠƒSƒ“’PˆÊ‚ÅÚü‚ÌŒvŽZ‚ðs‚¤‚±‚Æ‚ª‚Å‚«‚é
-		// Shaderƒx[ƒX‚Ì’¸“_ŽZo‚ÍƒpƒtƒH[ƒ}ƒ“ƒXˆ«‚¢‚Ì‚ÅA‚Ð‚Æ‚Ü‚¸ŒvŽZ‚ÍCPU‚Ås‚Á‚Ä‚¢‚é
-		// ”Ž®‚Í‚±‚ê(https://drive.google.com/file/d/1A4WK5GLRzWRD9yt9_yxSjyz8Yrmb5Is8/view?usp=sharing)
+		// TBN Matrixï¿½ÌŒvï¿½Zï¿½ï¿½@
+		// ï¿½@ï¿½ï¿½ï¿½Í—Ç‚ï¿½ï¿½È‚ï¿½.
+		// ï¿½Ú“_ï¿½Æ•ï¿½ï¿½Úï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Tï¿½[ï¿½tï¿½Fï¿½Cï¿½Xï¿½Ìƒeï¿½Nï¿½Xï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Ì•ï¿½ï¿½ï¿½ï¿½Æˆï¿½vï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ð—˜—pï¿½ï¿½ï¿½ÄŒvï¿½Zï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Lï¿½ÌÚï¿½ï¿½ï¿½Ô‚Ìï¿½ï¿½Ú‚ï¿½ï¿½)
+		// ï¿½Oï¿½pï¿½`ï¿½Ì’ï¿½ï¿½_ï¿½Æ‚ï¿½ï¿½Ìƒeï¿½Nï¿½Xï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½ï¿½Úï¿½ï¿½Æ•ï¿½ï¿½Úï¿½ï¿½ï¿½ï¿½vï¿½Zï¿½ï¿½ï¿½é‚±ï¿½Æ‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Íƒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úï¿½ï¿½ï¿½Ô‹Lï¿½ï¿½ï¿½ï¿½E1ï¿½EE2ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½Ì‚Í–ÊÏ‚Å‚Í‚È‚ï¿½ï¿½AP1ï¿½EP2ï¿½EP3ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½wï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½x
+		// ï¿½ï¿½ ï¿½È‚Ì‚Åƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÅŽOï¿½pï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎŒvï¿½Zï¿½Í‚Å‚ï¿½ï¿½ï¿½Ì‚ÅAï¿½ï¿½ï¿½ï¿½Planeï¿½Å‚Í‚È‚ï¿½ï¿½|ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Pï¿½Ê‚ÅÚï¿½ï¿½ÌŒvï¿½Zï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½
+		// Shaderï¿½xï¿½[ï¿½Xï¿½Ì’ï¿½ï¿½_ï¿½Zï¿½oï¿½Íƒpï¿½tï¿½Hï¿½[ï¿½}ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ÅAï¿½Ð‚Æ‚Ü‚ï¿½ï¿½vï¿½Zï¿½ï¿½CPUï¿½Åsï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½(https://drive.google.com/file/d/1A4WK5GLRzWRD9yt9_yxSjyz8Yrmb5Is8/view?usp=sharing)
 
 		vec3 t = normalize(f_WorldTangent.xyz);
 		vec3 b = normalize(f_WorldBioTangent.xyz);
@@ -223,9 +223,9 @@ vec3 getNormal()
 	return nomral;
 }
 
-// Lenear‚ÍŒõŠw‚É‘¥‚µ‚½F‹óŠÔ(Œ»ŽÀ‚ÌŒõ‚ÌŽd‘g‚Ý
-// sRGB‚Íƒ‚ƒjƒ^[‚ÉŽg‚í‚ê‚éF‹óŠÔ‚ÅlŠÔ‚ÌF‚Ì’mŠo‚É‘¥‚µ‚Ä‚¢‚é
-// Linear‚æ‚èsRGB‚Ì•û‚ª–¾‚é‚¢
+// Lenearï¿½ÍŒï¿½ï¿½wï¿½É‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½ÌŽdï¿½gï¿½ï¿½
+// sRGBï¿½Íƒï¿½ï¿½jï¿½^ï¿½[ï¿½ÉŽgï¿½ï¿½ï¿½ï¿½Fï¿½ï¿½Ô‚Ålï¿½Ô‚ÌFï¿½Ì’mï¿½oï¿½É‘ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+// Linearï¿½ï¿½ï¿½sRGBï¿½Ì•ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚¢
 // https://www.willgibbons.com/linear-workflow/#:~:text=sRGB%20is%20a%20non%2Dlinear,curve%20applied%20to%20the%20brightness.
 // https://lettier.github.io/3d-game-shaders-for-beginners/gamma-correction.html
 vec4 SRGBtoLINEAR(vec4 srgbIn)
@@ -303,33 +303,33 @@ float CalcShadow(vec3 lsp, vec3 nomral, vec3 lightDir)
 {
 	vec2 moments = ComputePCF(lsp.xy);
 
-	// ƒ}ƒbƒnƒoƒ“ƒh‘Îô‚ÌShadow Bias
-	// ShadowBias‚Æ‚Í[“x‚ÌƒIƒtƒZƒbƒg‚Ì‚±‚Æ
-	// ƒ}ƒbƒnƒoƒ“ƒh‚ÍShawMap‚Ì‰ð‘œ“x‚É‚æ‚è”­¶‚·‚éB•¡”‚Ìƒtƒ‰ƒOƒƒ“ƒg‚ªŒõŒ¹‚©‚ç”äŠr“I—£‚ê‚Ä‚¢‚éê‡A[“xƒ}ƒbƒv‚©‚ç“¯‚¶’l‚ðƒTƒ“ƒvƒŠƒ“ƒO‚·‚é‰Â”\«‚ª‚ ‚éB
-	// Œõ‚Ì“üŽËŠp‚ªƒIƒNƒ‹[ƒ_[‚Ì–@ü‚É‘Î‚µ‚ÄŽÎ‚ß‚È‚Æ‚«Aã‹L‚Ì——R‚©‚ç—á‚¦‚Î­‚µ[“x‚ª‘å‚«‚¢—×‚Ì•\–Ê‚Ì[“x‚ðƒTƒ“ƒvƒŠƒ“ƒO‚µ‚Ä‚µ‚Ü‚¢AŒ‹‰ÊShadowMap‚ÌŒ³‚Ì[“x‚æ‚è‘å‚«‚«‚È‚Á‚Ä‚µ‚Ü‚¤‚±‚Æ‚ÅŽÈX‚É‚È‚é(‘å‚«‚¢‚Æ‚¢‚¤‚±‚Æ‚Í‰e‚É‚È‚é, •F)
-	// ‚»‚Ì‘Îô‚ÅƒIƒNƒ‹[ƒ_[‚ð‚Ù‚ñ‚Ì­‚µ‚¾‚¯Žè‘O‚É‚·‚éBŽè‘O‚É‚·‚é‚±‚Æ‚ÅShadowmap‚æ‚è‚à[“x‚ª¬‚³‚­‚È‚é‚½‚ß‰e‚É‚È‚è‚É‚­‚­‚È‚é
+	// ï¿½}ï¿½bï¿½nï¿½oï¿½ï¿½ï¿½hï¿½Îï¿½ï¿½Shadow Bias
+	// ShadowBiasï¿½Æ‚Í[ï¿½xï¿½ÌƒIï¿½tï¿½Zï¿½bï¿½gï¿½Ì‚ï¿½ï¿½ï¿½
+	// ï¿½}ï¿½bï¿½nï¿½oï¿½ï¿½ï¿½hï¿½ï¿½ShawMapï¿½Ì‰ð‘œ“xï¿½É‚ï¿½è”­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½rï¿½Iï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Aï¿½[ï¿½xï¿½}ï¿½bï¿½vï¿½ï¿½ï¿½ç“¯ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½Â”\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+	// ï¿½ï¿½ï¿½Ì“ï¿½ï¿½ËŠpï¿½ï¿½ï¿½Iï¿½Nï¿½ï¿½ï¿½[ï¿½_ï¿½[ï¿½Ì–@ï¿½ï¿½ï¿½É‘Î‚ï¿½ï¿½ÄŽÎ‚ß‚È‚Æ‚ï¿½ï¿½Aï¿½ï¿½Lï¿½Ì—ï¿½ï¿½Rï¿½ï¿½ï¿½ï¿½á‚¦ï¿½Îï¿½ï¿½ï¿½ï¿½[ï¿½xï¿½ï¿½ï¿½å‚«ï¿½ï¿½ï¿½×‚Ì•\ï¿½Ê‚Ì[ï¿½xï¿½ï¿½ï¿½Tï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ShadowMapï¿½ÌŒï¿½ï¿½Ì[ï¿½xï¿½ï¿½ï¿½å‚«ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½Æ‚ÅŽÈXï¿½É‚È‚ï¿½(ï¿½å‚«ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚Í‰eï¿½É‚È‚ï¿½, ï¿½ï¿½ï¿½F)
+	// ï¿½ï¿½ï¿½Ì‘Îï¿½ÅƒIï¿½Nï¿½ï¿½ï¿½[ï¿½_ï¿½[ï¿½ï¿½ï¿½Ù‚ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½É‚ï¿½ï¿½ï¿½Bï¿½ï¿½Oï¿½É‚ï¿½ï¿½é‚±ï¿½Æ‚ï¿½Shadowmapï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚é‚½ï¿½ß‰eï¿½É‚È‚ï¿½É‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½
 	// https://drive.google.com/file/d/1tyDT7xQVSYzKnZXt6vvDwt-rlWEjVGDP/view?usp=sharing
-	// °‚Ì–@ü‚Æƒ‰ƒCƒg•ûŒü‚Ì¬‚·Šp“x‚ª‚’¼‚É‚È‚é‚Ù‚ÇABias‚ð‹­‚­‚·‚é
+	// ï¿½ï¿½ï¿½Ì–@ï¿½ï¿½ï¿½Æƒï¿½ï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½pï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚È‚ï¿½Ù‚ÇABiasï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	// https://learnopengl.com/Advanced-Lighting/Shadows/Shadow-Mapping
 	float ShadowBias = max(0.005, 0.05 * (1.0 - dot(nomral, lightDir)) );
 
 	float distance = lsp.z - ShadowBias;
 
-	// ShadowMap‚Ì[“x‚æ‚è‚àŽè‘O‚È‚Ì‚Å•’Ê‚É•`‰æ‚·‚é
+	// ShadowMapï¿½Ì[ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½È‚Ì‚Å•ï¿½ï¿½Ê‚É•`ï¿½æ‚·ï¿½ï¿½
 	if((distance) <= moments.x)
 	{
 		return 1.0;
 	}
 	
-	// Œã‚ë‚È‚Ì‚Å‰e‚É‚·‚é
-	// ƒoƒŠƒAƒ“ƒX‚ÌŒvŽZ
+	// ï¿½ï¿½ï¿½È‚Ì‚Å‰eï¿½É‚ï¿½ï¿½ï¿½
+	// ï¿½oï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Xï¿½ÌŒvï¿½Z
 	float variance = moments.y - (moments.x * moments.x);
 	variance = max(0.005, variance);
 
 	float d = distance - moments.x;
 	float p_max = variance / (variance + d * d);
 
-	// –{—ˆ‰e‚É‚È‚é‚Æ‚±‚ë‚ÉŒõ‚ª‚É‚¶‚ñ‚Å‚¢‚é‚æ‚¤‚ÈƒA[ƒeƒBƒtƒ@ƒNƒg‚ªo‚é‚±‚Æ‚ª‚ ‚é‚Ì‚Å‚»‚Ì‘Îô
+	// ï¿½{ï¿½ï¿½ï¿½eï¿½É‚È‚ï¿½Æ‚ï¿½ï¿½ï¿½ÉŒï¿½ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½æ‚¤ï¿½ÈƒAï¿½[ï¿½eï¿½Bï¿½tï¿½@ï¿½Nï¿½gï¿½ï¿½ï¿½oï¿½é‚±ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Å‚ï¿½ï¿½Ì‘Îï¿½
 	//p_max = ReduceLightBleeding(0.1, p_max);
 
 	return p_max;
@@ -349,7 +349,7 @@ vec2 CastDirToSt(vec3 Dir)
 
 vec3 ComputeReflectionColor(PBRParam pbrParam, vec3 v, vec3 n)
 {
-	// ”½ŽËƒJƒ‰[‚ðŒvŽZ
+	// ï¿½ï¿½ï¿½ËƒJï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½vï¿½Z
 	vec3 reflectColor = vec3(0.0);
 	if(ubo.useCubeMap != 0)
 	{
@@ -394,7 +394,7 @@ vec3 ComputeIBL(PBRParam pbrParam, vec3 v, vec3 n)
 	float mipCount = ubo.mipCount;
 	float lod = mipCount * pbrParam.perceptualRoughness;
 
-	// ƒeƒNƒXƒ`ƒƒŒvŽZ
+	// ï¿½eï¿½Nï¿½Xï¿½`ï¿½ï¿½ï¿½vï¿½Z
 	#ifdef USE_OPENGL
 	vec3 brdf = SRGBtoLINEAR(texture(IBL_GGXLUT_Texture, vec2(pbrParam.NdotV, 1.0 - pbrParam.perceptualRoughness))).rgb;
 	vec3 diffuseLight = SRGBtoLINEAR(texture(IBL_Diffuse_Texture, GetSphericalTexcoord(n))).rgb;
@@ -412,10 +412,27 @@ vec3 ComputeIBL(PBRParam pbrParam, vec3 v, vec3 n)
 	return diffuse + specular;
 }
 
+float CalcDepth(vec3 p)
+{
+	vec4 fragPos = ubo.proj * ubo.view * vec4(p, 1.0);
+
+    float depth = fragPos.z / fragPos.w;
+    depth = depth * 0.5 + 0.5;
+
+    float moment1 = depth;
+    float moment2 = depth * depth;
+
+    float dx = dFdx(depth);
+    float dy = dFdy(depth);
+    moment2 += 0.25 * (dx * dx + dy * dy);
+
+	return moment2;
+}
+
 void main(){
 	vec4 col = vec4(1.0);
 
-	// ƒ‰ƒtƒlƒX‚Æƒƒ^ƒŠƒbƒN‚ðŽæ“¾BƒeƒNƒXƒ`ƒƒ‚ÉƒpƒbƒLƒ“ƒO‚³‚ê‚Ä‚¢‚é‚±‚Æ‚à‚ ‚é
+	// ï¿½ï¿½ï¿½tï¿½lï¿½Xï¿½Æƒï¿½ï¿½^ï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½æ“¾ï¿½Bï¿½eï¿½Nï¿½Xï¿½`ï¿½ï¿½ï¿½Éƒpï¿½bï¿½Lï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚±ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½
 	float perceptualRoughness = ubo.roughnessFactor;
 	float metallic = ubo.metallicFactor;
 
@@ -435,10 +452,10 @@ void main(){
 	perceptualRoughness = clamp(perceptualRoughness, MIN_ROUGHNESS, 1.0);
 	metallic  = clamp(metallic, 0.0, 1.0);
 
-	// ŽÀÛ‚ÉŒvŽZ‚ÉŽg—p‚·‚éƒ‰ƒtƒlƒX‚©‚È
+	// ï¿½ï¿½ï¿½Û‚ÉŒvï¿½Zï¿½ÉŽgï¿½pï¿½ï¿½ï¿½éƒ‰ï¿½tï¿½lï¿½Xï¿½ï¿½ï¿½ï¿½
 	float alphaRoughness = perceptualRoughness * perceptualRoughness;
 
-	// ƒx[ƒXƒJƒ‰[‚ÌŽæ“¾. ƒx[ƒXƒJƒ‰[‚Í’Pƒ‚È•\–ÊF
+	// ï¿½xï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[ï¿½ÌŽæ“¾. ï¿½xï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[ï¿½Í’Pï¿½ï¿½ï¿½È•\ï¿½ÊF
 	vec4 baseColor;
 	if(ubo.useBaseColorTexture != 0)
 	{
@@ -455,45 +472,45 @@ void main(){
 	
 	// 
 	vec3 f0 = vec3(0.04);
-	// diffuseColor. –ó‚·‚ÆŠgŽUF. ƒ‰ƒCƒg‚ÅÆ‚ç‚³‚ê‚½‚Æ‚«‚É‚»‚Ì•¨‘Ì‚ª”½ŽË‚·‚éF. ŒõŠw“I‚É‚Í”½ŽË‚µ‚Ä–Ú‚É“ü‚éF
+	// diffuseColor. ï¿½ó‚·‚ÆŠgï¿½Uï¿½F. ï¿½ï¿½ï¿½Cï¿½gï¿½ÅÆ‚ç‚³ï¿½ê‚½ï¿½Æ‚ï¿½ï¿½É‚ï¿½ï¿½Ì•ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½Ë‚ï¿½ï¿½ï¿½F. ï¿½ï¿½ï¿½wï¿½Iï¿½É‚Í”ï¿½ï¿½Ë‚ï¿½ï¿½Ä–Ú‚É“ï¿½ï¿½ï¿½F
 	// https://help.autodesk.com/view/3DSMAX/2023/ENU/?guid=GUID-3CEBFC6A-7A8F-4E78-9CF2-F78BA9CFCDC3
-	// ‚½‚Ô‚ñ‚±‚Ì0.04‚Æ‚¢‚¤”’l‚ÍŒoŒ±‚©‚ç“¾‚ç‚ê‚½’l‚Å•¨—ŠwŽÒ‚ª‚¢‚¢Š´‚¶‚Éƒ`ƒ…[ƒjƒ“ƒO‚µ‚Ä“¾‚½ãY—í‚È•`‰æŒ‹‰Ê‚ðo‚·‚Ì‚É‚¿‚å‚¤‚Ç‚¢‚¢’l‚Æ‚¢‚¤‚±‚Æ‚¾‚ÆŽv‚¤
-	// ¨ ‚³‚ç‚É’²‚×‚Ä‚Ý‚é‚Æ‚±‚Ì0.04‚Í“üŽË”½ŽË—¦4%‚Æ‚¢‚¤ˆÓ–¡‚ç‚µ‚­A‚½‚Ô‚ñ‚Ç‚ñ‚È•¨‘Ì‚Å‚àÅ’á‚Å‚à4%‚Í”½ŽË‚·‚é‚Æ‚¢‚¤‚±‚Æ‚È‚Ì‚©‚à‚µ‚ê‚È‚¢
-	vec3 diffuseColor = baseColor.rgb * (vec3(1.0) - f0); // 0.04‚¾‚¯Œ¸Š‚³‚¹‚é. ‚½‚Ô‚ñŒõƒGƒlƒ‹ƒM[‚ªFˆÈŠO‚Ì‚Æ‚±‚ÅŒ¸Š‚µ‚½•ª‚ðl—¶‚µ‚Ä‚¢‚é(?)
-	diffuseColor *= (1.0 - metallic); // metallic‚ª1.0‚È‚çdiffuseColor‚Í0‚É‚È‚éBŠ®‘S‚È‹à‘®‚Ì•\–ÊF‚ÍŽü‚è‚Ì‰f‚èž‚ÝF‚¾‚¯‚É‚È‚é‚±‚Æ‚ð•\‚µ‚Ä‚¢‚é
-	// specularColor. ˆÓ–¡‚Í‹¾–ÊF. ƒT[ƒtƒFƒCƒXã‚ÌƒnƒCƒ‰ƒCƒg‚ÌF‚ç‚µ‚¢.
+	// ï¿½ï¿½ï¿½Ô‚ñ‚±‚ï¿½0.04ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ÍŒoï¿½ï¿½ï¿½ï¿½ï¿½ç“¾ï¿½ï¿½ê‚½ï¿½lï¿½Å•ï¿½ï¿½ï¿½ï¿½wï¿½Ò‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éƒ`ï¿½ï¿½ï¿½[ï¿½jï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Ä“ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½È•`ï¿½æŒ‹ï¿½Ê‚ï¿½ï¿½oï¿½ï¿½ï¿½Ì‚É‚ï¿½ï¿½å‚¤ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½lï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ÆŽvï¿½ï¿½
+	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½É’ï¿½ï¿½×‚Ä‚Ý‚ï¿½Æ‚ï¿½ï¿½ï¿½0.04ï¿½Í“ï¿½ï¿½Ë”ï¿½ï¿½Ë—ï¿½4%ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½Ó–ï¿½ï¿½ç‚µï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ô‚ï¿½Ç‚ï¿½È•ï¿½ï¿½Ì‚Å‚ï¿½ï¿½Å’ï¿½Å‚ï¿½4%ï¿½Í”ï¿½ï¿½Ë‚ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚È‚Ì‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
+	vec3 diffuseColor = baseColor.rgb * (vec3(1.0) - f0); // 0.04ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½ï¿½Gï¿½lï¿½ï¿½ï¿½Mï¿½[ï¿½ï¿½ï¿½Fï¿½ÈŠOï¿½Ì‚Æ‚ï¿½ï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½(?)
+	diffuseColor *= (1.0 - metallic); // metallicï¿½ï¿½1.0ï¿½È‚ï¿½diffuseColorï¿½ï¿½0ï¿½É‚È‚ï¿½Bï¿½ï¿½ï¿½Sï¿½È‹ï¿½ï¿½ï¿½ï¿½Ì•\ï¿½ÊFï¿½ÍŽï¿½ï¿½ï¿½Ì‰fï¿½èžï¿½ÝFï¿½ï¿½ï¿½ï¿½ï¿½É‚È‚é‚±ï¿½Æ‚ï¿½\ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+	// specularColor. ï¿½Ó–ï¿½ï¿½Í‹ï¿½ï¿½ÊF. ï¿½Tï¿½[ï¿½tï¿½Fï¿½Cï¿½Xï¿½ï¿½Ìƒnï¿½Cï¿½ï¿½ï¿½Cï¿½gï¿½ÌFï¿½ç‚µï¿½ï¿½.
 	// https://help.autodesk.com/view/3DSMAX/2023/ENU/?guid=GUID-90065A74-C223-474C-8D85-7596D70E5004
-	// ‹à‘®‚Å‚ ‚é‚Ù‚ÇƒnƒCƒ‰ƒCƒgF‚ªƒx[ƒXƒJƒ‰[‚É‹ß‚Ã‚­.
-	// ‚Æ‚Í‚¢‚¦Šm‚©‚É‹à‘®‚Í‚«‚ç‚Á‚Æ‚µ‚Ä‚Ä‹t‚Éƒ}ƒbƒg‚ÈƒIƒuƒWƒFƒNƒg‚Í‘S‚­Œõ‚Á‚Ä‚È‚¢‚æ‚¤‚ÈƒCƒ[ƒW‚ª‚ ‚é
-	// metallic : 0.0(ƒ}ƒbƒg) <--> 1.0(‹à‘®) ‚Á‚ÄˆÓ–¡‚¾‚ÆŽv‚¤
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½Ù‚Çƒnï¿½Cï¿½ï¿½ï¿½Cï¿½gï¿½Fï¿½ï¿½ï¿½xï¿½[ï¿½Xï¿½Jï¿½ï¿½ï¿½[ï¿½É‹ß‚Ã‚ï¿½.
+	// ï¿½Æ‚Í‚ï¿½ï¿½ï¿½ï¿½mï¿½ï¿½ï¿½É‹ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Ä‚Ä‹tï¿½Éƒ}ï¿½bï¿½gï¿½ÈƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Í‘Sï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚È‚ï¿½ï¿½æ‚¤ï¿½ÈƒCï¿½ï¿½ï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	// metallic : 0.0(ï¿½}ï¿½bï¿½g) <--> 1.0(ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ÄˆÓ–ï¿½ï¿½ï¿½ï¿½ÆŽvï¿½ï¿½
 	vec3 specularColor = mix(f0, baseColor.rgb, metallic); // specularColor
 
-	// ”½ŽË—¦(reflectance)‚ÌŒvŽZ
-	// ƒnƒCƒ‰ƒCƒgƒJƒ‰[‚ÍRGB‚ªˆê”Ô‘å‚«‚¢‚â‚Â‚ÌF‚É‚È‚é‚Ì‚ÅA‚Ç‚ê‚­‚ç‚¢”½ŽË‚·‚é‚©‚à‚»‚Ì’l(F)‚ðŠî€‚É‚·‚é‚Í‚¸‚Å‚ ‚é
+	// ï¿½ï¿½ï¿½Ë—ï¿½(reflectance)ï¿½ÌŒvï¿½Z
+	// ï¿½nï¿½Cï¿½ï¿½ï¿½Cï¿½gï¿½Jï¿½ï¿½ï¿½[ï¿½ï¿½RGBï¿½ï¿½ï¿½ï¿½Ô‘å‚«ï¿½ï¿½ï¿½ï¿½Â‚ÌFï¿½É‚È‚ï¿½Ì‚ÅAï¿½Ç‚ê‚­ï¿½ç‚¢ï¿½ï¿½ï¿½Ë‚ï¿½ï¿½é‚©ï¿½ï¿½ï¿½ï¿½ï¿½Ì’l(ï¿½F)ï¿½ï¿½ï¿½î€ï¿½É‚ï¿½ï¿½ï¿½Í‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½
 	float reflectance = max(max(specularColor.r, specularColor.g), specularColor.b);
 
-	// ƒtƒŒƒlƒ‹€‚Å•K—v‚Èƒpƒ‰ƒ[ƒ^[
-	// reflectance‚É‘Î‚µ‚Ä0.04(4%) * 25.0 = 1.0(100%)‚Æ‚¢‚Á‚½ŒvŽZ‚ðs‚¢A0.04(4%)ˆÈã‚Í‹­§“I‚É1.0(100%)‚ÉA‚»‚ê‚æ‚è‰º‚Ì’l‚Å0.0 ~ 1.0‚Ì•ª•z‚ðì‚Á‚Ä‚¢‚éB‚Â‚Ü‚èƒOƒ‰ƒt‚ð‹}Œù”z‚É‚µ‚Ä‚¢‚é
+	// ï¿½tï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½Å•Kï¿½vï¿½Èƒpï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½[
+	// reflectanceï¿½É‘Î‚ï¿½ï¿½ï¿½0.04(4%) * 25.0 = 1.0(100%)ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Zï¿½ï¿½ï¿½sï¿½ï¿½ï¿½A0.04(4%)ï¿½Èï¿½Í‹ï¿½ï¿½ï¿½ï¿½Iï¿½ï¿½1.0(100%)ï¿½ÉAï¿½ï¿½ï¿½ï¿½ï¿½è‰ºï¿½Ì’lï¿½ï¿½0.0 ~ 1.0ï¿½Ì•ï¿½ï¿½zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Bï¿½Â‚Ü‚ï¿½Oï¿½ï¿½ï¿½tï¿½ï¿½ï¿½}ï¿½ï¿½ï¿½zï¿½É‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 	float reflectance90 = clamp(reflectance * 25.0, 0.0, 1.0);
-	vec3 specularEnvironmentR0 = specularColor.rgb; // ’Êí‚Ì”½ŽË—¦
-	vec3 specularEnvironmentR90 = vec3(1.0, 1.0, 1.0) * reflectance90; // ‹}Œù”z‚Î”½ŽË—¦
+	vec3 specularEnvironmentR0 = specularColor.rgb; // ï¿½Êï¿½Ì”ï¿½ï¿½Ë—ï¿½
+	vec3 specularEnvironmentR90 = vec3(1.0, 1.0, 1.0) * reflectance90; // ï¿½}ï¿½ï¿½ï¿½zï¿½Î”ï¿½ï¿½Ë—ï¿½
 
-	// PBR‚ÉŽg‚¤ƒxƒNƒgƒ‹Œn‚Ìƒpƒ‰ƒ[ƒ^[‚ðŒvŽZ‚·‚é
+	// PBRï¿½ÉŽgï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½nï¿½Ìƒpï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½[ï¿½ï¿½ï¿½vï¿½Zï¿½ï¿½ï¿½ï¿½
 	vec3 n = getNormal();
 	vec3 v = (-1.0f) * normalize(f_WorldPos.xyz - ubo.cameraPos.xyz);
 	
-	// ŒvŽZ‚ÉŽg—p‚·‚é‚Ì‚Åƒ‰ƒCƒg•ûŒü‚Í”½“]‚³‚¹‚Ä‚¨‚­
-	// }‚ð‘‚­‚Æ‚í‚©‚é‚ª‚»‚Ì‚Ü‚Ü‚ÌƒxƒNƒgƒ‹‚ðŽg‚¤‚Æ180“x‰ñ“]‚µ‚½•ª‚ÌŒ‹‰Ê‚É‚È‚Á‚Ä‚µ‚Ü‚¤
-	// –@ü•ûŒü‚ðŠî€‚Él‚¦‚é
+	// ï¿½vï¿½Zï¿½ÉŽgï¿½pï¿½ï¿½ï¿½ï¿½Ì‚Åƒï¿½ï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Í”ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+	// ï¿½}ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚í‚©ï¿½é‚ªï¿½ï¿½ï¿½Ì‚Ü‚Ü‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½180ï¿½xï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌŒï¿½ï¿½Ê‚É‚È‚ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½
+	// ï¿½@ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î€ï¿½Élï¿½ï¿½ï¿½ï¿½
 	vec3 l = (-1.0f) * normalize(ubo.lightDir.xyz);
 	
-	// ƒn[ƒtƒxƒNƒgƒ‹‚Ív‚Æl‚Ì’†ŠÔ‚ÉˆÊ’u‚·‚éƒxƒNƒgƒ‹‚Ì‚±‚Æ
-	// ŒõŒ¹‚Ì•ûŒüƒxƒNƒgƒ‹‚ÍCG‚ÌŠµ—á‚Æ‚µ‚ÄŒõŒ¹•ûŒü‚ÉŒü‚¯‚½•û‚ª‚¢‚¢‚Ì‚©‚àH
+	// ï¿½nï¿½[ï¿½tï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½vï¿½ï¿½lï¿½Ì’ï¿½ï¿½Ô‚ÉˆÊ’uï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ì•ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½CGï¿½ÌŠï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ÄŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÉŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½H
 	// https://qiita.com/emadurandal/items/76348ad118c36317ec5c#:~:text=%E3%81%97%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%E3%80%82-,h,%E3%81%AF%E3%83%8F%E3%83%BC%E3%83%95%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB%E3%81%A8%E3%81%84%E3%81%84,-%E3%80%81%E3%83%A9%E3%82%A4%E3%83%88%E3%83%99%E3%82%AF%E3%83%88%E3%83%AB%E3%81%A8
 	vec3 h = normalize(v + l);
 	vec3 reflection = normalize(reflect(v, n));
 
-	// l‚¦•û‚Æ‚µ‚Ä‚Í“àÏ‚Í“ñ‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠp“x‚ª‚Ç‚ê‚¾‚¯…•½E‚’¼‚É‹ß‚¢‚©‚ðŽ¦‚·’l‚Æ‚µ‚Ä‚Ý‚é‚±‚Æ‚ª‚Å‚«‚é
+	// ï¿½lï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Ä‚Í“ï¿½ï¿½Ï‚Í“ï¿½Â‚Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½ÌŠpï¿½xï¿½ï¿½ï¿½Ç‚ê‚¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½É‹ß‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½Æ‚ï¿½ï¿½Ä‚Ý‚é‚±ï¿½Æ‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½
 	float NdotL = clamp(dot(n, l), 0.0, 1.0);
 	float NdotV = clamp(abs(dot(n, v)), 0.0, 1.0);
 	float NdotH = clamp(dot(n, h), 0.0, 1.0);
@@ -520,30 +537,30 @@ void main(){
 	vec3 specular = vec3(0.0);
 	vec3 diffuse = vec3(0.0);
 
-	// ƒNƒbƒNƒgƒ‰ƒ“ƒXƒ‚ƒfƒ‹‚É‚æ‚éƒXƒyƒLƒ…ƒ‰[‚ÌGGX‚ðŒvŽZ‚·‚é
-	float D = CalcMicrofacet(pbrParam); // ƒ}ƒCƒNƒƒtƒ@ƒZƒbƒg(”÷¬–Ê–@ü•ª•zŠÖ”)
-	float G = CalcGeometricOcculusion(pbrParam); // Šô‰½Œ¸Š€
-	vec3 F = CalcFrenelReflection(pbrParam); // ƒtƒŒƒlƒ‹€
+	// ï¿½Nï¿½bï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½fï¿½ï¿½ï¿½É‚ï¿½ï¿½Xï¿½yï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½ï¿½GGXï¿½ï¿½ï¿½vï¿½Zï¿½ï¿½ï¿½ï¿½
+	float D = CalcMicrofacet(pbrParam); // ï¿½}ï¿½Cï¿½Nï¿½ï¿½ï¿½tï¿½@ï¿½Zï¿½bï¿½g(ï¿½ï¿½ï¿½ï¿½ï¿½Ê–@ï¿½ï¿½ï¿½ï¿½ï¿½zï¿½Öï¿½)
+	float G = CalcGeometricOcculusion(pbrParam); // ï¿½ô‰½Œï¿½ï¿½ï¿½ï¿½ï¿½
+	vec3 F = CalcFrenelReflection(pbrParam); // ï¿½tï¿½ï¿½ï¿½lï¿½ï¿½ï¿½ï¿½
 
 	if(NdotL > 0.0 || NdotV > 0.0)
 	{
-		// ƒXƒyƒLƒ…ƒ‰[BRDF‚ð\’z
-		// ƒXƒyƒLƒ…ƒ‰[‚Í‹¾–Ê”½ŽË: ‹¾–Ê”½ŽË‚Æ‚Í“üŽËŠp‚ÆoŽËŠp‚ª“™‚µ‚¢”½ŽË
+		// ï¿½Xï¿½yï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½[BRDFï¿½ï¿½ï¿½\ï¿½z
+		// ï¿½Xï¿½yï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Í‹ï¿½ï¿½Ê”ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½Ê”ï¿½ï¿½Ë‚Æ‚Í“ï¿½ï¿½ËŠpï¿½Æoï¿½ËŠpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		// https://ja.wikipedia.org/wiki/%E9%8F%A1%E9%9D%A2%E5%8F%8D%E5%B0%84
 		specular += D * G * F / (4.0 * NdotL * NdotV);
 
 		specular = max(specular, vec3(0.0));
 
-		// ƒfƒBƒtƒ…[ƒYBRDF‚ðŒvŽZ
-		// Diffuse‚ÍŠgŽU”½ŽË : ŠgŽU”½ŽË‚Æ‚Í‹¾–Ê”½ŽË‚É”ä‚×‚Ä”½ŽËŠp‚ÉˆË‘¶‚¹‚¸A‘½—l‚È•ûŒü‚É“¯’ö“x‚ÌŒõ“x‚ð•ú‚Â”½ŽË‚Ì‚±‚Æ
+		// ï¿½fï¿½Bï¿½tï¿½ï¿½ï¿½[ï¿½YBRDFï¿½ï¿½ï¿½vï¿½Z
+		// Diffuseï¿½ÍŠgï¿½Uï¿½ï¿½ï¿½ï¿½ : ï¿½gï¿½Uï¿½ï¿½ï¿½Ë‚Æ‚Í‹ï¿½ï¿½Ê”ï¿½ï¿½Ë‚É”ï¿½×‚Ä”ï¿½ï¿½ËŠpï¿½ÉˆË‘ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½lï¿½È•ï¿½ï¿½ï¿½ï¿½É“ï¿½ï¿½ï¿½ï¿½xï¿½ÌŒï¿½ï¿½xï¿½ï¿½ï¿½ï¿½Â”ï¿½ï¿½Ë‚Ì‚ï¿½ï¿½ï¿½
 		// https://ja.wikipedia.org/wiki/%E6%8B%A1%E6%95%A3%E5%8F%8D%E5%B0%84
 		diffuse += (1.0 - F) * CalcDiffuseBRDF(pbrParam);
 
-		// ƒŒƒ“ƒ_ƒŠƒ“ƒO•û’öŽ®‚ð\’z
+		// ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½z
 		col.rgb = NdotL * (specular + diffuse);
 	}
 
-	// ‚æ‚­‚í‚©‚ç‚ñ‚ªAif•¶‚ª2‰ñƒlƒXƒg‚É‚È‚Á‚Ä‚¢‚é‚ÆComputeIBL‚ª“®‚©‚È‚¢‚Ì‚Å‚Ð‚Æ‚Ü‚¸if•¶‚ÌŠO‚É’u‚¢‚Ä‚¨‚­
+	// ï¿½æ‚­ï¿½í‚©ï¿½ï¿½ñ‚ªAifï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½lï¿½Xï¿½gï¿½É‚È‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ComputeIBLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Ì‚Å‚Ð‚Æ‚Ü‚ï¿½ifï¿½ï¿½ï¿½ÌŠOï¿½É’uï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
 	if(ubo.useIBL != 0)
 	{
 		// IBL
@@ -551,19 +568,19 @@ void main(){
 	}
 	else
 	{
-		// ”½ŽËƒJƒ‰[‚ðŒvŽZ
+		// ï¿½ï¿½ï¿½ËƒJï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½vï¿½Z
 		col.rgb += ComputeReflectionColor(pbrParam, v, n) * F;
 
-		// ‹^Ž—“I‚ÈŠÂ‹«Œõ(ƒ‰ƒCƒg‚Ì”½‘Î•ûŒü‚ªˆÃ‚­‚È‚è‚·‚¬‚È‚¢‚æ‚¤‚É‚·‚é‚½‚ß‚Ì‘Îô)
-		// –{—ˆ‚ÍGI‚âIBL‚Å‘ã—p‚·‚é‚Æ‚±‚ë‚¾‚ªA‚Ð‚Æ‚Ü‚¸‚±‚Ì‚æ‚¤‚ÈŠÈˆÕ“I‚È•û–@‚Å‘ã—p
-		// GI‚âIBL‚ðŽg—p‚·‚é‚Æ‚«‚ÍƒvƒŠƒvƒƒZƒbƒT‚Å‚±‚±‚ÍŽÀs‚³‚ê‚È‚¢‚æ‚¤‚É‚·‚é
-		// (Cubemap‚ðŠO‚µ‚½‚Æ‚«A‚±‚ê‚ª‚È‚¢‚Æ^‚ÁˆÃ‚É‚È‚é)
+		// ï¿½^ï¿½ï¿½ï¿½Iï¿½ÈŠÂ‹ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Cï¿½gï¿½Ì”ï¿½ï¿½Î•ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã‚ï¿½ï¿½È‚è‚·ï¿½ï¿½ï¿½È‚ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½é‚½ï¿½ß‚Ì‘Îï¿½)
+		// ï¿½{ï¿½ï¿½ï¿½ï¿½GIï¿½ï¿½IBLï¿½Å‘ï¿½pï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ë‚¾ï¿½ï¿½ï¿½Aï¿½Ð‚Æ‚Ü‚ï¿½ï¿½ï¿½ï¿½Ì‚æ‚¤ï¿½ÈŠÈˆÕ“Iï¿½È•ï¿½ï¿½@ï¿½Å‘ï¿½p
+		// GIï¿½ï¿½IBLï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Íƒvï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Zï¿½bï¿½Tï¿½Å‚ï¿½ï¿½ï¿½ï¿½ÍŽï¿½ï¿½sï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½ï¿½
+		// (Cubemapï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Aï¿½ï¿½ï¿½ê‚ªï¿½È‚ï¿½ï¿½Æ^ï¿½ï¿½ï¿½Ã‚É‚È‚ï¿½)
 		// https://cgworld.jp/terms/%E3%82%A2%E3%83%B3%E3%83%93%E3%82%A8%E3%83%B3%E3%83%88.html
 		vec3 gi_diffuse = clamp(specular, 0.04, 1.0);
 		col.rgb += gi_diffuse * diffuse;
 	}
 
-	// AO Map‚Ì“K‰ž
+	// AO Mapï¿½Ì“Kï¿½ï¿½
 	if(ubo.useOcclusionTexture != 0)
 	{ 
 		#ifdef USE_OPENGL
@@ -575,7 +592,7 @@ void main(){
 		col.rgb = mix(col.rgb, col.rgb * ao, ubo.occlusionStrength);
 	}
 
-	// Emissive Map‚Ì“K‰ž
+	// Emissive Mapï¿½Ì“Kï¿½ï¿½
 	if(ubo.useEmissiveTexture != 0)
 	{
 		#ifdef USE_OPENGL
@@ -605,11 +622,13 @@ void main(){
 		col.rgb *= shadowCol;
 	}
 
-	// ƒJƒ‰[ƒXƒy[ƒX‚ðƒŠƒjƒA‚É‚·‚é
+	// ï¿½Jï¿½ï¿½ï¿½[ï¿½Xï¿½yï¿½[ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½jï¿½Aï¿½É‚ï¿½ï¿½ï¿½
 	col.rgb = pow(col.rgb, vec3(1.0/2.2));
 
-	// ƒAƒ‹ƒtƒ@‚ðŽw’è
+	// ï¿½Aï¿½ï¿½ï¿½tï¿½@ï¿½ï¿½ï¿½wï¿½ï¿½
 	col.a = baseColor.a;
 
 	outColor = col;
+
+	gl_FragDepth = CalcDepth(f_WorldPos.xyz);
 }

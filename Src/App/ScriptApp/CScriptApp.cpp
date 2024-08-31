@@ -36,19 +36,32 @@ namespace app
 		m_Projection(std::make_shared<projection::CProjection>()),
 		m_DrawInfo(std::make_shared<graphics::CDrawInfo>()),
 #ifdef USE_GUIENGINE
+		m_EnabledGUIDraw(true),
 		m_GraphicsEditingWindow(std::make_shared<gui::CGraphicsEditingWindow>()),
 #endif // USE_GUIENGINE
+		m_MainFrameRenderer(nullptr),
+		m_MRTFrameRenderer(nullptr),
 		m_FileModifier(std::make_shared<CFileModifier>()),
 		m_TimelineController(std::make_shared<timeline::CTimelineController>())
 	{
-		m_ViewCamera->SetPos(glm::vec3(-7.0f, 1.0f, 0.0f));
+		//m_ViewCamera->SetPos(glm::vec3(0.0f, 1.65, 2.5f));
+		//m_ViewCamera->SetCenter(glm::vec3(0.0f, 1.65f, 0.0f));
+
+		m_ViewCamera->SetPos(glm::vec3(0.0f, 0.0f, 3.0));
+
 		m_MainCamera = m_ViewCamera;
 
-		m_DrawInfo->GetLightCamera()->SetPos(glm::vec3(-2.358f, 15.6f, -0.59f));
+		// ライトはあとでトレースカメラにする
+		//m_DrawInfo->GetLightCamera()->SetPos(glm::vec3(-2.358f, 15.6f, -0.59f));
+		//m_DrawInfo->GetLightCamera()->SetPos(glm::vec3(0.0f, 0.0f, 0.0f));
 		m_DrawInfo->GetLightProjection()->SetNear(2.0f);
 		m_DrawInfo->GetLightProjection()->SetFar(100.0f);
 
 		m_SceneController->SetDefaultPass("MainResultPass", "");
+
+#ifdef USE_GUIENGINE
+		m_GraphicsEditingWindow->SetDefaultPass("MainResultPass", "");
+#endif
 	}
 
 	bool CScriptApp::Release(api::IGraphicsAPI* pGraphicsAPI)
@@ -64,10 +77,14 @@ namespace app
 
 	bool CScriptApp::Initialize(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker)
 	{
-		pLoadWorker->AddScene(std::make_shared<resource::CSceneLoader>("Resources\\Scene\\Sample.json", m_SceneController));
+		pLoadWorker->AddScene(std::make_shared<resource::CSceneLoader>("Resources\\Scene\\Demo-SESSIONS-2024.json", m_SceneController));
 
 		// オフスクリーンレンダリング
+		if (!pGraphicsAPI->CreateRenderPass("MRTPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 5)) return false;
 		if (!pGraphicsAPI->CreateRenderPass("MainResultPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 1)) return false;
+
+		m_MRTFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MRTPass", "MainResultPass");
+		if (!m_MRTFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\mrt_renderer_mf.json")) return false;
 
 		m_MainFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", "");
 		if (!m_MainFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\FrameTexture_MF.json")) return false;
@@ -94,6 +111,9 @@ namespace app
 
 	bool CScriptApp::Update(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<input::CInputState>& InputState)
 	{
+		// 常にタイムラインからの再生時間を渡す
+		m_DrawInfo->SetSecondsTime(m_TimelineController->GetPlayBackTime());
+
 		if (!m_FileModifier->Update(pLoadWorker)) return false;
 
 		if (pLoadWorker->IsLoaded())
@@ -105,6 +125,7 @@ namespace app
 		if (!m_ScriptScene->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 
 		m_MainCamera->Update(m_DrawInfo->GetDeltaSecondsTime(), InputState);
+		m_DrawInfo->GetLightCamera()->Update(m_DrawInfo->GetDeltaSecondsTime(), InputState);
 
 		if (InputState->IsKeyUp(input::EKeyType::KEY_TYPE_SPACE))
 		{
@@ -120,7 +141,16 @@ namespace app
 			}
 		}
 
+		if (!m_MRTFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 		if (!m_MainFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
+
+		// GUIEngine
+#ifdef USE_GUIENGINE
+		if (InputState->IsKeyUp(input::EKeyType::KEY_TYPE_F1))
+		{
+			m_EnabledGUIDraw = !m_EnabledGUIDraw;
+		}
+#endif // USE_GUIENGINE
 
 		return true;
 	}
@@ -145,9 +175,17 @@ namespace app
 
 	bool CScriptApp::Draw(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<gui::IGUIEngine>& GUIEngine)
 	{
+		// MRTPass
+		{
+			if (!pGraphicsAPI->BeginRender("MRTPass")) return false;
+			if (!m_SceneController->Draw(pGraphicsAPI, false, m_MainCamera, m_Projection, m_DrawInfo)) return false;
+			if (!pGraphicsAPI->EndRender()) return false;
+		}
+
 		// MainResultPass
 		{
 			if (!pGraphicsAPI->BeginRender("MainResultPass")) return false;
+			if (!m_MRTFrameRenderer->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 			if (!m_SceneController->Draw(pGraphicsAPI, false, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
 		}
@@ -155,12 +193,12 @@ namespace app
 		// Main FrameBuffer
 		{
 			if (!pGraphicsAPI->BeginRender()) return false;
-
+			
 			if (!m_MainFrameRenderer->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 
 			// GUIEngine
 #ifdef USE_GUIENGINE
-			if (pLoadWorker->IsLoaded())
+			if (pLoadWorker->IsLoaded() && m_EnabledGUIDraw)
 			{
 				gui::SGUIParams GUIParams = gui::SGUIParams(GetObjectList(), m_SceneController, m_FileModifier, m_TimelineController, pLoadWorker);
 
@@ -227,6 +265,28 @@ namespace app
 			}
 		}
 
+		// ライト
+		{
+			// ライトの方もトレースカメラにする
+			std::shared_ptr<camera::CTraceCamera> LightTraceCamera = std::make_shared<camera::CTraceCamera>();
+
+			const auto& Object = m_SceneController->FindObjectByName("LightObject");
+			if (Object)
+			{
+				const auto& Node = Object->FindNodeByName("LightNode");
+
+				if (Node)
+				{
+					LightTraceCamera->SetTargetNode(Node);
+				}
+			}
+
+			m_DrawInfo->SetLightCamera(LightTraceCamera);
+		}
+
+		// タイムラインの再生開始
+		m_TimelineController->Play();
+
 		return true;
 	}
 
@@ -271,5 +331,24 @@ namespace app
 	std::shared_ptr<scene::CSceneController> CScriptApp::GetSceneController() const
 	{
 		return m_SceneController;
+	}
+
+	// タイムライン再生停止イベント
+	void CScriptApp::OnPlayedTimeline(bool IsPlay)
+	{
+		const auto& Sound = m_SceneController->GetSound();
+		const auto& SoundClip = std::get<0>(Sound);
+		if (SoundClip)
+		{
+			if (IsPlay)
+			{
+				SoundClip->SetPlayPos(m_TimelineController->GetPlayBackTime());
+				SoundClip->PlayOneShot();
+			}
+			else
+			{
+				SoundClip->Stop();
+			}
+		}
 	}
 }

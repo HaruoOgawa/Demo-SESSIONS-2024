@@ -8,6 +8,7 @@ layout(location = 4) in uvec4 inBone0;
 layout(location = 5) in vec4 inWeights0;
 
 layout(location = 0) out vec4 v2f_ObjectPos;
+layout(location = 1) out vec2 v2f_UV;
 
 layout(binding = 0) uniform VertexUniformBuffer{
 	mat4 model;
@@ -20,4 +21,5 @@ void main()
 {
 	gl_Position = v_ubo.proj * v_ubo.view * v_ubo.model * vec4(inPosition, 1.0);
 	v2f_ObjectPos = vec4(inPosition, 1.0);
+	v2f_UV = inTexcoord;
 }

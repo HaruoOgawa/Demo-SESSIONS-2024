@@ -25,9 +25,11 @@ namespace app
 		std::shared_ptr<graphics::CDrawInfo> m_DrawInfo;
 
 		std::shared_ptr<graphics::CFrameRenderer> m_MainFrameRenderer;
+		std::shared_ptr<graphics::CFrameRenderer> m_MRTFrameRenderer;
 
 		std::shared_ptr<CFileModifier> m_FileModifier;
 #ifdef USE_GUIENGINE
+		bool m_EnabledGUIDraw;
 		std::shared_ptr<gui::CGraphicsEditingWindow> m_GraphicsEditingWindow;
 #endif // USE_GUIENGINE
 
@@ -67,5 +69,8 @@ namespace app
 		// Getter
 		virtual std::vector<std::shared_ptr<object::C3DObject>> GetObjectList() const override;
 		virtual std::shared_ptr<scene::CSceneController> GetSceneController() const override;
+
+		// タイムライン再生停止イベント
+		virtual void OnPlayedTimeline(bool IsPlay) override;
 	};
 }

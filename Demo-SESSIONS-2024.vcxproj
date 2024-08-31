@@ -480,6 +480,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\GUIApp\GUI\C3DView.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUILogTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIMeshTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.cpp" />
@@ -493,12 +494,13 @@
     <ClCompile Include="Src\GUIApp\GUI\CGUIObjectTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIRenderingTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIResourcesTab.cpp" />
-    <ClCompile Include="Src\GUIApp\GUI\CGUITransformTab.cpp" />
+    <ClCompile Include="Src\GUIApp\GUI\CGUIBaseTab.cpp" />
     <ClCompile Include="Src\GUIApp\Model\CFileModifier.cpp" />
     <ClCompile Include="Src\App\ScriptApp\Scene\CScriptScene.cpp" />
     <ClCompile Include="Src\Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\GUIApp\GUI\C3DView.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUILogTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIMeshTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.h" />
@@ -513,7 +515,7 @@
     <ClInclude Include="Src\GUIApp\GUI\CGUIObjectTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIRenderingTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIResourcesTab.h" />
-    <ClInclude Include="Src\GUIApp\GUI\CGUITransformTab.h" />
+    <ClInclude Include="Src\GUIApp\GUI\CGUIBaseTab.h" />
     <ClInclude Include="Src\GUIApp\Model\CFileModifier.h" />
     <ClInclude Include="Src\App\ScriptApp\Scene\CScriptScene.h" />
   </ItemGroup>
@@ -546,9 +548,11 @@
     <None Include="Resources\MaterialFrame\PBR_MF.json" />
     <None Include="Resources\MaterialFrame\PBR_MRT_MF.json" />
     <None Include="Resources\MaterialFrame\raymarching_mf.json" />
+    <None Include="Resources\MaterialFrame\ray_01_mf.json" />
     <None Include="Resources\MaterialFrame\Sample_MF.json" />
     <None Include="Resources\MaterialFrame\sdftext_mf.json" />
     <None Include="Resources\MaterialFrame\SimpleTexture_MF.json" />
+    <None Include="Resources\Scene\Demo-SESSIONS-2024.json" />
     <None Include="Resources\Scene\MRTTest.json" />
     <None Include="Resources\Shaders\basic_toon.frag" />
     <None Include="Resources\Shaders\basic_toon.vert" />
@@ -603,6 +607,7 @@
     <None Include="Resources\Shaders\raymarching.frag" />
     <None Include="Resources\Shaders\raymarching_frag.spv" />
     <None Include="Resources\Shaders\raymarching_frag.wgsl" />
+    <None Include="Resources\Shaders\ray_01.frag" />
     <None Include="Resources\Shaders\renderboard.vert" />
     <None Include="Resources\Shaders\renderboard_vert.spv" />
     <None Include="Resources\Shaders\renderboard_vert.wgsl" />

@@ -4,7 +4,11 @@
 int main()
 {
 	app::SAppSettings Settings = {};
-	Settings.FullScreen = false;
+#ifndef _DEBUG
+	Settings.Overlap = false;
+#else
+	Settings.ShowFPS = true;
+#endif // !_DEBUG
 
 	if (!app::CAppRunner::Run(std::make_shared<app::CScriptApp>(), Settings)) return 1;
 

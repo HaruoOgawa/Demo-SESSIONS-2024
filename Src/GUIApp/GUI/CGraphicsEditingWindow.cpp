@@ -73,35 +73,16 @@ namespace gui
 			ImGui::SetNextWindowSize(ImVec2(io.DisplaySize.x * (1.0f - MainMenuWidthRate), io.DisplaySize.y * (1.0f - TimeLineHeightRate)), ImGuiCond_Always);
 
 			bool Open = true;
-			if (ImGui::Begin("3DView", &Open, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | 
-				ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoScrollbar))
+
+			ImGuiWindowFlags flags = ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings |
+				ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoInputs;
+
+			if (ImGui::Begin("3DView", &Open, flags))
 			{
-				auto RenderPass = pGraphicsAPI->FindOffScreenRenderPass("MainResultPass");
+				ImVec2 WindowSize = ImGui::GetWindowSize();
+				ImVec2 ImageSize = ImVec2(io.DisplaySize.x * (1.0f - TimeLineHeightRate), io.DisplaySize.y * (1.0f - TimeLineHeightRate));
 
-				auto Core = GUIEngine->GetImGuiCore();
-
-				if (RenderPass && Core)
-				{
-					ImVec2 WindowSize = ImGui::GetWindowSize();
-					ImVec2 ImageSize = ImVec2(io.DisplaySize.x * (1.0f - TimeLineHeightRate), io.DisplaySize.y * (1.0f - TimeLineHeightRate));
-					
-					// 親ウィンドウの中心に配置
-					ImVec2 ImagePos = ImVec2(
-						(WindowSize.x - ImageSize.x) * 0.5f,
-						(WindowSize.y - ImageSize.y) * 0.5f
-					);
-					ImGui::SetCursorPos(ImagePos);
-
-					ImVec2 UV0 = ImVec2(0.0f, 0.0f);
-					ImVec2 UV1 = ImVec2(1.0f, 1.0f);
-#ifdef USE_OPENGL
-					// OpenGL時は上下反転するので補正する
-					UV0 = ImVec2(0.0f, 1.0f);
-					UV1 = ImVec2(1.0f, 0.0f);
-#endif // USE_OPENGL
-
-					ImGui::Image(Core->CastTexID(RenderPass->GetFrameTexture().get()), ImageSize, UV0, UV1);
-				}
+				if (!m_3DView.Draw(pGraphicsAPI, GUIParams, GUIEngine, WindowSize, ImageSize)) return false;
 			}
 
 			ImGui::End();
@@ -113,6 +94,11 @@ namespace gui
 	void CGraphicsEditingWindow::AddLog(gui::EGUILogType LogType, const std::string Msg)
 	{
 		m_LogTab.AddLog(LogType, Msg);
+	}
+
+	void CGraphicsEditingWindow::SetDefaultPass(const std::string& RenderPass, const std::string& DepthPass)
+	{
+		m_3DView.SetDefaultPass(RenderPass, DepthPass);
 	}
 }
 #endif // USE_GUIENGINE
