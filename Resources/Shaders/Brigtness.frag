@@ -22,8 +22,8 @@ layout(binding = 2) uniform FragUniformBuffer
 	float fPad1;
 } frag_ubo;
 
-layout(location = 0) out vec4 outColor;
-layout(location = 1) out vec4 outBrigtnessColor;
+layout(location = 0) out vec4 outBrigtnessColor;
+layout(location = 1) out vec4 outColor;
 
 void main()
 {

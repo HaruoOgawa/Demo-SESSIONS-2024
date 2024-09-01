@@ -22,7 +22,6 @@ namespace imageeffect
 	{
 		std::string DstPass = std::string();
 		std::string SrcPass = std::string();
-		int SrcTexIndex = -1;
 	};
 
 	class CBloomEffect

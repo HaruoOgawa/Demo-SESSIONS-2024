@@ -12,9 +12,9 @@ namespace imageeffect
 		m_BloomMixPassRenderer(nullptr)
 	{
 		m_ReduceBufList = {
-			std::make_tuple(SReduceBuf{"ReducePass_2x2", "BrigtnessPass", 1}, SReduceBuf{"ReducePass_2x2_XBlur", "ReducePass_2x2", 0} ,SReduceBuf{"ReducePass_2x2_YBlur", "ReducePass_2x2_XBlur", 0}),
-			std::make_tuple(SReduceBuf{"ReducePass_4x4", "ReducePass_2x2_YBlur", 0}, SReduceBuf{"ReducePass_4x4_XBlur", "ReducePass_4x4", 0} ,SReduceBuf{"ReducePass_4x4_YBlur", "ReducePass_4x4_XBlur", 0}),
-			std::make_tuple(SReduceBuf{"ReducePass_8x8", "ReducePass_4x4_YBlur", 0}, SReduceBuf{"ReducePass_8x8_XBlur", "ReducePass_8x8", 0} ,SReduceBuf{"ReducePass_8x8_YBlur", "ReducePass_8x8_XBlur", 0})
+			std::make_tuple(SReduceBuf{"ReducePass_2x2", "BrigtnessPass"}, SReduceBuf{"ReducePass_2x2_XBlur", "ReducePass_2x2"} ,SReduceBuf{"ReducePass_2x2_YBlur", "ReducePass_2x2_XBlur"}),
+			std::make_tuple(SReduceBuf{"ReducePass_4x4", "ReducePass_2x2_YBlur"}, SReduceBuf{"ReducePass_4x4_XBlur", "ReducePass_4x4"} ,SReduceBuf{"ReducePass_4x4_YBlur", "ReducePass_4x4_XBlur"}),
+			std::make_tuple(SReduceBuf{"ReducePass_8x8", "ReducePass_4x4_YBlur"}, SReduceBuf{"ReducePass_8x8_XBlur", "ReducePass_8x8"} ,SReduceBuf{"ReducePass_8x8_YBlur", "ReducePass_8x8_XBlur"})
 		};
 	}
 
@@ -37,8 +37,6 @@ namespace imageeffect
 			if (!pGraphicsAPI->CreateRenderPass(std::get<1>(ReduceBuf).DstPass, api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), 1024 / Rate, 1024 / Rate, 1)) return false;
 			if (!pGraphicsAPI->CreateRenderPass(std::get<2>(ReduceBuf).DstPass, api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), 1024 / Rate, 1024 / Rate, 1)) return false;
 		}
-		
-		if (!pGraphicsAPI->CreateRenderPass("BloomMixPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 1)) return false;
 
 		// FrameBufferRenderer
 		// BrigtnessPass
@@ -55,7 +53,7 @@ namespace imageeffect
 				const auto& ReduceBuf = std::get<0>(ReduceBufTuple);
 
 				std::vector<std::shared_ptr<graphics::CTexture>> TextureList;
-				TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(ReduceBuf.SrcPass)->GetFrameTexture(ReduceBuf.SrcTexIndex));
+				TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(ReduceBuf.SrcPass)->GetFrameTexture());
 
 				ReduceFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, ReduceBuf.DstPass, TextureList);
 				if (!ReduceFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\ReduceBuffer_MF.json")) return false;
@@ -67,7 +65,7 @@ namespace imageeffect
 				const auto& ReduceBuf = std::get<1>(ReduceBufTuple);
 
 				std::vector<std::shared_ptr<graphics::CTexture>> TextureList;
-				TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(ReduceBuf.SrcPass)->GetFrameTexture(ReduceBuf.SrcTexIndex));
+				TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(ReduceBuf.SrcPass)->GetFrameTexture());
 
 				XBlurFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, ReduceBuf.DstPass, TextureList);
 				if (!XBlurFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\Blur1Pass_MF.json")) return false;
@@ -79,7 +77,7 @@ namespace imageeffect
 				const auto& ReduceBuf = std::get<2>(ReduceBufTuple);
 
 				std::vector<std::shared_ptr<graphics::CTexture>> TextureList;
-				TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(ReduceBuf.SrcPass)->GetFrameTexture(ReduceBuf.SrcTexIndex));
+				TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(ReduceBuf.SrcPass)->GetFrameTexture());
 
 				YBlurFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, ReduceBuf.DstPass, TextureList);
 				if (!YBlurFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\Blur1Pass_MF.json")) return false;
@@ -96,8 +94,14 @@ namespace imageeffect
 		}
 
 		//
-		m_BloomMixPassRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "BrigtnessPass", pGraphicsAPI->FindOffScreenRenderPass("MainResultPass")->GetFrameTextureList());
-		if (!m_BloomMixPassRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\Brigtness_MF.json")) return false;
+		{
+			std::vector<std::shared_ptr<graphics::CTexture>> TextureList;
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("BrigtnessPass")->GetFrameTexture(1));
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("ReducePass_8x8_YBlur")->GetFrameTexture());
+
+			m_BloomMixPassRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", TextureList);
+			if (!m_BloomMixPassRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\BloomMix_MF.json")) return false;
+		}
 
 		return true;
 	}
@@ -129,6 +133,7 @@ namespace imageeffect
 			if (Material)
 			{
 				Material->SetUniformValue("Threshold", &glm::vec1(1.0f)[0], sizeof(float));
+				Material->SetUniformValue("Intencity", &glm::vec1(1.5f)[0], sizeof(float));
 			}
 			if (!m_BrightFrameRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
@@ -184,11 +189,11 @@ namespace imageeffect
 		}
 
 		// BloomMixPass(MainResultPass)
-		/*{
+		{
 			if (!pGraphicsAPI->BeginRender("MainResultPass")) return false;
 			if (!m_BloomMixPassRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
-		}*/
+		}
 
 		return true;
 	}

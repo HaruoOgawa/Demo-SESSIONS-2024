@@ -273,6 +273,8 @@
     <None Include="Resources\MaterialFrame\ReduceBuffer_MF.json" />
     <None Include="Resources\Shaders\Blur1Pass.frag" />
     <None Include="Resources\MaterialFrame\Blur1Pass_MF.json" />
+    <None Include="Resources\Shaders\BloomMix.frag" />
+    <None Include="Resources\MaterialFrame\BloomMix_MF.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Commands\LibList.txt" />
