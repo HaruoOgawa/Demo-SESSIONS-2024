@@ -541,6 +541,7 @@
     <None Include="Commands\UTF8Encorder.py" />
     <None Include="Commands\wgslc_ALL.bat" />
     <None Include="Resources\MaterialFrame\basic_toon_mf.json" />
+    <None Include="Resources\MaterialFrame\Blur1Pass_MF.json" />
     <None Include="Resources\MaterialFrame\Blur_MF.json" />
     <None Include="Resources\MaterialFrame\Brigtness_MF.json" />
     <None Include="Resources\MaterialFrame\Depth_MF.json" />
@@ -566,6 +567,7 @@
     <None Include="Resources\Shaders\basic_toon_vert.wgsl" />
     <None Include="Resources\Shaders\blur.frag" />
     <None Include="Resources\Shaders\blur.vert" />
+    <None Include="Resources\Shaders\Blur1Pass.frag" />
     <None Include="Resources\Shaders\blur_frag.spv" />
     <None Include="Resources\Shaders\blur_frag.wgsl" />
     <None Include="Resources\Shaders\blur_vert.spv" />

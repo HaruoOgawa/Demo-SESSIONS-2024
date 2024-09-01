@@ -1,6 +1,6 @@
 {
-  "name": "Brigtness_mat",
-  "outputcolorcount": 2,
+  "name": "Blur1Pass_mat",
+  "outputcolorcount": 1,
   "shaderList": [
     {
       "name": "renderboard_vert",
@@ -11,8 +11,8 @@
       "uniformBlockList": []
     },
     {
-      "name": "Brigtness_frag",
-      "shaderFile": "Resources\\Shaders\\Brigtness",
+      "name": "Blur1Pass_frag",
+      "shaderFile": "Resources\\Shaders\\Blur1Pass",
       "autoShaderExtension": true,
       "shadercode": "",
       "shaderType": "fragment",
@@ -65,33 +65,33 @@
               }
             },
             {
-              "name": "Threshold",
-              "type": "float",
-              "initValue": [ 1.0 ],
-              "input": {
-
-              }
-            },
-            {
-              "name": "Intencity",
-              "type": "float",
-              "initValue": [ 1.0 ],
+              "name": "IsXBlur",
+              "type": "int",
+              "initValue": [ 1 ],
               "input": {
                 "hide": true
               }
             },
             {
-              "name": "fPad0",
-              "type": "float",
-              "initValue": [ 1.0 ],
+              "name": "iPad0",
+              "type": "int",
+              "initValue": [ 1 ],
               "input": {
                 "hide": true
               }
             },
             {
-              "name": "fPad1",
-              "type": "float",
-              "initValue": [ 1.0 ],
+              "name": "iPad1",
+              "type": "int",
+              "initValue": [ 1 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "iPad2",
+              "type": "int",
+              "initValue": [ 1 ],
               "input": {
                 "hide": true
               }
