@@ -75,6 +75,11 @@ namespace imageeffect
 		// BrigtnessPass
 		{
 			if (!pGraphicsAPI->BeginRender("BrigtnessPass")) return false;
+			const auto& Material = m_BrightFrameRenderer->GetMaterial();
+			if (Material)
+			{
+				Material->SetUniformValue("Threshold", &glm::vec1(1.0f)[0], sizeof(float));
+			}
 			if (!m_BrightFrameRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
 		}

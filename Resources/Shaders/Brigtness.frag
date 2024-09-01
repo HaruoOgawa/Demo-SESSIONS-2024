@@ -9,6 +9,19 @@ layout(binding = 0) uniform texture2D texImage;
 layout(binding = 1) uniform sampler texSampler;
 #endif
 
+layout(binding = 2) uniform FragUniformBuffer
+{
+	mat4 mPad0;
+	mat4 mPad1;
+	mat4 mPad2;
+	mat4 mPad3;
+
+	float Threshold;
+	float Intencity;
+	float fPad0;
+	float fPad1;
+} frag_ubo;
+
 layout(location = 0) out vec4 outColor;
 layout(location = 1) out vec4 outBrigtnessColor;
 
@@ -24,9 +37,7 @@ void main()
 	#endif
 
 	vec4 BrigtnessCol = col;
-	float Threshold = 1.0;
-	float Intencity = 1.0;
-	BrigtnessCol.rgb = max(vec3(0.0), BrigtnessCol.rgb - Threshold) * Intencity;
+	BrigtnessCol.rgb = max(vec3(0.0), BrigtnessCol.rgb - frag_ubo.Threshold) * frag_ubo.Intencity;
 
 	outColor = col;
 	outBrigtnessColor = BrigtnessCol;
