@@ -96,10 +96,10 @@ namespace app
 		m_BlurEffect = std::make_shared<imageeffect::CBlurEffect>(pGraphicsAPI);
 		if (!m_BlurEffect->Create(pLoadWorker)) return false;
 
-		m_DeferredRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MRTTest", "MainResultPass");
+		m_DeferredRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTextureList());
 		if (!m_DeferredRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\MRTSample_MF.json")) return false;
 
-		m_MainFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", "");
+		m_MainFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "", pGraphicsAPI->FindOffScreenRenderPass("MainResultPass")->GetFrameTextureList());
 		if (!m_MainFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\FrameTexture_MF.json")) return false;
 
 		// FrameTexture‚ð“n‚·

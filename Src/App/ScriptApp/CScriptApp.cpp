@@ -15,6 +15,8 @@
 #include "../../Message/Console.h"
 #include "../../Interface/IGUIEngine.h"
 
+#include "../../ImageEffect/CBloomEffect.h"
+
 #include "../../GUIApp/GUI/CGraphicsEditingWindow.h"
 #include "../../GUIApp/Model/CFileModifier.h"
 #include <Timeline/CTimelineController.h>
@@ -41,6 +43,7 @@ namespace app
 #endif // USE_GUIENGINE
 		m_MainFrameRenderer(nullptr),
 		m_MRTFrameRenderer(nullptr),
+		m_BloomEffect(std::make_shared<imageeffect::CBloomEffect>()),
 		m_FileModifier(std::make_shared<CFileModifier>()),
 		m_TimelineController(std::make_shared<timeline::CTimelineController>())
 	{
@@ -83,10 +86,13 @@ namespace app
 		if (!pGraphicsAPI->CreateRenderPass("MRTPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 5)) return false;
 		if (!pGraphicsAPI->CreateRenderPass("MainResultPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 1)) return false;
 
-		m_MRTFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MRTPass", "MainResultPass");
+		// ブルームエフェクト
+		if (!m_BloomEffect->Initialize(pGraphicsAPI, pLoadWorker)) return false;
+
+		m_MRTFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTextureList());
 		if (!m_MRTFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\mrt_renderer_mf.json")) return false;
 
-		m_MainFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", "");
+		m_MainFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "", pGraphicsAPI->FindOffScreenRenderPass("MainResultPass")->GetFrameTextureList());
 		if (!m_MainFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\FrameTexture_MF.json")) return false;
 
 		// Viewの初期化
@@ -141,6 +147,8 @@ namespace app
 			}
 		}
 
+		if (!m_BloomEffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
+
 		if (!m_MRTFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 		if (!m_MainFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 
@@ -189,6 +197,9 @@ namespace app
 			if (!m_SceneController->Draw(pGraphicsAPI, false, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
 		}
+
+		// BloomEffect
+		if (!m_BloomEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 
 		// Main FrameBuffer
 		{
