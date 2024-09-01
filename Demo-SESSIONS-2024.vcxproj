@@ -480,6 +480,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\ImageEffect\CBloomEffect.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\C3DView.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUILogTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIMeshTab.cpp" />
@@ -500,6 +501,7 @@
     <ClCompile Include="Src\Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\ImageEffect\CBloomEffect.h" />
     <ClInclude Include="Src\GUIApp\GUI\C3DView.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUILogTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIMeshTab.h" />
@@ -539,7 +541,10 @@
     <None Include="Commands\UTF8Encorder.py" />
     <None Include="Commands\wgslc_ALL.bat" />
     <None Include="Resources\MaterialFrame\basic_toon_mf.json" />
+    <None Include="Resources\MaterialFrame\BloomMix_MF.json" />
+    <None Include="Resources\MaterialFrame\Blur1Pass_MF.json" />
     <None Include="Resources\MaterialFrame\Blur_MF.json" />
+    <None Include="Resources\MaterialFrame\Brigtness_MF.json" />
     <None Include="Resources\MaterialFrame\Depth_MF.json" />
     <None Include="Resources\MaterialFrame\FrameTexture_MF.json" />
     <None Include="Resources\MaterialFrame\MRTSample_MF.json" />
@@ -549,6 +554,7 @@
     <None Include="Resources\MaterialFrame\PBR_MRT_MF.json" />
     <None Include="Resources\MaterialFrame\raymarching_mf.json" />
     <None Include="Resources\MaterialFrame\ray_01_mf.json" />
+    <None Include="Resources\MaterialFrame\ReduceBuffer_MF.json" />
     <None Include="Resources\MaterialFrame\Sample_MF.json" />
     <None Include="Resources\MaterialFrame\sdftext_mf.json" />
     <None Include="Resources\MaterialFrame\SimpleTexture_MF.json" />
@@ -560,12 +566,15 @@
     <None Include="Resources\Shaders\basic_toon_frag.wgsl" />
     <None Include="Resources\Shaders\basic_toon_vert.spv" />
     <None Include="Resources\Shaders\basic_toon_vert.wgsl" />
+    <None Include="Resources\Shaders\BloomMix.frag" />
     <None Include="Resources\Shaders\blur.frag" />
     <None Include="Resources\Shaders\blur.vert" />
+    <None Include="Resources\Shaders\Blur1Pass.frag" />
     <None Include="Resources\Shaders\blur_frag.spv" />
     <None Include="Resources\Shaders\blur_frag.wgsl" />
     <None Include="Resources\Shaders\blur_vert.spv" />
     <None Include="Resources\Shaders\blur_vert.wgsl" />
+    <None Include="Resources\Shaders\Brigtness.frag" />
     <None Include="Resources\Shaders\depth.frag" />
     <None Include="Resources\Shaders\depth.vert" />
     <None Include="Resources\Shaders\depth_frag.spv" />
@@ -608,6 +617,7 @@
     <None Include="Resources\Shaders\raymarching_frag.spv" />
     <None Include="Resources\Shaders\raymarching_frag.wgsl" />
     <None Include="Resources\Shaders\ray_01.frag" />
+    <None Include="Resources\Shaders\ReduceBuffer.frag" />
     <None Include="Resources\Shaders\renderboard.vert" />
     <None Include="Resources\Shaders\renderboard_vert.spv" />
     <None Include="Resources\Shaders\renderboard_vert.wgsl" />

@@ -177,18 +177,6 @@ vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 light
 		diffuse += (1.0 - F) * CalcDiffuseBRDF(pbrParam);
 
 		col.rgb = NdotL * (specular + diffuse);
-
-		if(UseLightPos)
-		{
-			vec3 lightPos = fragUBO.lightPos.xyz;
-
-			float Atten = 0.1;
-			float len = length(WorldPos - lightPos);
-
-			col.rgb *= exp(-1.0 * len * Atten);
-		}
-
-		// col.rgb = vec3(NdotL);
 	}
 
 	// col.rgb += ComputeReflectionColor(pbrParam, v, n) * F;
@@ -197,7 +185,17 @@ vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 light
 	vec3 gi_diffuse = clamp(specular, 0.04, 1.0);
 	col.rgb += gi_diffuse * diffuse;
 
-	// col.rgb = pow(col.rgb, vec3(1.0/2.2));
+	col.rgb = pow(col.rgb, vec3(1.0/2.2));
+
+	if(UseLightPos)
+	{
+		vec3 lightPos = fragUBO.lightPos.xyz;
+
+		float Atten = 0.1;
+		float len = length(WorldPos - lightPos);
+
+		col.rgb *= exp(-1.0 * len * Atten);
+	}
 
 	return col.rgb;
 }

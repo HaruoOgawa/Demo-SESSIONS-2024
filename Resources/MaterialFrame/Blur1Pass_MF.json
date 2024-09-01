@@ -1,0 +1,104 @@
+{
+  "name": "Blur1Pass_mat",
+  "outputcolorcount": 1,
+  "shaderList": [
+    {
+      "name": "renderboard_vert",
+      "shaderFile": "Resources\\Shaders\\renderboard",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "vertex",
+      "uniformBlockList": []
+    },
+    {
+      "name": "Blur1Pass_frag",
+      "shaderFile": "Resources\\Shaders\\Blur1Pass",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "fragment",
+      "uniformBlockList": [
+        {
+          "name": "texImage",
+          "viewBinding": 0,
+          "samplerBinding": 1,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "FragUniformBuffer",
+          "binding": 2,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "mPad0",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad1",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad2",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad3",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "IsXBlur",
+              "type": "int",
+              "initValue": [ 1 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "iPad0",
+              "type": "int",
+              "initValue": [ 1 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "iPad1",
+              "type": "int",
+              "initValue": [ 1 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "iPad2",
+              "type": "int",
+              "initValue": [ 1 ],
+              "input": {
+                "hide": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
