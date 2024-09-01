@@ -41,7 +41,7 @@
           "bufferUpdateType": "cpu",
           "values": [
             {
-              "name": "mPad0",
+              "name": "model",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -49,7 +49,7 @@
               }
             },
             {
-              "name": "mPad1",
+              "name": "view",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -57,7 +57,7 @@
               }
             },
             {
-              "name": "mPad2",
+              "name": "proj",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -65,11 +65,19 @@
               }
             },
             {
-              "name": "mPad3",
+              "name": "lightVPMat",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
                 "hide": true
+              }
+            },
+            {
+              "name": "lightPos",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+              "input": {
+
               }
             },
             {
@@ -106,32 +114,32 @@
             },
             {
               "name": "numSamples",
-              "type": "int",
-              "initValue": [ 10 ],
+              "type": "float",
+              "initValue": [ 10.0 ],
               "input": {
 
               }
             },
             {
-              "name": "iPad0",
-              "type": "int",
-              "initValue": [ 0 ],
+              "name": "fPad0",
+              "type": "float",
+              "initValue": [ 0.0 ],
               "input": {
 
               }
             },
             {
-              "name": "iPad1",
-              "type": "int",
-              "initValue": [ 0 ],
+              "name": "fPad1",
+              "type": "float",
+              "initValue": [ 0.0 ],
               "input": {
 
               }
             },
             {
-              "name": "iPad2",
-              "type": "int",
-              "initValue": [ 0 ],
+              "name": "fPad2",
+              "type": "float",
+              "initValue": [ 0.0 ],
               "input": {
 
               }

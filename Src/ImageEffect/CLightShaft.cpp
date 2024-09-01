@@ -2,6 +2,9 @@
 #include <Graphics/CFrameRenderer.h>
 #include <Message/Console.h>
 
+// ライトシャフトの実装方法
+// https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-13-volumetric-light-scattering-post-process
+
 namespace imageeffect
 {
 	CLightShaft::CLightShaft(const std::string& TargetPassName, const std::tuple<std::string, int>& DepthBufferTuple):
