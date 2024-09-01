@@ -18,8 +18,17 @@ namespace graphics
 
 namespace imageeffect
 {
+	struct SReduceBuf
+	{
+		std::string DstPass = std::string();
+		std::string SrcPass = std::string();
+		int SrcTexIndex = -1;
+	};
+
 	class CBloomEffect
 	{
+		std::vector<std::tuple<SReduceBuf, SReduceBuf, SReduceBuf>> m_ReduceBufList;
+
 		std::shared_ptr<graphics::CFrameRenderer> m_BrightFrameRenderer;
 		
 		std::vector<std::tuple<std::shared_ptr<graphics::CFrameRenderer>, std::shared_ptr<graphics::CFrameRenderer>, std::shared_ptr<graphics::CFrameRenderer>>> m_ReduceFrameRendererList;
