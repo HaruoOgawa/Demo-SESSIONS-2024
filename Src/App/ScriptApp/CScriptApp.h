@@ -7,7 +7,10 @@ namespace gui { class CGraphicsEditingWindow; }
 namespace timeline { class CTimelineController; }
 namespace scene { class CSceneController; }
 namespace camera { class CTraceCamera; }
-namespace imageeffect { class CBloomEffect; }
+namespace imageeffect { 
+	class CBloomEffect; 
+	class CLightShaft;
+}
 
 namespace app
 {
@@ -29,6 +32,7 @@ namespace app
 		std::shared_ptr<graphics::CFrameRenderer> m_MRTFrameRenderer;
 
 		std::shared_ptr<imageeffect::CBloomEffect> m_BloomEffect;
+		std::shared_ptr<imageeffect::CLightShaft> m_LightShaftEffect;
 
 		std::shared_ptr<CFileModifier> m_FileModifier;
 #ifdef USE_GUIENGINE

@@ -480,6 +480,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\ImageEffect\CLightShaft.cpp" />
     <ClCompile Include="Src\ImageEffect\CBloomEffect.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\C3DView.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUILogTab.cpp" />
@@ -501,6 +502,7 @@
     <ClCompile Include="Src\Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\ImageEffect\CLightShaft.h" />
     <ClInclude Include="Src\ImageEffect\CBloomEffect.h" />
     <ClInclude Include="Src\GUIApp\GUI\C3DView.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUILogTab.h" />
@@ -547,6 +549,7 @@
     <None Include="Resources\MaterialFrame\Brigtness_MF.json" />
     <None Include="Resources\MaterialFrame\Depth_MF.json" />
     <None Include="Resources\MaterialFrame\FrameTexture_MF.json" />
+    <None Include="Resources\MaterialFrame\LightShaft_MF.json" />
     <None Include="Resources\MaterialFrame\MRTSample_MF.json" />
     <None Include="Resources\MaterialFrame\Objectspace_Ray_MF.json" />
     <None Include="Resources\MaterialFrame\PBRMorph_MF.json" />
@@ -590,6 +593,7 @@
     <None Include="Resources\Shaders\gpgpu_sample_frag.wgsl" />
     <None Include="Resources\Shaders\gpgpu_sample_vert.spv" />
     <None Include="Resources\Shaders\gpgpu_sample_vert.wgsl" />
+    <None Include="Resources\Shaders\LightShaft.frag" />
     <None Include="Resources\Shaders\loadingbar.frag" />
     <None Include="Resources\Shaders\loadingbar.vert" />
     <None Include="Resources\Shaders\loadingbar_frag.spv" />

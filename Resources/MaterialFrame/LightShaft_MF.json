@@ -1,0 +1,144 @@
+{
+  "name": "LightShaft_mat",
+  "outputcolorcount": 2,
+  "shaderList": [
+    {
+      "name": "renderboard_vert",
+      "shaderFile": "Resources\\Shaders\\renderboard",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "vertex",
+      "uniformBlockList": []
+    },
+    {
+      "name": "LightShaft_frag",
+      "shaderFile": "Resources\\Shaders\\LightShaft",
+      "autoShaderExtension": true,
+      "shadercode": "",
+      "shaderType": "fragment",
+      "uniformBlockList": [
+        {
+          "name": "texImage",
+          "viewBinding": 0,
+          "samplerBinding": 1,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "depthImage",
+          "viewBinding": 2,
+          "samplerBinding": 3,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
+          "name": "FragUniformBuffer",
+          "binding": 4,
+          "isWritable": false,
+          "type": "ubo",
+          "bufferUpdateType": "cpu",
+          "values": [
+            {
+              "name": "mPad0",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad1",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad2",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "mPad3",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "exposure",
+              "type": "float",
+              "initValue": [ 1.0 ],
+              "input": {
+
+              }
+            },
+            {
+              "name": "decay",
+              "type": "float",
+              "initValue": [ 0.9 ],
+              "input": {
+
+              }
+            },
+            {
+              "name": "density",
+              "type": "float",
+              "initValue": [ 0.5 ],
+              "input": {
+
+              }
+            },
+            {
+              "name": "weight",
+              "type": "float",
+              "initValue": [ 0.5 ],
+              "input": {
+
+              }
+            },
+            {
+              "name": "numSamples",
+              "type": "int",
+              "initValue": [ 10 ],
+              "input": {
+
+              }
+            },
+            {
+              "name": "iPad0",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+
+              }
+            },
+            {
+              "name": "iPad1",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+
+              }
+            },
+            {
+              "name": "iPad2",
+              "type": "int",
+              "initValue": [ 0 ],
+              "input": {
+
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
