@@ -34,8 +34,16 @@
           "textureUsage": "2d"
         },
         {
+          "name": "brigtnessImage",
+          "viewBinding": 4,
+          "samplerBinding": 5,
+          "textureIndex": -1,
+          "type": "texture",
+          "textureUsage": "2d"
+        },
+        {
           "name": "FragUniformBuffer",
-          "binding": 4,
+          "binding": 6,
           "isWritable": false,
           "type": "ubo",
           "bufferUpdateType": "cpu",

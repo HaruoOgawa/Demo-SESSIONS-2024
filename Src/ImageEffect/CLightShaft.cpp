@@ -7,9 +7,8 @@
 
 namespace imageeffect
 {
-	CLightShaft::CLightShaft(const std::string& TargetPassName, const std::tuple<std::string, int>& DepthBufferTuple):
+	CLightShaft::CLightShaft(const std::string& TargetPassName):
 		m_TargetPassName(TargetPassName),
-		m_DepthBufferTuple(DepthBufferTuple),
 		m_LightShaftFrameRenderer(nullptr),
 		m_ResultRenderer(nullptr)
 	{
@@ -19,14 +18,15 @@ namespace imageeffect
 	{
 	}
 
-	bool CLightShaft::Initialize(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker)
+	bool CLightShaft::Initialize(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker, const std::tuple<std::string, int>& DepthBufferTuple, const std::tuple<std::string, int>& BrigtnessBufferTuple)
 	{
 		// オフスクリーンレンダーパス
 		if (!pGraphicsAPI->CreateRenderPass("LightShaftPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 1)) return false;
 
 		std::vector<std::shared_ptr<graphics::CTexture>> TextureList;
 		TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(m_TargetPassName)->GetFrameTexture());
-		TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(std::get<0>(m_DepthBufferTuple))->GetFrameTexture(std::get<1>(m_DepthBufferTuple)));
+		TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(std::get<0>(DepthBufferTuple))->GetFrameTexture(std::get<1>(DepthBufferTuple)));
+		TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(std::get<0>(BrigtnessBufferTuple))->GetFrameTexture(std::get<1>(BrigtnessBufferTuple)));
 
 		m_LightShaftFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "LightShaftPass", TextureList);
 		if (!m_LightShaftFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\LightShaft_MF.json")) return false;

@@ -45,7 +45,7 @@ namespace app
 		m_MainFrameRenderer(nullptr),
 		m_MRTFrameRenderer(nullptr),
 		m_BloomEffect(std::make_shared<imageeffect::CBloomEffect>("MainResultPass")),
-		m_LightShaftEffect(std::make_shared<imageeffect::CLightShaft>("MainResultPass", std::make_tuple("MRTPass", 3))),
+		m_LightShaftEffect(std::make_shared<imageeffect::CLightShaft>("MainResultPass")),
 		m_FileModifier(std::make_shared<CFileModifier>()),
 		m_TimelineController(std::make_shared<timeline::CTimelineController>())
 	{
@@ -93,7 +93,7 @@ namespace app
 		if (!m_BloomEffect->Initialize(pGraphicsAPI, pLoadWorker)) return false;
 
 		// ライトシャフト
-		if (!m_LightShaftEffect->Initialize(pGraphicsAPI, pLoadWorker)) return false;
+		if (!m_LightShaftEffect->Initialize(pGraphicsAPI, pLoadWorker, std::make_tuple("MRTPass", 3), std::make_tuple("BrigtnessPass", 0))) return false;
 
 		m_MRTFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTextureList());
 		if (!m_MRTFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\mrt_renderer_mf.json")) return false;
@@ -209,7 +209,7 @@ namespace app
 		if (!m_BloomEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 
 		// LightShaft
-		if (!m_LightShaftEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
+		//if (!m_LightShaftEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 
 		// Main FrameBuffer
 		{

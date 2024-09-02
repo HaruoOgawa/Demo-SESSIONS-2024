@@ -283,6 +283,8 @@
     <None Include="Resources\MaterialFrame\BloomMix_MF.json" />
     <None Include="Resources\Shaders\LightShaft.frag" />
     <None Include="Resources\MaterialFrame\LightShaft_MF.json" />
+    <None Include="Resources\Shaders\Water.frag" />
+    <None Include="Resources\MaterialFrame\Water_MF.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Commands\LibList.txt" />

@@ -21,15 +21,14 @@ namespace imageeffect
 	class CLightShaft
 	{
 		std::string m_TargetPassName;
-		std::tuple<std::string, int> m_DepthBufferTuple;
 
 		std::shared_ptr<graphics::CFrameRenderer> m_LightShaftFrameRenderer;
 		std::shared_ptr<graphics::CFrameRenderer> m_ResultRenderer;
 	public:
-		CLightShaft(const std::string& TargetPassName, const std::tuple<std::string, int>& DepthBufferTuple);
+		CLightShaft(const std::string& TargetPassName);
 		virtual ~CLightShaft();
 
-		bool Initialize(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker);
+		bool Initialize(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker, const std::tuple<std::string, int>& DepthBufferTuple, const std::tuple<std::string, int>& BrigtnessBufferTuple);
 
 		bool Update(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<camera::CCamera>& Camera, const std::shared_ptr<projection::CProjection>& Projection,
 			const std::shared_ptr<graphics::CDrawInfo>& DrawInfo, const std::shared_ptr<input::CInputState>& InputState);
