@@ -1,6 +1,10 @@
 {
     "materialframes": [
         {
+            "name": "Water",
+            "filename": "Resources/MaterialFrame/Water_MF.json"
+        },
+        {
             "name": "centercube_01",
             "filename": "Resources/MaterialFrame/centercube_01_mf.json"
         },
@@ -390,6 +394,132 @@
                         ]
                     },
                     "meshindex": -1
+                }
+            ]
+        },
+        {
+            "name": "Water",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "Water",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            99.0,
+                            99.0,
+                            99.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "Water",
+                    "cull": "front",
+                    "uniformvalues": [
+                        {
+                            "name": "WaterHeight",
+                            "type": "float",
+                            "value": [
+                                0.05000000074505806
+                            ]
+                        },
+                        {
+                            "name": "WaterWidth",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        },
+                        {
+                            "name": "baseHeight",
+                            "type": "float",
+                            "value": [
+                                -2.0
+                            ]
+                        },
+                        {
+                            "name": "mainColor",
+                            "type": "vec4",
+                            "value": [
+                                0.3338139057159424,
+                                0.4055284857749939,
+                                0.7401961088180542,
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "param0",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "param1",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
                 }
             ]
         }
