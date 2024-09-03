@@ -480,6 +480,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\ImageEffect\CSSR.cpp" />
     <ClCompile Include="Src\ImageEffect\CLightShaft.cpp" />
     <ClCompile Include="Src\ImageEffect\CBloomEffect.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\C3DView.cpp" />
@@ -502,6 +503,7 @@
     <ClCompile Include="Src\Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\ImageEffect\CSSR.h" />
     <ClInclude Include="Src\ImageEffect\CLightShaft.h" />
     <ClInclude Include="Src\ImageEffect\CBloomEffect.h" />
     <ClInclude Include="Src\GUIApp\GUI\C3DView.h" />
@@ -561,6 +563,7 @@
     <None Include="Resources\MaterialFrame\Sample_MF.json" />
     <None Include="Resources\MaterialFrame\sdftext_mf.json" />
     <None Include="Resources\MaterialFrame\SimpleTexture_MF.json" />
+    <None Include="Resources\MaterialFrame\SSR_MF.json" />
     <None Include="Resources\MaterialFrame\Water_MF.json" />
     <None Include="Resources\Scene\Demo-SESSIONS-2024.json" />
     <None Include="Resources\Scene\MRTTest.json" />
@@ -639,6 +642,7 @@
     <None Include="Resources\Shaders\shadow_debug_frag.wgsl" />
     <None Include="Resources\Shaders\shadow_debug_vert.spv" />
     <None Include="Resources\Shaders\shadow_debug_vert.wgsl" />
+    <None Include="Resources\Shaders\SSR.frag" />
     <None Include="Resources\Shaders\texture.frag" />
     <None Include="Resources\Shaders\unlit.frag" />
     <None Include="Resources\Shaders\unlit_frag.spv" />

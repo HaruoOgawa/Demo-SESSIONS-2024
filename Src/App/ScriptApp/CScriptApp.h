@@ -10,6 +10,7 @@ namespace camera { class CTraceCamera; }
 namespace imageeffect { 
 	class CBloomEffect; 
 	class CLightShaft;
+	class CSSR;
 }
 
 namespace app
@@ -33,6 +34,7 @@ namespace app
 
 		std::shared_ptr<imageeffect::CBloomEffect> m_BloomEffect;
 		std::shared_ptr<imageeffect::CLightShaft> m_LightShaftEffect;
+		std::shared_ptr<imageeffect::CSSR> m_SSREffect;
 
 		std::shared_ptr<CFileModifier> m_FileModifier;
 #ifdef USE_GUIENGINE

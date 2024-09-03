@@ -7,7 +7,7 @@ layout(location = 0) out vec4 gPosition;
 layout(location = 1) out vec4 gNormal;
 layout(location = 2) out vec4 gAlbedo;
 layout(location = 3) out vec4 gDepth;
-layout(location = 4) out vec4 gParam_1; // (Material_ID, None, None, None)
+layout(location = 4) out vec4 gParam_1; 
 
 layout(binding = 1) uniform FragUniformBufferObject{
 	mat4 invModel;
@@ -42,9 +42,11 @@ struct MatInfo
 {
 	float d;
 	float MatID;
+	float metallic;
+	float roughness;
 };
 
-MatInfo getMin(MatInfo src, float Dist, float MatID)
+MatInfo getMin(MatInfo src, float Dist, float MatID, float m, float r)
 {
 	MatInfo dst = src;
 
@@ -52,6 +54,8 @@ MatInfo getMin(MatInfo src, float Dist, float MatID)
 	{
 		dst.d = Dist;
 		dst.MatID = MatID;
+		dst.metallic = m;
+		dst.roughness = r;
 	}
 
 	return dst;
@@ -91,12 +95,14 @@ MatInfo map(vec3 p)
 	MatInfo Info;
 	Info.d = 1e5;
 	Info.MatID = -1;
+	Info.metallic = 0.0;
+	Info.roughness = 0.0;
 
 	vec2 st = vec2(0.0);
 
 	/*if(true)
 	{
-		// 極座標変換
+		// �ɍ��W�ϊ�
 		float r = length(p.xz);
 		float t = atan(p.x, p.z);
 
@@ -110,7 +116,7 @@ MatInfo map(vec3 p)
 	float h = noise(st * fragUbo.WaterWidth) * fragUbo.WaterHeight;
 
 	float d = p.y - fragUbo.baseHeight - h;
-	Info = getMin(Info, d, 2.0);
+	Info = getMin(Info, d, 2.0, 0.9, 1.0);
 
 	return Info;
 }
@@ -152,7 +158,7 @@ void main()
 	vec3 ro = (fragUbo.invModel * fragUbo.cameraPos).xyz;
     vec3 rd = normalize(v2f_ObjectPos.xyz - ro);
 
-	// �J�����̃I�t�Z�b�g����ǉ�����B���ꂪ�Ȃ��ƌ��_�Ƃ��Ĉ�����
+	// ?J??????I?t?Z?b?g??????????B???????????_??????????
 	ro += fragUbo.cameraPos.xyz;
 
 	float depth = 0.0, lenToNextGrid = 0.0;
@@ -161,6 +167,8 @@ void main()
 	MatInfo Info;
 	Info.d = 1e5;
 	Info.MatID = -1;
+	Info.metallic = 0.0;
+	Info.roughness = 0.0;
 
 	for(int i = 0; i < 256; i++)
 	{
@@ -171,7 +179,6 @@ void main()
 		if(abs(Info.d) < MIN_VALUE) break;
 	}
 
-	float MatID = Info.MatID;
 	float UseLightPos = 1.0;
 
 	if(Info.d < MIN_VALUE)
@@ -185,7 +192,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(col, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(MatID, UseLightPos, 0.0, 1.0);
+		gParam_1 = vec4(Info.MatID, UseLightPos, Info.metallic, Info.roughness);
 
 		gl_FragDepth = outDepth;
 	}

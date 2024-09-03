@@ -7,7 +7,7 @@ layout(location = 0) out vec4 gPosition;
 layout(location = 1) out vec4 gNormal;
 layout(location = 2) out vec4 gAlbedo;
 layout(location = 3) out vec4 gDepth;
-layout(location = 4) out vec4 gParam_1; // (Material_ID, None, None, None)
+layout(location = 4) out vec4 gParam_1;
 
 layout(binding = 1) uniform FragUniformBufferObject{
 	mat4 invModel;
@@ -161,6 +161,8 @@ void main()
 
 	float MatID = 2.0;
 	float UseLightPos = 1.0;
+	float Metallic = 0.25;
+	float Roughness = 1.0;
 
 	if(dist < MIN_VALUE)
 	{
@@ -173,7 +175,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(col, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(MatID, UseLightPos, 0.0, 1.0);
+		gParam_1 = vec4(MatID, UseLightPos, Metallic, Roughness);
 
 		gl_FragDepth = outDepth;
 	}

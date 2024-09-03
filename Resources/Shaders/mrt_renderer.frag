@@ -96,13 +96,13 @@ vec3 CalcDiffuseBRDF(PBRParam param)
 	return param.diffuseColor / PI;
 }
 
-vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 lightDir)
+vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 lightDir, float Metallic, float Roughness)
 {
 	vec4 col = vec4(1.0);
 
-	// ひとまず定数
-	float perceptualRoughness = 0.0;
-	float metallic = 0.0;
+	// GBufferから取得する
+	float perceptualRoughness = Roughness;
+	float metallic = Metallic;
 
 	perceptualRoughness = clamp(perceptualRoughness, MIN_ROUGHNESS, 1.0);
 	metallic  = clamp(metallic, 0.0, 1.0);
@@ -233,7 +233,7 @@ void main()
 	vec4 GDepthCol = texture(sampler2D(texDepth, texDepthSampler), st);
 	#endif
 
-	// (Material_ID, UseLightPos, None, None)
+	// (Material_ID, UseLightPos, Metallic, Roughness)
     #ifdef USE_OPENGL
 	vec4 Param1Col = texture(texParam1, st);
 	#else
@@ -245,6 +245,8 @@ void main()
 	vec3 WorldPos = GPositionCol.rgb;
 	float MatID = floor(Param1Col.r);
 	bool UseLightPos = (floor(Param1Col.g) == 1.0);
+	float Metallic = Param1Col.b;
+	float Roughness = Param1Col.a;
 
 	vec3 lDir = normalize(vec3(1.0, -1.0, 1.0));
 
@@ -259,7 +261,7 @@ void main()
 		// とりま定数
 		vec3 lightDir = (-1.0f) * normalize(vec3(1.0, -1.0, 1.0));
 
-		col.rgb = DoPBR(Albedo, Normal, WorldPos, UseLightPos, lightDir);
+		col.rgb = DoPBR(Albedo, Normal, WorldPos, UseLightPos, lightDir, Metallic, Roughness);
 	}
 	else if(MatID == 3.0)
 	{
@@ -267,7 +269,7 @@ void main()
 		{
 			vec3 lightDir = vec3((i % 2 == 0)? 1.0 : -1.0 , 1.0, (i % 2 == 0)? 1.0 : -1.0);
 
-			col.rgb += DoPBR(Albedo, Normal, WorldPos, false, lightDir);
+			col.rgb += DoPBR(Albedo, Normal, WorldPos, false, lightDir, Metallic, Roughness);
 		}
 
 		col.rgb *= 0.5;

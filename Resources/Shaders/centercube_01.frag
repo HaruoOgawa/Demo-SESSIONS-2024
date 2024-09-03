@@ -7,7 +7,7 @@ layout(location = 0) out vec4 gPosition;
 layout(location = 1) out vec4 gNormal;
 layout(location = 2) out vec4 gAlbedo;
 layout(location = 3) out vec4 gDepth;
-layout(location = 4) out vec4 gParam_1; // (Material_ID, None, None, None)
+layout(location = 4) out vec4 gParam_1;
 
 layout(binding = 1) uniform FragUniformBufferObject{
 	mat4 invModel;
@@ -39,9 +39,11 @@ struct MatInfo
 {
 	float d;
 	float MatID;
+	float metallic;
+	float roughness;
 };
 
-MatInfo getMin(MatInfo src, float Dist, float MatID)
+MatInfo getMin(MatInfo src, float Dist, float MatID, float m, float r)
 {
 	MatInfo dst = src;
 
@@ -49,6 +51,8 @@ MatInfo getMin(MatInfo src, float Dist, float MatID)
 	{
 		dst.d = Dist;
 		dst.MatID = MatID;
+		dst.metallic = m;
+		dst.roughness = r;
 	}
 
 	return dst;
@@ -84,13 +88,15 @@ MatInfo map(vec3 p)
 	MatInfo Info;
 	Info.d = 1e5;
 	Info.MatID = -1;
+	Info.metallic = 0.0;
+	Info.roughness = 0.0;
 
 	{
 		vec3 pos = p;
 
 		pos.xy *= rot(pi * 0.25);
 		float d = sdTorus(pos , vec2(2.5, 0.025) );
-		Info = getMin(Info, d, 3.0);
+		Info = getMin(Info, d, 3.0, 0.25, 1.0);
 	}
 
 	{
@@ -98,7 +104,7 @@ MatInfo map(vec3 p)
 
 		pos.xy *= rot(pi * -0.25);
 		float d = sdTorus(pos , vec2(2.0, 0.025) );
-		Info = getMin(Info, d, 3.0);
+		Info = getMin(Info, d, 3.0, 0.25, 1.0);
 	}
 
 	{
@@ -200,13 +206,13 @@ MatInfo map(vec3 p)
 		// float d = length(pos) / sum - 0.02;
 		float d = sdTorus(pos , vec2(0.5, 0.05) );
 		// float d = sdBox(pos, vec3(0.25));
-		Info = getMin(Info, d, 3.0);
+		Info = getMin(Info, d, 3.0, 0.25, 1.0);
 	}
 
 	{
 		vec3 pos = p;
 		float d = length(pos) - 0.5;
-		Info = getMin(Info, d, 4.0);
+		Info = getMin(Info, d, 4.0, 0.25, 1.0);
 	}
 
 	return Info;
@@ -258,6 +264,8 @@ void main()
 	MatInfo Info;
 	Info.d = 1e5;
 	Info.MatID = -1;
+	Info.metallic = 0.0;
+	Info.roughness = 0.0;
 
 	for(int i = 0; i < 64; i++)
 	{
@@ -268,7 +276,6 @@ void main()
 		if(abs(Info.d) < MIN_VALUE) break;
 	}
 
-	float MatID = Info.MatID;
 	float UseLightPos = 1.0;
 
 	if(Info.d < MIN_VALUE)
@@ -288,7 +295,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(col, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(MatID, UseLightPos, 0.0, 1.0);
+		gParam_1 = vec4(Info.MatID, UseLightPos, Info.metallic, Info.roughness);
 
 		gl_FragDepth = outDepth;
 	}
