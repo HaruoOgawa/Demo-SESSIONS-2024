@@ -102,7 +102,7 @@ MatInfo map(vec3 p)
 
 	/*if(true)
 	{
-		// ‹ÉÀ•W•ÏŠ·
+		// ‹ÉÀ•W•ÏŠ·
 		float r = length(p.xz);
 		float t = atan(p.x, p.z);
 

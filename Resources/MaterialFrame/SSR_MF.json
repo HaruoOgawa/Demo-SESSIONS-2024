@@ -97,7 +97,7 @@
               }
             },
             {
-              "name": "lightPos",
+              "name": "cameraPos",
               "type": "vec4",
               "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
               "input": {

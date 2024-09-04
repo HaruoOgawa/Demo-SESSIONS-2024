@@ -28,7 +28,7 @@ layout(binding = 10) uniform FragUniformBuffer
     mat4 proj;
 	mat4 lightVPMat;
 
-	vec4 lightPos;
+	vec4 cameraPos;
 
 	float fPad0;
 	float fPad1;
@@ -101,14 +101,80 @@ vec2 GetMetallicRoughness(vec2 texcoord)
 	return col.ba;
 }
 
+vec3 GetWorldPosition(vec2 ScreenUV, float Depth)
+{
+	// スクリーン上のUVと深度からワールド座標を取得する
+	// スクリーン空間のUV座標からNDC(Normalized Device Coorinates)へ変換
+	// ToDO: 後でプロジェクション行列・ビュー行列の定義を再確認しておく
+	vec4 clipSpacePos;
+	clipSpacePos.xy = ScreenUV * 2.0 - 1.0;
+	clipSpacePos.z = Depth * 2.0 - 1.0; // 深度をNDCに変換
+	clipSpacePos.w = 1.0;
+
+	// クリップ空間(Projection)からワールド座標に変換
+	vec4 viewSpacePos = inverse(frag_ubo.proj) * clipSpacePos;
+	viewSpacePos /= viewSpacePos.w; // 視点空間に戻すためにwでわる
+
+	vec4 worldSpacePos = inverse(frag_ubo.view) * viewSpacePos;
+
+	return worldSpacePos.xyz;
+}
+
 void main()
 {
 	vec3 col = vec3(0.0);
 	vec2 st = fUV;
 
-	vec3 WorldPos = GetPosCol(st);
+	col = GetMainCol(st);
 
-	col = WorldPos;
+	vec3 Pos = GetPosCol(st);
+	vec3 Normal = GetNormalCol(st);
+	vec2 MetallicRoughness = GetMetallicRoughness(st);
+
+	vec3 CameraPos = frag_ubo.cameraPos.xyz;
+
+	vec3 ViewVec = normalize(Pos - CameraPos);
+	// vec3 ViewVec = normalize(Pos);
+	vec3 rd = reflect(ViewVec, Normal);
+
+	float StepSize = 0.25;
+	vec3 ro = Pos;
+	float threshold = 0.5;
+
+	bool IsCollided = false;
+	vec3 ReflectCol = vec3(0.0);
+
+	for(int i = 0; i < 64; i++)
+	{
+		// ray pos
+		ro += rd * StepSize;
+
+		// レイがスクリーン上でどこに存在するか
+		vec4 screenRP = frag_ubo.proj * frag_ubo.view * vec4(ro, 1.0);
+		vec2 screenUV = (screenRP.xy / screenRP.w) * 0.5 + 0.5;
+
+		// depth
+		float currentDepth = GetDepth(screenUV);
+
+		//
+		vec3 scenePos = GetWorldPosition(screenUV, currentDepth);
+
+		//
+		if(length(scenePos - ro) < threshold)
+		{
+			ReflectCol = GetMainCol(screenUV);
+			IsCollided = true;
+			break;
+		}
+	}
+
+	col += ReflectCol;
+	// col = mix(col, ReflectCol, MetallicRoughness.x);
+
+	if(IsCollided)
+	{
+		// col = vec3(1.0);
+	}
 
 	outColor = vec4(col, 1.0);
 }
