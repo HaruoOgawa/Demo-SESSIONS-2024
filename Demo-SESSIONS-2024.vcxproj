@@ -480,6 +480,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\ImageEffect\CSSWater.cpp" />
     <ClCompile Include="Src\ImageEffect\CSSR.cpp" />
     <ClCompile Include="Src\ImageEffect\CLightShaft.cpp" />
     <ClCompile Include="Src\ImageEffect\CBloomEffect.cpp" />
@@ -487,9 +488,7 @@
     <ClCompile Include="Src\GUIApp\GUI\CGUILogTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIMeshTab.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.cpp" />
-    <ClCompile Include="Src\App\ScriptApp\CDevApp.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CTimeLineView.cpp" />
-    <ClCompile Include="Src\ImageEffect\CBlurEffect.cpp" />
     <ClCompile Include="Src\App\ScriptApp\CScriptApp.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGraphicsEditingWindow.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUICameraTab.cpp" />
@@ -503,6 +502,7 @@
     <ClCompile Include="Src\Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\ImageEffect\CSSWater.h" />
     <ClInclude Include="Src\ImageEffect\CSSR.h" />
     <ClInclude Include="Src\ImageEffect\CLightShaft.h" />
     <ClInclude Include="Src\ImageEffect\CBloomEffect.h" />
@@ -510,10 +510,8 @@
     <ClInclude Include="Src\GUIApp\GUI\CGUILogTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIMeshTab.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.h" />
-    <ClInclude Include="Src\App\ScriptApp\CDevApp.h" />
     <ClInclude Include="Src\GUIApp\GUI\CTimeLineView.h" />
     <ClInclude Include="Src\GUIApp\GUI\SGUIParams.h" />
-    <ClInclude Include="Src\ImageEffect\CBlurEffect.h" />
     <ClInclude Include="Src\App\ScriptApp\CScriptApp.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGraphicsEditingWindow.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUICameraTab.h" />
@@ -564,6 +562,7 @@
     <None Include="Resources\MaterialFrame\sdftext_mf.json" />
     <None Include="Resources\MaterialFrame\SimpleTexture_MF.json" />
     <None Include="Resources\MaterialFrame\SSR_MF.json" />
+    <None Include="Resources\MaterialFrame\SSWater_MF.json" />
     <None Include="Resources\MaterialFrame\Water_MF.json" />
     <None Include="Resources\Scene\Demo-SESSIONS-2024.json" />
     <None Include="Resources\Scene\MRTTest.json" />
@@ -643,6 +642,7 @@
     <None Include="Resources\Shaders\shadow_debug_vert.spv" />
     <None Include="Resources\Shaders\shadow_debug_vert.wgsl" />
     <None Include="Resources\Shaders\SSR.frag" />
+    <None Include="Resources\Shaders\SSWater.frag" />
     <None Include="Resources\Shaders\texture.frag" />
     <None Include="Resources\Shaders\unlit.frag" />
     <None Include="Resources\Shaders\unlit_frag.spv" />
