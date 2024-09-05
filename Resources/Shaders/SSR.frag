@@ -103,17 +103,17 @@ vec2 GetMetallicRoughness(vec2 texcoord)
 
 vec3 GetWorldPosition(vec2 ScreenUV, float Depth)
 {
-	// ƒXƒNƒŠ[ƒ“ã‚ÌUV‚Æ[“x‚©‚çƒ[ƒ‹ƒhÀ•W‚ğæ“¾‚·‚é
-	// ƒXƒNƒŠ[ƒ“‹óŠÔ‚ÌUVÀ•W‚©‚çNDC(Normalized Device Coorinates)‚Ö•ÏŠ·
-	// ToDO: Œã‚ÅƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñEƒrƒ…[s—ñ‚Ì’è‹`‚ğÄŠm”F‚µ‚Ä‚¨‚­
+	// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ä¸Šã®UVã¨æ·±åº¦ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’å–å¾—ã™ã‚‹
+	// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ç©ºé–“ã®UVåº§æ¨™ã‹ã‚‰NDC(Normalized Device Coorinates)ã¸å¤‰æ›
+	// ToDO: å¾Œã§ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ãƒ»ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã®å®šç¾©ã‚’å†ç¢ºèªã—ã¦ãŠã
 	vec4 clipSpacePos;
 	clipSpacePos.xy = ScreenUV * 2.0 - 1.0;
-	clipSpacePos.z = Depth * 2.0 - 1.0; // [“x‚ğNDC‚É•ÏŠ·
+	clipSpacePos.z = Depth * 2.0 - 1.0; // æ·±åº¦ã‚’NDCã«å¤‰æ›
 	clipSpacePos.w = 1.0;
 
-	// ƒNƒŠƒbƒv‹óŠÔ(Projection)‚©‚çƒ[ƒ‹ƒhÀ•W‚É•ÏŠ·
+	// ã‚¯ãƒªãƒƒãƒ—ç©ºé–“(Projection)ã‹ã‚‰ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã«å¤‰æ›
 	vec4 viewSpacePos = inverse(frag_ubo.proj) * clipSpacePos;
-	viewSpacePos /= viewSpacePos.w; // ‹“_‹óŠÔ‚É–ß‚·‚½‚ß‚Éw‚Å‚í‚é
+	viewSpacePos /= viewSpacePos.w; // è¦–ç‚¹ç©ºé–“ã«æˆ»ã™ãŸã‚ã«wã§ã‚ã‚‹
 
 	vec4 worldSpacePos = inverse(frag_ubo.view) * viewSpacePos;
 
@@ -137,27 +137,36 @@ void main()
 	// vec3 ViewVec = normalize(Pos);
 	vec3 rd = reflect(ViewVec, Normal);
 
+	// float MARCH = 64.0;
+	// float LENGTH = 50.0;
+	float MARCH = 24.0;
+	float LENGTH = 10.0;
+
+	float rayStepLength = LENGTH / MARCH;
+	vec3 rayStep = rd * rayStepLength;
+
 	float StepSize = 0.25;
 	vec3 ro = Pos;
+	
 	float threshold = 0.5;
 
 	bool IsCollided = false;
 	vec3 ReflectCol = vec3(0.0);
 
-	for(int i = 0; i < 64; i++)
+	for(float i = 0.0; i < MARCH; i++)
 	{
 		// ray pos
-		ro += rd * StepSize;
+		// ro += rd * StepSize;
+		ro += rayStep;
 
-		// ƒŒƒC‚ªƒXƒNƒŠ[ƒ“ã‚Å‚Ç‚±‚É‘¶İ‚·‚é‚©
+		// ãƒ¬ã‚¤ãŒã‚¹ã‚¯ãƒªãƒ¼ãƒ³ä¸Šã§ã©ã“ã«å­˜åœ¨ã™ã‚‹ã‹
 		vec4 screenRP = frag_ubo.proj * frag_ubo.view * vec4(ro, 1.0);
 		vec2 screenUV = (screenRP.xy / screenRP.w) * 0.5 + 0.5;
 
 		// depth
-		float currentDepth = GetDepth(screenUV);
-
-		//
-		vec3 scenePos = GetWorldPosition(screenUV, currentDepth);
+		//float currentDepth = GetDepth(screenUV);
+		//vec3 scenePos = GetWorldPosition(screenUV, currentDepth);
+		vec3 scenePos = GetPosCol(screenUV);
 
 		//
 		if(length(scenePos - ro) < threshold)
@@ -169,12 +178,6 @@ void main()
 	}
 
 	col += ReflectCol;
-	// col = mix(col, ReflectCol, MetallicRoughness.x);
-
-	if(IsCollided)
-	{
-		// col = vec3(1.0);
-	}
 
 	outColor = vec4(col, 1.0);
 }
