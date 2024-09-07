@@ -221,11 +221,11 @@ void main()
 	// vec3 ro = fragUbo.cameraPos.xyz;
     // vec3 rd = normalize((fragUbo.view * inverse(fragUbo.proj) * vec4(st, 1.0, 1.0)).xyz);
 
-	// vec3 ro = vec3(0.0, 0.0, 1.0);
-	// vec3 rd = normalize(vec3(st, -1.0));
+	 vec3 ro = vec3(0.0, 0.0, 1.0);
+	 vec3 rd = normalize(vec3(st, -1.0));
 
-	vec3 ro = (fragUbo.view * vec4(0.0, 0.0, 1.0, 1.0)).xyz;
-	vec3 rd = normalize((fragUbo.view * vec4(st, -1.0, 1.0)).xyz);
+	//vec3 ro = (fragUbo.view * vec4(0.0, 0.0, 1.0, 1.0)).xyz;
+	//vec3 rd = normalize((fragUbo.view * vec4(st, -1.0, 1.0)).xyz);
 
 	//ro += fragUbo.cameraPos.xyz;
 

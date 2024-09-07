@@ -289,6 +289,10 @@
     <None Include="Resources\MaterialFrame\SSR_MF.json" />
     <None Include="Resources\Shaders\SSWater.frag" />
     <None Include="Resources\MaterialFrame\SSWater_MF.json" />
+    <None Include="Resources\Shaders\MRTBlit.frag" />
+    <None Include="Resources\MaterialFrame\MRTBlit_MF.json" />
+    <None Include="Resources\Shaders\SSWaterMix.frag" />
+    <None Include="Resources\MaterialFrame\SSWaterMix_MF.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Commands\LibList.txt" />

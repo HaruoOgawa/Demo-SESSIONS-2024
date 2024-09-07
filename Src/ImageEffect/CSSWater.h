@@ -12,6 +12,7 @@ namespace camera { class CCamera; }
 namespace projection { class CProjection; }
 namespace input { class CInputState; }
 namespace physics { class IPhysicsEngine; }
+namespace scene { class CSceneController; }
 namespace graphics
 {
 	class CFrameRenderer;
@@ -24,7 +25,8 @@ namespace imageeffect
 	{
 		std::string m_TargetPassName;
 
-		std::shared_ptr<graphics::CFrameRenderer> m_SSWaterFrameRenderer;
+		std::shared_ptr<graphics::CFrameRenderer> m_SSWaterMixRenderer;
+		std::shared_ptr<graphics::CFrameRenderer> m_MRTBlitRenderer;
 		std::shared_ptr<graphics::CFrameRenderer> m_ResultRenderer;
 	public:
 		CSSWater(const std::string& TargetPassName);
@@ -37,6 +39,6 @@ namespace imageeffect
 			const std::shared_ptr<graphics::CDrawInfo>& DrawInfo, const std::shared_ptr<input::CInputState>& InputState);
 
 		bool Draw(api::IGraphicsAPI* pGraphicsAPI, const std::shared_ptr<camera::CCamera>& Camera, const std::shared_ptr<projection::CProjection>& Projection,
-			const std::shared_ptr<graphics::CDrawInfo>& DrawInfo);
+			const std::shared_ptr<graphics::CDrawInfo>& DrawInfo, const std::shared_ptr<scene::CSceneController>& SceneController);
 	};
 }

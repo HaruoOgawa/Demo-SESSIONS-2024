@@ -550,6 +550,7 @@
     <None Include="Resources\MaterialFrame\Depth_MF.json" />
     <None Include="Resources\MaterialFrame\FrameTexture_MF.json" />
     <None Include="Resources\MaterialFrame\LightShaft_MF.json" />
+    <None Include="Resources\MaterialFrame\MRTBlit_MF.json" />
     <None Include="Resources\MaterialFrame\MRTSample_MF.json" />
     <None Include="Resources\MaterialFrame\Objectspace_Ray_MF.json" />
     <None Include="Resources\MaterialFrame\PBRMorph_MF.json" />
@@ -562,6 +563,7 @@
     <None Include="Resources\MaterialFrame\sdftext_mf.json" />
     <None Include="Resources\MaterialFrame\SimpleTexture_MF.json" />
     <None Include="Resources\MaterialFrame\SSR_MF.json" />
+    <None Include="Resources\MaterialFrame\SSWaterMix_MF.json" />
     <None Include="Resources\MaterialFrame\SSWater_MF.json" />
     <None Include="Resources\MaterialFrame\Water_MF.json" />
     <None Include="Resources\Scene\Demo-SESSIONS-2024.json" />
@@ -606,6 +608,7 @@
     <None Include="Resources\Shaders\minimum.vert" />
     <None Include="Resources\Shaders\minimum_vert.spv" />
     <None Include="Resources\Shaders\minimum_vert.wgsl" />
+    <None Include="Resources\Shaders\MRTBlit.frag" />
     <None Include="Resources\Shaders\mrt_sample.frag" />
     <None Include="Resources\Shaders\objectspace_raymarching.frag" />
     <None Include="Resources\Shaders\objectspace_raymarching.vert" />
@@ -643,6 +646,7 @@
     <None Include="Resources\Shaders\shadow_debug_vert.wgsl" />
     <None Include="Resources\Shaders\SSR.frag" />
     <None Include="Resources\Shaders\SSWater.frag" />
+    <None Include="Resources\Shaders\SSWaterMix.frag" />
     <None Include="Resources\Shaders\texture.frag" />
     <None Include="Resources\Shaders\unlit.frag" />
     <None Include="Resources\Shaders\unlit_frag.spv" />

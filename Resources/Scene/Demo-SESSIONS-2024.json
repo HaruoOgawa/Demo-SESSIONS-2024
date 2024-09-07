@@ -400,7 +400,7 @@
         {
             "name": "Water",
             "filename": "",
-            "renderpass": "MRTPass",
+            "renderpass": "SSWaterMRTPass",
             "depthpass": "",
             "transform": {
                 "pos": [
@@ -419,7 +419,7 @@
                     1.0
                 ]
             },
-            "enable": false,
+            "enable": true,
             "rootnodes": [
                 0
             ],

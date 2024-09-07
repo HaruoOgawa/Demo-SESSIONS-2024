@@ -3,13 +3,15 @@
 // Screen Space Water
 
 #include <Graphics/CFrameRenderer.h>
+#include <Scene/CSceneController.h>
 #include <Message/Console.h>
 
 namespace imageeffect
 {
 	CSSWater::CSSWater(const std::string& TargetPassName) :
 		m_TargetPassName(TargetPassName),
-		m_SSWaterFrameRenderer(nullptr),
+		m_SSWaterMixRenderer(nullptr),
+		m_MRTBlitRenderer(nullptr),
 		m_ResultRenderer(nullptr)
 	{
 	}
@@ -22,22 +24,50 @@ namespace imageeffect
 		const std::tuple<std::string, int>& PosGBufferTuple, const std::tuple<std::string, int>& NormalGBufferTuple, const std::tuple<std::string, int>& MetallicRoughnessGBufferTuple)
 	{
 		// オフスクリーンレンダーパス
-		if (!pGraphicsAPI->CreateRenderPass("SSWaterPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 1)) return false;
+		if (!pGraphicsAPI->CreateRenderPass("SSWaterMRTPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), -1, -1, 5)) return false;
+		if (!pGraphicsAPI->CreateRenderPass("SSWaterMixPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 6)) return false;
 
-		std::vector<std::shared_ptr<graphics::CTexture>> TextureList;
-		TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(m_TargetPassName)->GetFrameTexture());
-		TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(std::get<0>(DepthGBufferTuple))->GetFrameTexture(std::get<1>(DepthGBufferTuple)));
-		TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(std::get<0>(PosGBufferTuple))->GetFrameTexture(std::get<1>(PosGBufferTuple)));
-		TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(std::get<0>(NormalGBufferTuple))->GetFrameTexture(std::get<1>(NormalGBufferTuple)));
-		TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(std::get<0>(MetallicRoughnessGBufferTuple))->GetFrameTexture(std::get<1>(MetallicRoughnessGBufferTuple)));
+		{
+			std::vector<std::shared_ptr<graphics::CTexture>> TextureList;
 
-		m_SSWaterFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "SSWaterPass", TextureList);
-		if (!m_SSWaterFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\SSWater_MF.json")) return false;
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTexture(0)); // GPosition
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTexture(1)); // GNormal
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTexture(2)); // GAlbedo
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTexture(3)); // GDepth
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTexture(4)); // GParam1
 
-		m_ResultRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, m_TargetPassName, pGraphicsAPI->FindOffScreenRenderPass("SSWaterPass")->GetFrameTextureList());
-		if (!m_ResultRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\FrameTexture_MF.json")) return false;
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMRTPass")->GetFrameTexture(0)); // GPosition
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMRTPass")->GetFrameTexture(1)); // GNormal
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMRTPass")->GetFrameTexture(2)); // GAlbedo
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMRTPass")->GetFrameTexture(3)); // GDepth
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMRTPass")->GetFrameTexture(4)); // GParam1
 
-		return true;
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass(m_TargetPassName)->GetFrameTexture()); // MainResultColor
+
+			m_SSWaterMixRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "SSWaterMixPass", TextureList);
+			if (!m_SSWaterMixRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\SSWaterMix_MF.json")) return false;
+		}
+
+		{
+			std::vector<std::shared_ptr<graphics::CTexture>> TextureList;
+			
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMixPass")->GetFrameTexture(1)); // GPosition
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMixPass")->GetFrameTexture(2)); // GNormal
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMixPass")->GetFrameTexture(3)); // GAlbedo
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMixPass")->GetFrameTexture(4)); // GDepth
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMixPass")->GetFrameTexture(5)); // GParam1
+
+			m_MRTBlitRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MRTPass", TextureList);
+			if (!m_MRTBlitRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\MRTBlit_MF.json")) return false;
+		}
+
+		{
+			std::vector<std::shared_ptr<graphics::CTexture>> TextureList;
+			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("SSWaterMixPass")->GetFrameTexture(0)); // MainResultColor
+
+			m_ResultRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, m_TargetPassName, TextureList);
+			if (!m_ResultRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\FrameTexture_MF.json")) return false;
+		}
 
 		return true;
 	}
@@ -45,30 +75,38 @@ namespace imageeffect
 	bool CSSWater::Update(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<camera::CCamera>& Camera, const std::shared_ptr<projection::CProjection>& Projection,
 		const std::shared_ptr<graphics::CDrawInfo>& DrawInfo, const std::shared_ptr<input::CInputState>& InputState)
 	{
-		if (!m_SSWaterFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, Camera, Projection, DrawInfo, InputState)) return false;
+		if (!m_SSWaterMixRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, Camera, Projection, DrawInfo, InputState)) return false;
+		if (!m_MRTBlitRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, Camera, Projection, DrawInfo, InputState)) return false;
 		if (!m_ResultRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, Camera, Projection, DrawInfo, InputState)) return false;
 
 		return true;
 	}
 
 	bool CSSWater::Draw(api::IGraphicsAPI* pGraphicsAPI, const std::shared_ptr<camera::CCamera>& Camera, const std::shared_ptr<projection::CProjection>& Projection,
-		const std::shared_ptr<graphics::CDrawInfo>& DrawInfo)
+		const std::shared_ptr<graphics::CDrawInfo>& DrawInfo, const std::shared_ptr<scene::CSceneController>& SceneController)
 	{
-		// SSWaterPass
+		// SSWaterMRTPass
 		{
-			if (!pGraphicsAPI->BeginRender("SSWaterPass")) return false;
-			const auto& Material = m_SSWaterFrameRenderer->GetMaterial();
-			if (Material)
-			{
-				Material->SetUniformValue("baseHeight", &glm::vec1(-2.0f)[0], sizeof(float));
-				Material->SetUniformValue("WaterWidth", &glm::vec1(2.0f)[0], sizeof(float));
-				Material->SetUniformValue("WaterHeight", &glm::vec1(0.05f)[0], sizeof(float));
-			}
-			if (!m_SSWaterFrameRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
+			if (!pGraphicsAPI->BeginRender("SSWaterMRTPass")) return false;
+			if (!SceneController->Draw(pGraphicsAPI, false, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
 		}
 
-		// ResultPass
+		// SSWaterMixPass
+		{
+			if (!pGraphicsAPI->BeginRender("SSWaterMixPass")) return false;
+			if (!m_SSWaterMixRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
+			if (!pGraphicsAPI->EndRender()) return false;
+		}
+
+		// SSWaterMixPassのGBuffer成分をMRTPassにコピー 
+		{
+			if (!pGraphicsAPI->BeginRender("MRTPass")) return false;
+			if (!m_MRTBlitRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
+			if (!pGraphicsAPI->EndRender()) return false;
+		}
+
+		// SSWaterMixPassのメインカラー成分をResultPassに再描画
 		{
 			if (!pGraphicsAPI->BeginRender(m_TargetPassName)) return false;
 			if (!m_ResultRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
