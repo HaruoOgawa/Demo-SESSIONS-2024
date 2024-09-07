@@ -1,7 +1,6 @@
 #version 450
 
-layout(location = 0) in vec4 v2f_ObjectPos;
-layout(location = 1) in vec2 v2f_UV;
+layout(location = 0) in vec2 v2f_UV;
 
 /*layout(location = 0) out vec4 gPosition;
 layout(location = 1) out vec4 gNormal;
@@ -121,26 +120,42 @@ MatInfo map(vec3 p)
 
 	vec2 st = vec2(0.0);
 
-	/*if(true)
-	{
-		// ã…ù¿ïWïœä∑
-		float r = length(p.xz);
-		float t = atan(p.x, p.z);
+	// if(true)
+	// {
+	// 	// ã…ù¿ïWïœä∑
+	// 	float r = length(p.xz);
+	// 	float t = atan(p.x, p.z);
 
-		st = vec2(r - fragUbo.time, t);
-	}
-	else*/
+	// 	st = vec2(r - fragUbo.time, t);
+	// }
+	// else
 	{
 		st = p.xz + fragUbo.time * 0.1;
 	}
 
 	float h = noise(st * fragUbo.WaterWidth) * fragUbo.WaterHeight;
+	// float h = noise(st);
 
 	float d = p.y - fragUbo.baseHeight - h;
+	// float d = p.y - (-2.0) - h;
 	Info = getMin(Info, d, 2.0, 0.9, 1.0);
 
 	return Info;
 }
+
+/*MatInfo map(vec3 p)
+{
+	MatInfo Info;
+	Info.d = 1e5;
+	Info.MatID = -1;
+	Info.metallic = 0.0;
+	Info.roughness = 0.0;
+
+	float d = length(p) - 0.5;
+	Info = getMin(Info, d, 2.0, 0.9, 1.0);
+
+	return Info;
+}*/
 
 vec3 gn(vec3 p)
 {
@@ -169,6 +184,19 @@ float CalcDepth(vec3 p)
 	return moment2;
 }
 
+vec3 GetMainCol(vec2 texcoord)
+{
+	vec4 col = vec4(0.0);
+
+	#ifdef USE_OPENGL
+	col.rgb = texture(texImage, texcoord).rgb;
+	#else
+	col.rgb = texture(sampler2D(texImage, texSampler), texcoord).rgb;
+	#endif
+
+	return col.rgb;
+}
+
 float GetDepth(vec2 texcoord)
 {
 	float depth = 1.0;
@@ -184,17 +212,24 @@ float GetDepth(vec2 texcoord)
 
 void main()
 {
-	vec3 col = vec3(0.0, 0.0, 0.0);
+	vec2 texcoord = v2f_UV;
+	vec2 st = texcoord * 2.0 - 1.0;
+	// st.x *= (fragUbo.resolution.x / fragUbo.resolution.y);
+
+	vec3 col = GetMainCol(texcoord);
 	
-	vec2 st = v2f_UV * 2.0 - 1.0;
-	st.x *= (fragUbo.resolution.x / fragUbo.resolution.y);
-	
-	vec3 ro = fragUbo.cameraPos.xyz;
-    vec3 rd = normalize((fragUbo.view * inverse(fragUbo.proj) * vec4(st, 1.0, 1.0)).xyz);
+	// vec3 ro = fragUbo.cameraPos.xyz;
+    // vec3 rd = normalize((fragUbo.view * inverse(fragUbo.proj) * vec4(st, 1.0, 1.0)).xyz);
+
+	// vec3 ro = vec3(0.0, 0.0, 1.0);
+	// vec3 rd = normalize(vec3(st, -1.0));
+
+	vec3 ro = (fragUbo.view * vec4(0.0, 0.0, 1.0, 1.0)).xyz;
+	vec3 rd = normalize((fragUbo.view * vec4(st, -1.0, 1.0)).xyz);
 
 	//ro += fragUbo.cameraPos.xyz;
 
-	float SceneDepth = GetDepth(v2f_UV);
+	float SceneDepth = GetDepth(texcoord);
 
 	float depth = 0.0;
 	vec3 p = ro + rd * depth;
@@ -207,7 +242,7 @@ void main()
 
 	float CurrentSceneDepth = 0.0;
 
-	for(int i = 0; i < 256; i++)
+	for(int i = 0; i < 64; i++)
 	{
 		Info = map(p);
 		depth += Info.d;
@@ -215,30 +250,32 @@ void main()
 
 		CurrentSceneDepth = CalcDepth(p);
 
-		if(abs(Info.d) < MIN_VALUE || CurrentSceneDepth > SceneDepth) break;
+		// if(abs(Info.d) < MIN_VALUE || CurrentSceneDepth > SceneDepth) break;
+		if(abs(Info.d) < MIN_VALUE) break;
 	}
 
 	float UseLightPos = 1.0;
 
-	if(Info.d < MIN_VALUE && CurrentSceneDepth <= SceneDepth)
+	// if(Info.d < MIN_VALUE && CurrentSceneDepth <= SceneDepth)
+	if(Info.d < MIN_VALUE)
 	{
 		vec3 n = gn(p);
 		float outDepth = CalcDepth(p);
 
 		col = fragUbo.mainColor.rgb;
+		col = vec3(n);
 
-		/*gPosition = vec4(p, 1.0);
-		gNormal = vec4(n, 1.0);
-		gAlbedo = vec4(col, 1.0);
-		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(Info.MatID, UseLightPos, Info.metallic, Info.roughness);*/
+		// col = vec3(1.0, 0.0, 0.0);
 
-		outColor = vec4(col, 1.0);
+		// col.rgb = vec3(SceneDepth);
 
 		//gl_FragDepth = outDepth;
 	}
 	else
 	{
-		discard;
+		
+		// discard;
 	}
+
+	outColor = vec4(col, 1.0);
 }

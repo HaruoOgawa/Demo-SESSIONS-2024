@@ -3,53 +3,12 @@
   "outputcolorcount": 1,
   "shaderList": [
     {
-      "name": "objectspace_raymarching",
-      "shaderFile": "Resources\\Shaders\\objectspace_raymarching",
+      "name": "renderboard",
+      "shaderFile": "Resources\\Shaders\\renderboard",
       "autoShaderExtension": true,
       "shadercode": "",
       "shaderType": "vertex",
       "uniformBlockList": [
-        {
-          "name": "VertexUniformBuffer",
-          "binding": 0,
-          "isWritable": false,
-          "type": "ubo",
-          "bufferUpdateType": "cpu",
-          "values": [
-            {
-              "name": "model",
-              "type": "mat4",
-              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
-              "input": {
-                "hide": true
-              }
-            },
-            {
-              "name": "view",
-              "type": "mat4",
-              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
-              "input": {
-                "hide": true
-              }
-            },
-            {
-              "name": "proj",
-              "type": "mat4",
-              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
-              "input": {
-                "hide": true
-              }
-            },
-            {
-              "name": "lightVPMat",
-              "type": "mat4",
-              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
-              "input": {
-                "hide": true
-              }
-            }
-          ]
-        }
       ]
     },
     {

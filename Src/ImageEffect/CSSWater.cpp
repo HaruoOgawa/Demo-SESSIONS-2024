@@ -61,8 +61,8 @@ namespace imageeffect
 			if (Material)
 			{
 				Material->SetUniformValue("baseHeight", &glm::vec1(-2.0f)[0], sizeof(float));
-				Material->SetUniformValue("WaterWidth", &glm::vec1(0.05f)[0], sizeof(float));
-				Material->SetUniformValue("WaterHeight", &glm::vec1(0.0f)[0], sizeof(float));
+				Material->SetUniformValue("WaterWidth", &glm::vec1(2.0f)[0], sizeof(float));
+				Material->SetUniformValue("WaterHeight", &glm::vec1(0.05f)[0], sizeof(float));
 			}
 			if (!m_SSWaterFrameRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
