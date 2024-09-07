@@ -185,7 +185,7 @@ vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 light
 	{
 		vec3 lightPos = fragUBO.lightPos.xyz;
 
-		float Atten = 0.1;
+		float Atten = 0.25;
 		float len = length(WorldPos - lightPos);
 
 		col.rgb *= exp(-1.0 * len * Atten);

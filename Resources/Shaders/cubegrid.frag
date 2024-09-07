@@ -161,8 +161,8 @@ void main()
 
 	float MatID = 2.0;
 	float UseLightPos = 1.0;
-	float Metallic = 0.25;
-	float Roughness = 1.0;
+	float Metallic = 0.1;
+	float Roughness = 0.0;
 
 	if(dist < MIN_VALUE)
 	{

@@ -130,6 +130,7 @@ void main()
 	vec3 Pos = GetPosCol(st);
 	vec3 Normal = GetNormalCol(st);
 	vec2 MetallicRoughness = GetMetallicRoughness(st);
+	float Metallic = MetallicRoughness.r;
 
 	vec3 CameraPos = frag_ubo.cameraPos.xyz;
 
@@ -153,31 +154,34 @@ void main()
 	bool IsCollided = false;
 	vec3 ReflectCol = vec3(0.0);
 
-	for(float i = 0.0; i < MARCH; i++)
+	if(Metallic > 0.0)
 	{
-		// ray pos
-		// ro += rd * StepSize;
-		ro += rayStep;
-
-		// レイがスクリーン上でどこに存在するか
-		vec4 screenRP = frag_ubo.proj * frag_ubo.view * vec4(ro, 1.0);
-		vec2 screenUV = (screenRP.xy / screenRP.w) * 0.5 + 0.5;
-
-		// depth
-		//float currentDepth = GetDepth(screenUV);
-		//vec3 scenePos = GetWorldPosition(screenUV, currentDepth);
-		vec3 scenePos = GetPosCol(screenUV);
-
-		//
-		if(length(scenePos - ro) < threshold)
+		for(float i = 0.0; i < MARCH; i++)
 		{
-			ReflectCol = GetMainCol(screenUV);
-			IsCollided = true;
-			break;
-		}
-	}
+			// ray pos
+			// ro += rd * StepSize;
+			ro += rayStep;
 
-	col += ReflectCol * 0.5;
+			// レイがスクリーン上でどこに存在するか
+			vec4 screenRP = frag_ubo.proj * frag_ubo.view * vec4(ro, 1.0);
+			vec2 screenUV = (screenRP.xy / screenRP.w) * 0.5 + 0.5;
+
+			// depth
+			//float currentDepth = GetDepth(screenUV);
+			//vec3 scenePos = GetWorldPosition(screenUV, currentDepth);
+			vec3 scenePos = GetPosCol(screenUV);
+
+			//
+			if(length(scenePos - ro) < threshold)
+			{
+				ReflectCol = GetMainCol(screenUV);
+				IsCollided = true;
+				break;
+			}
+		}
+
+		col += ReflectCol * Metallic;
+	}
 
 	outColor = vec4(col, 1.0);
 }
