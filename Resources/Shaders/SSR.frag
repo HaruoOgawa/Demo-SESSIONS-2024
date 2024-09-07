@@ -177,7 +177,7 @@ void main()
 		}
 	}
 
-	col += ReflectCol;
+	col += ReflectCol * 0.5;
 
 	outColor = vec4(col, 1.0);
 }

@@ -59,7 +59,7 @@ float map(vec3 p, vec3 gridCenter)
 
 	if(length(gridCenter.xz) < 5.0)
 	{
-		hegiht = 0.0;
+		hegiht = hegiht * 0.1;
 	}
 
 	float d0 = sdBox(pos0 + vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );

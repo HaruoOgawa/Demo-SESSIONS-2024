@@ -235,13 +235,97 @@ void main()
 		vec3 WorldPos = SSWGPositionCol.rgb;
 		float MatID = floor(SSWParam1Col.r);
 		bool UseLightPos = (floor(SSWParam1Col.g) == 1.0);
-		float Metallic = SSWParam1Col.b;
-		float Roughness = SSWParam1Col.a;
+		// float Metallic = SSWParam1Col.b;
+		float Metallic = 1.0;
+		// float Roughness = SSWParam1Col.a;
+		float Roughness = 0.0;
 		// vec3 lightDir = (-1.0f) * normalize(fragUBO.lightDir.xyz);
 		// とりま定数
 		vec3 lightDir = (-1.0f) * normalize(vec3(1.0, -1.0, 1.0));
 
-		vec3 col = DoPBR(Albedo, Normal, WorldPos, UseLightPos, lightDir, Metallic, Roughness);
+		vec3 col = DoPBR(Albedo, Normal, WorldPos, true, lightDir, Metallic, Roughness);
+		col += DoPBR(Albedo, Normal, WorldPos, false, lightDir, Metallic, Roughness);
+
+		{
+			vec3 Pos = SSWGPositionCol.xyz;
+			vec3 CameraPos = fragUBO.cameraPos.xyz;
+
+			vec3 ViewVec = normalize(Pos - CameraPos);
+
+			float n1 = 1.0; // 空気の屈折率
+			float n2 = 1.33; // 水の屈折率
+			vec3 rd = refract(ViewVec, Normal, (n1 / n2));
+
+			// 画面外に出にくくするために屈折ベクトルにバイアスをかける
+			// rd = mix(rd, ViewVec, 0.5);
+			// rd = mix(ViewVec, rd, step(dot(rd, ViewVec), 0.0)); 
+			// rd = mix(rd, ViewVec, step(dot(rd, ViewVec), 0.0)); 
+
+			float MARCH = 24.0;
+			float LENGTH = 10.0;
+
+			float rayStepLength = LENGTH / MARCH;
+			vec3 rayStep = rd * rayStepLength;
+
+			vec3 ro = Pos;
+			
+			float threshold = 0.5;
+
+			vec3 ReflectCol = vec3(0.0);
+			vec2 screenUV = vec2(0.0);
+
+			for(float i = 0.0; i < MARCH; i++)
+			{
+				ro += rayStep;
+
+				// レイがスクリーン上でどこに存在するか
+				vec4 screenRP = fragUBO.proj * fragUBO.view * vec4(ro, 1.0);
+				screenUV = (screenRP.xy / screenRP.w) * 0.5 + 0.5;
+
+				// MRTPassから取得する
+				vec3 scenePos = texture(texGPosition, screenUV).xyz;
+
+				if(length(scenePos - ro) < threshold)
+				{
+					ReflectCol = texture(texMainColor, screenUV).rgb;
+					break;
+				}
+			}
+
+			if(screenUV.x < 0.0 || screenUV.x > 1.0 || screenUV.y < 0.0 || screenUV.y > 1.0)
+			{
+				// screenUV = clamp(screenUV, 0.0, 1.0);
+				// ReflectCol = texture(texMainColor, screenUV).rgb;
+
+				// ViewVecとしてやりなおす
+				ro = Pos;
+				rd = ViewVec;
+				rayStep = rd * rayStepLength;
+
+				for(float i = 0.0; i < MARCH; i++)
+				{
+					ro += rayStep;
+
+					// レイがスクリーン上でどこに存在するか
+					vec4 screenRP = fragUBO.proj * fragUBO.view * vec4(ro, 1.0);
+					screenUV = (screenRP.xy / screenRP.w) * 0.5 + 0.5;
+
+					// MRTPassから取得する
+					vec3 scenePos = texture(texGPosition, screenUV).xyz;
+
+					if(length(scenePos - ro) < threshold)
+					{
+						ReflectCol = texture(texMainColor, screenUV).rgb;
+						break;
+					}
+				}
+			}
+
+			col += ReflectCol;
+
+			// col = vec3(screenUV, 0.0);
+		}
+
 		outColor = vec4(col, 1.0);
 	}
 }

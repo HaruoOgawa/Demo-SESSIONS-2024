@@ -229,7 +229,7 @@ namespace app
 		if (!m_SSWaterEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo, m_SceneController)) return false;
 		
 		// SSR
-		//if (!m_SSREffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
+		if (!m_SSREffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 
 		// Main FrameBuffer
 		{
