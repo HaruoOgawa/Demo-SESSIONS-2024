@@ -115,11 +115,10 @@
               }
             },
             {
-              "name": "v4Pad1",
+              "name": "placeCubeSize",
               "type": "vec4",
-              "initValue": [ 1.0, 1.0, 1.0, 1.0 ],
+              "initValue": [ 0.5, 0.5, 0.5, 1.0 ],
               "input": {
-                "hide": true
               }
             },
             {
@@ -162,7 +161,51 @@
               }
             },
             {
+              "name": "lowGridRadius",
+              "type": "float",
+              "initValue": [ 5.0 ],
+              "input": {
+              }
+            },
+            {
+              "name": "placeMode",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
+              }
+            },
+            {
+              "name": "someTallMode",
+              "type": "float",
+              "initValue": [ 0.5 ],
+              "input": {
+              }
+            },
+            {
+              "name": "ceilingOffsset",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
+              }
+            },
+            {
               "name": "fpad0",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "fpad1",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "fpad2",
               "type": "float",
               "initValue": [ 0.0 ],
               "input": {

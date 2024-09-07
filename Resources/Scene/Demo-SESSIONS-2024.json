@@ -97,6 +97,30 @@
                     "cull": "front",
                     "uniformvalues": [
                         {
+                            "name": "lowGridRadius",
+                            "type": "float",
+                            "value": [
+                                5.0
+                            ]
+                        },
+                        {
+                            "name": "placeCubeSize",
+                            "type": "vec4",
+                            "value": [
+                                1.0,
+                                100.0,
+                                0.5,
+                                -2.551317915928659e-29
+                            ]
+                        },
+                        {
+                            "name": "placeMode",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
                             "name": "zLength",
                             "type": "float",
                             "value": [

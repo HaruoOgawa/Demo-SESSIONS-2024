@@ -17,14 +17,22 @@ layout(binding = 1) uniform FragUniformBufferObject{
 
 	vec4 cameraPos;
     vec4 mainColor;
-    vec4 v4Pad1;
+    vec4 placeCubeSize;
     vec4 v4Pad2;
 
 	vec2 resolution;
 	float time;
 	float deltaTime;
+
 	float zLength;
+	float lowGridRadius;
+	float placeMode;
+	float someTallMode;
+
+	float ceilingOffsset;
 	float fpad0;
+	float fpad1;
+	float fpad2;
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
@@ -57,15 +65,37 @@ float map(vec3 p, vec3 gridCenter)
 
 	float width = GRID_INTERVAL * 0.5;
 
-	if(length(gridCenter.xz) < 5.0)
+	if(floor(fragUbo.placeMode) == 0.0) // Sphereに配置
 	{
-		hegiht = hegiht * 0.1;
+		// if(length(gridCenter.xz) < 5.0)
+		if(length(gridCenter.xz) < fragUbo.lowGridRadius)
+		{
+			float tmpH = hegiht * 0.1;
+
+			if(floor(fragUbo.someTallMode) == 1.0)
+			{
+				float flag = rand(vec2(gridCenter.x * 10.0 + gridCenter.z, gridCenter.z * 10.0 + gridCenter.x)) * 0.5 + 0.5;
+				if(step(0.975, flag) == 1.0)
+				{
+					tmpH = hegiht * 0.5;
+				}
+			}
+
+			hegiht = tmpH;
+		}
+	}
+	else if(floor(fragUbo.placeMode) == 1.0) // Cubeに配置
+	{
+		if(length(max(vec2(0.0), abs(gridCenter.xz) - fragUbo.placeCubeSize.xy)) < MIN_VALUE)
+		{
+			hegiht = hegiht * 0.1;
+		}
 	}
 
 	float d0 = sdBox(pos0 + vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );
 	gmin(d, d0);
 
-	d0 = sdBox(pos0 - vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );
+	d0 = sdBox(pos0 - vec3(0.0, 2.5 + fragUbo.ceilingOffsset, 0.0), vec3(width, hegiht, width) );
 	gmin(d, d0);
 
 	return d;
