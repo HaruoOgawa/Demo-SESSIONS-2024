@@ -122,11 +122,11 @@
               }
             },
             {
-              "name": "v4Pad2",
+              "name": "patternCol",
               "type": "vec4",
               "initValue": [ 1.0, 1.0, 1.0, 1.0 ],
               "input": {
-                "hide": true
+                "type":"color"
               }
             },
             {
@@ -189,19 +189,17 @@
               }
             },
             {
-              "name": "fpad0",
+              "name": "usePattern",
               "type": "float",
               "initValue": [ 0.0 ],
               "input": {
-                "hide": true
               }
             },
             {
-              "name": "fpad1",
+              "name": "glowPower",
               "type": "float",
-              "initValue": [ 0.0 ],
+              "initValue": [ 1.0 ],
               "input": {
-                "hide": true
               }
             },
             {

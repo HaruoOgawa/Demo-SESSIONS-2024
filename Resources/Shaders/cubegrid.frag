@@ -18,7 +18,7 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	vec4 cameraPos;
     vec4 mainColor;
     vec4 placeCubeSize;
-    vec4 v4Pad2;
+    vec4 patternCol;
 
 	vec2 resolution;
 	float time;
@@ -30,8 +30,8 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float someTallMode;
 
 	float ceilingOffsset;
-	float fpad0;
-	float fpad1;
+	float usePattern;
+	float glowPower;
 	float fpad2;
 } fragUbo;
 
@@ -182,6 +182,48 @@ float CalcDepth(vec3 p)
 	return vec3( grid, b );
  }
 
+// https://github.com/i-saint/RaymarchingOnUnity5/blob/master/Assets/Raymarching/Raymarcher.shader
+vec2 DrawPattern(vec2 p)
+{
+    p=fract(p);
+    float r = 0.123;
+    float v=0.0,g=0.0;
+    r=fract(r*9184.928);
+    float cp,d;
+    
+    d=p.x;
+    g+=pow(clamp(1.0-abs(d), 0.0, 1.0), 1000.0);
+    d=p.y;
+    g+=pow(clamp(1.0-abs(d), 0.0, 1.0), 1000.0);
+    d=p.x - 1.0;
+    g+=pow(clamp(3.0-abs(d), 0.0, 1.0), 1000.0);
+    d=p.y - 1.0;
+    g+=pow(clamp(1.0-abs(d), 0.0, 1.0), 10000.0);
+    
+    const int ITER = 12;
+    for(int i=0; i<ITER; i++)
+    {
+      cp=0.5+(r-0.5)*0.9;
+      d=p.x-cp;
+      g+=pow(clamp(1.0-abs(d), 0.0, 1.0), 200.0);
+      if(d>0.0)
+      {
+          r=fract(r*4829.013);
+          p.x=(p.x-cp)/(1.0-cp);
+          v+=1.0;
+      }
+      else
+      {
+          r=fract(r*1239.528);
+          p.x=p.x/cp;
+      }
+      p=p.yx;
+    }
+    
+    v/=float(ITER);
+    return vec2(g,v);
+}
+
 void main()
 {
 	vec2 st = v2f_UV * 2.0 - 1.0;
@@ -234,6 +276,35 @@ void main()
 	{
 		vec3 n = gn(p - gridCenter, gridCenter);
 		float outDepth = CalcDepth(p);
+
+		// GlowPattern
+		if(floor(fragUbo.usePattern) == 1.0)
+		{
+			vec3 GlowCol = vec3(0.0);
+
+			for(int i = 0; i < 3; i++)
+			{
+				vec2 target = vec2(0.0);
+				if((i == 0)) target = p.xy * 0.5;
+				else if((i == 1)) target = p.yz * 0.5;
+				else if((i == 2)) target = p.xz * 0.5;
+
+				vec2 gp = DrawPattern(target);
+				float glow = 0.0;
+				glow += gp.x;
+				if(gp.x < 1.3) glow = 0.0;
+
+				GlowCol += vec3(glow);
+			}
+
+			GlowCol = clamp(GlowCol, 0.0, 1.0);
+
+			if(length(GlowCol) > 0.0)
+			{
+				Info.Albedo = fragUbo.patternCol.rgb * fragUbo.glowPower;
+				Info.MatID = 4.0;
+			}
+		}
 
 		gPosition = vec4(p, 1.0);
 		gNormal = vec4(n, 1.0);

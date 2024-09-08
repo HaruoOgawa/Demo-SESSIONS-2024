@@ -108,10 +108,27 @@
                             ]
                         },
                         {
+                            "name": "glowPower",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        },
+                        {
                             "name": "lowGridRadius",
                             "type": "float",
                             "value": [
-                                50.0
+                                5.0
+                            ]
+                        },
+                        {
+                            "name": "patternCol",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.3269897401332855,
+                                0.7941176295280457,
+                                1.0
                             ]
                         },
                         {
@@ -133,6 +150,13 @@
                         },
                         {
                             "name": "someTallMode",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "usePattern",
                             "type": "float",
                             "value": [
                                 0.0
@@ -587,7 +611,7 @@
                     1.0
                 ]
             },
-            "enable": true,
+            "enable": false,
             "rootnodes": [
                 0
             ],
