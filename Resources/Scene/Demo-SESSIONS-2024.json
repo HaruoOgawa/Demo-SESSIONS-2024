@@ -5,6 +5,10 @@
             "filename": "Resources/MaterialFrame/Water_MF.json"
         },
         {
+            "name": "blossum",
+            "filename": "Resources/MaterialFrame/blossum_MF.json"
+        },
+        {
             "name": "centercube_01",
             "filename": "Resources/MaterialFrame/centercube_01_mf.json"
         },
@@ -548,6 +552,119 @@
                                 0.0,
                                 0.0,
                                 0.0
+                            ]
+                        },
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "blossum",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "blossum",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            100.0,
+                            100.0,
+                            100.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "blossum",
+                    "cull": "front",
+                    "uniformvalues": [
+                        {
+                            "name": "ceilingOffsset",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "lowGridRadius",
+                            "type": "float",
+                            "value": [
+                                5.0
+                            ]
+                        },
+                        {
+                            "name": "placeCubeSize",
+                            "type": "vec4",
+                            "value": [
+                                0.5,
+                                0.5,
+                                0.5,
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "placeMode",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "someTallMode",
+                            "type": "float",
+                            "value": [
+                                0.5
                             ]
                         },
                         {

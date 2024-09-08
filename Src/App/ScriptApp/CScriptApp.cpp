@@ -219,9 +219,6 @@ namespace app
 			if (!pGraphicsAPI->EndRender()) return false;
 		}
 
-		// BloomEffect
-		if (!m_BloomEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
-
 		// LightShaft
 		//if (!m_LightShaftEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 		
@@ -230,6 +227,9 @@ namespace app
 		
 		// SSR
 		if (!m_SSREffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
+
+		// BloomEffect
+		if (!m_BloomEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 
 		// Main FrameBuffer
 		{
