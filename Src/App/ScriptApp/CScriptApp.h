@@ -12,6 +12,7 @@ namespace imageeffect {
 	class CLightShaft;
 	class CSSR;
 	class CSSWater;
+	class CChromaticAberration;
 }
 
 namespace app
@@ -37,6 +38,7 @@ namespace app
 		std::shared_ptr<imageeffect::CLightShaft> m_LightShaftEffect;
 		std::shared_ptr<imageeffect::CSSWater> m_SSWaterEffect;
 		std::shared_ptr<imageeffect::CSSR> m_SSREffect;
+		std::shared_ptr<imageeffect::CChromaticAberration> m_ChromaticAberrationEffect;
 
 		std::shared_ptr<CFileModifier> m_FileModifier;
 #ifdef USE_GUIENGINE

@@ -19,6 +19,7 @@
 #include "../../ImageEffect/CLightShaft.h"
 #include "../../ImageEffect/CSSR.h"
 #include "../../ImageEffect/CSSWater.h"
+#include "../../ImageEffect/CChromaticAberration.h"
 
 #include "../../GUIApp/GUI/CGraphicsEditingWindow.h"
 #include "../../GUIApp/Model/CFileModifier.h"
@@ -49,6 +50,7 @@ namespace app
 		m_BloomEffect(std::make_shared<imageeffect::CBloomEffect>("MainResultPass")),
 		m_LightShaftEffect(std::make_shared<imageeffect::CLightShaft>("MainResultPass")),
 		m_SSWaterEffect(std::make_shared<imageeffect::CSSWater>("MainResultPass")),
+		m_ChromaticAberrationEffect(std::make_shared<imageeffect::CChromaticAberration>("MainResultPass")),
 		m_SSREffect(std::make_shared<imageeffect::CSSR>("MainResultPass")),
 		m_FileModifier(std::make_shared<CFileModifier>()),
 		m_TimelineController(std::make_shared<timeline::CTimelineController>())
@@ -106,6 +108,9 @@ namespace app
 		// SSR
 		if (!m_SSREffect->Initialize(pGraphicsAPI, pLoadWorker, std::make_tuple("MRTPass", 3), std::make_tuple("MRTPass", 0),
 			std::make_tuple("MRTPass", 1), std::make_tuple("MRTPass", 4))) return false;
+		
+		// ChromaticAberration
+		if (!m_ChromaticAberrationEffect->Initialize(pGraphicsAPI, pLoadWorker)) return false;
 
 		m_MRTFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTextureList());
 		if (!m_MRTFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\mrt_renderer_mf.json")) return false;
@@ -169,6 +174,7 @@ namespace app
 		if (!m_LightShaftEffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 		if (!m_SSWaterEffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 		if (!m_SSREffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
+		if (!m_ChromaticAberrationEffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 
 		if (!m_MRTFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 		if (!m_MainFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
@@ -227,6 +233,9 @@ namespace app
 		
 		// SSR
 		if (!m_SSREffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
+		
+		// ChromaticAberration
+		if (!m_ChromaticAberrationEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 
 		// BloomEffect
 		if (!m_BloomEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
