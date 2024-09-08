@@ -7,7 +7,8 @@
 
 namespace imageeffect
 {
-	CBloomEffect::CBloomEffect():
+	CBloomEffect::CBloomEffect(const std::string& TargetPassName):
+		m_TargetPassName(TargetPassName),
 		m_BrightFrameRenderer(nullptr),
 		m_BloomMixPassRenderer(nullptr)
 	{
@@ -40,7 +41,7 @@ namespace imageeffect
 
 		// FrameBufferRenderer
 		// BrigtnessPass
-		m_BrightFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "BrigtnessPass", pGraphicsAPI->FindOffScreenRenderPass("MainResultPass")->GetFrameTextureList());
+		m_BrightFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "BrigtnessPass", pGraphicsAPI->FindOffScreenRenderPass(m_TargetPassName)->GetFrameTextureList());
 		if (!m_BrightFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\Brigtness_MF.json")) return false;
 		
 		for (int i = 0; i < static_cast<int>(m_ReduceBufList.size()); i++)
@@ -99,7 +100,7 @@ namespace imageeffect
 			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("BrigtnessPass")->GetFrameTexture(1));
 			TextureList.push_back(pGraphicsAPI->FindOffScreenRenderPass("ReducePass_8x8_YBlur")->GetFrameTexture());
 
-			m_BloomMixPassRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", TextureList);
+			m_BloomMixPassRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, m_TargetPassName, TextureList);
 			if (!m_BloomMixPassRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\BloomMix_MF.json")) return false;
 		}
 
@@ -188,9 +189,9 @@ namespace imageeffect
 			}
 		}
 
-		// BloomMixPass(MainResultPass)
+		// BloomMixPass
 		{
-			if (!pGraphicsAPI->BeginRender("MainResultPass")) return false;
+			if (!pGraphicsAPI->BeginRender(m_TargetPassName)) return false;
 			if (!m_BloomMixPassRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
 		}

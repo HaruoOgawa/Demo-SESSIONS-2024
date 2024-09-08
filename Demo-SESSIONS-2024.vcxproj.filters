@@ -48,13 +48,7 @@
     <ClCompile Include="Src\App\ScriptApp\CScriptApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\ImageEffect\CBlurEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Src\GUIApp\GUI\CTimeLineView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\App\ScriptApp\CDevApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\GUIApp\GUI\CGUIMaterialFrameTab.cpp">
@@ -70,6 +64,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Src\ImageEffect\CBloomEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImageEffect\CLightShaft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImageEffect\CSSR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImageEffect\CSSWater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ImageEffect\CChromaticAberration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,13 +110,7 @@
     <ClInclude Include="Src\App\ScriptApp\CScriptApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\ImageEffect\CBlurEffect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Src\GUIApp\GUI\CTimeLineView.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Src\App\ScriptApp\CDevApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\GUIApp\GUI\SGUIParams.h">
@@ -129,6 +129,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\ImageEffect\CBloomEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImageEffect\CLightShaft.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImageEffect\CSSR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImageEffect\CSSWater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\ImageEffect\CChromaticAberration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -275,6 +287,18 @@
     <None Include="Resources\MaterialFrame\Blur1Pass_MF.json" />
     <None Include="Resources\Shaders\BloomMix.frag" />
     <None Include="Resources\MaterialFrame\BloomMix_MF.json" />
+    <None Include="Resources\Shaders\LightShaft.frag" />
+    <None Include="Resources\MaterialFrame\LightShaft_MF.json" />
+    <None Include="Resources\Shaders\Water.frag" />
+    <None Include="Resources\MaterialFrame\Water_MF.json" />
+    <None Include="Resources\Shaders\SSR.frag" />
+    <None Include="Resources\MaterialFrame\SSR_MF.json" />
+    <None Include="Resources\Shaders\SSWater.frag" />
+    <None Include="Resources\MaterialFrame\SSWater_MF.json" />
+    <None Include="Resources\Shaders\MRTBlit.frag" />
+    <None Include="Resources\MaterialFrame\MRTBlit_MF.json" />
+    <None Include="Resources\Shaders\SSWaterMix.frag" />
+    <None Include="Resources\MaterialFrame\SSWaterMix_MF.json" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Commands\LibList.txt" />

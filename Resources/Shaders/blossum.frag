@@ -83,6 +83,72 @@ vec2 pmod(vec2 p, float seg)
 	return p * rot(-a);
 }
 
+MatInfo Brossum(vec3 p, vec3 offset, float gridW)
+{
+	MatInfo Info;
+	Info.d = 1e5;
+	Info.MatID = -1;
+	Info.metallic = 0.0;
+	Info.roughness = 0.0;
+
+	p += offset;
+
+	if(length(p.xz) > 10.0) return Info;
+
+	float Dist = 1e5;
+
+	float BaseH = 2.0;
+	p.y += BaseH;
+	
+	vec2 gridID = floor(p.xz / gridW) * gridW;
+	p.xz = repeat(p.xz, gridW);
+
+	float Loop = 3.0;
+	for(float i = 0.0; i < Loop; i++)
+	{
+		vec3 pos = p;
+		// pos.x *= 2.0;
+
+		pos.xz *= rot(pi * (1.0 / Loop) * i);
+		pos.yz *= rot(pi * 0.5);
+
+		// この時点でのPosをアニメーション用に保持しておく
+		vec3 animP = pos;
+
+		pos.x = abs(pos.x) - 0.25;
+
+		vec3 v = vec3(0.0, 0.0, 0.1);
+		pos -= clamp(pos, -v, v);
+
+		// float TorusBold = 0.0025 + 0.0025 * exp(length(0.5 * p.y));
+		// float TorusBold = 0.0025 * exp(length(1.0 * p.y));
+		float TorusBold = 0.00025 + 0.02 * length(1.0 * p.y);
+
+		float d = sdTorus(pos , vec2(0.25, TorusBold) );
+		Dist = min(Dist, d);
+
+		{
+			float tempo = 500.0;
+			float Local = mod(fragUbo.time + rand(gridID) * tempo, tempo);
+			float trans = tempo - 2.0 * 3.1415;
+			float t = step(Local, trans) * (Local - trans);
+			float w = sin(t) * 0.5 + 0.5;
+			float CutCube = sdBox(animP, vec3(0.75 * w, 0.75 * w, 0.75 * w));
+			Dist = max(Dist, CutCube);
+		}
+
+		// 下半分を削る
+		{
+			float CutCube = sdBox(p - vec3(0.0, 0.25, 0.0), vec3(0.75, 0.25, 0.75));
+			Dist = max(Dist, CutCube);
+		}
+
+		Info = getMin(Info, Dist, 4.0, 0.25, 1.0);
+	}
+
+	return Info;
+}
+
 MatInfo map(vec3 p)
 {
 	MatInfo Info;
@@ -91,128 +157,19 @@ MatInfo map(vec3 p)
 	Info.metallic = 0.0;
 	Info.roughness = 0.0;
 
-	{
-		vec3 pos = p;
+	float offset = 2.0;
+	float gridW = 4.0;
 
-		pos.xy *= rot(pi * 0.25);
-		float d = sdTorus(pos , vec2(2.5, 0.025) );
-		Info = getMin(Info, d, 3.0, 0.25, 1.0);
+	// p.z -= fragUbo.time;
+
+	{
+		MatInfo B = Brossum(p, vec3(0.0), gridW);
+		Info = getMin(Info, B.d, B.MatID, B.metallic, B.roughness);
 	}
 
 	{
-		vec3 pos = p;
-
-		pos.xy *= rot(pi * -0.25);
-		float d = sdTorus(pos , vec2(2.0, 0.025) );
-		Info = getMin(Info, d, 3.0, 0.25, 1.0);
-	}
-
-	{
-
-		
-		
-		float offset = 1.0;
-		float angle = 0.0;
-		// float expand = 1.0 + sin(fragUbo.time * 0.1) * 0.25;
-		float rateE = (sin(fragUbo.time * 0.5) * 0.5 + 0.5);
-		float rateA = (sin(fragUbo.time * 2.0) * 0.5 + 0.5);
-		float expand = 1.0 - rateE * 0.5;
-
-
-		/*for(int i = 0; i < 15; i++)
-		{
-			vec3 pos = p;
-			pos *= expand;
-			pos.xy *= rot(fragUbo.time);
-			pos.yz *= rot(fragUbo.time);
-			pos.xz *= rot(fragUbo.time);
-			
-			pos.xy *= rot(angle);
-			pos.yz *= rot(angle);
-			pos.xz *= rot(angle);
-
-			pos = abs(pos);
-			pos -= offset;
-			if(pos.x < pos.y) pos.xy = pos.yx;
-			if(pos.x < pos.z) pos.xz = pos.zx;
-			if(pos.y < pos.z) pos.yz = pos.zy;
-
-			float d = length(pos.xy) - 0.01;
-			gInfo = getMin(Info, d, 3.0);
-
-			offset *= 0.99;
-			// angle += 0.05;
-			angle += 0.01 + rateA * 0.04;
-		}*/
-
-
-		// float scale = 1.0;
-
-		// for(int i = 0; i < 6; i++)
-		// {
-		// 	pos.xy *= rot(pi * -0.25);
-
-		// 	float d = sdTorus(pos/ scale , vec2(2.0, 0.02) );
-		// 	Info = getMin(Info, d, 3.0);
-
-		// 	scale *= 0.8;
-		// 	pos *= 0.8;
-		// }
-	}
-
-	{
-		vec3 pos = p;
-			pos.xy *= rot(-fragUbo.time);
-			pos.yz *= rot(-fragUbo.time);
-			pos.xz *= rot(-fragUbo.time);
-
-		// 直角Fold
-		pos = abs(pos);
-		
-		float sum = 1.0;
-
-		for(int i = 0; i < 3; i++)
-		{
-			pos = abs(pos) - vec3(fragUbo.param0.w);
-			// pos.xy = pmod(pos.xy, 3.0);
-			if(pos.x < pos.y) pos.xy = pos.yx;
-			if(pos.x < pos.z) pos.xz = pos.zx;
-			if(pos.y < pos.z) pos.yz = pos.zy;
-
-			// pos = abs(pos) - vec3(0.2, 0.2, 0.2);
-
-			float sc = clamp(max(0.0, 2.0 / dot(p, p)), 0.0, 4.0);
-			// float sc = 2.0;
-			pos *= sc;
-			sum *= sc;
-			
-			pos.xy -= 0.2;
-
-			pos.xy *= rot(fragUbo.param0.x);
-			pos.yz *= rot(fragUbo.param0.y);
-			pos.xz *= rot(fragUbo.param0.z);
-
-			// pos = abs(pos);
-			// pos.xy -= 0.05;
-		}
-
-		float h = fragUbo.param1.x;
-		pos.x -= clamp(pos.x, -h, h);
-
-		// sum = abs(sum);
-
-		pos /= sum;
-
-		// float d = length(pos) / sum - 0.02;
-		float d = sdTorus(pos , vec2(0.5, 0.05) );
-		// float d = sdBox(pos, vec3(0.25));
-		Info = getMin(Info, d, 3.0, 0.25, 1.0);
-	}
-
-	{
-		vec3 pos = p;
-		float d = length(pos) - 0.5;
-		Info = getMin(Info, d, 4.0, 0.25, 1.0);
+		MatInfo B = Brossum(p, vec3(offset, 0.0, offset), gridW);
+		Info = getMin(Info, B.d, B.MatID, B.metallic, B.roughness);
 	}
 
 	return Info;

@@ -1,5 +1,5 @@
 {
-  "name": "cubegrid",
+  "name": "Water",
   "outputcolorcount": 5,
   "shaderList": [
     {
@@ -53,8 +53,8 @@
       ]
     },
     {
-      "name": "cubegrid",
-      "shaderFile": "Resources\\Shaders\\cubegrid",
+      "name": "Water",
+      "shaderFile": "Resources\\Shaders\\Water",
       "autoShaderExtension": true,
       "shadercode": "",
       "shaderType": "fragment",
@@ -111,22 +111,21 @@
               "type": "vec4",
               "initValue": [ 1.0, 1.0, 1.0, 1.0 ],
               "input": {
-                "hide": true
-              }
-            },
-            {
-              "name": "placeCubeSize",
-              "type": "vec4",
-              "initValue": [ 0.5, 0.5, 0.5, 1.0 ],
-              "input": {
-              }
-            },
-            {
-              "name": "patternCol",
-              "type": "vec4",
-              "initValue": [ 1.0, 1.0, 1.0, 1.0 ],
-              "input": {
                 "type":"color"
+              }
+            },
+            {
+              "name": "param0",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+              "input": {
+              }
+            },
+            {
+              "name": "param1",
+              "type": "vec4",
+              "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
+              "input": {
               }
             },
             {
@@ -161,53 +160,24 @@
               }
             },
             {
-              "name": "lowGridRadius",
-              "type": "float",
-              "initValue": [ 5.0 ],
-              "input": {
-              }
-            },
-            {
-              "name": "placeMode",
+              "name": "baseHeight",
               "type": "float",
               "initValue": [ 0.0 ],
               "input": {
               }
             },
             {
-              "name": "someTallMode",
-              "type": "float",
-              "initValue": [ 0.5 ],
-              "input": {
-              }
-            },
-            {
-              "name": "ceilingOffsset",
-              "type": "float",
-              "initValue": [ 0.0 ],
-              "input": {
-              }
-            },
-            {
-              "name": "usePattern",
-              "type": "float",
-              "initValue": [ 0.0 ],
-              "input": {
-              }
-            },
-            {
-              "name": "glowPower",
+              "name": "WaterWidth",
               "type": "float",
               "initValue": [ 1.0 ],
               "input": {
               }
             },
             {
-              "name": "fpad2",
+              "name": "WaterHeight",
               "type": "float",
-              "initValue": [ 0.0 ],
+              "initValue": [ 0.1 ],
               "input": {
-                "hide": true
               }
             }
           ]

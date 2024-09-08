@@ -1,6 +1,14 @@
 {
     "materialframes": [
         {
+            "name": "Water",
+            "filename": "Resources/MaterialFrame/Water_MF.json"
+        },
+        {
+            "name": "blossum",
+            "filename": "Resources/MaterialFrame/blossum_MF.json"
+        },
+        {
             "name": "centercube_01",
             "filename": "Resources/MaterialFrame/centercube_01_mf.json"
         },
@@ -93,6 +101,68 @@
                     "cull": "front",
                     "uniformvalues": [
                         {
+                            "name": "ceilingOffsset",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "glowPower",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        },
+                        {
+                            "name": "lowGridRadius",
+                            "type": "float",
+                            "value": [
+                                5.0
+                            ]
+                        },
+                        {
+                            "name": "patternCol",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.3269897401332855,
+                                0.7941176295280457,
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "placeCubeSize",
+                            "type": "vec4",
+                            "value": [
+                                1.0,
+                                100.0,
+                                0.5,
+                                -2.551317915928659e-29
+                            ]
+                        },
+                        {
+                            "name": "placeMode",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "someTallMode",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "usePattern",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
                             "name": "zLength",
                             "type": "float",
                             "value": [
@@ -125,7 +195,7 @@
                     50.0
                 ]
             },
-            "enable": true,
+            "enable": false,
             "rootnodes": [
                 0
             ],
@@ -390,6 +460,245 @@
                         ]
                     },
                     "meshindex": -1
+                }
+            ]
+        },
+        {
+            "name": "Water",
+            "filename": "",
+            "renderpass": "SSWaterMRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "Water",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            99.0,
+                            99.0,
+                            99.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "Water",
+                    "cull": "front",
+                    "uniformvalues": [
+                        {
+                            "name": "WaterHeight",
+                            "type": "float",
+                            "value": [
+                                0.05000000074505806
+                            ]
+                        },
+                        {
+                            "name": "WaterWidth",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        },
+                        {
+                            "name": "baseHeight",
+                            "type": "float",
+                            "value": [
+                                -2.0
+                            ]
+                        },
+                        {
+                            "name": "mainColor",
+                            "type": "vec4",
+                            "value": [
+                                0.3338139057159424,
+                                0.4055284857749939,
+                                0.7401961088180542,
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "param0",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "param1",
+                            "type": "vec4",
+                            "value": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "blossum",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": false,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "blossum",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            100.0,
+                            100.0,
+                            100.0
+                        ]
+                    },
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "blossum",
+                    "cull": "front",
+                    "uniformvalues": [
+                        {
+                            "name": "ceilingOffsset",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "lowGridRadius",
+                            "type": "float",
+                            "value": [
+                                5.0
+                            ]
+                        },
+                        {
+                            "name": "placeCubeSize",
+                            "type": "vec4",
+                            "value": [
+                                0.5,
+                                0.5,
+                                0.5,
+                                1.0
+                            ]
+                        },
+                        {
+                            "name": "placeMode",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
+                        {
+                            "name": "someTallMode",
+                            "type": "float",
+                            "value": [
+                                0.5
+                            ]
+                        },
+                        {
+                            "name": "zLength",
+                            "type": "float",
+                            "value": [
+                                2.0
+                            ]
+                        }
+                    ]
                 }
             ]
         }

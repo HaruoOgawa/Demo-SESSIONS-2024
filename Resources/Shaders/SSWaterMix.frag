@@ -19,32 +19,26 @@ layout(binding = 0) uniform UniformBufferObject{
 	float fPad2;
 } fragUBO;
 
-#ifdef USE_OPENGL
 layout(binding = 1) uniform sampler2D texGPosition;
 layout(binding = 3) uniform sampler2D texGNormal;
 layout(binding = 5) uniform sampler2D texGAlbedo;
 layout(binding = 7) uniform sampler2D texDepth;
 layout(binding = 9) uniform sampler2D texParam1;
-#else
-layout(binding = 1) uniform texture2D texGPosition;
-layout(binding = 2) uniform sampler texGPositionSampler;
-layout(binding = 3) uniform texture2D texGNormal;
-layout(binding = 4) uniform sampler texGNormalSampler;
-layout(binding = 5) uniform texture2D texGAlbedo;
-layout(binding = 6) uniform sampler texGAlbedoSampler;
-layout(binding = 7) uniform texture2D texDepth;
-layout(binding = 8) uniform sampler texDepthSampler;
-layout(binding = 7) uniform texture2D texParam1;
-layout(binding = 8) uniform sampler texParam1Sampler;
-#endif
+
+layout(binding = 11) uniform sampler2D texSSWGPosition;
+layout(binding = 13) uniform sampler2D texSSWGNormal;
+layout(binding = 15) uniform sampler2D texSSWGAlbedo;
+layout(binding = 17) uniform sampler2D texSSWDepth;
+layout(binding = 19) uniform sampler2D texSSWParam1;
+
+layout(binding = 21) uniform sampler2D texMainColor;
 
 layout(location = 0) out vec4 outColor;
-
-struct Light
-{
-	vec3 Posision;
-	vec3 Color;
-};
+layout(location = 1) out vec4 gPosition;
+layout(location = 2) out vec4 gNormal;
+layout(location = 3) out vec4 gAlbedo;
+layout(location = 4) out vec4 gDepth;
+layout(location = 5) out vec4 gParam_1; 
 
 // PBR Shader////////////////////////////////////
 const float MIN_ROUGHNESS = 0.04;
@@ -204,85 +198,134 @@ vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 light
 
 void main()
 {
-	vec4 col = vec4(0.0, 0.0, 0.0, 1.0); 
-	vec2 st = fUV;
-	//vec2 st = mod(fUV * 2.0, 1.0);
-	vec2 id = floor(fUV * 2.0);
+	 
+	vec2 texcoord = fUV;
 
-	#ifdef USE_OPENGL
-	vec4 GPositionCol = texture(texGPosition, st);
-	#else
-	vec4 GPositionCol = texture(sampler2D(texGPosition, texGPositionSampler), st);
-	#endif
-
-	#ifdef USE_OPENGL
-	vec4 GNormalCol = texture(texGNormal, st);
-	#else
-	vec4 GNormalCol = texture(sampler2D(texGNormal, texGNormalSampler), st);
-	#endif
-
-	#ifdef USE_OPENGL
-	vec4 GAlbedoCol = texture(texGAlbedo, st);
-	#else
-	vec4 GAlbedoCol = texture(sampler2D(texGAlbedo, texGAlbedoSampler), st);
-	#endif
-
-	#ifdef USE_OPENGL
-	vec4 GDepthCol = texture(texDepth, st);
-	#else
-	vec4 GDepthCol = texture(sampler2D(texDepth, texDepthSampler), st);
-	#endif
-
-	// (Material_ID, UseLightPos, Metallic, Roughness)
-    #ifdef USE_OPENGL
-	vec4 Param1Col = texture(texParam1, st);
-	#else
-	vec4 Param1Col = texture(sampler2D(texParam1, texParam1Sampler), st);
-	#endif
+	// Depth
+	vec4 MRTDepth = texture(texDepth, texcoord);
+	vec4 SSWDepth = texture(texSSWDepth, texcoord);
 	
-	vec3 Normal = GNormalCol.rgb;
-	vec3 Albedo = GAlbedoCol.rgb;
-	vec3 WorldPos = GPositionCol.rgb;
-	float MatID = floor(Param1Col.r);
-	bool UseLightPos = (floor(Param1Col.g) == 1.0);
-	float Metallic = Param1Col.b;
-	float Roughness = Param1Col.a;
-
-	vec3 lDir = normalize(vec3(1.0, -1.0, 1.0));
-
-	if(MatID == 1.0)
+	if(MRTDepth.r <= SSWDepth.r)
 	{
-		vec3 diffuse = max(0.0, dot(lDir, Normal)) * Albedo;
-		col.rgb += diffuse;
+		// MRTの結果をそのまま渡す
+		gPosition = texture(texGPosition, texcoord);
+		gNormal = texture(texGNormal, texcoord);
+		gAlbedo = texture(texGAlbedo, texcoord);
+		gDepth = MRTDepth;
+		gParam_1 = texture(texParam1, texcoord);
+		outColor = texture(texMainColor, texcoord);
 	}
-	else if(MatID == 2.0)
+	else
 	{
+		// Waterの描画
+		vec4 SSWGPositionCol = texture(texSSWGPosition, texcoord);
+		vec4 SSWGNormalCol = texture(texSSWGNormal, texcoord);
+		vec4 SSWGAlbedoCol = texture(texSSWGAlbedo, texcoord);
+		vec4 SSWParam1Col = texture(texSSWParam1, texcoord);
+		
+		gPosition = SSWGPositionCol;
+		gNormal = SSWGNormalCol;
+		gAlbedo = SSWGAlbedoCol;
+		gDepth = SSWDepth;
+		gParam_1 = SSWParam1Col;
+
+		// Lighting
+		vec3 Normal = SSWGNormalCol.rgb;
+		vec3 Albedo = SSWGAlbedoCol.rgb;
+		vec3 WorldPos = SSWGPositionCol.rgb;
+		float MatID = floor(SSWParam1Col.r);
+		bool UseLightPos = (floor(SSWParam1Col.g) == 1.0);
+		// float Metallic = SSWParam1Col.b;
+		float Metallic = 1.0;
+		// float Roughness = SSWParam1Col.a;
+		float Roughness = 0.0;
 		// vec3 lightDir = (-1.0f) * normalize(fragUBO.lightDir.xyz);
 		// とりま定数
 		vec3 lightDir = (-1.0f) * normalize(vec3(1.0, -1.0, 1.0));
 
-		col.rgb = DoPBR(Albedo, Normal, WorldPos, UseLightPos, lightDir, Metallic, Roughness);
-	}
-	else if(MatID == 3.0)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			vec3 lightDir = vec3((i % 2 == 0)? 1.0 : -1.0 , 1.0, (i % 2 == 0)? 1.0 : -1.0);
+		vec3 col = DoPBR(Albedo, Normal, WorldPos, true, lightDir, Metallic, Roughness);
+		col += DoPBR(Albedo, Normal, WorldPos, false, lightDir, Metallic, Roughness);
 
-			col.rgb += DoPBR(Albedo, Normal, WorldPos, false, lightDir, Metallic, Roughness);
+		{
+			vec3 Pos = SSWGPositionCol.xyz;
+			vec3 CameraPos = fragUBO.cameraPos.xyz;
+
+			vec3 ViewVec = normalize(Pos - CameraPos);
+
+			float n1 = 1.0; // 空気の屈折率
+			float n2 = 1.33; // 水の屈折率
+			vec3 rd = refract(ViewVec, Normal, (n1 / n2));
+
+			// 画面外に出にくくするために屈折ベクトルにバイアスをかける
+			// rd = mix(rd, ViewVec, 0.5);
+			// rd = mix(ViewVec, rd, step(dot(rd, ViewVec), 0.0)); 
+			// rd = mix(rd, ViewVec, step(dot(rd, ViewVec), 0.0)); 
+
+			float MARCH = 24.0;
+			float LENGTH = 10.0;
+
+			float rayStepLength = LENGTH / MARCH;
+			vec3 rayStep = rd * rayStepLength;
+
+			vec3 ro = Pos;
+			
+			float threshold = 0.5;
+
+			vec3 ReflectCol = vec3(0.0);
+			vec2 screenUV = vec2(0.0);
+
+			for(float i = 0.0; i < MARCH; i++)
+			{
+				ro += rayStep;
+
+				// レイがスクリーン上でどこに存在するか
+				vec4 screenRP = fragUBO.proj * fragUBO.view * vec4(ro, 1.0);
+				screenUV = (screenRP.xy / screenRP.w) * 0.5 + 0.5;
+
+				// MRTPassから取得する
+				vec3 scenePos = texture(texGPosition, screenUV).xyz;
+
+				if(length(scenePos - ro) < threshold)
+				{
+					ReflectCol = texture(texMainColor, screenUV).rgb;
+					break;
+				}
+			}
+
+			if(screenUV.x < 0.0 || screenUV.x > 1.0 || screenUV.y < 0.0 || screenUV.y > 1.0)
+			{
+				// screenUV = clamp(screenUV, 0.0, 1.0);
+				// ReflectCol = texture(texMainColor, screenUV).rgb;
+
+				// ViewVecとしてやりなおす
+				ro = Pos;
+				rd = ViewVec;
+				rayStep = rd * rayStepLength;
+
+				for(float i = 0.0; i < MARCH; i++)
+				{
+					ro += rayStep;
+
+					// レイがスクリーン上でどこに存在するか
+					vec4 screenRP = fragUBO.proj * fragUBO.view * vec4(ro, 1.0);
+					screenUV = (screenRP.xy / screenRP.w) * 0.5 + 0.5;
+
+					// MRTPassから取得する
+					vec3 scenePos = texture(texGPosition, screenUV).xyz;
+
+					if(length(scenePos - ro) < threshold)
+					{
+						ReflectCol = texture(texMainColor, screenUV).rgb;
+						break;
+					}
+				}
+			}
+
+			col += ReflectCol;
+
+			// col = vec3(screenUV, 0.0);
 		}
 
-		col.rgb *= 0.5;
+		outColor = vec4(col, 1.0);
 	}
-	else if(MatID == 4.0)
-	{
-		// Emission
-		// あとでBloomで光らせる
-		col.rgb = Albedo;
-	}
-
-	// col.rgb = GNormalCol.rgb * 0.5 + 0.5;
-
-	outColor = col;
-	gl_FragDepth = GDepthCol.r;
 }

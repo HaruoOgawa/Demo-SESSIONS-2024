@@ -16,6 +16,10 @@
 #include "../../Interface/IGUIEngine.h"
 
 #include "../../ImageEffect/CBloomEffect.h"
+#include "../../ImageEffect/CLightShaft.h"
+#include "../../ImageEffect/CSSR.h"
+#include "../../ImageEffect/CSSWater.h"
+#include "../../ImageEffect/CChromaticAberration.h"
 
 #include "../../GUIApp/GUI/CGraphicsEditingWindow.h"
 #include "../../GUIApp/Model/CFileModifier.h"
@@ -43,7 +47,11 @@ namespace app
 #endif // USE_GUIENGINE
 		m_MainFrameRenderer(nullptr),
 		m_MRTFrameRenderer(nullptr),
-		m_BloomEffect(std::make_shared<imageeffect::CBloomEffect>()),
+		m_BloomEffect(std::make_shared<imageeffect::CBloomEffect>("MainResultPass")),
+		m_LightShaftEffect(std::make_shared<imageeffect::CLightShaft>("MainResultPass")),
+		m_SSWaterEffect(std::make_shared<imageeffect::CSSWater>("MainResultPass")),
+		m_ChromaticAberrationEffect(std::make_shared<imageeffect::CChromaticAberration>("MainResultPass")),
+		m_SSREffect(std::make_shared<imageeffect::CSSR>("MainResultPass")),
 		m_FileModifier(std::make_shared<CFileModifier>()),
 		m_TimelineController(std::make_shared<timeline::CTimelineController>())
 	{
@@ -83,11 +91,26 @@ namespace app
 		pLoadWorker->AddScene(std::make_shared<resource::CSceneLoader>("Resources\\Scene\\Demo-SESSIONS-2024.json", m_SceneController));
 
 		// オフスクリーンレンダリング
+		// MRTPass: Position(0), Normal(1), Albedo(2), Depth(3), Param1(4)
 		if (!pGraphicsAPI->CreateRenderPass("MRTPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 5)) return false;
 		if (!pGraphicsAPI->CreateRenderPass("MainResultPass", api::ERenderPassFormat::COLOR_FLOAT_RENDERPASS, glm::vec4(0.0f, 0.0f, 0.0f, 1.0f), -1, -1, 1)) return false;
 
 		// ブルームエフェクト
 		if (!m_BloomEffect->Initialize(pGraphicsAPI, pLoadWorker)) return false;
+
+		// ライトシャフト
+		if (!m_LightShaftEffect->Initialize(pGraphicsAPI, pLoadWorker, std::make_tuple("MRTPass", 3), std::make_tuple("BrigtnessPass", 0))) return false;
+
+		// Screen Space Water
+		if (!m_SSWaterEffect->Initialize(pGraphicsAPI, pLoadWorker, std::make_tuple("MRTPass", 3), std::make_tuple("MRTPass", 0),
+			std::make_tuple("MRTPass", 1), std::make_tuple("MRTPass", 4))) return false;
+
+		// SSR
+		if (!m_SSREffect->Initialize(pGraphicsAPI, pLoadWorker, std::make_tuple("MRTPass", 3), std::make_tuple("MRTPass", 0),
+			std::make_tuple("MRTPass", 1), std::make_tuple("MRTPass", 4))) return false;
+		
+		// ChromaticAberration
+		if (!m_ChromaticAberrationEffect->Initialize(pGraphicsAPI, pLoadWorker)) return false;
 
 		m_MRTFrameRenderer = std::make_shared<graphics::CFrameRenderer>(pGraphicsAPI, "MainResultPass", pGraphicsAPI->FindOffScreenRenderPass("MRTPass")->GetFrameTextureList());
 		if (!m_MRTFrameRenderer->Create(pLoadWorker, "Resources\\MaterialFrame\\mrt_renderer_mf.json")) return false;
@@ -148,6 +171,10 @@ namespace app
 		}
 
 		if (!m_BloomEffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
+		if (!m_LightShaftEffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
+		if (!m_SSWaterEffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
+		if (!m_SSREffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
+		if (!m_ChromaticAberrationEffect->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 
 		if (!m_MRTFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 		if (!m_MainFrameRenderer->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
@@ -197,6 +224,18 @@ namespace app
 			if (!m_SceneController->Draw(pGraphicsAPI, false, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
 		}
+
+		// LightShaft
+		//if (!m_LightShaftEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
+		
+		// SSWater
+		if (!m_SSWaterEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo, m_SceneController)) return false;
+		
+		// SSR
+		if (!m_SSREffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
+		
+		// ChromaticAberration
+		if (!m_ChromaticAberrationEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
 
 		// BloomEffect
 		if (!m_BloomEffect->Draw(pGraphicsAPI, m_MainCamera, m_Projection, m_DrawInfo)) return false;
