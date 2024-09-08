@@ -107,11 +107,9 @@ float map(vec3 pos)
 
 		// scale = abs(scale);
 
-		float d = length(p) / scale - 0.02;
-		// float d = length(p) / scale;
+		// float d = length(p) / scale - 0.02;
 
-		// p.xy = pmod(p.xy, 3);
-		// float d = sdBox(p, vec3(0.5));
+		float d = sdBox(p, vec3(0.75)) / scale;
 		gmin(Dst, d);
 	}
 

@@ -36,7 +36,27 @@ layout(binding = 1) uniform FragUniformBufferObject{
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
-#define gmin(dst, src) dst = min(dst, src)
+
+struct MatInfo
+{
+	float Dist;
+	float MatID;
+	vec3 Albedo;
+};
+
+MatInfo getMin(MatInfo src, float d, float MatID, vec3 a)
+{
+	MatInfo dst = src;
+
+	if(d < dst.Dist)
+	{
+		dst.Dist = d;
+		dst.MatID = MatID;
+		dst.Albedo = a;
+	}
+
+	return dst;
+}
 
 //
 const float MIN_VALUE = 1E-3;
@@ -55,15 +75,21 @@ float sdBox(vec3 p, vec3 s)
 	return length(max(vec3(0.0), abs(p) - s));
 }
 
-float map(vec3 p, vec3 gridCenter)
+MatInfo map(vec3 p, vec3 gridCenter)
 {
-	float d = 1e5;
+	MatInfo Info;
+	Info.Dist = 1e5;
+	Info.MatID = 0;
+	Info.Albedo = vec3(0.0);
 
 	vec3 pos0 = p;
 	float hegiht = rand(gridCenter.xz) * 0.5 + 0.5;
 	hegiht *= 2.0;
 
 	float width = GRID_INTERVAL * 0.5;
+
+	vec3 Albedo = vec3(1.0);
+	float MatID = 2.0;
 
 	if(floor(fragUbo.placeMode) == 0.0) // Sphereに配置
 	{
@@ -75,9 +101,17 @@ float map(vec3 p, vec3 gridCenter)
 			if(floor(fragUbo.someTallMode) == 1.0)
 			{
 				float flag = rand(vec2(gridCenter.x * 10.0 + gridCenter.z, gridCenter.z * 10.0 + gridCenter.x)) * 0.5 + 0.5;
-				if(step(0.975, flag) == 1.0)
+				if(step(0.995, flag) == 1.0)
 				{
 					tmpH = hegiht * 0.5;
+
+					vec3 RCol = vec3(
+						rand(gridCenter.xz + vec2(0.971, 0.432)) * 0.5 + 0.5,
+						rand(gridCenter.zx + vec2(11.111, 55.6)) * 0.5 + 0.5,
+						rand(gridCenter.xz *2.0 + vec2(9.999)) * 0.5 + 0.5
+					);
+					Albedo = 2.0 * RCol;
+					MatID = 4.0;
 				}
 			}
 
@@ -93,21 +127,21 @@ float map(vec3 p, vec3 gridCenter)
 	}
 
 	float d0 = sdBox(pos0 + vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );
-	gmin(d, d0);
+	Info = getMin(Info, d0, MatID, Albedo);
 
 	d0 = sdBox(pos0 - vec3(0.0, 2.5 + fragUbo.ceilingOffsset, 0.0), vec3(width, hegiht, width) );
-	gmin(d, d0);
+	Info = getMin(Info, d0, MatID, Albedo);
 
-	return d;
+	return Info;
 }
 
 vec3 gn(vec3 p, vec3 gridCenter)
 {
 	vec2 e = vec2(MIN_VALUE, 0.0);
 	return normalize(vec3(
-		map(p + e.xyy, gridCenter) - map(p - e.xyy, gridCenter),
-		map(p + e.yxy, gridCenter) - map(p - e.yxy, gridCenter),
-		map(p + e.yyx, gridCenter) - map(p - e.yyx, gridCenter)
+		map(p + e.xyy, gridCenter).Dist - map(p - e.xyy, gridCenter).Dist,
+		map(p + e.yxy, gridCenter).Dist - map(p - e.yxy, gridCenter).Dist,
+		map(p + e.yyx, gridCenter).Dist - map(p - e.yyx, gridCenter).Dist
 	));
 }
 
@@ -150,8 +184,6 @@ float CalcDepth(vec3 p)
 
 void main()
 {
-	vec3 col = vec3(0.0, 0.0, 0.0);
-	
 	vec2 st = v2f_UV * 2.0 - 1.0;
 	st.x *= (fragUbo.resolution.x / fragUbo.resolution.y);
 	
@@ -161,11 +193,16 @@ void main()
 	// カメラのオフセット分を追加する。これがないと原点として扱われる
 	ro += fragUbo.cameraPos.xyz;
 
-	float dist = 0.0, depth = 0.0, lenToNextGrid = 0.0;
+	float depth = 0.0, lenToNextGrid = 0.0;
 	vec3 p = ro + rd * depth;
 	vec3 gridCenter;
 	vec2 normalizeRdXZ = normalize(rd.xz);
 	float gridLenMultiplier = 1.0 / length(rd.xz);
+
+	MatInfo Info;
+	Info.Dist = 1e5;
+	Info.MatID = 0.0;
+	Info.Albedo = vec3(0.0);
 
 	for(int i = 0; i < 256; i++)
 	{
@@ -182,36 +219,32 @@ void main()
 			lenToNextGrid += grid.z * gridLenMultiplier;
 		}
 
-		dist = map(p - gridCenter, gridCenter);
-		depth += dist;
+		Info = map(p - gridCenter, gridCenter);
+		depth += Info.Dist;
 		p = ro + rd * depth;
 
-		if(abs(dist) < MIN_VALUE) break;
+		if(abs(Info.Dist) < MIN_VALUE) break;
 	}
 
-	float MatID = 2.0;
 	float UseLightPos = 1.0;
 	float Metallic = 0.1;
 	float Roughness = 0.0;
 
-	if(dist < MIN_VALUE)
+	if(Info.Dist < MIN_VALUE)
 	{
 		vec3 n = gn(p - gridCenter, gridCenter);
 		float outDepth = CalcDepth(p);
 
-		col = vec3(1.0);
-
 		gPosition = vec4(p, 1.0);
 		gNormal = vec4(n, 1.0);
-		gAlbedo = vec4(col, 1.0);
+		gAlbedo = vec4(Info.Albedo, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(MatID, UseLightPos, Metallic, Roughness);
+		gParam_1 = vec4(Info.MatID, UseLightPos, Metallic, Roughness);
 
 		gl_FragDepth = outDepth;
 	}
 	else
 	{
-		// gDepth = vec4(1.0);
 		discard;
 	}
 }
