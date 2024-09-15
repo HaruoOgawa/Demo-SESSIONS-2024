@@ -11,6 +11,7 @@ namespace camera { class CCamera; }
 namespace projection { class CProjection; }
 namespace input { class CInputState; }
 namespace physics { class IPhysicsEngine; }
+namespace scene { class CSceneController; }
 namespace graphics 
 {
 	class CFrameRenderer;
@@ -39,6 +40,8 @@ namespace imageeffect
 	public:
 		CBloomEffect(const std::string& TargetPassName);
 		virtual ~CBloomEffect();
+
+		void OnLoaded(const std::shared_ptr<scene::CSceneController>& SceneController);
 
 		bool Initialize(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker);
 

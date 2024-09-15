@@ -293,6 +293,8 @@ namespace app
 
 		if (!m_ScriptScene->OnLoaded(pGraphicsAPI, pPhysicsEngine, pLoadWorker)) return false;
 
+		m_BloomEffect->OnLoaded(m_SceneController);
+
 		if (!m_TimelineController->Initialize(shared_from_this())) return false;
 
 #ifdef USE_GUIENGINE
