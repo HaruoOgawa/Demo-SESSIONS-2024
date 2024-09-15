@@ -45,6 +45,7 @@ namespace gui
 					if (!m_LogTab.Draw(pGraphicsAPI, GUIParams)) return false;
 					if (!CGUIRenderingTab::Draw()) return false;
 					if (!CGUICameraTab::Draw()) return false;
+					if (!CGUICustomTab::Draw(pGraphicsAPI, GUIParams)) return false;
 
 					ImGui::EndTabBar();
 				}
