@@ -4,6 +4,7 @@
 #include <vector>
 #include <tuple>
 #include <Interface/IGraphicsAPI.h>
+#include <Scriptable/CValueRegistry.h>
 
 namespace resource { class CLoadWorker; }
 namespace camera { class CCamera; }
@@ -24,7 +25,7 @@ namespace imageeffect
 		std::string SrcPass = std::string();
 	};
 
-	class CBloomEffect
+	class CBloomEffect : public scriptable::CValueRegistry
 	{
 		std::string m_TargetPassName;
 

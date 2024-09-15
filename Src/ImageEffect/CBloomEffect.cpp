@@ -8,6 +8,7 @@
 namespace imageeffect
 {
 	CBloomEffect::CBloomEffect(const std::string& TargetPassName):
+		CValueRegistry("BloomRegistry"),
 		m_TargetPassName(TargetPassName),
 		m_BrightFrameRenderer(nullptr),
 		m_BloomMixPassRenderer(nullptr)
@@ -17,6 +18,10 @@ namespace imageeffect
 			std::make_tuple(SReduceBuf{"ReducePass_4x4", "ReducePass_2x2_YBlur"}, SReduceBuf{"ReducePass_4x4_XBlur", "ReducePass_4x4"} ,SReduceBuf{"ReducePass_4x4_YBlur", "ReducePass_4x4_XBlur"}),
 			std::make_tuple(SReduceBuf{"ReducePass_8x8", "ReducePass_4x4_YBlur"}, SReduceBuf{"ReducePass_8x8_XBlur", "ReducePass_8x8"} ,SReduceBuf{"ReducePass_8x8_YBlur", "ReducePass_8x8_XBlur"})
 		};
+
+		// プロパティの設定
+		SetValue("Threshold", graphics::EUniformValueType::VALUE_TYPE_FLOAT, &glm::vec1(1.0f)[0], sizeof(float));
+		SetValue("Intencity", graphics::EUniformValueType::VALUE_TYPE_FLOAT, &glm::vec1(1.5f)[0], sizeof(float));
 	}
 
 	CBloomEffect::~CBloomEffect()
@@ -133,8 +138,11 @@ namespace imageeffect
 			const auto& Material = m_BrightFrameRenderer->GetMaterial();
 			if (Material)
 			{
-				Material->SetUniformValue("Threshold", &glm::vec1(1.0f)[0], sizeof(float));
-				Material->SetUniformValue("Intencity", &glm::vec1(1.5f)[0], sizeof(float));
+				const auto Threshold = GetValue("Threshold");
+				const auto Intencity = GetValue("Intencity");
+
+				Material->SetUniformValue("Threshold", &Threshold.Buffer[0], Threshold.ByteSize);
+				Material->SetUniformValue("Intencity", &Intencity.Buffer[0], Intencity.ByteSize);
 			}
 			if (!m_BrightFrameRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
