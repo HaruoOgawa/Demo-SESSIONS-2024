@@ -691,6 +691,9 @@ namespace gui
 
 		auto& style = ImGui::GetStyle();
 
+		// 単に選択したいだけの時もあるので必ずフレーム当たりのドラッグ量をチェックする。何かしらドラッグしているなら0以外になるはず
+		const bool IsDragging = (ImGui::GetMouseDragDelta().x != 0.0);
+
 		for (const auto& OpenedTrackAndCursor : m_OpenedTrackPosMap)
 		{
 			const auto& Track = OpenedTrackAndCursor.first;
@@ -721,7 +724,8 @@ namespace gui
 
 					// 描画位置を決定
 					float XPos = 0.0f;
-					if (!m_ClickedKeyFrameLabel.empty() && m_ClickedKeyFrameLabel == KeyFrameLabel)
+					
+					if (!m_ClickedKeyFrameLabel.empty() && m_ClickedKeyFrameLabel == KeyFrameLabel && IsDragging)
 					{
 						// マウスのX座標を割り当てる
 						XPos = ImGui::GetMousePos().x;
@@ -762,10 +766,13 @@ namespace gui
 						// 離したのでリセットする
 						m_ClickedKeyFrameLabel = std::string();
 
-						// MousePos.x(XPos)から逆計算してキーフレームの時間を求める
-						float NewFrameTime = CalcFrameTimeFromXPos(ImGui::GetMousePos().x);
+						if (IsDragging)
+						{
+							// MousePos.x(XPos)から逆計算してキーフレームの時間を求める
+							float NewFrameTime = CalcFrameTimeFromXPos(ImGui::GetMousePos().x);
 
-						Sampler->SetKeyFrameInput(KeyFrame, NewFrameTime);
+							Sampler->SetKeyFrameInput(KeyFrame, NewFrameTime);
+						}
 					}
 
 					// ボタンの色を選択
