@@ -57,7 +57,8 @@ namespace app
 
 		virtual bool Release(api::IGraphicsAPI* pGraphicsAPI) override;
 
-		virtual std::shared_ptr<scriptable::CComponent> CreateComponent(const std::string& ComponentType, const std::string& Name);
+		// コンポーネント作成
+		virtual std::shared_ptr<scriptable::CComponent> CreateComponent(const std::string& ComponentType, const std::string& ValueRegistry) override;
 
 		virtual bool Initialize(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker) override;
 		virtual bool ProcessInput(api::IGraphicsAPI* pGraphicsAPI) override;

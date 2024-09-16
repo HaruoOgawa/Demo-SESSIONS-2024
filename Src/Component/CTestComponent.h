@@ -7,7 +7,7 @@ namespace component
 	class CTestComponent : public scriptable::CComponent
 	{
 	public:
-		CTestComponent(const std::string& Name);
+		CTestComponent(const std::string& ComponentName, const std::string& RegistryName);
 		virtual ~CTestComponent();
 	};
 }

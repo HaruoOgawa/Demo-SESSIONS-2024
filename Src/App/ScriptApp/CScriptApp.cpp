@@ -88,11 +88,12 @@ namespace app
 		return true;
 	}
 
-	std::shared_ptr<scriptable::CComponent> CScriptApp::CreateComponent(const std::string& ComponentType, const std::string& Name)
+	// コンポーネント作成
+	std::shared_ptr<scriptable::CComponent> CScriptApp::CreateComponent(const std::string& ComponentType, const std::string& ValueRegistry)
 	{
 		if (ComponentType == "TestComponent")
 		{
-			return std::make_shared<component::CTestComponent>(Name);
+			return std::make_shared<component::CTestComponent>(ComponentType, ValueRegistry);
 		}
 
 		return nullptr;
