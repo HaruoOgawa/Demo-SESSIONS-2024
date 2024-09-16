@@ -28,6 +28,9 @@
     "valueregistries": [
         {
             "registryname": "BloomRegistry",
+            "trackids": [
+                "14f8d497-e434-428a-825f-f8c7017bc298"
+            ],
             "values": [
                 {
                     "name": "Intencity",
@@ -40,7 +43,7 @@
                     "name": "Threshold",
                     "type": "float",
                     "initValue": [
-                        1.0
+                        2.0
                     ]
                 }
             ]
@@ -216,7 +219,7 @@
                     50.0
                 ]
             },
-            "enable": false,
+            "enable": true,
             "rootnodes": [
                 0
             ],
