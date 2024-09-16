@@ -15,7 +15,7 @@ namespace gui
 	// ロード完了イベント
 	bool CGraphicsEditingWindow::OnLoaded(api::IGraphicsAPI* pGraphicsAPI, const SGUIParams& GUIParams, const std::shared_ptr<gui::IGUIEngine>& GUIEngine)
 	{
-		if (!m_TimeLineView.Initialize(GUIParams.TimelineController, GUIParams.ObjectList)) return false;
+		if (!m_TimeLineView.Initialize(GUIParams)) return false;
 
 		return true;
 	}
@@ -62,7 +62,7 @@ namespace gui
 			bool Open = true;
 			if (ImGui::Begin("TimeLineView", &Open, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoTitleBar))
 			{
-				if (!m_TimeLineView.Draw(GUIParams.TimelineController, GUIParams.ObjectList)) return false;
+				if (!m_TimeLineView.Draw(GUIParams)) return false;
 			}
 
 			ImGui::End();
