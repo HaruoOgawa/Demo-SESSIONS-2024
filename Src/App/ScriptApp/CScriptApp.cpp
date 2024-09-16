@@ -26,6 +26,8 @@
 #include <Timeline/CTimelineController.h>
 #include <Scene/CSceneController.h>
 
+#include "../../Component/CTestComponent.h"
+
 namespace app
 {
 	CScriptApp::CScriptApp() :
@@ -84,6 +86,17 @@ namespace app
 		}
 
 		return true;
+	}
+
+	// コンポーネント作成
+	std::shared_ptr<scriptable::CComponent> CScriptApp::CreateComponent(const std::string& ComponentType, const std::string& ValueRegistry)
+	{
+		if (ComponentType == "TestComponent")
+		{
+			return std::make_shared<component::CTestComponent>(ComponentType, ValueRegistry);
+		}
+
+		return nullptr;
 	}
 
 	bool CScriptApp::Initialize(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker)
@@ -250,7 +263,9 @@ namespace app
 #ifdef USE_GUIENGINE
 			if (pLoadWorker->IsLoaded() && m_EnabledGUIDraw)
 			{
-				gui::SGUIParams GUIParams = gui::SGUIParams(GetObjectList(), m_SceneController, m_FileModifier, m_TimelineController, pLoadWorker);
+				gui::SGUIParams GUIParams = gui::SGUIParams(GetObjectList(), m_SceneController, m_FileModifier, m_TimelineController, pLoadWorker, {});
+				
+				GUIParams.ValueRegistryList.emplace(m_BloomEffect->GetRegistryName(), m_BloomEffect);
 
 				if (!GUIEngine->BeginFrame(pGraphicsAPI)) return false;
 				if (!m_GraphicsEditingWindow->Draw(pGraphicsAPI, GUIParams, GUIEngine))
@@ -291,11 +306,19 @@ namespace app
 
 		if (!m_ScriptScene->OnLoaded(pGraphicsAPI, pPhysicsEngine, pLoadWorker)) return false;
 
+		{
+			auto Component = CreateComponent("TestComponent", "test");
+		}
+
+		m_BloomEffect->OnLoaded(m_SceneController);
+
 		if (!m_TimelineController->Initialize(shared_from_this())) return false;
 
 #ifdef USE_GUIENGINE
 		{
-			gui::SGUIParams GUIParams = gui::SGUIParams(GetObjectList(), m_SceneController, m_FileModifier, m_TimelineController, pLoadWorker);
+			gui::SGUIParams GUIParams = gui::SGUIParams(GetObjectList(), m_SceneController, m_FileModifier, m_TimelineController, pLoadWorker, {});
+
+			GUIParams.ValueRegistryList.emplace(m_BloomEffect->GetRegistryName(), m_BloomEffect);
 
 			if (!m_GraphicsEditingWindow->OnLoaded(pGraphicsAPI, GUIParams, GUIEngine)) return false;
 		}

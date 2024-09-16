@@ -1,6 +1,7 @@
 #include "CBloomEffect.h"
 #include <Graphics/CFrameRenderer.h>
 #include <Message/Console.h>
+#include <Scene/CSceneController.h>
 
 // 縮小バッファBloomの実装方法
 // https://chatgpt.com/c/a491f927-d30f-4f9d-a416-934e61e7152f
@@ -8,6 +9,7 @@
 namespace imageeffect
 {
 	CBloomEffect::CBloomEffect(const std::string& TargetPassName):
+		CValueRegistry("BloomRegistry"),
 		m_TargetPassName(TargetPassName),
 		m_BrightFrameRenderer(nullptr),
 		m_BloomMixPassRenderer(nullptr)
@@ -21,6 +23,24 @@ namespace imageeffect
 
 	CBloomEffect::~CBloomEffect()
 	{
+	}
+
+	void CBloomEffect::OnLoaded(const std::shared_ptr<scene::CSceneController>& SceneController)
+	{
+		const auto& InitValueRegistryList = SceneController->GetValueRegistryList();
+
+		const auto& it = InitValueRegistryList.find(GetRegistryName());
+		if (it == InitValueRegistryList.end()) return;
+
+		const auto& InitValueRegistry = it->second;
+
+		for (const auto& Value : InitValueRegistry->GetValueList())
+		{
+			SetValue(Value.second.Name, Value.second.Type, &Value.second.Buffer[0], Value.second.ByteSize);
+		}
+
+		// 更新
+		SceneController->SetValueRegistry(GetRegistryName(), shared_from_this());
 	}
 
 	bool CBloomEffect::Initialize(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker)
@@ -133,8 +153,11 @@ namespace imageeffect
 			const auto& Material = m_BrightFrameRenderer->GetMaterial();
 			if (Material)
 			{
-				Material->SetUniformValue("Threshold", &glm::vec1(1.0f)[0], sizeof(float));
-				Material->SetUniformValue("Intencity", &glm::vec1(1.5f)[0], sizeof(float));
+				const auto Threshold = GetValue("Threshold");
+				const auto Intencity = GetValue("Intencity");
+
+				Material->SetUniformValue("Threshold", &Threshold.Buffer[0], Threshold.ByteSize);
+				Material->SetUniformValue("Intencity", &Intencity.Buffer[0], Intencity.ByteSize);
 			}
 			if (!m_BrightFrameRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;

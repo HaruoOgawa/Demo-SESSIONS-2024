@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <Interface/IApp.h>
+#include <Scriptable/CComponent.h>
 
 namespace graphics { class CFrameRenderer; }
 namespace gui { class CGraphicsEditingWindow; }
@@ -55,6 +56,9 @@ namespace app
 		virtual ~CScriptApp() = default;
 
 		virtual bool Release(api::IGraphicsAPI* pGraphicsAPI) override;
+
+		// コンポーネント作成
+		virtual std::shared_ptr<scriptable::CComponent> CreateComponent(const std::string& ComponentType, const std::string& ValueRegistry) override;
 
 		virtual bool Initialize(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker) override;
 		virtual bool ProcessInput(api::IGraphicsAPI* pGraphicsAPI) override;

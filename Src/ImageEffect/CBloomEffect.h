@@ -4,12 +4,14 @@
 #include <vector>
 #include <tuple>
 #include <Interface/IGraphicsAPI.h>
+#include <Scriptable/CValueRegistry.h>
 
 namespace resource { class CLoadWorker; }
 namespace camera { class CCamera; }
 namespace projection { class CProjection; }
 namespace input { class CInputState; }
 namespace physics { class IPhysicsEngine; }
+namespace scene { class CSceneController; }
 namespace graphics 
 {
 	class CFrameRenderer;
@@ -24,7 +26,7 @@ namespace imageeffect
 		std::string SrcPass = std::string();
 	};
 
-	class CBloomEffect
+	class CBloomEffect : public scriptable::CValueRegistry
 	{
 		std::string m_TargetPassName;
 
@@ -38,6 +40,8 @@ namespace imageeffect
 	public:
 		CBloomEffect(const std::string& TargetPassName);
 		virtual ~CBloomEffect();
+
+		void OnLoaded(const std::shared_ptr<scene::CSceneController>& SceneController);
 
 		bool Initialize(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker);
 
