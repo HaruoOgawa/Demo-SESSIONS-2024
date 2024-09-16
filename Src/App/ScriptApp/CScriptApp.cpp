@@ -26,6 +26,8 @@
 #include <Timeline/CTimelineController.h>
 #include <Scene/CSceneController.h>
 
+#include "../../Component/CTestComponent.h"
+
 namespace app
 {
 	CScriptApp::CScriptApp() :
@@ -84,6 +86,16 @@ namespace app
 		}
 
 		return true;
+	}
+
+	std::shared_ptr<scriptable::CComponent> CScriptApp::CreateComponent(const std::string& ComponentType, const std::string& Name)
+	{
+		if (ComponentType == "TestComponent")
+		{
+			return std::make_shared<component::CTestComponent>(Name);
+		}
+
+		return nullptr;
 	}
 
 	bool CScriptApp::Initialize(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker)
@@ -292,6 +304,10 @@ namespace app
 		if (!m_SceneController->Create(pGraphicsAPI, pPhysicsEngine)) return false;
 
 		if (!m_ScriptScene->OnLoaded(pGraphicsAPI, pPhysicsEngine, pLoadWorker)) return false;
+
+		{
+			auto Component = CreateComponent("TestComponent", "test");
+		}
 
 		m_BloomEffect->OnLoaded(m_SceneController);
 

@@ -480,6 +480,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Component\CTestComponent.cpp" />
     <ClCompile Include="Src\GUIApp\GUI\CGUICustomTab.cpp" />
     <ClCompile Include="Src\ImageEffect\CChromaticAberration.cpp" />
     <ClCompile Include="Src\ImageEffect\CSSWater.cpp" />
@@ -504,6 +505,7 @@
     <ClCompile Include="Src\Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Component\CTestComponent.h" />
     <ClInclude Include="Src\GUIApp\GUI\CGUICustomTab.h" />
     <ClInclude Include="Src\ImageEffect\CChromaticAberration.h" />
     <ClInclude Include="Src\ImageEffect\CSSWater.h" />
