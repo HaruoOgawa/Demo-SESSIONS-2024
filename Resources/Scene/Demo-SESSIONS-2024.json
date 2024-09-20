@@ -43,7 +43,7 @@
                     "name": "Threshold",
                     "type": "float",
                     "initValue": [
-                        2.0
+                        0.8281495571136475
                     ]
                 }
             ]
@@ -106,11 +106,12 @@
                             100.0
                         ]
                     },
+                    "enable": true,
                     "meshindex": 0,
-                    "components" : [
+                    "components": [
                         {
-                            "type":"TestComponent",
-                            "valueregistry":"test"
+                            "type": "TestComponent",
+                            "valueregistry": "test"
                         }
                     ]
                 }
@@ -131,24 +132,10 @@
                     "cull": "front",
                     "uniformvalues": [
                         {
-                            "name": "ceilingOffsset",
-                            "type": "float",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
                             "name": "glowPower",
                             "type": "float",
                             "value": [
                                 2.0
-                            ]
-                        },
-                        {
-                            "name": "lowGridRadius",
-                            "type": "float",
-                            "value": [
-                                5.0
                             ]
                         },
                         {
@@ -172,31 +159,10 @@
                             ]
                         },
                         {
-                            "name": "placeMode",
-                            "type": "float",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
                             "name": "someTallMode",
                             "type": "float",
                             "value": [
                                 0.0
-                            ]
-                        },
-                        {
-                            "name": "usePattern",
-                            "type": "float",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "zLength",
-                            "type": "float",
-                            "value": [
-                                2.0
                             ]
                         }
                     ]
@@ -249,6 +215,7 @@
                             1.0
                         ]
                     },
+                    "enable": true,
                     "meshindex": 0
                 }
             ],
@@ -267,6 +234,16 @@
                     "materialframe": "centercube_01",
                     "cull": "front",
                     "uniformvalues": [
+                        {
+                            "name": "mainColor",
+                            "type": "vec4",
+                            "value": [
+                                0.21854574978351593,
+                                0.2535082995891571,
+                                0.4166666865348816,
+                                1.0
+                            ]
+                        },
                         {
                             "name": "param0",
                             "type": "vec4",
@@ -288,10 +265,10 @@
                             ]
                         },
                         {
-                            "name": "zLength",
+                            "name": "tparam",
                             "type": "float",
                             "value": [
-                                2.0
+                                0.20000000298023224
                             ]
                         }
                     ]
@@ -344,6 +321,7 @@
                             100.0
                         ]
                     },
+                    "enable": true,
                     "meshindex": 0
                 }
             ],
@@ -370,23 +348,6 @@
                                 0.25,
                                 0.0,
                                 0.0
-                            ]
-                        },
-                        {
-                            "name": "param1",
-                            "type": "vec4",
-                            "value": [
-                                0.0,
-                                0.0,
-                                0.0,
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "zLength",
-                            "type": "float",
-                            "value": [
-                                2.0
                             ]
                         }
                     ]
@@ -439,6 +400,7 @@
                             1.0
                         ]
                     },
+                    "enable": true,
                     "meshindex": -1
                 }
             ]
@@ -489,6 +451,7 @@
                             1.0
                         ]
                     },
+                    "enable": true,
                     "meshindex": -1
                 }
             ]
@@ -539,6 +502,7 @@
                             99.0
                         ]
                     },
+                    "enable": true,
                     "meshindex": 0
                 }
             ],
@@ -586,33 +550,6 @@
                                 0.4055284857749939,
                                 0.7401961088180542,
                                 1.0
-                            ]
-                        },
-                        {
-                            "name": "param0",
-                            "type": "vec4",
-                            "value": [
-                                0.0,
-                                0.0,
-                                0.0,
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "param1",
-                            "type": "vec4",
-                            "value": [
-                                0.0,
-                                0.0,
-                                0.0,
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "zLength",
-                            "type": "float",
-                            "value": [
-                                2.0
                             ]
                         }
                     ]
@@ -665,6 +602,7 @@
                             100.0
                         ]
                     },
+                    "enable": true,
                     "meshindex": 0
                 }
             ],
@@ -681,54 +619,7 @@
             "materials": [
                 {
                     "materialframe": "blossum",
-                    "cull": "front",
-                    "uniformvalues": [
-                        {
-                            "name": "ceilingOffsset",
-                            "type": "float",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "lowGridRadius",
-                            "type": "float",
-                            "value": [
-                                5.0
-                            ]
-                        },
-                        {
-                            "name": "placeCubeSize",
-                            "type": "vec4",
-                            "value": [
-                                0.5,
-                                0.5,
-                                0.5,
-                                1.0
-                            ]
-                        },
-                        {
-                            "name": "placeMode",
-                            "type": "float",
-                            "value": [
-                                0.0
-                            ]
-                        },
-                        {
-                            "name": "someTallMode",
-                            "type": "float",
-                            "value": [
-                                0.5
-                            ]
-                        },
-                        {
-                            "name": "zLength",
-                            "type": "float",
-                            "value": [
-                                2.0
-                            ]
-                        }
-                    ]
+                    "cull": "front"
                 }
             ]
         }
