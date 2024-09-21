@@ -110,7 +110,8 @@ MatInfo map(vec3 p)
 	}
 	else*/
 	{
-		st = p.xz + fragUbo.time * 0.1;
+		st = p.xz;
+		// st.y += fragUbo.time * 0.1;
 	}
 
 	float h = noise(st * fragUbo.WaterWidth) * fragUbo.WaterHeight;

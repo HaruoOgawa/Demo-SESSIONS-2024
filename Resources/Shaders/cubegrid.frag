@@ -32,7 +32,7 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float ceilingOffsset;
 	float usePattern;
 	float glowPower;
-	float fpad2;
+	float expandRadius;
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
@@ -98,7 +98,7 @@ MatInfo map(vec3 p, vec3 gridCenter)
 		{
 			float tmpH = hegiht * 0.1;
 
-			if(floor(fragUbo.someTallMode) == 1.0)
+			/*if(floor(fragUbo.someTallMode) == 1.0)
 			{
 				float flag = rand(vec2(gridCenter.x * 10.0 + gridCenter.z, gridCenter.z * 10.0 + gridCenter.x)) * 0.5 + 0.5;
 				if(step(0.995, flag) == 1.0)
@@ -113,9 +113,15 @@ MatInfo map(vec3 p, vec3 gridCenter)
 					Albedo = 2.0 * RCol;
 					MatID = 4.0;
 				}
-			}
+			}*/
 
 			hegiht = tmpH;
+		}
+
+		if(length(gridCenter.xz) < fragUbo.expandRadius)
+		{
+			float tmpH = min(0.5, exp(fragUbo.expandRadius - length(gridCenter.xz)));
+			hegiht += tmpH;
 		}
 	}
 	else if(floor(fragUbo.placeMode) == 1.0) // Cubeに配置

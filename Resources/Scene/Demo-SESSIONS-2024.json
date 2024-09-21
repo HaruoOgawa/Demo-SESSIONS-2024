@@ -48,6 +48,21 @@
                     ]
                 }
             ]
+        },
+        {
+            "registryname": "ChromaticRegistry",
+            "trackids": [
+                "c10f8ea3-5067-4748-b8db-19577e65bb4a"
+            ],
+            "values": [
+                {
+                    "name": "WhiteRate",
+                    "type": "float",
+                    "initValue": [
+                        0.0
+                    ]
+                }
+            ]
         }
     ],
     "sound": {
@@ -166,6 +181,10 @@
                                 0.0
                             ]
                         }
+                    ],
+                    "trackids": [
+                        "44c936ce-043f-4a56-a73e-d398a70bf908",
+                        "15b69e48-e38b-4461-bc1c-284bd3927d9d"
                     ]
                 }
             ]
@@ -216,8 +235,10 @@
                             1.0
                         ]
                     },
-                    "enable": true,
-                    "meshindex": 0
+                    "meshindex": 0,
+                    "trackids": [
+                        "5476da19-34c8-4025-98b0-cceb14967f56"
+                    ]
                 }
             ],
             "meshs": [
@@ -322,7 +343,7 @@
                             100.0
                         ]
                     },
-                    "enable": true,
+                    "enable": false,
                     "meshindex": 0
                 }
             ],
@@ -573,7 +594,7 @@
                     1.0
                 ]
             },
-            "enable": false,
+            "enable": true,
             "rootnodes": [
                 0
             ],
@@ -597,8 +618,10 @@
                             100.0
                         ]
                     },
-                    "enable": true,
-                    "meshindex": 0
+                    "meshindex": 0,
+                    "trackids": [
+                        "dae28338-cf60-423e-bbc4-5228a0545759"
+                    ]
                 }
             ],
             "meshs": [

@@ -203,11 +203,10 @@
               }
             },
             {
-              "name": "fpad2",
+              "name": "expandRadius",
               "type": "float",
               "initValue": [ 0.0 ],
               "input": {
-                "hide": true
               }
             }
           ]

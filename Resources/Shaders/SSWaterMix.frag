@@ -120,7 +120,8 @@ vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 light
 	vec3 n = Normal;
 	vec3 v = (-1.0f) * normalize(WorldPos - fragUBO.cameraPos.xyz);
 	
-	vec3 l = lightDir;
+	// vec3 l = lightDir;
+	vec3 l = normalize(vec3(0.0, 1.0, 1.0));
 	if(UseLightPos)
 	{
 		vec3 lightPos = fragUBO.lightPos.xyz;
