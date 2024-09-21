@@ -23,7 +23,7 @@ namespace gui
 		int			m_SelectedTextureIndex;
 
 	private:
-		bool DrawOption(const ImVec2& WindowSize);
+		bool DrawOption(const ImVec2& WindowSize, const SGUIParams& GUIParams);
 		bool DrawFullScreen(api::IGraphicsAPI* pGraphicsAPI, const SGUIParams& GUIParams, const std::shared_ptr<gui::IGUIEngine>& GUIEngine, const ImVec2& WindowSize, const ImVec2& FullImageSize);
 		bool DrawPassList(api::IGraphicsAPI* pGraphicsAPI, const SGUIParams& GUIParams, const std::shared_ptr<gui::IGUIEngine>& GUIEngine, const ImVec2& WindowSize, const ImVec2& FullImageSize);
 

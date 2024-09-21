@@ -28,9 +28,6 @@
     "valueregistries": [
         {
             "registryname": "BloomRegistry",
-            "trackids": [
-                "14f8d497-e434-428a-825f-f8c7017bc298"
-            ],
             "values": [
                 {
                     "name": "Intencity",
@@ -43,7 +40,7 @@
                     "name": "Threshold",
                     "type": "float",
                     "initValue": [
-                        0.8281495571136475
+                        1.0
                     ]
                 }
             ]
@@ -384,16 +381,6 @@
                 {
                     "name": "CameraNode",
                     "transform": {
-                        "pos": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotate": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
                         "scale": [
                             1.0,
                             1.0,
@@ -401,7 +388,11 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "trackids": [
+                        "8cf6e2b5-6ce6-4383-83c5-c0f6deaf0133",
+                        "549d9953-138b-4c27-9be9-b53276164500"
+                    ]
                 }
             ]
         },

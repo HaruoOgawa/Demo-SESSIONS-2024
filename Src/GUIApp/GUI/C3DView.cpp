@@ -1,5 +1,6 @@
 #ifdef USE_GUIENGINE
 #include "C3DView.h"
+#include <Camera/CCamera.h>
 
 namespace gui
 {
@@ -30,7 +31,7 @@ namespace gui
 
 		const float Rate = 0.025f;
 
-		if (!DrawOption(ImVec2(WindowSize.x , WindowSize.y * Rate))) return false;
+		if (!DrawOption(ImVec2(WindowSize.x , WindowSize.y * Rate), GUIParams)) return false;
 
 		if (m_IsFullScreen)
 		{
@@ -44,17 +45,39 @@ namespace gui
 		return true;
 	}
 
-	bool C3DView::DrawOption(const ImVec2& WindowSize)
+	bool C3DView::DrawOption(const ImVec2& WindowSize, const SGUIParams& GUIParams)
 	{
 		if (ImGui::BeginChild("C3DView::DrawOption", WindowSize))
 		{
-			// たぶんボタンの最小サイズみたいなのでWindowを小さくしすぎると見えなくなるみたい(いったん仕様とする。普段使いには支障がないため)
-			std::string WindowModeLavel = (m_IsFullScreen ? "RenderPassList" : "RenderPassView");
-			WindowModeLavel += "##C3DView::DrawOption";
-
-			if (ImGui::Button(WindowModeLavel.c_str(), ImVec2(0, WindowSize.y)))
 			{
-				m_IsFullScreen = !m_IsFullScreen;
+				// たぶんボタンの最小サイズみたいなのでWindowを小さくしすぎると見えなくなるみたい(いったん仕様とする。普段使いには支障がないため)
+				std::string WindowModeLavel = (m_IsFullScreen ? "FrameBuffers" : "3DView");
+				WindowModeLavel += "##C3DView::DrawOption";
+
+				if (ImGui::Button(WindowModeLavel.c_str(), ImVec2(0, WindowSize.y)))
+				{
+					m_IsFullScreen = !m_IsFullScreen;
+				}
+			}
+
+			{
+				// たぶんボタンの最小サイズみたいなのでWindowを小さくしすぎると見えなくなるみたい(いったん仕様とする。普段使いには支障がないため)
+				ImGui::SameLine();
+				
+				std::string WindowModeLavel = GUIParams.CameraMode;
+				WindowModeLavel += "##C3DView::DrawOption_CameraMode";
+
+				if (ImGui::Button(WindowModeLavel.c_str(), ImVec2(0, WindowSize.y)))
+				{
+				}
+			}
+
+			if(GUIParams.Camera)
+			{
+				ImGui::SameLine();
+
+				const auto& CameraPos = GUIParams.Camera->GetPos();
+				ImGui::Text("[CameraPos] x: %f, y: %f, z: %f", CameraPos.x, CameraPos.y, CameraPos.z);
 			}
 
 			ImGui::EndChild();
