@@ -73,7 +73,7 @@
                 }
               },
               {
-                "name": "fPad0",
+                "name": "whiteRate",
                 "type": "float",
                 "initValue": [ 0.0 ],
                 "input": {

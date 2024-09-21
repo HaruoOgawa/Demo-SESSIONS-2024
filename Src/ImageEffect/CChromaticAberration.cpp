@@ -5,10 +5,13 @@
 namespace imageeffect
 {
 	CChromaticAberration::CChromaticAberration(const std::string& TargetPassName) :
+		CValueRegistry("ChromaticRegistry"),
 		m_TargetPassName(TargetPassName),
 		m_CAFrameRenderer(nullptr),
 		m_ResultRenderer(nullptr)
 	{
+		// プロパティの設定
+		SetValue("WhiteRate", graphics::EUniformValueType::VALUE_TYPE_FLOAT, &glm::vec1(0.0f)[0], sizeof(float));
 	}
 
 	CChromaticAberration::~CChromaticAberration()
@@ -44,6 +47,13 @@ namespace imageeffect
 		// CAPass
 		{
 			if (!pGraphicsAPI->BeginRender("CAPass")) return false;
+			const auto& Material = m_CAFrameRenderer->GetMaterial();
+			if (Material)
+			{
+				const auto WhiteRate = GetValue("WhiteRate");
+
+				Material->SetUniformValue("whiteRate", &WhiteRate.Buffer[0], WhiteRate.ByteSize);
+			}
 			if (!m_CAFrameRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;
 		}

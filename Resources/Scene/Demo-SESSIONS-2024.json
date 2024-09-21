@@ -28,12 +28,16 @@
     "valueregistries": [
         {
             "registryname": "BloomRegistry",
+            "trackids": [
+                "2bd4e1aa-1ae2-4fff-b202-a69d1c6baaf2",
+                "bd674e8b-bacb-417e-af20-06ec1ee81d07"
+            ],
             "values": [
                 {
                     "name": "Intencity",
                     "type": "float",
                     "initValue": [
-                        2.0
+                        1.5
                     ]
                 },
                 {
