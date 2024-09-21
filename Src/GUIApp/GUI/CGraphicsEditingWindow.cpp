@@ -1,6 +1,8 @@
 #ifdef USE_GUIENGINE
 #include "CGraphicsEditingWindow.h"
 #include "../../Message/Console.h"
+#include <Scene/CSceneWriter.h>
+#include <Input/CInputState.h>
 
 namespace gui
 {
@@ -88,6 +90,14 @@ namespace gui
 
 			ImGui::End();
 		}
+
+		// ƒV[ƒ“•Û‘¶
+#ifdef USE_BINARY_WRITE
+		if ( (ImGui::IsKeyDown(ImGuiKey_LeftCtrl) && ImGui::IsKeyReleased(ImGuiKey_S)) || (GUIParams.InputState->IsKeyDown(input::EKeyType::KEY_TYPE_CONTROL) && GUIParams.InputState->IsKeyUp(input::EKeyType::KEY_TYPE_S)) )
+		{
+			if (!scene::CSceneWriter::Write(GUIParams.SceneController.get(), GUIParams.TimelineController)) return false;
+		}
+#endif
 
 		return true;
 	}
