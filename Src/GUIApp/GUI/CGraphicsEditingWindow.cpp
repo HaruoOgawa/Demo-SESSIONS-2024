@@ -6,7 +6,8 @@
 
 namespace gui
 {
-	CGraphicsEditingWindow::CGraphicsEditingWindow()
+	CGraphicsEditingWindow::CGraphicsEditingWindow():
+		m_ShowSavedDialog(false)
 	{
 	}
 
@@ -96,8 +97,39 @@ namespace gui
 		if ( (ImGui::IsKeyDown(ImGuiKey_LeftCtrl) && ImGui::IsKeyReleased(ImGuiKey_S)) || (GUIParams.InputState->IsKeyDown(input::EKeyType::KEY_TYPE_CONTROL) && GUIParams.InputState->IsKeyUp(input::EKeyType::KEY_TYPE_S)) )
 		{
 			if (!scene::CSceneWriter::Write(GUIParams.SceneController.get(), GUIParams.TimelineController)) return false;
+
+			m_ShowSavedDialog = true;
 		}
 #endif
+
+		if (m_ShowSavedDialog)
+		{
+			ImVec2 DisplaySize = io.DisplaySize;
+			ImVec2 WindowSize = ImVec2(DisplaySize.x * 0.25f, DisplaySize.y * 0.25f);
+			ImVec2 WindowPos = ImVec2(DisplaySize.x * 0.5f - WindowSize.x * 0.5f, DisplaySize.y * 0.5f - WindowSize.y * 0.5f);
+
+			ImGui::SetNextWindowPos(WindowPos, ImGuiCond_Appearing, ImVec2(0.0f, 0.0f));
+			ImGui::SetNextWindowSize(WindowSize, ImGuiCond_Appearing);
+
+			if (ImGui::Begin("##Timeline_SavedScene_Dialog", &m_ShowSavedDialog))
+			{
+				ImVec2 CursorPos = ImGui::GetCursorPos();
+
+				ImGui::Text("The scene was saved successfully.");
+
+				if (ImGui::Button("OK##Timeline_SavedScene_Dialog"))
+				{
+					m_ShowSavedDialog = false;
+				}
+
+				if (ImGui::IsKeyReleased(ImGuiKey_Enter) || GUIParams.InputState->IsKeyUp(input::EKeyType::KEY_TYPE_ENTER))
+				{
+					m_ShowSavedDialog = false;
+				}
+			}
+
+			ImGui::End();
+		}
 
 		return true;
 	}
