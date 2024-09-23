@@ -33,6 +33,11 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float usePattern;
 	float glowPower;
 	float expandRadius;
+
+	float LightParam;
+	float fPad0;
+	float fPad1;
+	float fPad2;
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
@@ -120,7 +125,8 @@ MatInfo map(vec3 p, vec3 gridCenter)
 
 		if(length(gridCenter.xz) < fragUbo.expandRadius)
 		{
-			float tmpH = min(0.5, exp(fragUbo.expandRadius - length(gridCenter.xz)));
+			float power = 0.25;
+			float tmpH = min(0.5, exp((fragUbo.expandRadius - length(gridCenter.xz))) * power);
 			hegiht += tmpH;
 		}
 	}
@@ -274,7 +280,6 @@ void main()
 		if(abs(Info.Dist) < MIN_VALUE) break;
 	}
 
-	float UseLightPos = 1.0;
 	float Metallic = 0.1;
 	float Roughness = 0.0;
 
@@ -316,7 +321,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(Info.Albedo, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(Info.MatID, UseLightPos, Metallic, Roughness);
+		gParam_1 = vec4(Info.MatID, fragUbo.LightParam, Metallic, Roughness);
 
 		gl_FragDepth = outDepth;
 	}

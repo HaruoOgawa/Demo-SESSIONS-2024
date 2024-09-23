@@ -165,6 +165,34 @@
                 "initValue": [ 0.0 ],
                 "input": {
                 }
+              },
+              {
+                "name": "LightParam",
+                "type": "float",
+                "initValue": [ 1.0 ],
+                "input": {
+                }
+              },
+              {
+                "name": "fPad0",
+                "type": "float",
+                "initValue": [ 0.0 ],
+                "input": {
+                }
+              },
+              {
+                "name": "fPad1",
+                "type": "float",
+                "initValue": [ 0.0 ],
+                "input": {
+                }
+              },
+              {
+                "name": "fPad2",
+                "type": "float",
+                "initValue": [ 0.0 ],
+                "input": {
+                }
               }
             ]
           }

@@ -90,7 +90,7 @@ vec3 CalcDiffuseBRDF(PBRParam param)
 	return param.diffuseColor / PI;
 }
 
-vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 lightDir, float Metallic, float Roughness)
+vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, bool UseCameraPos, vec3 lightDir, float Metallic, float Roughness)
 {
 	vec4 col = vec4(1.0);
 
@@ -120,8 +120,7 @@ vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 light
 	vec3 n = Normal;
 	vec3 v = (-1.0f) * normalize(WorldPos - fragUBO.cameraPos.xyz);
 	
-	// vec3 l = lightDir;
-	vec3 l = normalize(vec3(0.0, 1.0, 1.0));
+	vec3 l = lightDir;
 	if(UseLightPos)
 	{
 		vec3 lightPos = fragUBO.lightPos.xyz;
@@ -182,13 +181,16 @@ vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 light
 
 	col.rgb = pow(col.rgb, vec3(1.0/2.2));
 
+	float Atten = 0.25;
+
 	if(UseLightPos)
 	{
-		vec3 lightPos = fragUBO.lightPos.xyz;
-
-		float Atten = 0.25;
-		float len = length(WorldPos - lightPos);
-
+		float len = length(WorldPos - fragUBO.lightPos.xyz);
+		col.rgb *= exp(-1.0 * len * Atten);
+	}
+	else if(UseCameraPos)
+	{
+		float len = length(WorldPos - fragUBO.cameraPos.xyz);
 		col.rgb *= exp(-1.0 * len * Atten);
 	}
 
@@ -236,16 +238,18 @@ void main()
 		vec3 WorldPos = SSWGPositionCol.rgb;
 		float MatID = floor(SSWParam1Col.r);
 		bool UseLightPos = (floor(SSWParam1Col.g) == 1.0);
+		bool UseCameraPos = (floor(SSWParam1Col.g) == 2.0);
 		// float Metallic = SSWParam1Col.b;
 		float Metallic = 1.0;
 		// float Roughness = SSWParam1Col.a;
 		float Roughness = 0.0;
 		// vec3 lightDir = (-1.0f) * normalize(fragUBO.lightDir.xyz);
 		// とりま定数
-		vec3 lightDir = (-1.0f) * normalize(vec3(1.0, -1.0, 1.0));
+		vec3 lightDir = (-1.0f) * normalize(vec3(0.0, -1.0, -1.0));
 
-		vec3 col = DoPBR(Albedo, Normal, WorldPos, true, lightDir, Metallic, Roughness);
-		col += DoPBR(Albedo, Normal, WorldPos, false, lightDir, Metallic, Roughness);
+		vec3 col = vec3(0.0);
+		if(UseLightPos) col += DoPBR(Albedo, Normal, WorldPos, true, false, lightDir, Metallic, Roughness);
+		col += DoPBR(Albedo, Normal, WorldPos, false, UseCameraPos, lightDir, Metallic, Roughness);
 
 		{
 			vec3 Pos = SSWGPositionCol.xyz;

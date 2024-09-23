@@ -28,10 +28,6 @@
     "valueregistries": [
         {
             "registryname": "BloomRegistry",
-            "trackids": [
-                "2bd4e1aa-1ae2-4fff-b202-a69d1c6baaf2",
-                "bd674e8b-bacb-417e-af20-06ec1ee81d07"
-            ],
             "values": [
                 {
                     "name": "Intencity",
@@ -184,7 +180,8 @@
                     ],
                     "trackids": [
                         "44c936ce-043f-4a56-a73e-d398a70bf908",
-                        "15b69e48-e38b-4461-bc1c-284bd3927d9d"
+                        "15b69e48-e38b-4461-bc1c-284bd3927d9d",
+                        "e196eb30-876a-474a-8007-adc7a73f85a1"
                     ]
                 }
             ]
@@ -519,7 +516,11 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": 0
+                    "meshindex": 0,
+                    "trackids": [
+                        "65d95f66-cf6e-496c-80b1-236103794cb1",
+                        "e3e0a1a4-8aeb-4ba5-890f-0ecd1a3cda8a"
+                    ]
                 }
             ],
             "meshs": [
@@ -537,6 +538,13 @@
                     "materialframe": "Water",
                     "cull": "front",
                     "uniformvalues": [
+                        {
+                            "name": "LightParam",
+                            "type": "float",
+                            "value": [
+                                0.0
+                            ]
+                        },
                         {
                             "name": "WaterHeight",
                             "type": "float",

@@ -28,6 +28,11 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float baseHeight;
 	float WaterWidth;
 	float WaterHeight;
+	
+	float LightParam;
+	float fPad0;
+	float fPad1;
+	float fPad2;
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
@@ -180,8 +185,6 @@ void main()
 		if(abs(Info.d) < MIN_VALUE) break;
 	}
 
-	float UseLightPos = 1.0;
-
 	if(Info.d < MIN_VALUE)
 	{
 		vec3 n = gn(p);
@@ -193,7 +196,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(col, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(Info.MatID, UseLightPos, Info.metallic, Info.roughness);
+		gParam_1 = vec4(Info.MatID, fragUbo.LightParam, Info.metallic, Info.roughness);
 
 		gl_FragDepth = outDepth;
 	}

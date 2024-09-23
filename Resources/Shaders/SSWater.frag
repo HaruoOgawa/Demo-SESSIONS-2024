@@ -254,7 +254,7 @@ void main()
 		if(abs(Info.d) < MIN_VALUE) break;
 	}
 
-	float UseLightPos = 1.0;
+	float LightParam = 1.0;
 
 	// if(Info.d < MIN_VALUE && CurrentSceneDepth <= SceneDepth)
 	if(Info.d < MIN_VALUE)

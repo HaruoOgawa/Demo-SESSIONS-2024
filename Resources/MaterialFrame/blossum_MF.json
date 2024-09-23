@@ -161,55 +161,31 @@
                 }
               },
               {
-                "name": "lowGridRadius",
+                "name": "LightParam",
                 "type": "float",
-                "initValue": [ 5.0 ],
+                "initValue": [ 1.0 ],
                 "input": {
                 }
               },
               {
-                "name": "placeMode",
+                "name": "fPad0",
                 "type": "float",
                 "initValue": [ 0.0 ],
                 "input": {
                 }
               },
               {
-                "name": "someTallMode",
-                "type": "float",
-                "initValue": [ 0.5 ],
-                "input": {
-                }
-              },
-              {
-                "name": "ceilingOffsset",
+                "name": "fPad1",
                 "type": "float",
                 "initValue": [ 0.0 ],
                 "input": {
                 }
               },
               {
-                "name": "fpad0",
+                "name": "fPad2",
                 "type": "float",
                 "initValue": [ 0.0 ],
                 "input": {
-                  "hide": true
-                }
-              },
-              {
-                "name": "fpad1",
-                "type": "float",
-                "initValue": [ 0.0 ],
-                "input": {
-                  "hide": true
-                }
-              },
-              {
-                "name": "fpad2",
-                "type": "float",
-                "initValue": [ 0.0 ],
-                "input": {
-                  "hide": true
                 }
               }
             ]
