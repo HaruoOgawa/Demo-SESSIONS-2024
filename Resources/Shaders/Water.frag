@@ -30,7 +30,7 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float WaterHeight;
 	
 	float LightParam;
-	float fPad0;
+	float useZAnim;
 	float fPad1;
 	float fPad2;
 } fragUbo;
@@ -116,7 +116,7 @@ MatInfo map(vec3 p)
 	else*/
 	{
 		st = p.xz;
-		// st.y += fragUbo.time * 0.1;
+		if(floor(fragUbo.useZAnim) == 1.0) st.y += fragUbo.time;
 	}
 
 	float h = noise(st * fragUbo.WaterWidth) * fragUbo.WaterHeight;

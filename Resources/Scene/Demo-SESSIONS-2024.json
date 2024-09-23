@@ -181,7 +181,9 @@
                     "trackids": [
                         "44c936ce-043f-4a56-a73e-d398a70bf908",
                         "15b69e48-e38b-4461-bc1c-284bd3927d9d",
-                        "e196eb30-876a-474a-8007-adc7a73f85a1"
+                        "e196eb30-876a-474a-8007-adc7a73f85a1",
+                        "0ca4b2d5-6df8-42a4-b7cd-ca4eb22d9f2a",
+                        "411dd1bd-e55f-4ef2-9332-2940a2e70a68"
                     ]
                 }
             ]
@@ -576,6 +578,9 @@
                                 1.0
                             ]
                         }
+                    ],
+                    "trackids": [
+                        "9cdbc1d1-75cc-4694-9077-825503b12e38"
                     ]
                 }
             ]
@@ -645,7 +650,10 @@
             "materials": [
                 {
                     "materialframe": "blossum",
-                    "cull": "front"
+                    "cull": "front",
+                    "trackids": [
+                        "4716760c-c021-4b7b-8a54-0aeb68159708"
+                    ]
                 }
             ]
         }

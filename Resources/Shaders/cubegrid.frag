@@ -35,7 +35,7 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float expandRadius;
 
 	float LightParam;
-	float fPad0;
+	float useZAnim;
 	float fPad1;
 	float fPad2;
 } fragUbo;
@@ -93,7 +93,7 @@ MatInfo map(vec3 p, vec3 gridCenter)
 
 	float width = GRID_INTERVAL * 0.5;
 
-	vec3 Albedo = vec3(1.0);
+	vec3 Albedo = fragUbo.mainColor.rgb;
 	float MatID = 2.0;
 
 	if(floor(fragUbo.placeMode) == 0.0) // Sphereに配置
@@ -241,11 +241,14 @@ void main()
 	vec2 st = v2f_UV * 2.0 - 1.0;
 	st.x *= (fragUbo.resolution.x / fragUbo.resolution.y);
 	
-	vec3 ro = (fragUbo.invModel * fragUbo.cameraPos).xyz;
+	vec4 cameraPos = fragUbo.cameraPos;
+
+	vec3 ro = (fragUbo.invModel * cameraPos).xyz;
     vec3 rd = normalize(v2f_ObjectPos.xyz - ro);
 
 	// カメラのオフセット分を追加する。これがないと原点として扱われる
-	ro += fragUbo.cameraPos.xyz;
+	ro += cameraPos.xyz;
+	if(floor(fragUbo.useZAnim) == 1.0) ro.z += fragUbo.time;
 
 	float depth = 0.0, lenToNextGrid = 0.0;
 	vec3 p = ro + rd * depth;
@@ -286,6 +289,9 @@ void main()
 	if(Info.Dist < MIN_VALUE)
 	{
 		vec3 n = gn(p - gridCenter, gridCenter);
+
+		if(floor(fragUbo.useZAnim) == 1.0) p -= vec3(0.0, 0.0, fragUbo.time);
+		
 		float outDepth = CalcDepth(p);
 
 		// GlowPattern

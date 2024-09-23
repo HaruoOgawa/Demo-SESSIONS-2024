@@ -111,7 +111,7 @@
               "type": "vec4",
               "initValue": [ 1.0, 1.0, 1.0, 1.0 ],
               "input": {
-                "hide": true
+                "type":"color"
               }
             },
             {
@@ -217,7 +217,7 @@
               }
             },
             {
-              "name": "fPad0",
+              "name": "useZAnim",
               "type": "float",
               "initValue": [ 0.0 ],
               "input": {

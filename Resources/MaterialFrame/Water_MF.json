@@ -188,7 +188,7 @@
               }
             },
             {
-              "name": "fPad0",
+              "name": "useZAnim",
               "type": "float",
               "initValue": [ 0.0 ],
               "input": {

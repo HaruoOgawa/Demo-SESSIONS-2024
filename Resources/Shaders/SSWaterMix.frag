@@ -276,7 +276,7 @@ void main()
 			
 			float threshold = 0.5;
 
-			vec3 ReflectCol = vec3(0.0);
+			vec3 RefractCol = vec3(0.0);
 			vec2 screenUV = vec2(0.0);
 
 			for(float i = 0.0; i < MARCH; i++)
@@ -292,7 +292,7 @@ void main()
 
 				if(length(scenePos - ro) < threshold)
 				{
-					ReflectCol = texture(texMainColor, screenUV).rgb;
+					RefractCol = texture(texMainColor, screenUV).rgb;
 					break;
 				}
 			}
@@ -300,7 +300,7 @@ void main()
 			if(screenUV.x < 0.0 || screenUV.x > 1.0 || screenUV.y < 0.0 || screenUV.y > 1.0)
 			{
 				// screenUV = clamp(screenUV, 0.0, 1.0);
-				// ReflectCol = texture(texMainColor, screenUV).rgb;
+				// RefractCol = texture(texMainColor, screenUV).rgb;
 
 				// ViewVecとしてやりなおす
 				ro = Pos;
@@ -320,13 +320,13 @@ void main()
 
 					if(length(scenePos - ro) < threshold)
 					{
-						ReflectCol = texture(texMainColor, screenUV).rgb;
+						RefractCol = texture(texMainColor, screenUV).rgb;
 						break;
 					}
 				}
 			}
 
-			col += ReflectCol;
+			col += RefractCol;
 
 			// col = vec3(screenUV, 0.0);
 		}

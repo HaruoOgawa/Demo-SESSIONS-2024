@@ -26,7 +26,7 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float zLength;
 
 	float LightParam;
-	float fPad0;
+	float useZAnim;
 	float fPad1;
 	float fPad2;
 } fragUbo;
@@ -104,6 +104,8 @@ MatInfo Brossum(vec3 p, vec3 offset, float gridW)
 
 	if(length(p.xz - fragUbo.cameraPos.xz) > 25.0) return Info;
 	
+	if(floor(fragUbo.useZAnim) == 1.0) p.z += fragUbo.time;
+
 	vec2 gridID = floor(p.xz / gridW) * gridW;
 	p.xz = repeat(p.xz, gridW);
 
@@ -163,8 +165,6 @@ MatInfo map(vec3 p)
 
 	float offset = 2.0;
 	float gridW = 4.0;
-
-	// p.z -= fragUbo.time;
 
 	{
 		MatInfo B = Brossum(p, vec3(0.0), gridW);
