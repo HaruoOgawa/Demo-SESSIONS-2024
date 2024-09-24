@@ -135,7 +135,7 @@ MatInfo Brossum(vec3 p, vec3 offset, float gridW)
 
 		{
 			float tempo = 500.0;
-			float Local = mod(fragUbo.time + rand(gridID) * tempo, tempo);
+			float Local = mod(fragUbo.time + rand(vec2(gridID.x * 10.0, 0.12354)) * 100.0 + rand(vec2(0.9746, gridID.y * 10.0)) * 100.0, tempo);
 			float trans = tempo - 2.0 * 3.1415;
 			float t = step(Local, trans) * (Local - trans);
 			float w = sin(t) * 0.5 + 0.5;
