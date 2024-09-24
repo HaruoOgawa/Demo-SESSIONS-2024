@@ -67,7 +67,8 @@ MatInfo getMin(MatInfo src, float d, float MatID, vec3 a)
 const float MIN_VALUE = 1E-3;
 
 // グリッドの間隔
-const float GRID_INTERVAL = 0.25;
+// const float GRID_INTERVAL = 0.25;
+const float GRID_INTERVAL = 0.1;
 
 //
 float rand(vec2 st)
@@ -103,23 +104,6 @@ MatInfo map(vec3 p, vec3 gridCenter)
 		{
 			float tmpH = hegiht * 0.1;
 
-			/*if(floor(fragUbo.someTallMode) == 1.0)
-			{
-				float flag = rand(vec2(gridCenter.x * 10.0 + gridCenter.z, gridCenter.z * 10.0 + gridCenter.x)) * 0.5 + 0.5;
-				if(step(0.995, flag) == 1.0)
-				{
-					tmpH = hegiht * 0.5;
-
-					vec3 RCol = vec3(
-						rand(gridCenter.xz + vec2(0.971, 0.432)) * 0.5 + 0.5,
-						rand(gridCenter.zx + vec2(11.111, 55.6)) * 0.5 + 0.5,
-						rand(gridCenter.xz *2.0 + vec2(9.999)) * 0.5 + 0.5
-					);
-					Albedo = 2.0 * RCol;
-					MatID = 4.0;
-				}
-			}*/
-
 			hegiht = tmpH;
 		}
 
@@ -132,10 +116,31 @@ MatInfo map(vec3 p, vec3 gridCenter)
 	}
 	else if(floor(fragUbo.placeMode) == 1.0) // Cubeに配置
 	{
-		if(length(max(vec2(0.0), abs(gridCenter.xz) - fragUbo.placeCubeSize.xy)) < MIN_VALUE)
+		float tmpH = hegiht * 0.1;
+
+		if(abs(gridCenter.x) > fragUbo.placeCubeSize.x)
+		{
+			float dc = abs(gridCenter.x) - fragUbo.placeCubeSize.x;
+			tmpH += min(2.25, exp(dc * 1.5) * 0.05);
+		}
+		// else
+		{
+			// if(floor(fragUbo.someTallMode) == 1.0)
+			{
+				float flag = rand(vec2(gridCenter.x * 10.0 + gridCenter.z, gridCenter.z * 10.0 + gridCenter.x)) * 0.5 + 0.5;
+				if(step(0.995, flag) == 1.0)
+				{
+					tmpH = hegiht * 0.5;
+				}
+			}
+		}
+
+		hegiht = tmpH;
+
+		/*if(length(max(vec2(0.0), abs(gridCenter.xz) - fragUbo.placeCubeSize.xy)) < MIN_VALUE)
 		{
 			hegiht = hegiht * 0.1;
-		}
+		}*/
 	}
 
 	float d0 = sdBox(pos0 + vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );
