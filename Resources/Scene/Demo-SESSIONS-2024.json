@@ -63,7 +63,7 @@
     ],
     "sound": {
         "bgm": {
-            "filename": "Resources\\Sound\\DemoSound_01.wav",
+            "filename": "Resources\\Sound\\DemoSound_Comp.wav",
             "autoplay": false,
             "loop": false
         }
