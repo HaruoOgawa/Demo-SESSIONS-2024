@@ -28,6 +28,11 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float baseHeight;
 	float WaterWidth;
 	float WaterHeight;
+	
+	float LightParam;
+	float useZAnim;
+	float fPad1;
+	float fPad2;
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
@@ -110,7 +115,8 @@ MatInfo map(vec3 p)
 	}
 	else*/
 	{
-		st = p.xz + fragUbo.time * 0.1;
+		st = p.xz;
+		if(floor(fragUbo.useZAnim) == 1.0) st.y += fragUbo.time;
 	}
 
 	float h = noise(st * fragUbo.WaterWidth) * fragUbo.WaterHeight;
@@ -179,8 +185,6 @@ void main()
 		if(abs(Info.d) < MIN_VALUE) break;
 	}
 
-	float UseLightPos = 1.0;
-
 	if(Info.d < MIN_VALUE)
 	{
 		vec3 n = gn(p);
@@ -192,7 +196,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(col, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(Info.MatID, UseLightPos, Info.metallic, Info.roughness);
+		gParam_1 = vec4(Info.MatID, fragUbo.LightParam, Info.metallic, Info.roughness);
 
 		gl_FragDepth = outDepth;
 	}

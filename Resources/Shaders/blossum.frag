@@ -17,14 +17,18 @@ layout(binding = 1) uniform FragUniformBufferObject{
 
 	vec4 cameraPos;
     vec4 mainColor;
-    vec4 param0;
-    vec4 param1;
+    vec4 placeCubeSize;
+    vec4 v4Pad2;
 
 	vec2 resolution;
 	float time;
 	float deltaTime;
 	float zLength;
-	float fpad0;
+
+	float LightParam;
+	float useZAnim;
+	float fPad1;
+	float fPad2;
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
@@ -93,13 +97,15 @@ MatInfo Brossum(vec3 p, vec3 offset, float gridW)
 
 	p += offset;
 
-	if(length(p.xz) > 10.0) return Info;
-
 	float Dist = 1e5;
 
 	float BaseH = 2.0;
 	p.y += BaseH;
+
+	if(length(p.xz - fragUbo.cameraPos.xz) > 25.0) return Info;
 	
+	if(floor(fragUbo.useZAnim) == 1.0) p.z += fragUbo.time;
+
 	vec2 gridID = floor(p.xz / gridW) * gridW;
 	p.xz = repeat(p.xz, gridW);
 
@@ -129,7 +135,7 @@ MatInfo Brossum(vec3 p, vec3 offset, float gridW)
 
 		{
 			float tempo = 500.0;
-			float Local = mod(fragUbo.time + rand(gridID) * tempo, tempo);
+			float Local = mod(fragUbo.time + rand(vec2(gridID.x * 10.0, 0.12354)) * 100.0 + rand(vec2(0.9746, gridID.y * 10.0)) * 100.0, tempo);
 			float trans = tempo - 2.0 * 3.1415;
 			float t = step(Local, trans) * (Local - trans);
 			float w = sin(t) * 0.5 + 0.5;
@@ -159,8 +165,6 @@ MatInfo map(vec3 p)
 
 	float offset = 2.0;
 	float gridW = 4.0;
-
-	// p.z -= fragUbo.time;
 
 	{
 		MatInfo B = Brossum(p, vec3(0.0), gridW);
@@ -233,8 +237,6 @@ void main()
 		if(abs(Info.d) < MIN_VALUE) break;
 	}
 
-	float UseLightPos = 1.0;
-
 	if(Info.d < MIN_VALUE)
 	{
 		vec3 n = gn(p);
@@ -252,7 +254,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(col, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(Info.MatID, UseLightPos, Info.metallic, Info.roughness);
+		gParam_1 = vec4(Info.MatID, fragUbo.LightParam, Info.metallic, Info.roughness);
 
 		gl_FragDepth = outDepth;
 	}

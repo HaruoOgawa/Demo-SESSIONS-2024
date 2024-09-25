@@ -1,7 +1,6 @@
 #include "CBloomEffect.h"
 #include <Graphics/CFrameRenderer.h>
 #include <Message/Console.h>
-#include <Scene/CSceneController.h>
 
 // 縮小バッファBloomの実装方法
 // https://chatgpt.com/c/a491f927-d30f-4f9d-a416-934e61e7152f
@@ -19,28 +18,14 @@ namespace imageeffect
 			std::make_tuple(SReduceBuf{"ReducePass_4x4", "ReducePass_2x2_YBlur"}, SReduceBuf{"ReducePass_4x4_XBlur", "ReducePass_4x4"} ,SReduceBuf{"ReducePass_4x4_YBlur", "ReducePass_4x4_XBlur"}),
 			std::make_tuple(SReduceBuf{"ReducePass_8x8", "ReducePass_4x4_YBlur"}, SReduceBuf{"ReducePass_8x8_XBlur", "ReducePass_8x8"} ,SReduceBuf{"ReducePass_8x8_YBlur", "ReducePass_8x8_XBlur"})
 		};
+
+		// プロパティの設定
+		SetValue("Threshold", graphics::EUniformValueType::VALUE_TYPE_FLOAT, &glm::vec1(1.0f)[0], sizeof(float));
+		SetValue("Intencity", graphics::EUniformValueType::VALUE_TYPE_FLOAT, &glm::vec1(1.5f)[0], sizeof(float));
 	}
 
 	CBloomEffect::~CBloomEffect()
 	{
-	}
-
-	void CBloomEffect::OnLoaded(const std::shared_ptr<scene::CSceneController>& SceneController)
-	{
-		const auto& InitValueRegistryList = SceneController->GetValueRegistryList();
-
-		const auto& it = InitValueRegistryList.find(GetRegistryName());
-		if (it == InitValueRegistryList.end()) return;
-
-		const auto& InitValueRegistry = it->second;
-
-		for (const auto& Value : InitValueRegistry->GetValueList())
-		{
-			SetValue(Value.second.Name, Value.second.Type, &Value.second.Buffer[0], Value.second.ByteSize);
-		}
-
-		// 更新
-		SceneController->SetValueRegistry(GetRegistryName(), shared_from_this());
 	}
 
 	bool CBloomEffect::Initialize(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker)

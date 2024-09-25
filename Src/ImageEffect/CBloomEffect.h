@@ -41,8 +41,6 @@ namespace imageeffect
 		CBloomEffect(const std::string& TargetPassName);
 		virtual ~CBloomEffect();
 
-		void OnLoaded(const std::shared_ptr<scene::CSceneController>& SceneController);
-
 		bool Initialize(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker);
 
 		bool Update(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<camera::CCamera>& Camera, const std::shared_ptr<projection::CProjection>& Projection,

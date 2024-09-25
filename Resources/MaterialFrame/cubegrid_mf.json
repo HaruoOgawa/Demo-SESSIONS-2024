@@ -111,7 +111,7 @@
               "type": "vec4",
               "initValue": [ 1.0, 1.0, 1.0, 1.0 ],
               "input": {
-                "hide": true
+                "type":"color"
               }
             },
             {
@@ -203,11 +203,38 @@
               }
             },
             {
-              "name": "fpad2",
+              "name": "expandRadius",
               "type": "float",
               "initValue": [ 0.0 ],
               "input": {
-                "hide": true
+              }
+            },
+            {
+              "name": "LightParam",
+              "type": "float",
+              "initValue": [ 1.0 ],
+              "input": {
+              }
+            },
+            {
+              "name": "useZAnim",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
+              }
+            },
+            {
+              "name": "fPad1",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
+              }
+            },
+            {
+              "name": "fPad2",
+              "type": "float",
+              "initValue": [ 0.0 ],
+              "input": {
               }
             }
           ]

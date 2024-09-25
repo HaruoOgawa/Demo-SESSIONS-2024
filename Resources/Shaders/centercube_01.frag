@@ -24,7 +24,12 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float time;
 	float deltaTime;
 	float zLength;
-	float fpad0;
+	float tparam;
+
+	float LightParam;
+	float fPad0;
+	float fPad1;
+	float fPad2;
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
@@ -91,8 +96,13 @@ MatInfo map(vec3 p)
 	Info.metallic = 0.0;
 	Info.roughness = 0.0;
 
+	float time = fragUbo.time * 0.1;
+
 	{
 		vec3 pos = p;
+		pos.xy *= rot(-time);
+		pos.yz *= rot(-time);
+		pos.xz *= rot(-time);
 
 		pos.xy *= rot(pi * 0.25);
 		float d = sdTorus(pos , vec2(2.5, 0.025) );
@@ -101,6 +111,9 @@ MatInfo map(vec3 p)
 
 	{
 		vec3 pos = p;
+		pos.xy *= rot(time);
+		pos.yz *= rot(time);
+		pos.xz *= rot(time);
 
 		pos.xy *= rot(pi * -0.25);
 		float d = sdTorus(pos , vec2(2.0, 0.025) );
@@ -108,70 +121,20 @@ MatInfo map(vec3 p)
 	}
 
 	{
-
-		
-		
-		float offset = 1.0;
-		float angle = 0.0;
-		// float expand = 1.0 + sin(fragUbo.time * 0.1) * 0.25;
-		float rateE = (sin(fragUbo.time * 0.5) * 0.5 + 0.5);
-		float rateA = (sin(fragUbo.time * 2.0) * 0.5 + 0.5);
-		float expand = 1.0 - rateE * 0.5;
-
-
-		/*for(int i = 0; i < 15; i++)
-		{
-			vec3 pos = p;
-			pos *= expand;
-			pos.xy *= rot(fragUbo.time);
-			pos.yz *= rot(fragUbo.time);
-			pos.xz *= rot(fragUbo.time);
-			
-			pos.xy *= rot(angle);
-			pos.yz *= rot(angle);
-			pos.xz *= rot(angle);
-
-			pos = abs(pos);
-			pos -= offset;
-			if(pos.x < pos.y) pos.xy = pos.yx;
-			if(pos.x < pos.z) pos.xz = pos.zx;
-			if(pos.y < pos.z) pos.yz = pos.zy;
-
-			float d = length(pos.xy) - 0.01;
-			gInfo = getMin(Info, d, 3.0);
-
-			offset *= 0.99;
-			// angle += 0.05;
-			angle += 0.01 + rateA * 0.04;
-		}*/
-
-
-		// float scale = 1.0;
-
-		// for(int i = 0; i < 6; i++)
-		// {
-		// 	pos.xy *= rot(pi * -0.25);
-
-		// 	float d = sdTorus(pos/ scale , vec2(2.0, 0.02) );
-		// 	Info = getMin(Info, d, 3.0);
-
-		// 	scale *= 0.8;
-		// 	pos *= 0.8;
-		// }
-	}
-
-	{
 		vec3 pos = p;
-			pos.xy *= rot(-fragUbo.time);
-			pos.yz *= rot(-fragUbo.time);
-			pos.xz *= rot(-fragUbo.time);
+
+		pos.xy *= rot(-time);
+		pos.yz *= rot(time);
+		pos.xz *= rot(-time);
 
 		// 直角Fold
 		pos = abs(pos);
 		
 		float sum = 1.0;
 
-		for(int i = 0; i < 3; i++)
+		float lt = fragUbo.tparam * 3.1415 * 2.0;
+
+		for(int i = 0; i < 5; i++)
 		{
 			pos = abs(pos) - vec3(fragUbo.param0.w);
 			// pos.xy = pmod(pos.xy, 3.0);
@@ -181,23 +144,23 @@ MatInfo map(vec3 p)
 
 			// pos = abs(pos) - vec3(0.2, 0.2, 0.2);
 
-			float sc = clamp(max(0.0, 2.0 / dot(p, p)), 0.0, 4.0);
+			float sc = 1.0 * clamp(max(0.0, 2.0 / dot(p, p)), 0.0, 2.0);
 			// float sc = 2.0;
 			pos *= sc;
 			sum *= sc;
 			
 			pos.xy -= 0.2;
 
-			pos.xy *= rot(fragUbo.param0.x);
-			pos.yz *= rot(fragUbo.param0.y);
-			pos.xz *= rot(fragUbo.param0.z);
+			pos.xy *= rot(fragUbo.param0.x * lt);
+			pos.yz *= rot(fragUbo.param0.y * lt);
+			pos.xz *= rot(fragUbo.param0.z * lt);
 
 			// pos = abs(pos);
-			// pos.xy -= 0.05;
+			// pos.z -= 0.05;
 		}
 
 		float h = fragUbo.param1.x;
-		pos.x -= clamp(pos.x, -h, h);
+		// pos.x -= clamp(pos.x, -h, h);
 
 		// sum = abs(sum);
 
@@ -270,20 +233,18 @@ void main()
 	for(int i = 0; i < 64; i++)
 	{
 		Info = map(p);
-		depth += Info.d;
+		depth += Info.d * 0.5;
 		p = ro + rd * depth;
 
 		if(abs(Info.d) < MIN_VALUE) break;
 	}
-
-	float UseLightPos = 1.0;
 
 	if(Info.d < MIN_VALUE)
 	{
 		vec3 n = gn(p);
 		float outDepth = CalcDepth(p);
 
-		col = vec3(1.0);
+		col = fragUbo.mainColor.rgb;
 
 		// Emission
 		if(Info.MatID == 4.0)
@@ -295,7 +256,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(col, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(Info.MatID, UseLightPos, Info.metallic, Info.roughness);
+		gParam_1 = vec4(Info.MatID, fragUbo.LightParam, Info.metallic, Info.roughness);
 
 		gl_FragDepth = outDepth;
 	}

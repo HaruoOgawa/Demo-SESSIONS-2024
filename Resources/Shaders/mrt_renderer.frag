@@ -96,7 +96,7 @@ vec3 CalcDiffuseBRDF(PBRParam param)
 	return param.diffuseColor / PI;
 }
 
-vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 lightDir, float Metallic, float Roughness)
+vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, bool UseCameraPos, vec3 lightDir, float Metallic, float Roughness)
 {
 	vec4 col = vec4(1.0);
 
@@ -187,13 +187,16 @@ vec3 DoPBR(vec3 Albedo, vec3 Normal, vec3 WorldPos, bool UseLightPos, vec3 light
 
 	col.rgb = pow(col.rgb, vec3(1.0/2.2));
 
+	float Atten = 0.25;
+
 	if(UseLightPos)
 	{
-		vec3 lightPos = fragUBO.lightPos.xyz;
-
-		float Atten = 0.25;
-		float len = length(WorldPos - lightPos);
-
+		float len = length(WorldPos - fragUBO.lightPos.xyz);
+		col.rgb *= exp(-1.0 * len * Atten);
+	}
+	else if(UseCameraPos)
+	{
+		float len = length(WorldPos - fragUBO.cameraPos.xyz);
 		col.rgb *= exp(-1.0 * len * Atten);
 	}
 
@@ -233,7 +236,7 @@ void main()
 	vec4 GDepthCol = texture(sampler2D(texDepth, texDepthSampler), st);
 	#endif
 
-	// (Material_ID, UseLightPos, Metallic, Roughness)
+	// (Material_ID, LightParam, Metallic, Roughness)
     #ifdef USE_OPENGL
 	vec4 Param1Col = texture(texParam1, st);
 	#else
@@ -245,6 +248,7 @@ void main()
 	vec3 WorldPos = GPositionCol.rgb;
 	float MatID = floor(Param1Col.r);
 	bool UseLightPos = (floor(Param1Col.g) == 1.0);
+	bool UseCameraPos = (floor(Param1Col.g) == 2.0);
 	float Metallic = Param1Col.b;
 	float Roughness = Param1Col.a;
 
@@ -261,7 +265,7 @@ void main()
 		// とりま定数
 		vec3 lightDir = (-1.0f) * normalize(vec3(1.0, -1.0, 1.0));
 
-		col.rgb = DoPBR(Albedo, Normal, WorldPos, UseLightPos, lightDir, Metallic, Roughness);
+		col.rgb = DoPBR(Albedo, Normal, WorldPos, UseLightPos, UseCameraPos, lightDir, Metallic, Roughness);
 	}
 	else if(MatID == 3.0)
 	{
@@ -269,7 +273,7 @@ void main()
 		{
 			vec3 lightDir = vec3((i % 2 == 0)? 1.0 : -1.0 , 1.0, (i % 2 == 0)? 1.0 : -1.0);
 
-			col.rgb += DoPBR(Albedo, Normal, WorldPos, false, lightDir, Metallic, Roughness);
+			col.rgb += DoPBR(Albedo, Normal, WorldPos, false, false, lightDir, Metallic, Roughness);
 		}
 
 		col.rgb *= 0.5;

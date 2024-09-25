@@ -33,7 +33,7 @@ namespace app
 	CScriptApp::CScriptApp() :
 		m_SceneController(std::make_shared<scene::CSceneController>()),
 		m_ScriptScene(nullptr),
-		m_CameraSwitchToggle(true),
+		m_CameraSwitchToggle(false),
 		m_MainCamera(nullptr),
 #ifdef USE_VIEWER_CAMERA
 		m_ViewCamera(std::make_shared<camera::CViewerCamera>()),
@@ -62,13 +62,16 @@ namespace app
 
 		m_ViewCamera->SetPos(glm::vec3(0.0f, 0.0f, 3.0));
 
-		m_MainCamera = m_ViewCamera;
+		//m_MainCamera = m_ViewCamera;
+		m_MainCamera = m_TraceCamera;
 
 		// ライトはあとでトレースカメラにする
 		//m_DrawInfo->GetLightCamera()->SetPos(glm::vec3(-2.358f, 15.6f, -0.59f));
 		//m_DrawInfo->GetLightCamera()->SetPos(glm::vec3(0.0f, 0.0f, 0.0f));
 		m_DrawInfo->GetLightProjection()->SetNear(2.0f);
 		m_DrawInfo->GetLightProjection()->SetFar(100.0f);
+
+		m_DrawInfo->GetLightCamera()->SetPos(glm::vec3(0.0f, 1.0f, 1.0f));
 
 		m_SceneController->SetDefaultPass("MainResultPass", "");
 
@@ -163,7 +166,7 @@ namespace app
 			if (!m_TimelineController->Update(m_DrawInfo->GetDeltaSecondsTime(), InputState)) return false;
 		}
 
-		if (!m_SceneController->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
+		if (!m_SceneController->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState, m_TimelineController)) return false;
 		if (!m_ScriptScene->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState)) return false;
 
 		m_MainCamera->Update(m_DrawInfo->GetDeltaSecondsTime(), InputState);
@@ -221,7 +224,7 @@ namespace app
 		return true;
 	}
 
-	bool CScriptApp::Draw(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<gui::IGUIEngine>& GUIEngine)
+	bool CScriptApp::Draw(api::IGraphicsAPI* pGraphicsAPI, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<input::CInputState>& InputState, const std::shared_ptr<gui::IGUIEngine>& GUIEngine)
 	{
 		// MRTPass
 		{
@@ -266,6 +269,10 @@ namespace app
 				gui::SGUIParams GUIParams = gui::SGUIParams(GetObjectList(), m_SceneController, m_FileModifier, m_TimelineController, pLoadWorker, {});
 				
 				GUIParams.ValueRegistryList.emplace(m_BloomEffect->GetRegistryName(), m_BloomEffect);
+				GUIParams.ValueRegistryList.emplace(m_ChromaticAberrationEffect->GetRegistryName(), m_ChromaticAberrationEffect);
+				GUIParams.CameraMode = (m_CameraSwitchToggle) ? "ViewCamera" : "TraceCamera";
+				GUIParams.Camera = m_MainCamera;
+				GUIParams.InputState = InputState;
 
 				if (!GUIEngine->BeginFrame(pGraphicsAPI)) return false;
 				if (!m_GraphicsEditingWindow->Draw(pGraphicsAPI, GUIParams, GUIEngine))
@@ -311,6 +318,7 @@ namespace app
 		}
 
 		m_BloomEffect->OnLoaded(m_SceneController);
+		m_ChromaticAberrationEffect->OnLoaded(m_SceneController);
 
 		if (!m_TimelineController->Initialize(shared_from_this())) return false;
 
@@ -319,6 +327,7 @@ namespace app
 			gui::SGUIParams GUIParams = gui::SGUIParams(GetObjectList(), m_SceneController, m_FileModifier, m_TimelineController, pLoadWorker, {});
 
 			GUIParams.ValueRegistryList.emplace(m_BloomEffect->GetRegistryName(), m_BloomEffect);
+			GUIParams.ValueRegistryList.emplace(m_ChromaticAberrationEffect->GetRegistryName(), m_ChromaticAberrationEffect);
 
 			if (!m_GraphicsEditingWindow->OnLoaded(pGraphicsAPI, GUIParams, GUIEngine)) return false;
 		}

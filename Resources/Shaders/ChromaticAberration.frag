@@ -18,7 +18,7 @@ layout(binding = 2) uniform FragUniformBuffer
 
 	vec4 cameraPos;
 
-	float fPad0;
+	float whiteRate;
 	float fPad1;
 	float fPad2;
 	float fPad3;
@@ -60,6 +60,9 @@ void main()
 	col.r += rand(texcoord + 0.1 + vec2(frag_ubo.cameraPos.x)) * 0.075;
 	col.g += rand(texcoord + 0.2 + vec2(frag_ubo.cameraPos.y)) * 0.075;
 	col.b += rand(texcoord + 0.3 + vec2(frag_ubo.cameraPos.z)) * 0.075;
+
+	// ホワイトアウト
+	col = mix(col, vec3(1.0), frag_ubo.whiteRate);
 
 	// 映画フィルム
 	// もしかしたらの別のフィルターとして移動するかも？

@@ -35,6 +35,8 @@ namespace gui
 
 		CTimeLineView m_TimeLineView;
 		C3DView m_3DView;
+
+		bool m_ShowSavedDialog;
 	public:
 		CGraphicsEditingWindow();
 		virtual ~CGraphicsEditingWindow();

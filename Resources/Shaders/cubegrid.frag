@@ -32,7 +32,12 @@ layout(binding = 1) uniform FragUniformBufferObject{
 	float ceilingOffsset;
 	float usePattern;
 	float glowPower;
-	float fpad2;
+	float expandRadius;
+
+	float LightParam;
+	float useZAnim;
+	float fPad1;
+	float fPad2;
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
@@ -62,7 +67,8 @@ MatInfo getMin(MatInfo src, float d, float MatID, vec3 a)
 const float MIN_VALUE = 1E-3;
 
 // グリッドの間隔
-const float GRID_INTERVAL = 0.25;
+// const float GRID_INTERVAL = 0.25;
+const float GRID_INTERVAL = 0.1;
 
 //
 float rand(vec2 st)
@@ -88,7 +94,7 @@ MatInfo map(vec3 p, vec3 gridCenter)
 
 	float width = GRID_INTERVAL * 0.5;
 
-	vec3 Albedo = vec3(1.0);
+	vec3 Albedo = fragUbo.mainColor.rgb;
 	float MatID = 2.0;
 
 	if(floor(fragUbo.placeMode) == 0.0) // Sphereに配置
@@ -98,32 +104,43 @@ MatInfo map(vec3 p, vec3 gridCenter)
 		{
 			float tmpH = hegiht * 0.1;
 
-			if(floor(fragUbo.someTallMode) == 1.0)
+			hegiht = tmpH;
+		}
+
+		if(length(gridCenter.xz) < fragUbo.expandRadius)
+		{
+			float power = 0.25;
+			float tmpH = min(0.5, exp((fragUbo.expandRadius - length(gridCenter.xz))) * power);
+			hegiht += tmpH;
+		}
+	}
+	else if(floor(fragUbo.placeMode) == 1.0) // Cubeに配置
+	{
+		float tmpH = hegiht * 0.1;
+
+		if(abs(gridCenter.x) > fragUbo.placeCubeSize.x)
+		{
+			float dc = abs(gridCenter.x) - fragUbo.placeCubeSize.x;
+			tmpH += min(2.25, exp(dc * 1.5) * 0.05);
+		}
+		// else
+		{
+			// if(floor(fragUbo.someTallMode) == 1.0)
 			{
 				float flag = rand(vec2(gridCenter.x * 10.0 + gridCenter.z, gridCenter.z * 10.0 + gridCenter.x)) * 0.5 + 0.5;
 				if(step(0.995, flag) == 1.0)
 				{
 					tmpH = hegiht * 0.5;
-
-					vec3 RCol = vec3(
-						rand(gridCenter.xz + vec2(0.971, 0.432)) * 0.5 + 0.5,
-						rand(gridCenter.zx + vec2(11.111, 55.6)) * 0.5 + 0.5,
-						rand(gridCenter.xz *2.0 + vec2(9.999)) * 0.5 + 0.5
-					);
-					Albedo = 2.0 * RCol;
-					MatID = 4.0;
 				}
 			}
-
-			hegiht = tmpH;
 		}
-	}
-	else if(floor(fragUbo.placeMode) == 1.0) // Cubeに配置
-	{
-		if(length(max(vec2(0.0), abs(gridCenter.xz) - fragUbo.placeCubeSize.xy)) < MIN_VALUE)
+
+		hegiht = tmpH;
+
+		/*if(length(max(vec2(0.0), abs(gridCenter.xz) - fragUbo.placeCubeSize.xy)) < MIN_VALUE)
 		{
 			hegiht = hegiht * 0.1;
-		}
+		}*/
 	}
 
 	float d0 = sdBox(pos0 + vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );
@@ -229,11 +246,14 @@ void main()
 	vec2 st = v2f_UV * 2.0 - 1.0;
 	st.x *= (fragUbo.resolution.x / fragUbo.resolution.y);
 	
-	vec3 ro = (fragUbo.invModel * fragUbo.cameraPos).xyz;
+	vec4 cameraPos = fragUbo.cameraPos;
+
+	vec3 ro = (fragUbo.invModel * cameraPos).xyz;
     vec3 rd = normalize(v2f_ObjectPos.xyz - ro);
 
 	// カメラのオフセット分を追加する。これがないと原点として扱われる
-	ro += fragUbo.cameraPos.xyz;
+	ro += cameraPos.xyz;
+	if(floor(fragUbo.useZAnim) == 1.0) ro.z += fragUbo.time;
 
 	float depth = 0.0, lenToNextGrid = 0.0;
 	vec3 p = ro + rd * depth;
@@ -268,13 +288,15 @@ void main()
 		if(abs(Info.Dist) < MIN_VALUE) break;
 	}
 
-	float UseLightPos = 1.0;
 	float Metallic = 0.1;
 	float Roughness = 0.0;
 
 	if(Info.Dist < MIN_VALUE)
 	{
 		vec3 n = gn(p - gridCenter, gridCenter);
+
+		if(floor(fragUbo.useZAnim) == 1.0) p -= vec3(0.0, 0.0, fragUbo.time);
+		
 		float outDepth = CalcDepth(p);
 
 		// GlowPattern
@@ -310,7 +332,7 @@ void main()
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(Info.Albedo, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(Info.MatID, UseLightPos, Metallic, Roughness);
+		gParam_1 = vec4(Info.MatID, fragUbo.LightParam, Metallic, Roughness);
 
 		gl_FragDepth = outDepth;
 	}
