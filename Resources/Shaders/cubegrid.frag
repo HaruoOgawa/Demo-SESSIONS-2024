@@ -346,12 +346,16 @@ void main()
 		{
 			vec3 GlowCol = vec3(0.0);
 
-			for(int i = 0; i < 3; i++)
+			// for(int i = 0; i < 3; i++)
+			for(int i = 0; i < 1; i++)
 			{
+				vec3 pos = p;
+				// vec3 pos = p - gridCenter;
+
 				vec2 target = vec2(0.0);
-				if((i == 0)) target = p.xy * 0.5;
-				else if((i == 1)) target = p.yz * 0.5;
-				else if((i == 2)) target = p.xz * 0.5;
+				if((i == 0)) target = pos.xy * 0.5;
+				else if((i == 1)) target = pos.yz * 0.5;
+				else if((i == 2)) target = pos.xz * 0.5;
 
 				vec2 gp = DrawPattern(target);
 				float glow = 0.0;
