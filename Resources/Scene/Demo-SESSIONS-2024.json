@@ -1,6 +1,10 @@
 {
     "materialframes": [
         {
+            "name": "RotRing",
+            "filename": "Resources/MaterialFrame/RotRing_MF.json"
+        },
+        {
             "name": "Water",
             "filename": "Resources/MaterialFrame/Water_MF.json"
         },
@@ -647,6 +651,73 @@
                     "trackids": [
                         "4716760c-c021-4b7b-8a54-0aeb68159708"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "Ring",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    99.0,
+                    99.0,
+                    99.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "Ring",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "RotRing",
+                    "cull": "front"
                 }
             ]
         }
