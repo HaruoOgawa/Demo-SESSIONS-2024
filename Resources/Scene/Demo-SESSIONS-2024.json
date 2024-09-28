@@ -161,16 +161,6 @@
                             ]
                         },
                         {
-                            "name": "placeCubeSize",
-                            "type": "vec4",
-                            "value": [
-                                0.0,
-                                100.0,
-                                0.5,
-                                -2.551317915928659e-29
-                            ]
-                        },
-                        {
                             "name": "someTallMode",
                             "type": "float",
                             "value": [
@@ -183,7 +173,10 @@
                         "15b69e48-e38b-4461-bc1c-284bd3927d9d",
                         "e196eb30-876a-474a-8007-adc7a73f85a1",
                         "0ca4b2d5-6df8-42a4-b7cd-ca4eb22d9f2a",
-                        "411dd1bd-e55f-4ef2-9332-2940a2e70a68"
+                        "411dd1bd-e55f-4ef2-9332-2940a2e70a68",
+                        "e35cd412-5a4e-4b28-915c-96664f5d7087",
+                        "a3862785-43d7-4f40-ad3c-2ed47bf8544c",
+                        "d3b8ef95-7fa7-4174-87c7-9bad18bfe73c"
                     ]
                 }
             ]

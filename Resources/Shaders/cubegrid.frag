@@ -42,6 +42,8 @@ layout(binding = 1) uniform FragUniformBufferObject{
 
 #define repeat(p, a) mod(p, a) - a * 0.5
 
+float g_Depth;
+
 struct MatInfo
 {
 	float Dist;
@@ -117,14 +119,52 @@ MatInfo map(vec3 p, vec3 gridCenter)
 	else if(floor(fragUbo.placeMode) == 1.0) // Cubeに配置
 	{
 		float tmpH = hegiht * 0.1;
-
+		
 		if(abs(gridCenter.x) > fragUbo.placeCubeSize.x)
 		{
 			float dc = abs(gridCenter.x) - fragUbo.placeCubeSize.x;
-			tmpH += min(2.25, exp(dc * 1.5) * 0.05);
+			tmpH += min(0.5, exp(dc * 1.5) * 0.05);
+
+			tmpH *= 3.5;
+
+			// if(g_Depth.z > 70.0)
+			// if(abs(p.z - fragUbo.cameraPos.z) > 5.0)
+			
+			
+			
 		}
-		// else
+
+		if(g_Depth > 30.0)
 		{
+			tmpH += exp(abs(g_Depth * 0.1)) * 0.1;
+		}
+
+		// else
+
+		{
+			// if(abs(gridCenter.z) > 20.0)
+			// if(abs(gridCenter.z - ca) > 20.0)
+			// if(abs(g_Depth.z) > 30.0)
+			{
+				
+				// tmpH = hegiht;
+
+				// float dc = abs(gridCenter.z) - 20.0;
+				// float dc = abs(g_Depth.z) - 20.0;
+				// tmpH += min(2.25, exp(dc * 1.5) * 0.05);
+			}
+		}
+
+		
+
+		// else
+		// else if(abs(fragUbo.cameraPos.z - gridCenter.z) > 30.0)
+		// else if(abs(p.z - fragUbo.cameraPos.z) > 5.0)
+		// if(length(gridCenter.xz) > 1.0)
+		// else 
+		
+		// else
+		/*{
 			// if(floor(fragUbo.someTallMode) == 1.0)
 			{
 				float flag = rand(vec2(gridCenter.x * 10.0 + gridCenter.z, gridCenter.z * 10.0 + gridCenter.x)) * 0.5 + 0.5;
@@ -133,7 +173,7 @@ MatInfo map(vec3 p, vec3 gridCenter)
 					tmpH = hegiht * 0.5;
 				}
 			}
-		}
+		}*/
 
 		hegiht = tmpH;
 
@@ -266,7 +306,7 @@ void main()
 	Info.MatID = 0.0;
 	Info.Albedo = vec3(0.0);
 
-	for(int i = 0; i < 256; i++)
+	for(int i = 0; i < 512; i++)
 	{
 		if(depth >= lenToNextGrid)
 		{
@@ -284,6 +324,8 @@ void main()
 		Info = map(p - gridCenter, gridCenter);
 		depth += Info.Dist;
 		p = ro + rd * depth;
+
+		g_Depth = depth;
 
 		if(abs(Info.Dist) < MIN_VALUE) break;
 	}
