@@ -20,7 +20,7 @@
 #include "SGUIParams.h"
 
 #include <Interface/IGUIEngine.h>
-#include <Interface/IApp.h>
+#include <AppCore/CApp.h>
 
 namespace api { class IGraphicsAPI; }
 
