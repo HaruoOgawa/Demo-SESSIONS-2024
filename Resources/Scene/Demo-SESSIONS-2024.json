@@ -32,6 +32,10 @@
     "valueregistries": [
         {
             "registryname": "BloomRegistry",
+            "trackids": [
+                "1555187c-3fff-42c9-a632-cc4899b01478",
+                "54a67e8f-82fb-4e63-b75b-52a065eed811"
+            ],
             "values": [
                 {
                     "name": "Intencity",
@@ -180,7 +184,8 @@
                         "411dd1bd-e55f-4ef2-9332-2940a2e70a68",
                         "e35cd412-5a4e-4b28-915c-96664f5d7087",
                         "a3862785-43d7-4f40-ad3c-2ed47bf8544c",
-                        "d3b8ef95-7fa7-4174-87c7-9bad18bfe73c"
+                        "d3b8ef95-7fa7-4174-87c7-9bad18bfe73c",
+                        "3794d691-5e22-4143-aad9-e0fa836e42f4"
                     ]
                 }
             ]
@@ -649,7 +654,8 @@
                     "materialframe": "blossum",
                     "cull": "front",
                     "trackids": [
-                        "4716760c-c021-4b7b-8a54-0aeb68159708"
+                        "4716760c-c021-4b7b-8a54-0aeb68159708",
+                        "a9509765-c894-43d9-b17c-e284f1c6930e"
                     ]
                 }
             ]
@@ -700,8 +706,10 @@
                             1.0
                         ]
                     },
-                    "enable": true,
-                    "meshindex": 0
+                    "meshindex": 0,
+                    "trackids": [
+                        "b99d97f1-9a9f-4e49-a11d-85a6df234079"
+                    ]
                 }
             ],
             "meshs": [

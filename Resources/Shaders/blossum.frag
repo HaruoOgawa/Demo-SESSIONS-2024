@@ -247,7 +247,7 @@ void main()
 		// Emission
 		if(Info.MatID == 4.0)
 		{
-			col = vec3(2.0);
+			col = fragUbo.mainColor.rgb * 2.0;
 		}
 
 		gPosition = vec4(p, 1.0);

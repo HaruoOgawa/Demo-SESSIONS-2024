@@ -36,7 +36,7 @@ layout(binding = 1) uniform FragUniformBufferObject{
 
 	float LightParam;
 	float useZAnim;
-	float fPad1;
+	float hRate;
 	float fPad2;
 } fragUbo;
 
@@ -101,7 +101,6 @@ MatInfo map(vec3 p, vec3 gridCenter)
 
 	if(floor(fragUbo.placeMode) == 0.0) // Sphereに配置
 	{
-		// if(length(gridCenter.xz) < 5.0)
 		if(length(gridCenter.xz) < fragUbo.lowGridRadius)
 		{
 			float tmpH = hegiht * 0.1;
@@ -119,6 +118,7 @@ MatInfo map(vec3 p, vec3 gridCenter)
 	else if(floor(fragUbo.placeMode) == 1.0) // Cubeに配置
 	{
 		float tmpH = hegiht * 0.1;
+		hegiht = tmpH; // 先に反映
 		
 		if(abs(gridCenter.x) > fragUbo.placeCubeSize.x)
 		{
@@ -126,61 +126,15 @@ MatInfo map(vec3 p, vec3 gridCenter)
 			tmpH += min(0.5, exp(dc * 1.5) * 0.05);
 
 			tmpH *= 3.5;
-
-			// if(g_Depth.z > 70.0)
-			// if(abs(p.z - fragUbo.cameraPos.z) > 5.0)
-			
-			
-			
 		}
 
 		if(g_Depth > 30.0)
 		{
 			tmpH += exp(abs(g_Depth * 0.1)) * 0.1;
 		}
-
-		// else
-
-		{
-			// if(abs(gridCenter.z) > 20.0)
-			// if(abs(gridCenter.z - ca) > 20.0)
-			// if(abs(g_Depth.z) > 30.0)
-			{
-				
-				// tmpH = hegiht;
-
-				// float dc = abs(gridCenter.z) - 20.0;
-				// float dc = abs(g_Depth.z) - 20.0;
-				// tmpH += min(2.25, exp(dc * 1.5) * 0.05);
-			}
-		}
-
 		
-
-		// else
-		// else if(abs(fragUbo.cameraPos.z - gridCenter.z) > 30.0)
-		// else if(abs(p.z - fragUbo.cameraPos.z) > 5.0)
-		// if(length(gridCenter.xz) > 1.0)
-		// else 
-		
-		// else
-		/*{
-			// if(floor(fragUbo.someTallMode) == 1.0)
-			{
-				float flag = rand(vec2(gridCenter.x * 10.0 + gridCenter.z, gridCenter.z * 10.0 + gridCenter.x)) * 0.5 + 0.5;
-				if(step(0.995, flag) == 1.0)
-				{
-					tmpH = hegiht * 0.5;
-				}
-			}
-		}*/
-
-		hegiht = tmpH;
-
-		/*if(length(max(vec2(0.0), abs(gridCenter.xz) - fragUbo.placeCubeSize.xy)) < MIN_VALUE)
-		{
-			hegiht = hegiht * 0.1;
-		}*/
+		tmpH *= clamp(fragUbo.hRate, 0.5, 1.0);
+		hegiht = mix(hegiht, tmpH, fragUbo.hRate);
 	}
 
 	float d0 = sdBox(pos0 + vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );

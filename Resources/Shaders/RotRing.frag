@@ -85,7 +85,7 @@ MatInfo map(vec3 p)
 	float time = fragUbo.time * 0.1;
 
 	float d = 1e5;
-	float scl = 3.0;
+	float scl = 2.0;
 	float w = 0.01;
 
 	p.z += fragUbo.time;
@@ -93,6 +93,9 @@ MatInfo map(vec3 p)
 	float gridW = 2.0;
 	float gridID = floor(p.z / gridW) * gridW;
 	p.z = repeat(p.z, gridW);
+
+	// 高さ調整
+	p.y += 1.0;
 
 	p.xy *= rot(gridID * 1.5);
 
