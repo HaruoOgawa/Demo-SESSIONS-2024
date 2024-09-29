@@ -39,7 +39,6 @@ layout(binding = 1) uniform FragUniformBufferObject{
 
 //
 const float MIN_VALUE = 1E-3;
-float g_Scale;
 
 struct MatInfo
 {
@@ -103,19 +102,16 @@ MatInfo map(vec3 p)
 		pos.xy = pmod(pos.xy, 8.0);
 		pos.xz = pmod(pos.xz, 3.0);
 		
-		float at = floor(fragUbo.time) + pow(fract(fragUbo.time), 0.15);
-		//float at = floor(78.53) + pow(fract(78.53), 0.3);
+		float sp = 0.25;
+		float at = floor(fragUbo.time * sp) + pow(fract(fragUbo.time * sp), 0.15);
 		
-		float scale = 1.0;
-		
-		for(int i = 0; i < 5; i++)
+		for(int i = 0; i < 3; i++)
 		{
+			// pos = abs(pos) - 0.1;
 			pos = abs(pos) - 0.1;
-			
-			// float s = 1.0 * clamp(max(0.0, 2.0 / dot(pos, pos)), 0.0, 4.0);
-			float s = 2.0;
-			scale *= s;
-			pos *= s;
+			if(pos.x < pos.y) pos.xy = pos.yx;
+			if(pos.x < pos.z) pos.xz = pos.zx;
+			if(pos.y < pos.z) pos.yz = pos.zy;
 			
 			pos.xy *= rot(at);
 			pos.xz *= rot(at);
@@ -127,16 +123,12 @@ MatInfo map(vec3 p)
 			// pos -= 0.1;
 		}
 		
-		pos /= abs(scale);
-
-		g_Scale = scale;
-		
 		float tmpd = sdBox(pos, vec3(0.1, 0.75, 0.1) * 0.5);
 
 		d = mix(d, tmpd, fragUbo.rate);
 	}
 
-	Info = getMin(Info, d, 2.0, 0.25, 1.0);
+	Info = getMin(Info, d, 4.0, 0.25, 1.0);
 
 	return Info;
 }
@@ -211,8 +203,6 @@ void main()
 		col = fragUbo.mainColor.rgb;
 
 		col = vec3(0.615, 0.8, 0.88) * 10.0 / itr;
-		// col = vec3(1.0, 0.0, 0.0);
-		// col = 20.*(cos(vec3(1.,5.,11.)+log(g_Scale)*3.)*.5+.5)/itr;
 
 		gPosition = vec4(p, 1.0);
 		gNormal = vec4(n, 1.0);
