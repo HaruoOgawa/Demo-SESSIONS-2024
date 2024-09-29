@@ -1,6 +1,10 @@
 {
     "materialframes": [
         {
+            "name": "LastCenter_MF",
+            "filename": "Resources/MaterialFrame/LastCenter_MF.json"
+        },
+        {
             "name": "RotRing",
             "filename": "Resources/MaterialFrame/RotRing_MF.json"
         },
@@ -742,6 +746,79 @@
                 {
                     "materialframe": "RotRing",
                     "cull": "front"
+                }
+            ]
+        },
+        {
+            "name": "LastCenter",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    99.0,
+                    99.0,
+                    99.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "LastCenter",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "meshindex": 0,
+                    "trackids": [
+                        "0bd1dbb1-a5d7-4721-8394-ae339b1628af"
+                    ]
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "sphere"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "LastCenter_MF",
+                    "cull": "front",
+                    "trackids": [
+                        "f2a844e4-570a-4029-9915-0e8fb46124d7",
+                        "edff8082-c02c-47a2-96d7-0a6137f02a44"
+                    ]
                 }
             ]
         }
