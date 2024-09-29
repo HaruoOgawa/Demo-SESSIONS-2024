@@ -12,6 +12,8 @@ namespace imageeffect
 	{
 		// プロパティの設定
 		SetValue("WhiteRate", graphics::EUniformValueType::VALUE_TYPE_FLOAT, &glm::vec1(0.0f)[0], sizeof(float));
+		SetValue("useSlide", graphics::EUniformValueType::VALUE_TYPE_FLOAT, &glm::vec1(0.0f)[0], sizeof(float));
+		SetValue("slideRate", graphics::EUniformValueType::VALUE_TYPE_FLOAT, &glm::vec1(0.0f)[0], sizeof(float));
 	}
 
 	CChromaticAberration::~CChromaticAberration()
@@ -51,8 +53,12 @@ namespace imageeffect
 			if (Material)
 			{
 				const auto WhiteRate = GetValue("WhiteRate");
+				const auto useSlide = GetValue("useSlide");
+				const auto slideRate = GetValue("slideRate");
 
 				Material->SetUniformValue("whiteRate", &WhiteRate.Buffer[0], WhiteRate.ByteSize);
+				Material->SetUniformValue("useSlide", &useSlide.Buffer[0], useSlide.ByteSize);
+				Material->SetUniformValue("slideRate", &slideRate.Buffer[0], slideRate.ByteSize);
 			}
 			if (!m_CAFrameRenderer->Draw(pGraphicsAPI, Camera, Projection, DrawInfo)) return false;
 			if (!pGraphicsAPI->EndRender()) return false;

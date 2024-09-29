@@ -81,7 +81,7 @@
                 }
               },
               {
-                "name": "fPad1",
+                "name": "time",
                 "type": "float",
                 "initValue": [ 0.0 ],
                 "input": {
@@ -89,7 +89,7 @@
                 }
               },
               {
-                "name": "fPad2",
+                "name": "useSlide",
                 "type": "float",
                 "initValue": [ 0.0 ],
                 "input": {
@@ -97,7 +97,7 @@
                 }
               },
               {
-                "name": "fPad3",
+                "name": "slideRate",
                 "type": "float",
                 "initValue": [ 0.0 ],
                 "input": {

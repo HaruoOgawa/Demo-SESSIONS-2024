@@ -56,11 +56,27 @@
         {
             "registryname": "ChromaticRegistry",
             "trackids": [
-                "c10f8ea3-5067-4748-b8db-19577e65bb4a"
+                "c10f8ea3-5067-4748-b8db-19577e65bb4a",
+                "c44fff49-40c4-4cf4-8a68-539a7fe1d384",
+                "fda32f75-4774-411c-a476-da4f95a14267"
             ],
             "values": [
                 {
                     "name": "WhiteRate",
+                    "type": "float",
+                    "initValue": [
+                        0.0
+                    ]
+                },
+                {
+                    "name": "slideRate",
+                    "type": "float",
+                    "initValue": [
+                        0.0
+                    ]
+                },
+                {
+                    "name": "useSlide",
                     "type": "float",
                     "initValue": [
                         0.0
