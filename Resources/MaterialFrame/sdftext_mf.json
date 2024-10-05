@@ -1,6 +1,6 @@
 {
-  "name": "sdftext_mat",
-  "outputcolorcount": 1,
+  "name": "sdftext_mf",
+  "outputcolorcount": 5,
   "shaderList": [
     {
       "name": "minimum_vert",
@@ -75,7 +75,7 @@
           "bufferUpdateType": "cpu",
           "values": [
             {
-              "name": "pad0",
+              "name": "invModel",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -83,7 +83,7 @@
               }
             },
             {
-              "name": "pad1",
+              "name": "model",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -91,7 +91,7 @@
               }
             },
             {
-              "name": "pad2",
+              "name": "view",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -99,7 +99,7 @@
               }
             },
             {
-              "name": "pad3",
+              "name": "proj",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -109,7 +109,7 @@
             {
               "name": "maxWidth",
               "type": "float",
-              "initValue": [ 32.0 ]
+              "initValue": [ 1152 ]
             },
             {
               "name": "charWidth",
@@ -119,12 +119,12 @@
             {
               "name": "numOfChar",
               "type": "float",
-              "initValue": [ 1.0 ]
+              "initValue": [ 36.0 ]
             },
             {
               "name": "textID",
               "type": "float",
-              "initValue": [ 32.0 ]
+              "initValue": [ 0.0 ]
             }
           ]
         }

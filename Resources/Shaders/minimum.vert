@@ -19,6 +19,7 @@ layout(binding = 0) uniform UniformBufferObject{
 layout(location = 0) out vec3 fWolrdNormal;
 layout(location = 1) out vec2 fUV;
 layout(location = 2) out vec3 fViewDir;
+layout(location = 3) out vec3 fWorldPos;
 
 void main()
 {
@@ -26,4 +27,5 @@ void main()
 	fWolrdNormal = (ubo.model * vec4(inNormal, 0.0)).xyz;
 	fUV = inTexcoord;
 	fViewDir = normalize((ubo.model * vec4(inPosition, 1.0)).xyz - ubo.cameraPos.xyz);
+	fWorldPos = (ubo.model * vec4(inPosition, 1.0)).xyz;
 }

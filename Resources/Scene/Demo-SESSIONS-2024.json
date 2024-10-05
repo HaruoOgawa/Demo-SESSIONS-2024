@@ -31,6 +31,10 @@
         {
             "name": "pbr_mat",
             "filename": "Resources/MaterialFrame/PBR_MF.json"
+        },
+        {
+            "name": "sdftext_mf",
+            "filename": "Resources\\MaterialFrame\\sdftext_mf.json"
         }
     ],
     "valueregistries": [
@@ -312,85 +316,6 @@
                             "type": "float",
                             "value": [
                                 0.20000000298023224
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "fractal_field",
-            "filename": "",
-            "renderpass": "MRTPass",
-            "depthpass": "",
-            "transform": {
-                "pos": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotate": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "enable": false,
-            "rootnodes": [
-                0
-            ],
-            "nodes": [
-                {
-                    "name": "fractal_node",
-                    "transform": {
-                        "pos": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotate": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            100.0,
-                            100.0,
-                            100.0
-                        ]
-                    },
-                    "enable": false,
-                    "meshindex": 0
-                }
-            ],
-            "meshs": [
-                {
-                    "primitives": [
-                        {
-                            "materialindex": 0,
-                            "type": "sphere"
-                        }
-                    ]
-                }
-            ],
-            "materials": [
-                {
-                    "materialframe": "fractalfield_01",
-                    "cull": "front",
-                    "uniformvalues": [
-                        {
-                            "name": "param0",
-                            "type": "vec4",
-                            "value": [
-                                0.25,
-                                0.25,
-                                0.0,
-                                0.0
                             ]
                         }
                     ]
@@ -819,6 +744,111 @@
                         "f2a844e4-570a-4029-9915-0e8fb46124d7",
                         "edff8082-c02c-47a2-96d7-0a6137f02a44"
                     ]
+                }
+            ]
+        },
+        {
+            "name": "TextList",
+            "filename": "",
+            "renderpass": "MRTPass",
+            "depthpass": "",
+            "transform": {
+                "pos": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotate": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "enable": true,
+            "rootnodes": [
+                0
+            ],
+            "nodes": [
+                {
+                    "name": "SESSIONS 2024",
+                    "transform": {
+                        "pos": [
+                            5.0,
+                            0.0,
+                            2.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            0.5,
+                            0.5,
+                            0.5
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "children": [
+                        1
+                    ]
+                },
+                {
+                    "name": "S_0",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": 0
+                }
+            ],
+            "meshs": [
+                {
+                    "primitives": [
+                        {
+                            "materialindex": 0,
+                            "type": "board"
+                        }
+                    ]
+                }
+            ],
+            "materials": [
+                {
+                    "materialframe": "sdftext_mf",
+                    "cull": "none",
+                    "textures": [
+                        {
+                            "texturebuffername": "MainTexture",
+                            "textureindex": -1,
+                            "texturename": "SDF"
+                        }
+                    ]
+                }
+            ],
+            "textureset": [
+                {
+                    "name": "SDF",
+                    "filename": "Resources/Font/dist/msdf.png"
                 }
             ]
         }
