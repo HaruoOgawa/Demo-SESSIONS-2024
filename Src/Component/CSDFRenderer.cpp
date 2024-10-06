@@ -164,6 +164,10 @@ namespace component
         {
             "9",
             35
+        },
+        {
+            "_",
+            36
         } };
 
         const auto it = sdf_chars.find(SelfNode->GetName());
@@ -189,9 +193,9 @@ namespace component
             m_Material = matIT->second->CreateMaterial(pGraphicsAPI, 1, graphics::ECullMode::CULL_NONE);
 
             m_Material->ReplaceTextureIndex("MainTexture", 0);
-            m_Material->SetUniformValue("maxWidth", &glm::vec1(1152.0f)[0], sizeof(float));
+            m_Material->SetUniformValue("maxWidth", &glm::vec1(1184.0f)[0], sizeof(float));
             m_Material->SetUniformValue("charWidth", &glm::vec1(32.0f)[0], sizeof(float));
-            m_Material->SetUniformValue("numOfChar", &glm::vec1(36.0f)[0], sizeof(float));
+            m_Material->SetUniformValue("numOfChar", &glm::vec1(37.0f)[0], sizeof(float));
             m_Material->SetUniformValue("textID", &glm::vec1(m_TextIndex)[0], sizeof(float));
 
             if (!m_Material->Create(Object->GetTextureSet())) return false;

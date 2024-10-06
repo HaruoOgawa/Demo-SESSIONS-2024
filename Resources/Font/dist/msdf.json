@@ -1,6 +1,6 @@
 {
     "charWidth":32,
-    "numOfChar":36,
+    "numOfChar":37,
     "sdf_chars":[
         [
             "A",
@@ -145,7 +145,11 @@
         [
             "9",
             35
+        ],
+        [
+            "_",
+            36
         ]
     ],
-    "total_width":1152
+    "total_width":1184
 }

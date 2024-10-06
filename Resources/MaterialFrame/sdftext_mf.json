@@ -101,7 +101,7 @@
             {
               "name": "maxWidth",
               "type": "float",
-              "initValue": [ 1152 ]
+              "initValue": [ 1184.0 ]
             },
             {
               "name": "charWidth",
@@ -111,7 +111,7 @@
             {
               "name": "numOfChar",
               "type": "float",
-              "initValue": [ 36.0 ]
+              "initValue": [ 37.0 ]
             },
             {
               "name": "textID",
