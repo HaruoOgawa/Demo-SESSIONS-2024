@@ -26,7 +26,10 @@
 #include <Timeline/CTimelineController.h>
 #include <Scene/CSceneController.h>
 
-#include "../../Component/CTestComponent.h"
+#ifdef _DEBUG
+#include "../../Component/CSDFGenerator.h"
+#endif // _DEBUG
+#include "../../Component/CSDFRenderer.h"
 
 namespace app
 {
@@ -94,9 +97,15 @@ namespace app
 	// コンポーネント作成
 	std::shared_ptr<scriptable::CComponent> CScriptApp::CreateComponent(const std::string& ComponentType, const std::string& ValueRegistry)
 	{
-		if (ComponentType == "TestComponent")
+		if (ComponentType == "SDFGenerator")
 		{
-			return std::make_shared<component::CTestComponent>(ComponentType, ValueRegistry);
+#ifdef _DEBUG
+			return std::make_shared<component::CSDFGenerator>(ComponentType, ValueRegistry);
+#endif // _DEBUG
+		}
+		else if (ComponentType == "SDFRenderer")
+		{
+			return std::make_shared<component::CSDFRenderer>(ComponentType, ValueRegistry);
 		}
 
 		return nullptr;
@@ -312,10 +321,6 @@ namespace app
 		if (!m_SceneController->Create(pGraphicsAPI, pPhysicsEngine)) return false;
 
 		if (!m_ScriptScene->OnLoaded(pGraphicsAPI, pPhysicsEngine, pLoadWorker)) return false;
-
-		{
-			auto Component = CreateComponent("TestComponent", "test");
-		}
 
 		m_BloomEffect->OnLoaded(m_SceneController);
 		m_ChromaticAberrationEffect->OnLoaded(m_SceneController);

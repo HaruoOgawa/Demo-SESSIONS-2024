@@ -151,13 +151,7 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": 0,
-                    "components": [
-                        {
-                            "type": "TestComponent",
-                            "valueregistry": "test"
-                        }
-                    ]
+                    "meshindex": 0
                 }
             ],
             "meshs": [
@@ -775,32 +769,7 @@
             ],
             "nodes": [
                 {
-                    "name": "SESSIONS 2024",
-                    "transform": {
-                        "pos": [
-                            5.0,
-                            0.0,
-                            2.0
-                        ],
-                        "rotate": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            0.5,
-                            0.5,
-                            0.5
-                        ]
-                    },
-                    "enable": true,
-                    "meshindex": -1,
-                    "children": [
-                        1
-                    ]
-                },
-                {
-                    "name": "S_0",
+                    "name": "TextList",
                     "transform": {
                         "pos": [
                             0.0,
@@ -819,36 +788,375 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": 0
-                }
-            ],
-            "meshs": [
-                {
-                    "primitives": [
+                    "meshindex": -1,
+                    "children": [
+                        1
+                    ],
+                    "components": [
                         {
-                            "materialindex": 0,
-                            "type": "board"
+                            "type": "SDFGenerator"
                         }
                     ]
-                }
-            ],
-            "materials": [
+                },
                 {
-                    "materialframe": "sdftext_mf",
-                    "cull": "none",
-                    "textures": [
+                    "name": "SESSIONS 2024",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "children": [
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13
+                    ]
+                },
+                {
+                    "name": "S",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
                         {
-                            "texturebuffername": "MainTexture",
-                            "textureindex": -1,
-                            "texturename": "SDF"
+                            "type": "SDFRenderer"
                         }
                     ]
-                }
-            ],
-            "textureset": [
+                },
                 {
-                    "name": "SDF",
-                    "filename": "Resources/Font/dist/msdf.png"
+                    "name": "E",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "S",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "S",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "I",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "O",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "N",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "S",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "2",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "0",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "2",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "4",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 }
             ]
         }
