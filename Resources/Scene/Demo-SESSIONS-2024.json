@@ -25,10 +25,6 @@
             "filename": "Resources/MaterialFrame/cubegrid_mf.json"
         },
         {
-            "name": "fractalfield_01",
-            "filename": "Resources/MaterialFrame/fractalfield_01_mf.json"
-        },
-        {
             "name": "pbr_mat",
             "filename": "Resources/MaterialFrame/PBR_MF.json"
         },
@@ -1157,6 +1153,12 @@
                             "type": "SDFRenderer"
                         }
                     ]
+                }
+            ],
+            "textureset": [
+                {
+                    "name": "msdf",
+                    "filename": "Resources/Font/dist/msdf.png"
                 }
             ]
         }

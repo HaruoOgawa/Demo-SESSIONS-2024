@@ -16,7 +16,8 @@ namespace component
 	{
 	}
 
-	void CSDFGenerator::OnLoaded(const std::shared_ptr<scene::CSceneController>& SceneController, const std::shared_ptr<object::C3DObject>& Object, const std::shared_ptr<object::CNode>& SelfNode)
+	bool CSDFGenerator::OnLoaded(api::IGraphicsAPI* pGraphicsAPI, const std::shared_ptr<scene::CSceneController>& SceneController,
+        const std::shared_ptr<object::C3DObject>& Object, const std::shared_ptr<object::CNode>& SelfNode)
 	{
         std::map<std::string, int> sdf_chars = { 
         {
@@ -186,6 +187,8 @@ namespace component
             auto NewComponent = std::make_shared<component::CSDFRenderer>("SDFRenderer", "");
             Node->AddComponent(NewComponent);
         }
+
+        return true;
 	}
 }
 #endif // _DEBUG

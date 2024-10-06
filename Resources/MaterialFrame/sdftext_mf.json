@@ -47,14 +47,6 @@
               "input": {
                 "hide": true
               }
-            },
-            {
-              "name": "cameraPos",
-              "type": "vec4",
-              "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
-              "input": {
-                "hide": true
-              }
             }
           ]
         }
@@ -75,14 +67,6 @@
           "bufferUpdateType": "cpu",
           "values": [
             {
-              "name": "invModel",
-              "type": "mat4",
-              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
-              "input": {
-                "hide": true
-              }
-            },
-            {
               "name": "model",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
@@ -100,6 +84,14 @@
             },
             {
               "name": "proj",
+              "type": "mat4",
+              "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+              "input": {
+                "hide": true
+              }
+            },
+            {
+              "name": "lightVPMat",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {

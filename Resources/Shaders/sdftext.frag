@@ -2,8 +2,7 @@
 
 layout(location = 0) in vec3 fWolrdNormal;
 layout(location = 1) in vec2 fUV;
-layout(location = 2) in vec3 fViewDir;
-layout(location = 3) in vec3 fWorldPos;
+layout(location = 2) in vec3 fWorldPos;
 
 // layout(location = 0) out vec4 outCol;
 layout(location = 0) out vec4 gPosition;
@@ -13,10 +12,10 @@ layout(location = 3) out vec4 gDepth;
 layout(location = 4) out vec4 gParam_1;
 
 layout(binding = 1) uniform FragUniformBufferObject{
-	mat4 invModel;
 	mat4 model;
     mat4 view;
     mat4 proj;
+	mat4 lightVPMat;
 
 	float maxWidth;
 	float charWidth;
