@@ -42,8 +42,6 @@ namespace gui
 		bool DrawAddObjectDialog(api::IGraphicsAPI* pGraphicsAPI, const SGUIParams& GUIParams);
 		bool DrawAddNodeDialog(api::IGraphicsAPI* pGraphicsAPI, const SGUIParams& GUIParams);
 
-		void SetDrawable(bool Flag, const std::shared_ptr<object::CNode>& Node, const std::vector<std::shared_ptr<object::CNode>>& NodeList);
-
 	public:
 		CGUIObjectTab();
 		virtual ~CGUIObjectTab() = default;

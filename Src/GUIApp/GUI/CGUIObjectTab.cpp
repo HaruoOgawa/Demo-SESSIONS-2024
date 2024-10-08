@@ -153,8 +153,6 @@ namespace gui
 			if (ImGui::Checkbox(BoxLabel.c_str(), &Flag))
 			{
 				Node->SetEnabled(Flag);
-
-				SetDrawable(Flag, Node, NodeList);
 			}
 
 			ImGui::SameLine();
@@ -393,20 +391,6 @@ namespace gui
 		ImGui::End();
 
 		return true;
-	}
-
-	void CGUIObjectTab::SetDrawable(bool Flag, const std::shared_ptr<object::CNode>& Node, const std::vector<std::shared_ptr<object::CNode>>& NodeList)
-	{
-		Node->SetDrawable(Flag);
-
-		// Žq—v‘f‚Ì‘–”j
-		for (const int ChildIndex : Node->GetChildrenNodeIndexList())
-		{
-			if (ChildIndex < 0 || ChildIndex >= NodeList.size()) continue;
-
-			const auto& ChildNode = NodeList[ChildIndex];
-			SetDrawable(Flag, ChildNode, NodeList);
-		}
 	}
 }
 #endif
