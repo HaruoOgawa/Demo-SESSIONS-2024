@@ -28,6 +28,7 @@
 
 #ifdef _DEBUG
 #include "../../Component/CSDFGenerator.h"
+#include "../../Component/CSDFTextLineGenerator.h"
 #endif // _DEBUG
 #include "../../Component/CSDFRenderer.h"
 
@@ -101,6 +102,12 @@ namespace app
 		{
 #ifdef _DEBUG
 			return std::make_shared<component::CSDFGenerator>(ComponentType, ValueRegistry);
+#endif // _DEBUG
+		}
+		else if (ComponentType == "SDFTextLineGenerator")
+		{
+#ifdef _DEBUG
+			return std::make_shared<component::CSDFTextLineGenerator>(ComponentType, ValueRegistry);
 #endif // _DEBUG
 		}
 		else if (ComponentType == "SDFRenderer")
