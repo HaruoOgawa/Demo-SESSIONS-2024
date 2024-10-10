@@ -170,12 +170,39 @@ namespace component
                 }
         };
 
-		const auto& NodeList = Object->GetNodeList();
+        const auto& ChildrenNodeIndexList = SelfNode->GetChildrenNodeIndexList();
 
         float LineIndex = 0.0f;
         float Width = -20.0f;
 
-		for (int ChildNodeIndex : SelfNode->GetChildrenNodeIndexList())
+        // std::vectorにpush_backする時、容量を超える要素が追加された内部でメモリの再配置が行われることがある
+        // その結果事前にベクターから取得しておいた要素のアドレスが無効になってnullアクセスになることがある(0xddddddddddddアクセス)
+        // そういう時はstd::vector::reserveで事前に確保しておくとよい
+        // これがよく某エンジンでそのようなコードがあった原因かぁ
+        // https://chatgpt.com/c/670855dc-3910-800d-9ebb-33f1f9c2532c
+        // 先に追加されうる量を計算
+        size_t AddedNum = 0;
+        for (int ChildNodeIndex : ChildrenNodeIndexList)
+        {
+            const auto& Node = Object->GetNodeList()[ChildNodeIndex];
+
+            // 子要素が存在しなかったら文字の子要素を作成する
+            if (!Node->GetChildrenNodeIndexList().empty()) continue;
+
+            // ノード名の長さだけ新規追加する
+            std::string NodeName = Node->GetName();
+            AddedNum += NodeName.size();
+        }
+
+        // ベクターサイズを再予約
+        if (AddedNum > 0)
+        {
+            Object->ReserveNodeCount(Object->GetNodeList().size() + AddedNum);
+        }
+
+        //
+        const auto& NodeList = Object->GetNodeList();
+        for (int ChildNodeIndex : ChildrenNodeIndexList)
 		{
 			const auto& Node = NodeList[ChildNodeIndex];
             std::string NodeName = Node->GetName();
@@ -207,6 +234,10 @@ namespace component
                 int SelfNodeIndex = static_cast<int>(Object->GetNodeList().size());
                 std::shared_ptr<object::CNode> NewCharNode = std::make_shared<object::CNode>(-1, SelfNodeIndex);
                 NewCharNode->SetName(CharName);
+
+                glm::vec3 NewCharPos = NewCharNode->GetPos();
+                NewCharPos.x = static_cast<float>(i) * 1.0f;
+                NewCharNode->SetPos(NewCharPos);
 
                 Object->AddNode(NewCharNode);
 
