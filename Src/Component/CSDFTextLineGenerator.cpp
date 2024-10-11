@@ -173,7 +173,8 @@ namespace component
         const auto& ChildrenNodeIndexList = SelfNode->GetChildrenNodeIndexList();
 
         float LineIndex = 0.0f;
-        float Width = -20.0f;
+        //float Width = -20.0f;
+        float Width = -10.0f; // // 2列にする
 
         // std::vectorにpush_backする時、容量を超える要素が追加された内部でメモリの再配置が行われることがある
         // その結果事前にベクターから取得しておいた要素のアドレスが無効になってnullアクセスになることがある(0xddddddddddddアクセス)
@@ -212,6 +213,11 @@ namespace component
             // 座標のZを割り当てる
             glm::vec3 Pos = Node->GetPos();
             Pos.z = Width * LineIndex;
+
+            // 2列にする時のX
+            {
+                Pos.x = ((static_cast<int>(LineIndex) % 2 == 0) ? 1.0f : -1.0f) * 5.0f - static_cast<float>(Node->GetChildrenNodeIndexList().size()) * 0.5f;
+            }
 
             Node->SetPos(Pos);
 

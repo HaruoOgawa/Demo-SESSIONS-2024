@@ -806,9 +806,9 @@
                             0.0
                         ],
                         "rotate": [
-                            -180.0,
+                            180.0,
                             -5.008956122765085e-06,
-                            -180.0
+                            180.0
                         ],
                         "scale": [
                             0.5,
@@ -1168,9 +1168,9 @@
                             -7.0
                         ],
                         "rotate": [
-                            180.0,
+                            -180.0,
                             -20.0,
-                            180.0
+                            -180.0
                         ],
                         "scale": [
                             0.25,
@@ -1209,9 +1209,9 @@
                             0.0
                         ],
                         "rotate": [
-                            180.0,
+                            -180.0,
                             -5.008956122765085e-06,
-                            180.0
+                            -180.0
                         ],
                         "scale": [
                             0.5,
@@ -1859,14 +1859,14 @@
                     "name": "Greetings",
                     "transform": {
                         "pos": [
-                            0.5,
+                            0.0,
                             -1.5,
                             0.0
                         ],
                         "rotate": [
-                            180.0,
+                            -180.0,
                             -5.008956122765085e-06,
-                            180.0
+                            -180.0
                         ],
                         "scale": [
                             0.25,
@@ -1874,20 +1874,17 @@
                             0.25
                         ]
                     },
-                    "enable": true,
                     "meshindex": -1,
                     "children": [
                         40
+                    ],
+                    "trackids": [
+                        "c93541f0-1a9a-4027-9fa4-29a8e4f98bfe"
                     ]
                 },
                 {
                     "name": "Group0",
                     "transform": {
-                        "pos": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
                         "rotate": [
                             0.0,
                             -0.0,
@@ -1929,7 +1926,12 @@
                         86,
                         87,
                         88,
-                        89
+                        89,
+                        252,
+                        253
+                    ],
+                    "trackids": [
+                        "4e0328df-3251-4b9b-9b11-fce01d4b38a2"
                     ],
                     "components": [
                         {
@@ -1941,7 +1943,7 @@
                     "name": "FL1NE",
                     "transform": {
                         "pos": [
-                            0.0,
+                            2.5,
                             0.0,
                             -0.0
                         ],
@@ -2105,9 +2107,9 @@
                     "name": "0B5VR",
                     "transform": {
                         "pos": [
+                            -7.5,
                             0.0,
-                            0.0,
-                            -20.0
+                            -10.0
                         ],
                         "rotate": [
                             0.0,
@@ -2134,9 +2136,9 @@
                     "name": "RENARD",
                     "transform": {
                         "pos": [
+                            2.0,
                             0.0,
-                            0.0,
-                            -40.0
+                            -20.0
                         ],
                         "rotate": [
                             0.0,
@@ -2461,9 +2463,9 @@
                     "name": "SAINA",
                     "transform": {
                         "pos": [
+                            -7.5,
                             0.0,
-                            0.0,
-                            -60.0
+                            -30.0
                         ],
                         "rotate": [
                             0.0,
@@ -2625,9 +2627,9 @@
                     "name": "SOLA",
                     "transform": {
                         "pos": [
+                            3.0,
                             0.0,
-                            0.0,
-                            -80.0
+                            -40.0
                         ],
                         "rotate": [
                             0.0,
@@ -2653,9 +2655,9 @@
                     "name": "UKONPOWER",
                     "transform": {
                         "pos": [
+                            -9.5,
                             0.0,
-                            0.0,
-                            -100.0
+                            -50.0
                         ],
                         "rotate": [
                             0.0,
@@ -2686,9 +2688,9 @@
                     "name": "KINANKOMOTI",
                     "transform": {
                         "pos": [
+                            -0.5,
                             0.0,
-                            0.0,
-                            -120.0
+                            -60.0
                         ],
                         "rotate": [
                             0.0,
@@ -2721,9 +2723,9 @@
                     "name": "KAMOSHIKA",
                     "transform": {
                         "pos": [
+                            -9.5,
                             0.0,
-                            0.0,
-                            -140.0
+                            -70.0
                         ],
                         "rotate": [
                             0.0,
@@ -2754,9 +2756,9 @@
                     "name": "DOXAS",
                     "transform": {
                         "pos": [
+                            2.5,
                             0.0,
-                            0.0,
-                            -160.0
+                            -80.0
                         ],
                         "rotate": [
                             0.0,
@@ -2783,9 +2785,9 @@
                     "name": "BUTADIENE",
                     "transform": {
                         "pos": [
+                            -9.5,
                             0.0,
-                            0.0,
-                            -180.0
+                            -90.0
                         ],
                         "rotate": [
                             0.0,
@@ -2816,9 +2818,9 @@
                     "name": "LACTOICE",
                     "transform": {
                         "pos": [
+                            1.0,
                             0.0,
-                            0.0,
-                            -200.0
+                            -100.0
                         ],
                         "rotate": [
                             0.0,
@@ -2848,9 +2850,9 @@
                     "name": "KANETA",
                     "transform": {
                         "pos": [
+                            -8.0,
                             0.0,
-                            0.0,
-                            -220.0
+                            -110.0
                         ],
                         "rotate": [
                             0.0,
@@ -2878,9 +2880,9 @@
                     "name": "GAZ",
                     "transform": {
                         "pos": [
+                            3.5,
                             0.0,
-                            0.0,
-                            -240.0
+                            -120.0
                         ],
                         "rotate": [
                             0.0,
@@ -2905,9 +2907,9 @@
                     "name": "EDDY",
                     "transform": {
                         "pos": [
+                            -7.0,
                             0.0,
-                            0.0,
-                            -260.0
+                            -130.0
                         ],
                         "rotate": [
                             0.0,
@@ -2933,9 +2935,9 @@
                     "name": "KODAI TAKAO",
                     "transform": {
                         "pos": [
+                            -0.5,
                             0.0,
-                            0.0,
-                            -280.0
+                            -140.0
                         ],
                         "rotate": [
                             0.0,
@@ -2968,9 +2970,9 @@
                     "name": "PHI16",
                     "transform": {
                         "pos": [
+                            -7.5,
                             0.0,
-                            0.0,
-                            -300.0
+                            -150.0
                         ],
                         "rotate": [
                             0.0,
@@ -2997,9 +2999,9 @@
                     "name": "GAM",
                     "transform": {
                         "pos": [
+                            3.5,
                             0.0,
-                            0.0,
-                            -320.0
+                            -160.0
                         ],
                         "rotate": [
                             0.0,
@@ -3024,9 +3026,9 @@
                     "name": "AMAGI",
                     "transform": {
                         "pos": [
+                            -7.5,
                             0.0,
-                            0.0,
-                            -340.0
+                            -170.0
                         ],
                         "rotate": [
                             0.0,
@@ -3053,9 +3055,9 @@
                     "name": "UKEYSHIMA",
                     "transform": {
                         "pos": [
+                            0.5,
                             0.0,
-                            0.0,
-                            -360.0
+                            -180.0
                         ],
                         "rotate": [
                             0.0,
@@ -3086,9 +3088,9 @@
                     "name": "KIOKU",
                     "transform": {
                         "pos": [
+                            -7.5,
                             0.0,
-                            0.0,
-                            -380.0
+                            -190.0
                         ],
                         "rotate": [
                             0.0,
@@ -3115,9 +3117,9 @@
                     "name": "SADAKKEY",
                     "transform": {
                         "pos": [
+                            1.0,
                             0.0,
-                            0.0,
-                            -400.0
+                            -200.0
                         ],
                         "rotate": [
                             0.0,
@@ -3147,9 +3149,9 @@
                     "name": "HIYOHIYO",
                     "transform": {
                         "pos": [
+                            -9.0,
                             0.0,
-                            0.0,
-                            -420.0
+                            -210.0
                         ],
                         "rotate": [
                             0.0,
@@ -3179,9 +3181,9 @@
                     "name": "KAIWARE",
                     "transform": {
                         "pos": [
+                            1.5,
                             0.0,
-                            0.0,
-                            -440.0
+                            -220.0
                         ],
                         "rotate": [
                             0.0,
@@ -3210,9 +3212,9 @@
                     "name": "SP4GHET",
                     "transform": {
                         "pos": [
+                            -8.5,
                             0.0,
-                            0.0,
-                            -460.0
+                            -230.0
                         ],
                         "rotate": [
                             0.0,
@@ -3241,9 +3243,9 @@
                     "name": "SONCHO",
                     "transform": {
                         "pos": [
+                            2.0,
                             0.0,
-                            0.0,
-                            -480.0
+                            -240.0
                         ],
                         "rotate": [
                             0.0,
@@ -3271,9 +3273,9 @@
                     "name": "JUGEM_T",
                     "transform": {
                         "pos": [
+                            -8.5,
                             0.0,
-                            0.0,
-                            -500.0
+                            -250.0
                         ],
                         "rotate": [
                             0.0,
@@ -3302,9 +3304,9 @@
                     "name": "GYABO",
                     "transform": {
                         "pos": [
+                            2.5,
                             0.0,
-                            0.0,
-                            -520.0
+                            -260.0
                         ],
                         "rotate": [
                             0.0,
@@ -3331,9 +3333,9 @@
                     "name": "HARUMAKI",
                     "transform": {
                         "pos": [
+                            -9.0,
                             0.0,
-                            0.0,
-                            -540.0
+                            -270.0
                         ],
                         "rotate": [
                             0.0,
@@ -3379,7 +3381,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -3401,7 +3408,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "L",
@@ -3423,7 +3435,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -3445,7 +3462,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "U",
@@ -3467,7 +3489,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -3489,7 +3516,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -3511,7 +3543,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "N",
@@ -3533,7 +3570,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "P",
@@ -3555,7 +3597,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -3577,7 +3624,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "W",
@@ -3599,7 +3651,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -3621,7 +3678,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "R",
@@ -3643,7 +3705,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -3665,7 +3732,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -3687,7 +3759,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "N",
@@ -3709,7 +3786,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -3731,7 +3813,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "N",
@@ -3753,7 +3840,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -3775,7 +3867,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -3797,7 +3894,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "M",
@@ -3819,7 +3921,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -3841,7 +3948,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "T",
@@ -3863,7 +3975,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -3885,7 +4002,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -3907,7 +4029,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -3929,7 +4056,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "M",
@@ -3951,7 +4083,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -3973,7 +4110,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "S",
@@ -3995,7 +4137,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "H",
@@ -4017,7 +4164,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -4039,7 +4191,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -4061,7 +4218,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -4083,7 +4245,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "D",
@@ -4105,7 +4272,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -4127,7 +4299,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "X",
@@ -4149,7 +4326,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -4171,7 +4353,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "S",
@@ -4193,7 +4380,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "B",
@@ -4215,7 +4407,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "U",
@@ -4237,7 +4434,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "T",
@@ -4259,7 +4461,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -4281,7 +4488,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "D",
@@ -4303,7 +4515,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -4325,7 +4542,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -4347,7 +4569,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "N",
@@ -4369,7 +4596,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -4391,7 +4623,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "L",
@@ -4413,7 +4650,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -4435,7 +4677,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "C",
@@ -4457,7 +4704,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "T",
@@ -4479,7 +4731,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -4501,7 +4758,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -4523,7 +4785,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "C",
@@ -4545,7 +4812,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -4567,7 +4839,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -4589,7 +4866,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -4611,7 +4893,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "N",
@@ -4633,7 +4920,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -4655,7 +4947,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "T",
@@ -4677,7 +4974,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -4699,7 +5001,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "G",
@@ -4721,7 +5028,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -4743,7 +5055,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "Z",
@@ -4765,7 +5082,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -4787,7 +5109,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "D",
@@ -4809,7 +5136,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "D",
@@ -4831,7 +5163,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "Y",
@@ -4853,7 +5190,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -4875,7 +5217,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -4897,7 +5244,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "D",
@@ -4919,7 +5271,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -4941,7 +5298,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -4963,7 +5325,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": " ",
@@ -5007,7 +5374,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -5029,7 +5401,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -5051,7 +5428,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -5073,7 +5455,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -5095,7 +5482,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "P",
@@ -5117,7 +5509,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "H",
@@ -5139,7 +5536,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -5161,7 +5563,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "1",
@@ -5183,7 +5590,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "6",
@@ -5205,7 +5617,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "G",
@@ -5227,7 +5644,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -5249,7 +5671,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "M",
@@ -5271,7 +5698,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -5293,7 +5725,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "M",
@@ -5315,7 +5752,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -5337,7 +5779,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "G",
@@ -5359,7 +5806,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -5381,7 +5833,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "U",
@@ -5403,7 +5860,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -5425,7 +5887,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -5447,7 +5914,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "Y",
@@ -5469,7 +5941,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "S",
@@ -5491,7 +5968,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "H",
@@ -5513,7 +5995,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -5535,7 +6022,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "M",
@@ -5557,7 +6049,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -5579,7 +6076,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -5601,7 +6103,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -5623,7 +6130,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -5645,7 +6157,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -5667,7 +6184,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "U",
@@ -5689,7 +6211,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "S",
@@ -5711,7 +6238,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -5733,7 +6265,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "D",
@@ -5755,7 +6292,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -5777,7 +6319,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -5799,7 +6346,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -5821,7 +6373,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -5843,7 +6400,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "Y",
@@ -5865,7 +6427,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "H",
@@ -5887,7 +6454,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -5909,7 +6481,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "Y",
@@ -5931,7 +6508,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -5953,7 +6535,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "H",
@@ -5975,7 +6562,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -5997,7 +6589,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "Y",
@@ -6019,7 +6616,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -6041,7 +6643,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -6063,7 +6670,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -6085,7 +6697,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -6107,7 +6724,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "W",
@@ -6129,7 +6751,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -6151,7 +6778,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "R",
@@ -6173,7 +6805,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -6195,7 +6832,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "S",
@@ -6217,7 +6859,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "P",
@@ -6239,7 +6886,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "4",
@@ -6261,7 +6913,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "G",
@@ -6283,7 +6940,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "H",
@@ -6305,7 +6967,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -6327,7 +6994,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "T",
@@ -6349,7 +7021,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "S",
@@ -6371,7 +7048,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -6393,7 +7075,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "N",
@@ -6415,7 +7102,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "C",
@@ -6437,7 +7129,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "H",
@@ -6459,7 +7156,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -6481,7 +7183,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "J",
@@ -6503,7 +7210,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "U",
@@ -6525,7 +7237,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "G",
@@ -6547,7 +7264,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "E",
@@ -6569,7 +7291,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "M",
@@ -6591,7 +7318,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "_",
@@ -6608,12 +7340,17 @@
                         ],
                         "scale": [
                             1.0,
-                            1.0,
+                            0.5,
                             1.0
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "T",
@@ -6635,7 +7372,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "G",
@@ -6657,7 +7399,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "Y",
@@ -6679,7 +7426,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -6701,7 +7453,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "B",
@@ -6723,7 +7480,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "O",
@@ -6745,7 +7507,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "H",
@@ -6767,7 +7534,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -6789,7 +7561,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "R",
@@ -6811,7 +7588,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "U",
@@ -6833,7 +7615,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "M",
@@ -6855,7 +7642,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "A",
@@ -6877,7 +7669,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "K",
@@ -6899,7 +7696,12 @@
                         ]
                     },
                     "enable": true,
-                    "meshindex": -1
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 },
                 {
                     "name": "I",
@@ -6921,7 +7723,610 @@
                         ]
                     },
                     "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "SESSIONS CREW",
+                    "transform": {
+                        "pos": [
+                            -1.5,
+                            0.0,
+                            -280.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "children": [
+                        254,
+                        255,
+                        256,
+                        257,
+                        258,
+                        259,
+                        260,
+                        261,
+                        262,
+                        263,
+                        264,
+                        265,
+                        266
+                    ]
+                },
+                {
+                    "name": "AND YOU",
+                    "transform": {
+                        "pos": [
+                            -8.5,
+                            0.0,
+                            -290.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "children": [
+                        267,
+                        268,
+                        269,
+                        270,
+                        271,
+                        272,
+                        273
+                    ]
+                },
+                {
+                    "name": "S",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "E",
+                    "transform": {
+                        "pos": [
+                            1.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "S",
+                    "transform": {
+                        "pos": [
+                            2.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "S",
+                    "transform": {
+                        "pos": [
+                            3.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "I",
+                    "transform": {
+                        "pos": [
+                            4.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "O",
+                    "transform": {
+                        "pos": [
+                            5.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "N",
+                    "transform": {
+                        "pos": [
+                            6.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "S",
+                    "transform": {
+                        "pos": [
+                            7.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": " ",
+                    "transform": {
+                        "pos": [
+                            8.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
                     "meshindex": -1
+                },
+                {
+                    "name": "C",
+                    "transform": {
+                        "pos": [
+                            9.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "R",
+                    "transform": {
+                        "pos": [
+                            10.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "E",
+                    "transform": {
+                        "pos": [
+                            11.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "W",
+                    "transform": {
+                        "pos": [
+                            12.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "A",
+                    "transform": {
+                        "pos": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "N",
+                    "transform": {
+                        "pos": [
+                            1.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "D",
+                    "transform": {
+                        "pos": [
+                            2.0999999046325684,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": " ",
+                    "transform": {
+                        "pos": [
+                            3.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1
+                },
+                {
+                    "name": "Y",
+                    "transform": {
+                        "pos": [
+                            4.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "O",
+                    "transform": {
+                        "pos": [
+                            5.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
+                },
+                {
+                    "name": "U",
+                    "transform": {
+                        "pos": [
+                            6.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotate": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "enable": true,
+                    "meshindex": -1,
+                    "components": [
+                        {
+                            "type": "SDFRenderer"
+                        }
+                    ]
                 }
             ],
             "textureset": [
