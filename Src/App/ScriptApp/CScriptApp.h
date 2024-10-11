@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <Interface/IApp.h>
+#include <AppCore/CApp.h>
 #include <Scriptable/CComponent.h>
 
 namespace graphics { class CFrameRenderer; }
@@ -21,7 +21,7 @@ namespace app
 	class CScriptScene;
 	class CFileModifier;
 
-	class CScriptApp : public IApp
+	class CScriptApp : public CApp
 	{
 		std::shared_ptr<scene::CSceneController> m_SceneController;
 

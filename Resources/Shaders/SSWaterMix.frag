@@ -41,6 +41,7 @@ layout(location = 4) out vec4 gDepth;
 layout(location = 5) out vec4 gParam_1; 
 
 // PBR Shader////////////////////////////////////
+#define rot(a) mat2(cos(a), sin(a), -sin(a), cos(a))
 const float MIN_ROUGHNESS = 0.04;
 const float PI = 3.14159265;
 
@@ -249,7 +250,14 @@ void main()
 
 		vec3 col = vec3(0.0);
 		if(UseLightPos) col += DoPBR(Albedo, Normal, WorldPos, true, false, lightDir, Metallic, Roughness);
-		col += DoPBR(Albedo, Normal, WorldPos, false, UseCameraPos, lightDir, Metallic, Roughness);
+		
+		for(float i = -1.0; i <= 1.0; i++)
+		{
+			lightDir = (-1.0f) * normalize(vec3(0.0, -1.0, -1.0));
+			lightDir.xz *= rot(i * PI * (1.0 / 6.0));
+			
+			col += DoPBR(Albedo, Normal, WorldPos, false, UseCameraPos, lightDir, Metallic, Roughness);
+		}
 
 		{
 			vec3 Pos = SSWGPositionCol.xyz;

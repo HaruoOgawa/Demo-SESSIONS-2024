@@ -36,11 +36,13 @@ layout(binding = 1) uniform FragUniformBufferObject{
 
 	float LightParam;
 	float useZAnim;
-	float fPad1;
+	float hRate;
 	float fPad2;
 } fragUbo;
 
 #define repeat(p, a) mod(p, a) - a * 0.5
+
+float g_Depth;
 
 struct MatInfo
 {
@@ -99,7 +101,6 @@ MatInfo map(vec3 p, vec3 gridCenter)
 
 	if(floor(fragUbo.placeMode) == 0.0) // Sphereに配置
 	{
-		// if(length(gridCenter.xz) < 5.0)
 		if(length(gridCenter.xz) < fragUbo.lowGridRadius)
 		{
 			float tmpH = hegiht * 0.1;
@@ -117,30 +118,23 @@ MatInfo map(vec3 p, vec3 gridCenter)
 	else if(floor(fragUbo.placeMode) == 1.0) // Cubeに配置
 	{
 		float tmpH = hegiht * 0.1;
-
+		hegiht = tmpH; // 先に反映
+		
 		if(abs(gridCenter.x) > fragUbo.placeCubeSize.x)
 		{
 			float dc = abs(gridCenter.x) - fragUbo.placeCubeSize.x;
-			tmpH += min(2.25, exp(dc * 1.5) * 0.05);
-		}
-		// else
-		{
-			// if(floor(fragUbo.someTallMode) == 1.0)
-			{
-				float flag = rand(vec2(gridCenter.x * 10.0 + gridCenter.z, gridCenter.z * 10.0 + gridCenter.x)) * 0.5 + 0.5;
-				if(step(0.995, flag) == 1.0)
-				{
-					tmpH = hegiht * 0.5;
-				}
-			}
+			tmpH += min(0.5, exp(dc * 1.5) * 0.05);
+
+			tmpH *= 3.5;
 		}
 
-		hegiht = tmpH;
-
-		/*if(length(max(vec2(0.0), abs(gridCenter.xz) - fragUbo.placeCubeSize.xy)) < MIN_VALUE)
+		if(g_Depth > 30.0)
 		{
-			hegiht = hegiht * 0.1;
-		}*/
+			tmpH += exp(abs(g_Depth * 0.1)) * 0.1;
+		}
+		
+		tmpH *= clamp(fragUbo.hRate, 0.5, 1.0);
+		hegiht = mix(hegiht, tmpH, fragUbo.hRate);
 	}
 
 	float d0 = sdBox(pos0 + vec3(0.0, 2.5, 0.0), vec3(width, hegiht, width) );
@@ -266,7 +260,7 @@ void main()
 	Info.MatID = 0.0;
 	Info.Albedo = vec3(0.0);
 
-	for(int i = 0; i < 256; i++)
+	for(int i = 0; i < 512; i++)
 	{
 		if(depth >= lenToNextGrid)
 		{
@@ -284,6 +278,8 @@ void main()
 		Info = map(p - gridCenter, gridCenter);
 		depth += Info.Dist;
 		p = ro + rd * depth;
+
+		g_Depth = depth;
 
 		if(abs(Info.Dist) < MIN_VALUE) break;
 	}
@@ -304,12 +300,16 @@ void main()
 		{
 			vec3 GlowCol = vec3(0.0);
 
-			for(int i = 0; i < 3; i++)
+			// for(int i = 0; i < 3; i++)
+			for(int i = 0; i < 1; i++)
 			{
+				vec3 pos = p;
+				// vec3 pos = p - gridCenter;
+
 				vec2 target = vec2(0.0);
-				if((i == 0)) target = p.xy * 0.5;
-				else if((i == 1)) target = p.yz * 0.5;
-				else if((i == 2)) target = p.xz * 0.5;
+				if((i == 0)) target = pos.xy * 0.5;
+				else if((i == 1)) target = pos.yz * 0.5;
+				else if((i == 2)) target = pos.xz * 0.5;
 
 				vec2 gp = DrawPattern(target);
 				float glow = 0.0;

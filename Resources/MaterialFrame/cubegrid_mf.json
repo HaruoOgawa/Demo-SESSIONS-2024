@@ -224,10 +224,11 @@
               }
             },
             {
-              "name": "fPad1",
+              "name": "hRate",
               "type": "float",
               "initValue": [ 0.0 ],
               "input": {
+                
               }
             },
             {

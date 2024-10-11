@@ -81,7 +81,13 @@
     <ClCompile Include="Src\GUIApp\GUI\CGUICustomTab.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Component\CTestComponent.cpp">
+    <ClCompile Include="Src\Component\CSDFGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Component\CSDFRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Component\CSDFTextLineGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -152,7 +158,13 @@
     <ClInclude Include="Src\GUIApp\GUI\CGUICustomTab.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Src\Component\CTestComponent.h">
+    <ClInclude Include="Src\Component\CSDFGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Component\CSDFRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Component\CSDFTextLineGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

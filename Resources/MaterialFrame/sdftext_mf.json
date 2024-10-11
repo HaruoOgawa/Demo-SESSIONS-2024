@@ -1,6 +1,6 @@
 {
-  "name": "sdftext_mat",
-  "outputcolorcount": 1,
+  "name": "sdftext_mf",
+  "outputcolorcount": 5,
   "shaderList": [
     {
       "name": "minimum_vert",
@@ -47,14 +47,6 @@
               "input": {
                 "hide": true
               }
-            },
-            {
-              "name": "cameraPos",
-              "type": "vec4",
-              "initValue": [ 0.0, 0.0, 0.0, 0.0 ],
-              "input": {
-                "hide": true
-              }
             }
           ]
         }
@@ -75,7 +67,7 @@
           "bufferUpdateType": "cpu",
           "values": [
             {
-              "name": "pad0",
+              "name": "model",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -83,7 +75,7 @@
               }
             },
             {
-              "name": "pad1",
+              "name": "view",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -91,7 +83,7 @@
               }
             },
             {
-              "name": "pad2",
+              "name": "proj",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -99,7 +91,7 @@
               }
             },
             {
-              "name": "pad3",
+              "name": "lightVPMat",
               "type": "mat4",
               "initValue": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
               "input": {
@@ -109,7 +101,7 @@
             {
               "name": "maxWidth",
               "type": "float",
-              "initValue": [ 32.0 ]
+              "initValue": [ 1184.0 ]
             },
             {
               "name": "charWidth",
@@ -119,12 +111,12 @@
             {
               "name": "numOfChar",
               "type": "float",
-              "initValue": [ 1.0 ]
+              "initValue": [ 37.0 ]
             },
             {
               "name": "textID",
               "type": "float",
-              "initValue": [ 32.0 ]
+              "initValue": [ 0.0 ]
             }
           ]
         }

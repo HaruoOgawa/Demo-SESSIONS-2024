@@ -17,16 +17,17 @@ layout(binding = 1) uniform FragUniformBufferObject{
 
 	vec4 cameraPos;
     vec4 mainColor;
-    vec4 placeCubeSize;
-    vec4 v4Pad2;
+    vec4 param0;
+    vec4 param1;
 
 	vec2 resolution;
 	float time;
 	float deltaTime;
 	float zLength;
+	float tparam;
 
 	float LightParam;
-	float useZAnim;
+	float fPad0;
 	float fPad1;
 	float fPad2;
 } fragUbo;
@@ -73,88 +74,6 @@ float sdBox(vec3 p, vec3 s)
 	return length(max(vec3(0.0), abs(p) - s));
 }
 
-float sdTorus(vec3 p, vec2 t)
-{
-	vec2 q = vec2(length(p.xz) - t.x, p.y);
-	return length(q) - t.y;
-}
-
-vec2 pmod(vec2 p, float seg)
-{
-	float n = pi2 / seg;
-	float a = atan(p.x, p.y) + n * 0.5;
-	a = floor(a / n) * n;
-	return p * rot(-a);
-}
-
-MatInfo Brossum(vec3 p, vec3 offset, float gridW)
-{
-	MatInfo Info;
-	Info.d = 1e5;
-	Info.MatID = -1;
-	Info.metallic = 0.0;
-	Info.roughness = 0.0;
-
-	p += offset;
-
-	float Dist = 1e5;
-
-	float BaseH = 2.0;
-	p.y += BaseH;
-
-	if(length(p.xz - fragUbo.cameraPos.xz) > 25.0) return Info;
-	
-	if(floor(fragUbo.useZAnim) == 1.0) p.z += fragUbo.time;
-
-	vec2 gridID = floor(p.xz / gridW) * gridW;
-	p.xz = repeat(p.xz, gridW);
-
-	float Loop = 3.0;
-	for(float i = 0.0; i < Loop; i++)
-	{
-		vec3 pos = p;
-		// pos.x *= 2.0;
-
-		pos.xz *= rot(pi * (1.0 / Loop) * i);
-		pos.yz *= rot(pi * 0.5);
-
-		// この時点でのPosをアニメーション用に保持しておく
-		vec3 animP = pos;
-
-		pos.x = abs(pos.x) - 0.25;
-
-		vec3 v = vec3(0.0, 0.0, 0.1);
-		pos -= clamp(pos, -v, v);
-
-		// float TorusBold = 0.0025 + 0.0025 * exp(length(0.5 * p.y));
-		// float TorusBold = 0.0025 * exp(length(1.0 * p.y));
-		float TorusBold = 0.00025 + 0.02 * length(1.0 * p.y);
-
-		float d = sdTorus(pos , vec2(0.25, TorusBold) );
-		Dist = min(Dist, d);
-
-		{
-			float tempo = 500.0;
-			float Local = mod(fragUbo.time + rand(vec2(gridID.x * 10.0, 0.12354)) * 100.0 + rand(vec2(0.9746, gridID.y * 10.0)) * 100.0, tempo);
-			float trans = tempo - 2.0 * 3.1415;
-			float t = step(Local, trans) * (Local - trans);
-			float w = sin(t) * 0.5 + 0.5;
-			float CutCube = sdBox(animP, vec3(0.75 * w, 0.75 * w, 0.75 * w));
-			Dist = max(Dist, CutCube);
-		}
-
-		// 下半分を削る
-		{
-			float CutCube = sdBox(p - vec3(0.0, 0.25, 0.0), vec3(0.75, 0.25, 0.75));
-			Dist = max(Dist, CutCube);
-		}
-
-		Info = getMin(Info, Dist, 4.0, 0.25, 1.0);
-	}
-
-	return Info;
-}
-
 MatInfo map(vec3 p)
 {
 	MatInfo Info;
@@ -163,18 +82,33 @@ MatInfo map(vec3 p)
 	Info.metallic = 0.0;
 	Info.roughness = 0.0;
 
-	float offset = 2.0;
-	float gridW = 4.0;
+	float time = fragUbo.time * 0.1;
 
+	float d = 1e5;
+	float scl = 2.0;
+	float w = 0.01;
+
+	p.z += fragUbo.time;
+
+	float gridW = 2.0;
+	float gridID = floor(p.z / gridW) * gridW;
+	p.z = repeat(p.z, gridW);
+
+	// 高さ調整
+	p.y += 1.0;
+
+	p.xy *= rot(gridID * 1.5);
+
+	for(float i = 0.0; i < 4.0; i++)
 	{
-		MatInfo B = Brossum(p, vec3(0.0), gridW);
-		Info = getMin(Info, B.d, B.MatID, B.metallic, B.roughness);
+		vec3 pos = p;
+		pos.xy *= rot(pi * 0.5 * i);
+		pos.x += 0.5 * scl;
+		
+		d = min(d, sdBox(pos, vec3(w, 0.5, w) * scl));
 	}
 
-	{
-		MatInfo B = Brossum(p, vec3(offset, 0.0, offset), gridW);
-		Info = getMin(Info, B.d, B.MatID, B.metallic, B.roughness);
-	}
+	Info = getMin(Info, d, 4.0, 0.25, 1.0);
 
 	return Info;
 }
@@ -231,7 +165,7 @@ void main()
 	for(int i = 0; i < 64; i++)
 	{
 		Info = map(p);
-		depth += Info.d;
+		depth += Info.d * 0.5;
 		p = ro + rd * depth;
 
 		if(abs(Info.d) < MIN_VALUE) break;
@@ -242,19 +176,19 @@ void main()
 		vec3 n = gn(p);
 		float outDepth = CalcDepth(p);
 
-		col = vec3(1.0);
+		col = fragUbo.mainColor.rgb;
 
 		// Emission
 		if(Info.MatID == 4.0)
 		{
-			col = fragUbo.mainColor.rgb * 2.0;
+			col = vec3(2.0, 1.2, 1.0);
 		}
 
 		gPosition = vec4(p, 1.0);
 		gNormal = vec4(n, 1.0);
 		gAlbedo = vec4(col, 1.0);
 		gDepth = vec4(vec3(outDepth), 1.0);
-		gParam_1 = vec4(Info.MatID, fragUbo.LightParam, Info.metallic, Info.roughness);
+		gParam_1 = vec4(Info.MatID, 0.0, Info.metallic, Info.roughness);
 
 		gl_FragDepth = outDepth;
 	}
