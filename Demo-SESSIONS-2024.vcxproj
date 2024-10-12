@@ -480,6 +480,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\App\ScriptApp\CEmbeddedFileList.cpp" />
     <ClCompile Include="Src\Component\CSDFTextLineGenerator.cpp" />
     <ClCompile Include="Src\Component\CSDFRenderer.cpp" />
     <ClCompile Include="Src\Component\CSDFGenerator.cpp" />
@@ -507,6 +508,7 @@
     <ClCompile Include="Src\Main\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\App\ScriptApp\CEmbeddedFileList.h" />
     <ClInclude Include="Src\Component\CSDFTextLineGenerator.h" />
     <ClInclude Include="Src\Component\CSDFRenderer.h" />
     <ClInclude Include="Src\Component\CSDFGenerator.h" />

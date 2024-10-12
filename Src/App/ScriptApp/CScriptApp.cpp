@@ -32,6 +32,8 @@
 #endif // _DEBUG
 #include "../../Component/CSDFRenderer.h"
 
+#include "CEmbeddedFileList.h"
+
 namespace app
 {
 	CScriptApp::CScriptApp() :
@@ -316,6 +318,11 @@ namespace app
 	const std::shared_ptr<graphics::CDrawInfo>& CScriptApp::GetDrawInfo() const
 	{
 		return m_DrawInfo;
+	}
+
+	std::vector<unsigned char> CScriptApp::GetEmbeddedBinary(const std::string& Key)
+	{
+		return resource::CEmbeddedFileList::GetBinary(Key);
 	}
 
 	// ‹N“®€”õŠ®—¹

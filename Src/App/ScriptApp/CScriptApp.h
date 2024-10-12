@@ -71,6 +71,8 @@ namespace app
 
 		virtual const std::shared_ptr<graphics::CDrawInfo>& GetDrawInfo() const override;
 
+		virtual std::vector<unsigned char> GetEmbeddedBinary(const std::string& Key) override;
+
 		// ‹N“®€”õŠ®—¹
 		virtual bool OnStartup(api::IGraphicsAPI* pGraphicsAPI, physics::IPhysicsEngine* pPhysicsEngine, resource::CLoadWorker* pLoadWorker, const std::shared_ptr<gui::IGUIEngine>& GUIEngine) override;
 
