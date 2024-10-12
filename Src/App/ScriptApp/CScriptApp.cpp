@@ -180,6 +180,11 @@ namespace app
 		if (pLoadWorker->IsLoaded())
 		{
 			if (!m_TimelineController->Update(m_DrawInfo->GetDeltaSecondsTime(), InputState)) return false;
+
+#ifndef _DEBUG
+			// Ä¶I—¹
+			if (m_TimelineController->GetPlayBackTime() > m_TimelineController->GetMaxTime()) return false;
+#endif // !_DEBUG
 		}
 
 		if (!m_SceneController->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState, m_TimelineController)) return false;
