@@ -1,0 +1,2 @@
+#version 450
+layout(location=0) in vec3 inPosition;layout(location=1) in vec3 inNormal;layout(location=2) in vec2 inTexcoord;layout(location=3) in vec4 inTangent;layout(location=4) in uvec4 inJoint0;layout(location=5) in vec4 inWeights0;layout(location=0) out vec3 fWolrdNormal;layout(location=1) out vec2 fUV;layout(location=2) out vec3 fWorldPos;void main(){gl_Position=ubo.proj*ubo.view*ubo.model*vec4(inPosition,1);fWolrdNormal=(ubo.model*vec4(inNormal,0)).xyz;fUV=inTexcoord;fWorldPos=(ubo.model*vec4(inPosition,1)).xyz;}

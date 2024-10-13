@@ -3,7 +3,7 @@ import shutil
 import json
 import subprocess
 
-def DoShaderMin(src, dst, tmp):
+def DoShaderMin(src, dst, tmp, showError):
     # コマンド実行でエラーが出たときに戻すために退避させておく    
     if(os.path.exists(dst)):
         shutil.copyfile(dst, tmp)
@@ -14,9 +14,12 @@ def DoShaderMin(src, dst, tmp):
     output = result.stdout
 
     if(output != ""):
-        print("%s ________________________________\n" % (dst))
-        print("%s\n" % (output))
-        print("_________________________________\n")
+        if(showError):
+            print(">>>>>>>>>>>>>>>>>>>> %s, %s _________________________________________________________________________________\n" % (src, dst))
+            print("%s\n" % (output))
+            print("__________________________________________________________________________________________________________\n")
+        else:
+            print("[Error] %s, %s\n" % (src, dst))
 
         # 元に戻す
         if(os.path.exists(dst)):
@@ -40,7 +43,7 @@ def Main():
     Prefix = "_Comp"
     tmpPath = resouces + "Resources/Shaders/tmp.txt"
     
-    FileList_Str = '"Resources/Font/dist/msdf.png" "Resources/MaterialFrame/BloomMix_MF.json" "Resources/MaterialFrame/Blur1Pass_MF.json" "Resources/MaterialFrame/Brigtness_MF.json" "Resources/MaterialFrame/ChromaticAberration_MF.json" "Resources/MaterialFrame/FrameTexture_MF.json" "Resources/MaterialFrame/LastCenter_MF.json" "Resources/MaterialFrame/LightShaft_MF.json" "Resources/MaterialFrame/MRTBlit_MF.json" "Resources/MaterialFrame/PBR_MF.json" "Resources/MaterialFrame/ReduceBuffer_MF.json" "Resources/MaterialFrame/RotRing_MF.json" "Resources/MaterialFrame/SSR_MF.json" "Resources/MaterialFrame/SSWaterMix_MF.json" "Resources/MaterialFrame/Water_MF.json" "Resources/MaterialFrame/blossum_MF.json" "Resources/MaterialFrame/centercube_01_mf.json" "Resources/MaterialFrame/cubegrid_mf.json" "Resources/MaterialFrame/mrt_renderer_mf.json" "Resources/MaterialFrame/sdftext_mf.json" "Resources/Scene/Demo-SESSIONS-2024.json" "Resources/Scene/Demo-SESSIONS-2024.tl" "Resources/Shaders/BloomMix.frag" "Resources/Shaders/Blur1Pass.frag" "Resources/Shaders/Brigtness.frag" "Resources/Shaders/ChromaticAberration.frag" "Resources/Shaders/LastCenter.frag" "Resources/Shaders/LightShaft.frag" "Resources/Shaders/MRTBlit.frag" "Resources/Shaders/ReduceBuffer.frag" "Resources/Shaders/RotRing.frag" "Resources/Shaders/SSR.frag" "Resources/Shaders/SSWaterMix.frag" "Resources/Shaders/Water.frag" "Resources/Shaders/blossum.frag" "Resources/Shaders/centercube_01.frag" "Resources/Shaders/cubegrid.frag" "Resources/Shaders/loadingbar.frag" "Resources/Shaders/loadingbar.vert" "Resources/Shaders/minimum.vert" "Resources/Shaders/mrt_renderer.frag" "Resources/Shaders/objectspace_raymarching.vert" "Resources/Shaders/pbr.frag" "Resources/Shaders/pbr.vert" "Resources/Shaders/renderboard.vert" "Resources/Shaders/sdftext.frag" "Resources/Shaders/texture.frag"'
+    FileList_Str = '"Resources/Font/dist/msdf.png" "Resources/MaterialFrame/BloomMix_MF.json" "Resources/MaterialFrame/Blur1Pass_MF.json" "Resources/MaterialFrame/Brigtness_MF.json" "Resources/MaterialFrame/ChromaticAberration_MF.json" "Resources/MaterialFrame/FrameTexture_MF.json" "Resources/MaterialFrame/LastCenter_MF.json" "Resources/MaterialFrame/LightShaft_MF.json" "Resources/MaterialFrame/MRTBlit_MF.json" "Resources/MaterialFrame/ReduceBuffer_MF.json" "Resources/MaterialFrame/RotRing_MF.json" "Resources/MaterialFrame/SSR_MF.json" "Resources/MaterialFrame/SSWaterMix_MF.json" "Resources/MaterialFrame/Water_MF.json" "Resources/MaterialFrame/blossum_MF.json" "Resources/MaterialFrame/centercube_01_mf.json" "Resources/MaterialFrame/cubegrid_mf.json" "Resources/MaterialFrame/mrt_renderer_mf.json" "Resources/MaterialFrame/sdftext_mf.json" "Resources/Scene/Demo-SESSIONS-2024.json" "Resources/Scene/Demo-SESSIONS-2024.tl" "Resources/Shaders/BloomMix.frag" "Resources/Shaders/Blur1Pass.frag" "Resources/Shaders/Brigtness.frag" "Resources/Shaders/ChromaticAberration.frag" "Resources/Shaders/LastCenter.frag" "Resources/Shaders/LightShaft.frag" "Resources/Shaders/MRTBlit.frag" "Resources/Shaders/ReduceBuffer.frag" "Resources/Shaders/RotRing.frag" "Resources/Shaders/SSR.frag" "Resources/Shaders/SSWaterMix.frag" "Resources/Shaders/Water.frag" "Resources/Shaders/blossum.frag" "Resources/Shaders/centercube_01.frag" "Resources/Shaders/cubegrid.frag" "Resources/Shaders/loadingbar.frag" "Resources/Shaders/loadingbar.vert" "Resources/Shaders/minimum.vert" "Resources/Shaders/mrt_renderer.frag" "Resources/Shaders/objectspace_raymarching.vert" "Resources/Shaders/renderboard.vert" "Resources/Shaders/sdftext.frag" "Resources/Shaders/texture.frag"'
 
     FilePathList = FileList_Str.split(" ")
 
@@ -55,11 +58,10 @@ def Main():
             extention = paramList[1]
 
             dstPath = paramList[0] + Prefix + "." + paramList[1]
-            print("srcPath: %s / dstPath: %s _______________________________________________\n" % (srcPath, dstPath))
 
             if(extention == "vert" or extention == "frag"):
                 # Shader圧縮
-                DoShaderMin(srcPath, dstPath, tmpPath)
+                DoShaderMin(srcPath, dstPath, tmpPath, False)
             elif(extention == "json"):
                 # json圧縮
                 DoJSONMin(srcPath, dstPath)
