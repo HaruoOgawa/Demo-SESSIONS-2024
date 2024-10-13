@@ -1,0 +1,2 @@
+#version 450
+layout(location=0) in vec2 fUV;layout(binding=0) uniform sampler2D texImage;layout(binding=2) uniform sampler2D bloomImage;layout(location=0) out vec4 outColor;void main(){vec3 l=vec3(0);vec2 g=fUV;l=texture(texImage,g).xyz+texture(bloomImage,g).xyz;outColor=vec4(l,1);}

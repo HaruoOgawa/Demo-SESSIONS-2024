@@ -32,6 +32,8 @@
 #endif // _DEBUG
 #include "../../Component/CSDFRenderer.h"
 
+#include "CEmbeddedFileList.h"
+
 namespace app
 {
 	CScriptApp::CScriptApp() :
@@ -180,6 +182,11 @@ namespace app
 		if (pLoadWorker->IsLoaded())
 		{
 			if (!m_TimelineController->Update(m_DrawInfo->GetDeltaSecondsTime(), InputState)) return false;
+
+#ifndef _DEBUG
+			// Ä¶I—¹
+			if (m_TimelineController->GetPlayBackTime() > m_TimelineController->GetMaxTime()) return false;
+#endif // !_DEBUG
 		}
 
 		if (!m_SceneController->Update(pGraphicsAPI, pPhysicsEngine, pLoadWorker, m_MainCamera, m_Projection, m_DrawInfo, InputState, m_TimelineController)) return false;
@@ -311,6 +318,11 @@ namespace app
 	const std::shared_ptr<graphics::CDrawInfo>& CScriptApp::GetDrawInfo() const
 	{
 		return m_DrawInfo;
+	}
+
+	std::vector<unsigned char> CScriptApp::GetEmbeddedBinary(const std::string& Key)
+	{
+		return resource::CEmbeddedFileList::GetBinary(Key);
 	}
 
 	// ‹N“®€”õŠ®—¹

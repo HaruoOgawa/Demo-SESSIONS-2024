@@ -25,10 +25,6 @@
             "filename": "Resources/MaterialFrame/cubegrid_mf.json"
         },
         {
-            "name": "pbr_mat",
-            "filename": "Resources/MaterialFrame/PBR_MF.json"
-        },
-        {
             "name": "sdftext_mf",
             "filename": "Resources\\MaterialFrame\\sdftext_mf.json"
         }

@@ -1,0 +1,5 @@
+#version 450
+layout(location=0) in vec2 fUV;
+layout(binding=0) uniform sampler2D texImage;layout(binding=2) uniform sampler2D depthImage;layout(binding=4) uniform sampler2D posImage;layout(binding=6) uniform sampler2D normalImage;layout(binding=8) uniform sampler2D metallicRoughnessImage;
+layout(binding = 10) uniform FragUniformBuffer{mat4 model;mat4 view;mat4 proj;mat4 lightVPMat;vec4 cameraPos;float fPad0;float fPad1;float fPad2;float fPad3;} frag_ubo;
+layout(location=0) out vec4 outColor;vec3 t(vec2 u){vec4 g=vec4(0);g.xyz=texture(texImage,u).xyz;return g.xyz;}vec3 u(vec2 u){vec4 g=vec4(0);g.xyz=texture(posImage,u).xyz;return g.xyz;}vec3 s(vec2 u){vec4 g=vec4(0);g.xyz=texture(normalImage,u).xyz;return g.xyz;}vec2 e(vec2 u){vec4 s=texture(metallicRoughnessImage,u);return s.zw;}void main(){vec3 g=vec3(0);vec2 v=fUV;g=t(v);vec3 b=u(v),z=s(v);v=e(v);float n=v.x;vec3 l=frag_ubo.cameraPos.xyz;z=reflect(normalize(b-l),z)*(10./24.);bool m=false;l=vec3(0);if(n>0.){for(float g=0.;g<24.;g++){b+=z;vec4 s=frag_ubo.proj*frag_ubo.view*vec4(b,1);vec2 v=s.xy/s.w*.5+.5;vec3 n=u(v);if(length(n-b)<.5){l=t(v);m=true;break;}}g+=l*n;}outColor=vec4(g,1);}
