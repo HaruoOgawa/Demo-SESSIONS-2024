@@ -1,5 +1,6 @@
 #version 450
 layout(location=0) in vec4 v2f_ObjectPos;layout(location=1) in vec2 v2f_UV;layout(location=0) out vec4 gPosition;layout(location=1) out vec4 gNormal;layout(location=2) out vec4 gAlbedo;layout(location=3) out vec4 gDepth;layout(location=4) out vec4 gParam_1;
+layout(binding = 1) uniform FragUniformBufferObject{mat4 invModel;mat4 model;mat4 view;mat4 proj;vec4 cameraPos;vec4 mainColor;vec4 param0;vec4 param1;vec2 resolution;float time;float deltaTime;float zLength;float tparam;float LightParam;float fPad0;float fPad1;float fPad2;} fragUbo;
 #define repeat(p,a)mod(p,a)-a*0.5
 #define rot(a)mat2(cos(a),sin(a),-sin(a),cos(a))
 #define pi acos(-1.0)
