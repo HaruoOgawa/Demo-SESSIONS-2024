@@ -49,9 +49,12 @@ def Main():
             else:
                 # 単純に_Compを付けてコピー
                 shutil.copyfile(srcPath, dstPath)
-
-    # バイナリ埋め込みファイルを作成
-    # os.system("FileBinaryEmbedder -r %s -i %s -o %s -c %s" % (resouces, FileList_Str, output, cppname))
+        
+        # バイナリ埋め込みファイルを作成
+        os.system("FileBinaryEmbedder -r %s -i %s -o %s -c %s -p %s" % (resouces, FileList_Str, output, cppname, Prefix))
+    else:
+        # バイナリ埋め込みファイルを作成
+        os.system("FileBinaryEmbedder -r %s -i %s -o %s -c %s" % (resouces, FileList_Str, output, cppname))
 
 #
 Main()
