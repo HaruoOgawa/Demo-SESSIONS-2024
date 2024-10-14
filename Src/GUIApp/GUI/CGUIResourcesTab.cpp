@@ -32,18 +32,21 @@ namespace gui
 
 		DstDir->DirName = std::make_pair(DeleteParentDirName(SearchDir), SearchDir);
 
-		for (const auto& entry : std::filesystem::directory_iterator(SearchDir))
+		if (std::filesystem::exists(SearchDir))
 		{
-			const auto& path = entry.path().generic_string();
-			std::string name = DeleteParentDirName(path);
+			for (const auto& entry : std::filesystem::directory_iterator(SearchDir))
+			{
+				const auto& path = entry.path().generic_string();
+				std::string name = DeleteParentDirName(path);
 
-			if (std::filesystem::is_directory(path))
-			{
-				DstDir->SubDirList.push_back(FindDirectory(path));
-			}
-			else
-			{
-				DstDir->FileList.push_back(std::make_pair(name, path));
+				if (std::filesystem::is_directory(path))
+				{
+					DstDir->SubDirList.push_back(FindDirectory(path));
+				}
+				else
+				{
+					DstDir->FileList.push_back(std::make_pair(name, path));
+				}
 			}
 		}
 
