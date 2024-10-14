@@ -322,7 +322,11 @@ namespace app
 
 	std::vector<unsigned char> CScriptApp::GetEmbeddedBinary(const std::string& Key)
 	{
+#ifdef _DEBUG
+		return {};
+#else
 		return resource::CEmbeddedFileList::GetBinary(Key);
+#endif // _DEBUG
 	}
 
 	// ‹N“®€”õŠ®—¹
