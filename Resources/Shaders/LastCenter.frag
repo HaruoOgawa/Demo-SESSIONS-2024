@@ -46,9 +46,10 @@ struct MatInfo
 	float MatID;
 	float metallic;
 	float roughness;
+	vec4  albedo;
 };
 
-MatInfo getMin(MatInfo src, float Dist, float MatID, float m, float r)
+MatInfo getMin(MatInfo src, float Dist, float MatID, float m, float r, vec4 a)
 {
 	MatInfo dst = src;
 
@@ -58,77 +59,33 @@ MatInfo getMin(MatInfo src, float Dist, float MatID, float m, float r)
 		dst.MatID = MatID;
 		dst.metallic = m;
 		dst.roughness = r;
+		dst.albedo = a;
 	}
 
 	return dst;
 }
 
-vec2 pmod(vec2 p, float s)
+MatInfo init()
 {
-    float n = pi * 2.0 / s;
-    float a = atan(p.x, p.y) + n * 0.5;
-    a = floor(a / n) * n;
-    return p * rot(-a);
-}
-
-float sdBox(vec3 p, vec3 s)
-{
-	return length(max(vec3(0.0), abs(p) - s));
+	MatInfo Info;
+	Info.d = 1e5;
+	Info.MatID = -1.0;
+	Info.metallic = 0.0;
+	Info.roughness = 0.0;
+	Info.albedo = vec4(1.0);
+	return Info;
 }
 
 MatInfo map(vec3 p)
 {
-	MatInfo Info;
-	Info.d = 1e5;
-	Info.MatID = -1;
-	Info.metallic = 0.0;
-	Info.roughness = 0.0;
+	MatInfo Info = init();
 
 	p.y += 1.0;
-
 	p += fragUbo.objPos.xyz;
 
-	p.xy *= rot(fragUbo.time);
-    p.yz *= rot(fragUbo.time);
-    p.xz *= rot(fragUbo.time);
-    
-    vec3 pos = p;
-    // pos = abs(pos);
+	float d = length(p) - 0.5;
 
-	float d = sdBox(pos, vec3(0.25));
-
-	if(fragUbo.rate > 0.0)
-	{
-		pos.xy = pmod(pos.xy, 8.0);
-		pos.xz = pmod(pos.xz, 3.0);
-		
-		float sp = 0.25;
-		float at = floor(fragUbo.time * sp) + pow(fract(fragUbo.time * sp), 0.15);
-		
-		for(int i = 0; i < 3; i++)
-		{
-			// pos = abs(pos) - 0.1;
-			pos = abs(pos) - 0.1;
-			if(pos.x < pos.y) pos.xy = pos.yx;
-			if(pos.x < pos.z) pos.xz = pos.zx;
-			if(pos.y < pos.z) pos.yz = pos.zy;
-			
-			pos.xy *= rot(at);
-			pos.xz *= rot(at);
-			
-			// pos.yz = abs(pos.yz) - 0.1;
-			
-			pos.xz *= rot(at);
-			
-			// pos -= 0.1;
-		}
-		
-		float tmpd = sdBox(pos, vec3(0.1, 0.75, 0.1) * 0.5);
-
-		d = mix(d, tmpd, fragUbo.rate);
-	}
-
-	Info = getMin(Info, d, 4.0, 0.25, 1.0);
+	Info = getMin(Info, d, 2.0, 1.0, 0.0, vec4(1.0));
 
 	return Info;
 }
@@ -162,8 +119,6 @@ float CalcDepth(vec3 p)
 
 void main()
 {
-	vec3 col = vec3(0.0, 0.0, 0.0);
-	
 	vec2 st = v2f_UV * 2.0 - 1.0;
 	st.x *= (fragUbo.resolution.x / fragUbo.resolution.y);
 	
@@ -176,21 +131,13 @@ void main()
 	float depth = 0.0, lenToNextGrid = 0.0;
 	vec3 p = ro + rd * depth;
 
-	MatInfo Info;
-	Info.d = 1e5;
-	Info.MatID = -1;
-	Info.metallic = 0.0;
-	Info.roughness = 0.0;
-
-	int itr = 0;
+	MatInfo Info = init();
 
 	for(int i = 0; i < 64; i++)
 	{
 		Info = map(p);
 		depth += Info.d * 0.5;
 		p = ro + rd * depth;
-
-		itr = i;
 
 		if(abs(Info.d) < MIN_VALUE) break;
 	}
@@ -200,13 +147,9 @@ void main()
 		vec3 n = gn(p);
 		float outDepth = CalcDepth(p);
 
-		col = fragUbo.mainColor.rgb;
-
-		col = vec3(0.615, 0.8, 0.88) * 10.0 / itr;
-
 		gPosition = vec4(p, 1.0);
 		gNormal = vec4(n, 1.0);
-		gAlbedo = vec4(col, 1.0);
+		gAlbedo = Info.albedo;
 		gDepth = vec4(vec3(outDepth), 1.0);
 		gParam_1 = vec4(Info.MatID, 0.0, Info.metallic, Info.roughness);
 
