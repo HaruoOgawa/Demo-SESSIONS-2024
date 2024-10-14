@@ -102,7 +102,7 @@ MatInfo Brossum(vec3 p, vec3 offset, float gridW)
 	float BaseH = 2.0;
 	p.y += BaseH;
 
-	if(length(p.xz - fragUbo.cameraPos.xz) > 25.0) return Info;
+	if(length(p.xz - fragUbo.cameraPos.xz) > 15.0) return Info;
 	
 	if(floor(fragUbo.useZAnim) == 1.0) p.z += fragUbo.time;
 
@@ -135,7 +135,7 @@ MatInfo Brossum(vec3 p, vec3 offset, float gridW)
 
 		{
 			float tempo = 500.0;
-			float Local = mod(fragUbo.time + rand(vec2(gridID.x * 10.0, 0.12354)) * 100.0 + rand(vec2(0.9746, gridID.y * 10.0)) * 100.0, tempo);
+			float Local = mod(fragUbo.time + rand(vec2(gridID.xy * 10.0 + offset.xz * 10.0)) * tempo, tempo);
 			float trans = tempo - 2.0 * 3.1415;
 			float t = step(Local, trans) * (Local - trans);
 			float w = sin(t) * 0.5 + 0.5;
@@ -247,7 +247,7 @@ void main()
 		// Emission
 		if(Info.MatID == 4.0)
 		{
-			col = fragUbo.mainColor.rgb * 2.0;
+			col = fragUbo.mainColor.rgb * 3.0;
 		}
 
 		gPosition = vec4(p, 1.0);
