@@ -3,3 +3,4 @@
 ## Dependencies
 * Garnet v0.1.0
   * Garnet is Haru86_'s original 3d engine.
+    * https://github.com/HaruoOgawa/Garnet/releases/tag/0.10 
