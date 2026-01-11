@@ -350,7 +350,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_GLFW;USE_VULKAN;NOMINMAX;VK_USE_PLATFORM_WIN32_KHR;GLFW_INCLUDE_VULKAN;GLFW_EXPOSE_NATIVE_WIN32;USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU;USE_FBX;USE_ANIMATION;USE_MMD;USE_PHYSICS;B3_USE_CLEW;USE_GUIENGINE;USE_GUI_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;E:\CppDev\Garnet\Garnet/Src\Library\json;E:\CppDev\Garnet\Garnet/Src\Library\GLFW\include;E:\CppDev\Garnet\Garnet/src\Library\Vulkan\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Garnet\Garnet/Src;..\Garnet\Garnet/Src\Library\glm;..\Garnet\Garnet/Src\Library\imgui\backends;..\Garnet\Garnet/Src\Library\imgui;..\Garnet\Garnet/Src\Library\json;..\Garnet\Garnet/Src\Library\GLFW\include;..\Garnet\Garnet/src\Library\Vulkan\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -364,13 +364,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_GLFW;USE_WEBGPU;NOMINMAX;USE_WebGPUNative;USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU;USE_FBX;USE_ANIMATION;USE_SMALL_FBX;mrDebug;USE_MMD;USE_PHYSICS;B3_USE_CLEW;USE_GUIENGINE;USE_GUI_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;E:\CppDev\Garnet\Garnet/Src\Library\json;E:\CppDev\Garnet\Garnet/src\Library\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Garnet\Garnet/Src;..\Garnet\Garnet/Src\Library\glm;..\Garnet\Garnet/Src\Library\imgui\backends;..\Garnet\Garnet/Src\Library\imgui;..\Garnet\Garnet/Src\Library\json;..\Garnet\Garnet/src\Library\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\CppDev\Garnet\Garnet/Src\Library\SmallFBX\lib\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Garnet\Garnet/Src\Library\SmallFBX\lib\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -380,7 +380,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;USE_GLFW;USE_OPENGL;NOMINMAX;USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU;USE_FBX;USE_ANIMATION;USE_MMD;USE_PHYSICS;B3_USE_CLEW;USE_GUIENGINE;USE_GUI_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;E:\CppDev\Garnet\Garnet/Src\Library\json;E:\CppDev\Garnet\Garnet/src\Library\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Garnet\Garnet/Src;..\Garnet\Garnet/Src\Library\glm;..\Garnet\Garnet/Src\Library\imgui\backends;..\Garnet\Garnet/Src\Library\imgui;..\Garnet\Garnet/Src\Library\json;..\Garnet\Garnet/src\Library\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -394,7 +394,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;RUNTIME_SHADER_EDITING;USE_OPENGL;NOMINMAX;USE_WIN32_WindowAPI;USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU;USE_FBX;USE_ANIMATION;USE_MMD;USE_PHYSICS;B3_USE_CLEW;USE_GUIENGINE;USE_GUI_APP;USE_BINARY_WRITE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;E:\CppDev\Garnet\Garnet/Src\Library\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Garnet\Garnet/Src;..\Garnet\Garnet/Src\Library\glm;..\Garnet\Garnet/Src\Library\imgui\backends;..\Garnet\Garnet/Src\Library\imgui;..\Garnet\Garnet/Src\Library\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -410,7 +410,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;USE_OPENGL;NOMINMAX</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Garnet\Garnet/Src;..\Garnet\Garnet/Src\Library\glm;..\Garnet\Garnet/Src\Library\imgui\backends;..\Garnet\Garnet/Src\Library\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -428,7 +428,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;USE_WEBGPU;NOMINMAX;%(PreprocessorDefinitions);USE_TEXTURE_LOADER;USE_GLTF;USE_VIEWER_CAMERA;USE_INPUT_SYSTEM;USE_GPGPU</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\imgui\backends;E:\CppDev\Garnet\Garnet/Src\Library\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Garnet\Garnet/Src;..\Garnet\Garnet/Src\Library\glm;..\Garnet\Garnet/Src\Library\imgui\backends;..\Garnet\Garnet/Src\Library\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -446,7 +446,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;USE_OPENGL;NOMINMAX;USE_TEXTURE_LOADER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Garnet\Garnet/Src;..\Garnet\Garnet/Src\Library\glm;..\Garnet\Garnet/Src\Library\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -464,7 +464,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;USE_OPENGL;NOMINMAX;USE_TEXTURE_LOADER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>E:\CppDev\Garnet\Garnet/Src;E:\CppDev\Garnet\Garnet/Src\Library\glm;E:\CppDev\Garnet\Garnet/Src\Library\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Garnet\Garnet/Src;..\Garnet\Garnet/Src\Library\glm;..\Garnet\Garnet/Src\Library\json;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -478,7 +478,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="E:\CppDev\Garnet\Garnet/Garnet.vcxproj">
+    <ProjectReference Include="..\Garnet\Garnet/Garnet.vcxproj">
       <Project>{9bb5f0a3-4cd3-470f-8d71-8c187fa3332b}</Project>
     </ProjectReference>
   </ItemGroup>

@@ -5,18 +5,18 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Demo-SESSIONS-2024", "Demo-SESSIONS-2024.vcxproj", "{F591028C-9D82-408C-998F-A52973597C46}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Garnet", "E:\CppDev\Garnet\Garnet/Garnet.vcxproj", "{9BB5F0A3-4CD3-470F-8D71-8C187FA3332B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Garnet", "..\Garnet\Garnet/Garnet.vcxproj", "{9BB5F0A3-4CD3-470F-8D71-8C187FA3332B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		DebugGLFW|x64 = DebugGLFW|x64
+		DebugGLFW|x86 = DebugGLFW|x86
+		DebugGL|x64 = DebugGL|x64
+		DebugGL|x86 = DebugGL|x86
 		CompGL|x64 = CompGL|x64
 		CompGL|x86 = CompGL|x86
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		DebugGL|x64 = DebugGL|x64
-		DebugGL|x86 = DebugGL|x86
-		DebugGLFW|x64 = DebugGLFW|x64
-		DebugGLFW|x86 = DebugGLFW|x86
 		DebugWG|x64 = DebugWG|x64
 		DebugWG|x86 = DebugWG|x86
 		Release|x64 = Release|x64

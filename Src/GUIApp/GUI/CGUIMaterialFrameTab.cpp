@@ -88,7 +88,7 @@ namespace gui
 				m_ShowAddMFDialog = false;
 
 				// MaterialFrameì¬
-				GUIParams.SceneController->AddMaterialFrameWithLoading(GUIParams.pLoadWorker, MFName, FileName);
+				GUIParams.SceneController->AddMaterialFrameWithLoading(GUIParams.pLoadWorker, FileName);
 			}
 		}
 
